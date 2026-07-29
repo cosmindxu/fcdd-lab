@@ -111,6 +111,16 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 - [ ] Arms run per bug (lanes `armA:*`, `armB:*`, offline, fresh contexts)
 - [ ] Grading (blinded) + unseal + report
 
+## Remote
+
+`origin` = https://github.com/cosmindxu/fcdd-lab — **PRIVATE** for now
+(deliberate: the sealed answer key must stay unpublishable while arms run;
+flip to public at report time for pre-registration credibility:
+`gh repo edit cosmindxu/fcdd-lab --visibility public
+--accept-visibility-change-consequences`). Push after every protocol
+amendment and ledger update; the pushed hash of `17588eb` is the
+server-timestamped pre-registration mark.
+
 ## Session log
 
 - **2026-07-29** — Case created (model: Fable 5 / effort max for orchestration;
