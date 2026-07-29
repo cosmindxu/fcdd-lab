@@ -1,6 +1,9 @@
 # nested working clones / arm worktrees — each has its own git
 case*/upstream/
 case*/arms/
+# sealed ground truth (seeded-bug answer keys): NEVER in the repo — the
+# ledger carries only the sha256; the orchestrator stays blind until grading
+case*/sealed/
 # raw headless outputs can be large; ledger/raw is tracked selectively
 *.wasm
 *.szx
