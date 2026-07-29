@@ -1,0 +1,7 @@
+# nested working clones / arm worktrees — each has its own git
+case*/upstream/
+case*/arms/
+# raw headless outputs can be large; ledger/raw is tracked selectively
+*.wasm
+*.szx
+__pycache__/
