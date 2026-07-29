@@ -29,10 +29,13 @@ cost per arm, the crossover bug-count (if any), and quality achieved vs the bar.
   `.szx` save/resume, clocks), Cloudflare Worker + D1 ladder/correspondence
   backend (`backend/worker.js`, `schema.sql`; `devserver.py` = local mirror).
 - **The chess engine itself lives in hc91emu, NOT in this repo**:
-  `/media/sf_Projects/HC91_emulator/chess/chess.asm` — **2,268 lines of Z80
-  assembly**, hand-written by Fable (alpha-beta, transposition tables,
-  quiescence). `upstream/build.sh` embeds `../hc91emu`'s `chess.tap`, i.e. it
-  expects an hc91emu checkout as a **sibling directory** at build time.
+  `/media/sf_Projects/HC91_emulator/chess/` — **7,343 lines of Z80 assembly**
+  hand-written by Fable: `chess.asm` (2,268) + `engine.inc` (2,489) +
+  `movegen.inc` (1,403) + `perft.inc` (578) + `tt.inc` (309) + `zobrist.inc`
+  (230) + `pieces.inc` (66); alpha-beta, transposition tables, quiescence,
+  zobrist hashing, built-in perft. Built via `chess/Makefile` (pasmo →
+  `../tools/zxtap.py` → `chess.tap`). `upstream/build.sh` embeds that tap,
+  expecting an hc91emu checkout as a **sibling directory** at build time.
 - Harness assets already in hand: the hc91emu emulator (z80full 160/160,
   `make test`); `upstream/verify.mjs` (headless boot + e2-e4 + PNG render);
   `upstream/test_movelog.mjs`; `upstream/TEST_PLAN.md`; an autoplay skill in

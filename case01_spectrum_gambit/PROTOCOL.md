@@ -121,6 +121,22 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   list-price-weighted USAGE index, not an actual bill — raw counters remain
   the ground truth if prices move.
 
+## Amendments
+
+- **2026-07-29 A1 (factual correction, pre-run):** D1 understated the engine.
+  The source is `chess.asm` (2,268 L) **plus six includes** — `engine.inc`
+  (2,489), `movegen.inc` (1,403), `perft.inc` (578), `tt.inc` (309),
+  `zobrist.inc` (230), `pieces.inc` (66) — **7,343 lines total**, built by
+  `chess/Makefile` (pasmo → `../tools/zxtap.py` → `chess.tap`). No decision
+  changes; seeded faults may live in any of these files; the engine's own
+  perft facility is fair game for bridges.
+- **2026-07-29 A2 (verification note, pre-run):** lane isolation verified
+  empirically — a fresh `claude --model fable --effort high -p` run with cwd
+  inside the case folder reports NONE for visible CLAUDE.md / user-memory
+  context (`ledger/raw/smoke_isolation.json`; $0.34, meta lane). `--effort`
+  exists headless, so D5 is fully applicable; the CLI's own
+  `total_cost_usd` is recorded alongside tokencount's computation.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·

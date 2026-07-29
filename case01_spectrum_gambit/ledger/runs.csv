@@ -1,1 +1,2 @@
 run_id,date,lane,arm,phase,bug_id,model,effort,source_ref,input_tokens,cache_write_tokens,cache_read_tokens,output_tokens,cost_usd,gate,notes
+smoke01,2026-07-29,meta,,isolation-smoke,,claude-fable-5,,ledger/raw/smoke_isolation.json,2,15948,15251,111,0.3398,pass,fresh-cwd-sees-NONE
