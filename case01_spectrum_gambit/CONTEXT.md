@@ -56,8 +56,8 @@ cost per arm, the crossover bug-count (if any), and quality achieved vs the bar.
   5/10/0.5/25 per MTok at 1-hr cache-write rates); raw counters always logged.
 - **D4 contract**: layered — full implemented-rules kernel spec + strategy as
   properties; FIDE divergences flagged, not normalized.
-- **D5 arms** (default, veto-able): same model + effort both arms; launch
-  default Fable 5 / high.
+- **D5 arms — AMENDED (A3, operator 2026-07-29): ALL lanes and both arms run
+  on the Opus model at effort max.** Same-model parity unchanged.
 
 PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 
@@ -134,6 +134,16 @@ server-timestamped pre-registration mark.
   tokens for this bootstrap live in session `dc589311-cdbd-4958-9b03-92a69446dfe8`
   (shared with unrelated ikbr_tools work — count only from the first
   spectrum-gambit message onward; noted here for the ledger).
+- **2026-07-29 (launch)** — Two auto-mode-classifier blocks hit ORCHESTRATOR
+  launch commands (meta lane, before any measured run — measured lanes are
+  unpolluted; see PROTOCOL A3). Operator directive mid-launch: **all lanes →
+  Opus / effort max** (A3); the ~2-min Fable step-1 was killed (cost
+  unrecorded — killed runs emit no result JSON; TOKEN_LEDGER note) and both
+  lanes relaunched **detached** (setsid) with scoped `--allowedTools` (no web
+  tools → offline by construction). PIDs in `ledger/raw/{step1,seeding}.pid`;
+  results will land in `ledger/raw/{step1,seeding}_result.json`. This
+  orchestrator session can be `/clear`-ed freely: the runs are detached;
+  resume from THIS file (and session tasks #23–#26).
 - **2026-07-29 (later)** — Operator answered the 4 design questions (D1–D5
   above); Fable 5 + Opus 4.8 prices pinned by web search and frozen into
   `tools/tokencount.py`; PROTOCOL frozen v1.0 and committed. Next actions in

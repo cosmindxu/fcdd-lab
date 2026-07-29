@@ -130,6 +130,18 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   `chess/Makefile` (pasmo → `../tools/zxtap.py` → `chess.tap`). No decision
   changes; seeded faults may live in any of these files; the engine's own
   perft facility is fair game for bridges.
+- **2026-07-29 A3 (operator directive, pre-run):** ALL measured runs in this
+  case (step 1, seeding, both arms, grading) use **the Opus model at effort
+  max**, superseding D5's "Fable 5 / high" default (operator instruction
+  during the first launch attempt; a ~2-minute Fable step-1 launch was killed
+  before it wrote anything — killed runs emit no result JSON, so its small
+  cost is unrecorded; noted in TOKEN_LEDGER). Same-model-both-arms parity
+  unchanged. Opus 4.8 is priced in the table, so the D3 cost headline stays
+  fully computable. Launch-mechanics note: orchestrator-side launch commands
+  are subject to the interactive auto-mode classifier (two blocks occurred —
+  meta lane only, before any measured run started); measured lanes run
+  headless with an explicit `--allowedTools` grant, so no classifier sits
+  inside their loop — **measured lanes are unpolluted**.
 - **2026-07-29 A2 (verification note, pre-run):** lane isolation verified
   empirically — a fresh `claude --model fable --effort high -p` run with cwd
   inside the case folder reports NONE for visible CLAUDE.md / user-memory
