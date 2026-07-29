@@ -1,2 +1,4 @@
 run_id,date,lane,arm,phase,bug_id,model,effort,source_ref,input_tokens,cache_write_tokens,cache_read_tokens,output_tokens,cost_usd,gate,notes
 smoke01,2026-07-29,meta,,isolation-smoke,,claude-fable-5,,ledger/raw/smoke_isolation.json,2,15948,15251,111,0.3398,pass,fresh-cwd-sees-NONE
+step1,2026-07-29,step1_contract,,contract,,claude-opus-5,max,ledger/raw/step1_result.json,183,396692,24464324,222109,,green,bridge-11/11 95thm 10findings; cli_usd=21.7527; D3-price-pin-pending
+seed01,2026-07-29,seeding,,seed-7-variants,,claude-opus-5,max,ledger/raw/seeding_result.json,5426,398426,40419724,218692,,,7 variants+reports+gates; key sealed; cli_usd=29.6886; D3-price-pin-pending

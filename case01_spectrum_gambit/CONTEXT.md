@@ -105,13 +105,19 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 - [x] Engine source located (hc91emu sibling), issue tracker checked (empty)
 - [x] Token-usage schema verified; `tools/tokencount.py` v0
 - [x] Operator answers to the 4 design questions → **PROTOCOL FROZEN v1.0**
-- [ ] **Step 1**: formal contract of the chess game + strategies (measured,
-      lane `step1_contract`, its own session/headless run) — user-defined
-      first step; can start now against the PRISTINE engine
-- [ ] Seeding lane: 7 sealed single-fault variants + symptom reports + per-bug
-      acceptance gates (independent agent; parallelizable with step 1 since
-      both work from the pristine engine)
-- [ ] Arms run per bug (lanes `armA:*`, `armB:*`, offline, fresh contexts)
+- [x] **Step 1** DONE 2026-07-29 23:07 — gate GREEN 11/11; Contract.lean
+      (1,271 L, 95 kernel-proved thms, empty axioms) + twin + bridge + smt +
+      10 organic findings (2 HIGH). Ledger row `step1` (opus-5, $21.75 CLI).
+- [x] Seeding lane DONE 2026-07-29 23:07 — 7 variants + symptom reports +
+      per-bug gates + harness; key sealed (sha256 in ledger, manifest =
+      `ledger/sealed_manifest.sha256`, orchestrator unread). Row `seed01`
+      (opus-5, $29.69 CLI).
+- [ ] ⚠ **D3 price pin for `claude-opus-5`** (lanes ran opus-5 under A3
+      "Opus"; frozen table lacks it → cost columns empty, CLI USD in notes).
+      Needs a dated PROTOCOL amendment by the operator before report math.
+- [ ] Arms run per bug (lanes `armA:*`, `armB:*`, offline, fresh contexts) —
+      **awaiting operator GO** (cost order-of-magnitude: 2 arms × 7 bugs at
+      lane-scale runs ≈ several hundred USD; k=1 first pass per rule 6)
 - [ ] Grading (blinded) + unseal + report
 
 ## Remote
@@ -152,3 +158,17 @@ server-timestamped pre-registration mark.
   lane in parallel (independent agent, sealed outputs); (3) pre-register
   per-bug gates as seeded variants land; (4) arms; (5) blinded grading +
   unseal + report.
+- **2026-07-29 23:07–23:30 (results landed; orchestrator now the /clear-ed
+  session, Fable 5)** — BOTH detached lanes exited clean at 23:07 (watcher
+  confirmed; PIDs gone). Step 1: gate GREEN 11/11, 95 kernel thms, 10 organic
+  findings (2 HIGH). Seeding: 7/7 variants + reports + gates + harness;
+  answer key sealed unread (sha256 + 206-file manifest in ledger). Ledger
+  rows `step1`/`seed01` appended via tokencount. **Both lanes actually ran
+  `claude-opus-5`** — frozen D3 table has no opus-5 row, so cost columns are
+  empty and CLI-reported USD sits in notes ($21.75 + $29.69); operator must
+  pin opus-5 prices as a dated amendment before report math. Seeding lane
+  relocated `work/pristine/` → `sealed/seedkit/pristine` (deletion committed
+  as-is). Committed + pushed = pre-registration mark for gates/key/variants.
+  Orchestrator session runs a 2-hourly progress-report cron (operator
+  request). **Arms NOT launched — awaiting operator GO** (and the price
+  pin). Nothing in `sealed/` was read.

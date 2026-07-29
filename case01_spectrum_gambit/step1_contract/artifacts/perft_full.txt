@@ -1,0 +1,26 @@
+=== SCREEN ===
+PERFT self-test (start position)
+                                
+perft 1  20         OK          
+perft 2  400        OK          
+perft 3  8902       OK          
+perft 4  197281     OK          
+                                
+kiwipete d3  97862    OK        
+enpassant d4 43238    OK        
+promotion d3 62379    OK        
+incr key/phase/pst    OK        
+PERFT OK - movegen verified     
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+=== END ===
