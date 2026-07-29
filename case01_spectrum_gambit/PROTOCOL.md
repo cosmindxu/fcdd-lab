@@ -1,8 +1,10 @@
-# PROTOCOL — case01 Spectrum Gambit token-cost study  [DRAFT — not yet frozen]
+# PROTOCOL — case01 Spectrum Gambit token-cost study  [FROZEN v1.0 — 2026-07-29]
 
-Status: **DRAFT** pending the operator's answers in §Decisions. When frozen,
-this file is committed and its commit hash is the pre-registration mark;
-after that, changes require a dated amendment note, never a silent edit.
+Status: **FROZEN v1.0** (operator answered the four design questions
+2026-07-29; the commit adding this line is the pre-registration mark).
+Changes after freeze require a dated amendment note here, never a silent
+edit. Numeric freeze constants (§Gate, §Decisions) may be amended pre-run
+the same way.
 
 ## Hypothesis under test
 
@@ -33,19 +35,48 @@ model as Arm A's reviewer.
 implemented strategies as a formal contract per the FCDD skill's Beat 1
 (+ twin/bridge to the depth decided in §Decisions D4).
 
-## Decisions (filled from operator answers — PENDING)
+## Decisions (operator, 2026-07-29)
 
-- **D1 Bug surface**: PENDING (Z80 engine `chess.asm` | Rust port vehicle |
-  full stack incl. JS chess semantics)
-- **D2 Bug-set origin**: PENDING (seeded sealed mutations | organic discovery |
-  operator's known-bug list | seeded+organic) — note: issue tracker is empty.
-- **D3 Headline token metric**: PENDING (cost-weighted total | output-only |
-  no single headline). All four raw counters are logged regardless.
-- **D4 Contract depth (step 1)**: PENDING (layered rules-core + strategy
-  properties | fully determinized incl. exact eval/search | bug-adjacent
-  minimal)
-- **D5 Arm model/effort**: default = same model + effort both arms (chosen at
-  launch, logged). PENDING confirmation.
+- **D1 Bug surface = the Z80 engine** (`hc91emu/chess/chess.asm`, 2,268 L,
+  lives in `/media/sf_Projects/HC91_emulator/chess/`). Fixes are written in
+  Z80 asm; behavior is exercised through the hc91emu emulator headlessly
+  (and the spectrum-gambit WASM harness where useful). The JS/backend layers
+  are OUT of headline scope — anything found there goes to the bonus lane.
+- **D2 Bug set = seeded core + organic bonus.** **N = 7** seeded single-fault
+  variants of `chess.asm`, one bug per variant, classes spanning:
+  movegen/legality (castling rights / through-check, en passant, promotion),
+  check/mate/stalemate detection, search (TT key/depth bound, quiescence),
+  eval (sign/symmetry), draw accounting (50-move / repetition). The seeding
+  lane (an independent agent, its own token lane) must: inject the fault,
+  **verify it manifests** via the emulator (a reproducible symptom line),
+  write a **symptom-level bug report** (no location or cause hints), deliver
+  each variant as a tree **without git history**, and write the answer key
+  (locations + patches + intended class) to `sealed/answer_key.json` — the
+  ledger records only its sha256; the orchestrator never reads the key or
+  the seeded diffs until grading. Real bugs an arm (or step 1) uncovers in
+  the pristine engine are logged in the **organic bonus lane**, outside the
+  headline A/B. Contamination controls: arms run **offline** (no web tools),
+  are forbidden to fetch the public repos, and receive the variant tarball
+  as "the current dev state".
+- **D3 Metric = cost-weighted USD total** over all four counters, per-model
+  prices at the 1-hour cache-write rate; raw counters always reported
+  alongside. Frozen prices (USD/MTok, in / cache-wr(1h) / cache-rd / out):
+  **Fable 5 = 10 / 20 / 1 / 50; Opus 4.8 = 5 / 10 / 0.50 / 25** (Opus
+  4.5–4.8 share the rate). Fast-mode, batch, and US-1.1x multipliers are out
+  of scope (not used). Opus 5 unpriced → raw-only if it ever appears.
+- **D4 Contract depth = layered.** Step 1 produces: a kernel spec of the
+  full rule set **as the engine implements it** (movegen, legality,
+  check/mate/stalemate, castling/EP/promotion, the draw rules actually
+  present) + the strategy layer as PROPERTIES (always-returns-a-legal-move,
+  search termination within budget, eval symmetry where intended, alpha-beta
+  ≡ minimax at small depth via the twin), per FCDD Beats 1–3 with the
+  emulator as execution oracle for conformance sampling. **Honesty rule:**
+  where the 8-bit engine deliberately diverges from FIDE (e.g. promotion
+  choice, threefold tracking), the contract records the engine's actual rule
+  and FLAGS the divergence as a finding (organic lane) — it does not
+  silently normalize the spec to FIDE.
+- **D5 Arms config (default, operator may veto): same model + same effort
+  for both arms; launch default = Fable 5 / effort high.** Logged per run.
 
 ## Equivalence gate (per bug, pre-registered before arms run)
 
@@ -54,11 +85,15 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
 2. **Regression**: the repo's existing checks stay green (`verify.mjs`,
    `test_movelog.mjs`, `make test` in hc91emu, per D1 scope).
 3. **Blinded rubric review**: a grader agent (fresh context, not told which arm
-   produced which diff) scores both fixes on correctness risk, clarity,
-   test quality. Gate = acceptance + regression pass AND rubric ≥ threshold
-   set at freeze time. Rubric ties do NOT block; they're reported.
-4. An arm that cannot reach the gate within a per-bug token budget cap
-   (set at freeze) is recorded as DNF at the cap — a result, not an exclusion.
+   produced which diff; label order alternates deterministically by bug
+   parity) scores both fixes 1–5 on three axes — correctness risk, clarity /
+   maintainability, test quality. **Gate threshold: no axis below 3.**
+   Rubric ties do NOT block; they're reported.
+4. **Per-bug per-arm budget cap: $40 cost-weighted.** An arm that cannot
+   reach the gate within the cap is recorded as **DNF at cap** — a result,
+   not an exclusion.
+5. Replication rule: k=1 first pass; any bug where the arms' cost gap is
+   < 30% of the larger cost is re-run (k=2–3) before a winner is claimed.
 
 ## Measurement
 
@@ -81,8 +116,10 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   consulted only after both arms froze their fixes, and any use is logged.
 - **Author asymmetry**: the engine was written by Fable; if arms also run on
   Fable, both arms share whatever self-model advantage exists (symmetric).
-- **Fable pricing** unknown in the local table → cost-weighted headline needs
-  a price entry or falls back to raw counters (see tokencount.py PRICES).
+- **Prices are a dated snapshot** (2026-07-29, third-party pricing pages; the
+  session runs on a subscription, not metered API). The $-headline is a
+  list-price-weighted USAGE index, not an actual bill — raw counters remain
+  the ground truth if prices move.
 
 ## Report skeleton (end state)
 

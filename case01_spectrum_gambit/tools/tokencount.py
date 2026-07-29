@@ -23,10 +23,16 @@ import json
 import sys
 
 PRICES = {  # USD per MTok: (input, cache_write, cache_read, output)
-    "claude-opus-4": (15.0, 18.75, 1.50, 75.0),
-    "claude-sonnet": (3.0, 3.75, 0.30, 15.0),
-    "claude-haiku-4-5": (1.0, 1.25, 0.10, 5.0),
-    "claude-fable-5": None,  # unknown -> raw counters only
+    # 1-HOUR cache-write rates (this environment's TTL). Frozen 2026-07-29,
+    # sources in PROTOCOL.md D3. Order matters: specific prefixes first.
+    "claude-fable-5": (10.0, 20.0, 1.00, 50.0),
+    "claude-opus-4-8": (5.0, 10.0, 0.50, 25.0),
+    "claude-opus-4-7": (5.0, 10.0, 0.50, 25.0),
+    "claude-opus-4-5": (5.0, 10.0, 0.50, 25.0),
+    "claude-opus-4": (15.0, 30.0, 1.50, 75.0),   # legacy 4.0/4.1
+    "claude-opus-5": None,   # not priced yet -> raw counters only
+    "claude-sonnet": (3.0, 6.0, 0.30, 15.0),
+    "claude-haiku-4-5": (1.0, 2.0, 0.10, 5.0),
 }
 
 KEYS = ("input_tokens", "cache_creation_input_tokens",

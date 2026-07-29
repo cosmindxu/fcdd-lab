@@ -43,12 +43,20 @@ cost per arm, the crossover bug-count (if any), and quality achieved vs the bar.
   (compete/ladder API; unauthenticated in this CLI). Not needed for the core
   experiment.
 
-## Design decisions
+## Design decisions (operator, 2026-07-29 — full text in PROTOCOL.md §Decisions)
 
-Recorded in `PROTOCOL.md` §Decisions once the operator answers the open
-questions (bug surface, bug-set origin, headline token metric, contract depth).
-Until PROTOCOL says **FROZEN**, nothing measured has started — only `meta` lane
-tokens (orchestration) are burning.
+- **D1 surface**: the Z80 engine `chess.asm` (fixes in asm; emulator = harness).
+- **D2 bugs**: 7 seeded single-fault variants (sealed answer key, symptom-level
+  reports, no-git tarballs, offline arms) + an organic bonus lane for real
+  finds. Issue tracker was empty.
+- **D3 metric**: cost-weighted USD total (Fable 5 = 10/20/1/50, Opus 4.8 =
+  5/10/0.5/25 per MTok at 1-hr cache-write rates); raw counters always logged.
+- **D4 contract**: layered — full implemented-rules kernel spec + strategy as
+  properties; FIDE divergences flagged, not normalized.
+- **D5 arms** (default, veto-able): same model + effort both arms; launch
+  default Fable 5 / high.
+
+PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 
 ## Measurement mechanics (verified 2026-07-29)
 
@@ -93,12 +101,15 @@ tokens (orchestration) are burning.
 - [x] Lab folder + case scaffold, upstream cloned (`dfd4f1e` at clone time)
 - [x] Engine source located (hc91emu sibling), issue tracker checked (empty)
 - [x] Token-usage schema verified; `tools/tokencount.py` v0
-- [ ] Operator answers to the 4 design questions → PROTOCOL frozen (§Decisions)
-- [ ] Bug set fixed (+ sealed if seeded); per-bug gates pre-registered
+- [x] Operator answers to the 4 design questions → **PROTOCOL FROZEN v1.0**
 - [ ] **Step 1**: formal contract of the chess game + strategies (measured,
-      lane `step1_contract`)
-- [ ] Arms run per bug (lanes `armA:*`, `armB:*`)
-- [ ] Grading + report
+      lane `step1_contract`, its own session/headless run) — user-defined
+      first step; can start now against the PRISTINE engine
+- [ ] Seeding lane: 7 sealed single-fault variants + symptom reports + per-bug
+      acceptance gates (independent agent; parallelizable with step 1 since
+      both work from the pristine engine)
+- [ ] Arms run per bug (lanes `armA:*`, `armB:*`, offline, fresh contexts)
+- [ ] Grading (blinded) + unseal + report
 
 ## Session log
 
@@ -110,3 +121,11 @@ tokens (orchestration) are burning.
   tokens for this bootstrap live in session `dc589311-cdbd-4958-9b03-92a69446dfe8`
   (shared with unrelated ikbr_tools work — count only from the first
   spectrum-gambit message onward; noted here for the ledger).
+- **2026-07-29 (later)** — Operator answered the 4 design questions (D1–D5
+  above); Fable 5 + Opus 4.8 prices pinned by web search and frozen into
+  `tools/tokencount.py`; PROTOCOL frozen v1.0 and committed. Next actions in
+  order: (1) launch **step 1** (contract authoring, measured) as its own
+  attributable run against the pristine `chess.asm`; (2) launch the seeding
+  lane in parallel (independent agent, sealed outputs); (3) pre-register
+  per-bug gates as seeded variants land; (4) arms; (5) blinded grading +
+  unseal + report.
