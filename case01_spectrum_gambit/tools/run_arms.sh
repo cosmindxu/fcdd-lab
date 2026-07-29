@@ -14,8 +14,11 @@ TOOLS_A="Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite"
 TOOLS_B="$TOOLS_A,Skill"
 CLAUDE_BIN="${CLAUDE_BIN:-$(command -v claude)}"
 [ -n "$CLAUDE_BIN" ] || { echo "FATAL: claude not on PATH"; exit 1; }
+BUGS="${BUGS:-bug01 bug02 bug03 bug04 bug05 bug06 bug07}"   # override to resume
+TIMEOUT_S="${TIMEOUT_OVERRIDE:-$TIMEOUT_S}"
 log() { echo "$(date -Is) $*"; }
 mkdir -p "$WORK"
+echo $$ > "$RAW/arms_driver.pid"   # REAL bash pid (the setsid wrapper's pid is useless for kills)
 
 prep_ws() {                                   # $1=bug $2=arm
   local BUG=$1 ARM=$2 WS="$WORK/${1}_arm${2}"
@@ -57,8 +60,8 @@ run_arm() {                                   # $1=bug $2=arm  (backgrounded)
   echo $! > "$RAW/arm${ARM}_${BUG}.pid"
 }
 
-log "ARMS DRIVER START model=$MODEL effort=$EFFORT timeout=${TIMEOUT_S}s toolsA=$TOOLS_A toolsB=$TOOLS_B"
-for BUG in bug01 bug02 bug03 bug04 bug05 bug06 bug07; do
+log "ARMS DRIVER START pid=$$ bugs='$BUGS' model=$MODEL effort=$EFFORT timeout=${TIMEOUT_S}s toolsA=$TOOLS_A toolsB=$TOOLS_B"
+for BUG in $BUGS; do
   log "prep $BUG"
   prep_ws "$BUG" A
   prep_ws "$BUG" B

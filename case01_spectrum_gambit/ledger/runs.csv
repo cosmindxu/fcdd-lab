@@ -2,3 +2,11 @@ run_id,date,lane,arm,phase,bug_id,model,effort,source_ref,input_tokens,cache_wri
 smoke01,2026-07-29,meta,,isolation-smoke,,claude-fable-5,,ledger/raw/smoke_isolation.json,2,15948,15251,111,0.3398,pass,fresh-cwd-sees-NONE
 step1,2026-07-29,step1_contract,,contract,,claude-opus-5,max,ledger/raw/step1_result.json,183,396692,24464324,222109,,green,bridge-11/11 95thm 10findings; cli_usd=21.7527; D3-price-pin-pending
 seed01,2026-07-29,seeding,,seed-7-variants,,claude-opus-5,max,ledger/raw/seeding_result.json,5426,398426,40419724,218692,,,7 variants+reports+gates; key sealed; cli_usd=29.6886; D3-price-pin-pending
+armA_bug01,2026-07-30,armA:bug01,A,fix,bug01,claude-opus-5,max,ledger/raw/armA_bug01_result.json,447,1157872,48795807,415633,,DNF-at-cap,killed 2h wall at usd 43.48 - over 40 cap without gate
+armB_bug01,2026-07-30,armB:bug01,B,fix,bug01,claude-fable-5+claude-opus-5,max,ledger/raw/armB_bug01_result.json,780,1236032,95896475,501643,,gate-selfreported-OVER-CAP,GREEN 12/12 self-report at usd 89.28 - headline DNF-at-cap per frozen 40; contract +S5 +25thm +b8 quality-beyond-bar
+armA_bug02,2026-07-30,meta,,killed-pause,bug02,claude-opus-5,max,ledger/raw/armA_bug02_result.json,24,41103,593655,6496,,,orchestrator pause kill remnant armA - excluded from A/B
+armB_bug02,2026-07-30,meta,,killed-pause,bug02,claude-opus-5,max,ledger/raw/armB_bug02_result.json,25,76575,817019,8155,,,orchestrator pause kill remnant armB - excluded from A/B
+armA_bug03,2026-07-30,meta,,killed-pause,bug03,claude-opus-5,max,ledger/raw/armA_bug03_result.json,11,40033,229417,2980,,,orchestrator pause kill remnant armA - excluded from A/B
+armB_bug03,2026-07-30,meta,,killed-pause,bug03,claude-opus-5,max,ledger/raw/armB_bug03_result.json,13,51570,336953,2979,,,orchestrator pause kill remnant armB - excluded from A/B
+armA_bug04,2026-07-30,meta,,killed-pause,bug04,claude-opus-5,max,ledger/raw/armA_bug04_result.json,17,37387,368448,3463,,,orchestrator pause kill remnant armA - excluded from A/B
+armB_bug04,2026-07-30,meta,,killed-pause,bug04,claude-opus-5,max,ledger/raw/armB_bug04_result.json,17,55360,472687,2635,,,orchestrator pause kill remnant armB - excluded from A/B

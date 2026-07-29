@@ -1,3 +1,19 @@
 2026-07-29T23:28:20+02:00 ARMS DRIVER START model=claude-opus-5 effort=max timeout=7200s toolsA=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite toolsB=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite,Skill
 2026-07-29T23:28:20+02:00 prep bug01
 2026-07-29T23:28:20+02:00 launch pair bug01 (A+B concurrent)
+2026-07-30T01:03:15+02:00 armB bug01 exit rc=0
+2026-07-30T01:28:21+02:00 armA bug01 TIMEOUT->DNF (rc=124)
+2026-07-30T01:28:21+02:00 pair bug01 done
+2026-07-30T01:28:21+02:00 prep bug02
+2026-07-30T01:28:21+02:00 launch pair bug02 (A+B concurrent)
+2026-07-30T01:30:37+02:00 pair bug02 done
+2026-07-30T01:30:37+02:00 prep bug03
+2026-07-30T01:30:37+02:00 launch pair bug03 (A+B concurrent)
+2026-07-30T01:30:40+02:00 OPERATOR-PAUSE: driver+bug02 stopped by orchestrator — B blew $40 cap ($89.28); awaiting operator decision
+2026-07-30T01:31:45+02:00 pair bug03 done
+2026-07-30T01:31:45+02:00 prep bug04
+2026-07-30T01:31:45+02:00 launch pair bug04 (A+B concurrent)
+2026-07-30T01:32:02+02:00 OPERATOR-PAUSE complete: driver + bug03 stopped; bug01 results final (A DNF-at-cap $43.48; B gate@$89.28 over-cap); bug02 anomaly under review
+2026-07-30T01:33:01+02:00 armA bug04 exit rc=143
+2026-07-30T01:33:01+02:00 armB bug04 exit rc=143
+2026-07-30T01:33:05+02:00 OPERATOR-PAUSE v2: REAL driver pid 1083229 killed (first kill hit the setsid wrapper pid — bug02/bug03 2-min deaths were the orchestrator's own pid-file kills, not an API anomaly); bug04 pair killed ~2min in; EXPERIMENT PAUSED

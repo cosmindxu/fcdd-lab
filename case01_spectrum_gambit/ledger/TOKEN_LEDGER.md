@@ -49,3 +49,25 @@ armA:<bug> / armB:<bug> / grading.
   (the pristine engine lives on this disk; arms must not be led to it).
   Results land in `raw/arm{A,B}_bugNN_result.json`; driver log
   `raw/arms_driver.log`.
+- **2026-07-30 01:03–01:33 · bug01 pair complete → EXPERIMENT PAUSED** —
+  **armB:bug01**: rc=0 at 95 min, self-reported gate GREEN 12/12 (quiescence
+  ply-cap fault fixed; contract extended +S5 +25 theorems + new bridge layer
+  b8; `make test` 5/5) at **$89.28 CLI — 2.2× the frozen $40 cap** → headline
+  booking per frozen protocol = DNF-at-cap, gate-reached + quality-beyond-bar
+  recorded. Its attack round ran **claude-fable-5 subagents** (the FCDD
+  skill's own routing) — method-inherent A3 deviation, flagged.
+  **armA:bug01**: killed by the orchestrator's 2 h wall cap at **$43.48**,
+  gate not reached — already over the $40 cost cap, so protocol DNF-at-cap
+  stands on its own. **Cap calibration is broken for opus-5/max on this
+  task class; trajectory = every run DNFs ⇒ scientifically void at ~$150/pair
+  ⇒ PAUSED.** Ops honesty: the first pause attempt killed the setsid WRAPPER
+  pid (recorded by `echo $!`), not the driver bash — the driver survived two
+  kill attempts and started bugs 02, 03, 04; their 6 kill remnants
+  ($0.59–$1.38 each, $5.10 total) are booked lane=meta/killed-pause,
+  EXCLUDED from the A/B (reruns get fresh workspaces). Driver fixed
+  (`echo $$` + BUGS/TIMEOUT_OVERRIDE env). Orchestrator contamination log:
+  read armB:bug01's final self-report (fix summary), and bug04's symptom
+  report scrolled through a pgrep dump — symptom-level only, sealed key
+  untouched; grading stays blinded via fresh agents. Arms spend tonight:
+  **$138.86** ($132.76 measured bug01 + $5.10 pause waste + $0.87+$0.13
+  rounding in rows); prep lanes $51.44; case total ≈ **$190.6**.
