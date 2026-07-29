@@ -32,3 +32,20 @@ armA:<bug> / armB:<bug> / grading.
   timestamp is the pre-registration mark). Lane also relocated
   `work/pristine/` → `sealed/seedkit/pristine` (the `work/` deletion is
   committed as-is). Same opus-5 price-pin caveat; CLI-reported **$29.6886**.
+- **2026-07-29 23:28 · arms launched · armA:*/armB:*** — operator GO received;
+  detached driver `tools/run_arms.sh` (pid in `raw/arms_driver.pid`), 7 bugs ×
+  2 arms, **pair-per-bug**: A+B of the same bug run concurrently (same API
+  weather for both arms), pairs sequential. Config: `claude-opus-5` /
+  effort **max** (A3), `--output-format json`, 2 h wall timeout per run
+  (rc=124 → DNF-timeout), offline by construction — allowedTools
+  A=`Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite`, B=+`Skill`
+  (no web tools). $40/run cap enforced post-hoc on CLI-reported USD
+  (opus-5 D3 pin still pending). Prompt packs `prompts/arm{A,B}_header.md` +
+  `arm_footer.md`; **orchestrator assembled prompts blind** (script cats
+  `bug_reports/*.md`; reports remain unread by the orchestrator). Arm B
+  workspace copies get a disclosed mechanical re-point: `bridge/emu.py` →
+  workspace harness, `b7_findings.py` → variant `engine.inc`, then a blanket
+  scrub of any remaining `/media/sf_Projects/*` signpost in BOTH arms' copies
+  (the pristine engine lives on this disk; arms must not be led to it).
+  Results land in `raw/arm{A,B}_bugNN_result.json`; driver log
+  `raw/arms_driver.log`.

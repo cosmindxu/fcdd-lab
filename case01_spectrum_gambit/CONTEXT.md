@@ -115,9 +115,11 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 - [ ] ⚠ **D3 price pin for `claude-opus-5`** (lanes ran opus-5 under A3
       "Opus"; frozen table lacks it → cost columns empty, CLI USD in notes).
       Needs a dated PROTOCOL amendment by the operator before report math.
-- [ ] Arms run per bug (lanes `armA:*`, `armB:*`, offline, fresh contexts) —
-      **awaiting operator GO** (cost order-of-magnitude: 2 arms × 7 bugs at
-      lane-scale runs ≈ several hundred USD; k=1 first pass per rule 6)
+- [~] Arms RUNNING since 2026-07-29 23:28 (operator GO) — detached driver
+      `tools/run_arms.sh`, pair-per-bug sequential, opus-5/max, 2 h
+      timeout/run, results → `ledger/raw/arm{A,B}_bugNN_result.json`;
+      ETA all 7 pairs ≈ overnight. See TOKEN_LEDGER 23:28 entry for the
+      full disclosed config.
 - [ ] Grading (blinded) + unseal + report
 
 ## Remote
