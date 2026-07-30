@@ -71,3 +71,19 @@ armA:<bug> / armB:<bug> / grading.
   untouched; grading stays blinded via fresh agents. Arms spend tonight:
   **$138.86** ($132.76 measured bug01 + $5.10 pause waste + $0.87+$0.13
   rounding in rows); prep lanes $51.44; case total ≈ **$190.6**.
+- **2026-07-30 07:47–08:01 · pair bug02 closed (A4 no-cap regime)** —
+  **armB:bug02 VALID: gate GREEN 13/13 self-reported at $23.42, 44 min,
+  156 turns** — Arm B's marginal cost fell $89.28 → $23.42 (the H1
+  amortization pattern, n=2). Bonus finding: B reports the step-1 gate's
+  11/11 green was measured against a wrong/stale binary, now rebuilt and
+  pinned byte-identical (quality-beyond-bar + a step-1 package caveat to
+  verify at grading). Reviewer-model note: THIS run's attack agents were
+  opus-5 (no fable in modelUsage) — the skill's fable routing is
+  non-deterministic run-to-run; disclosed per A5, per-run models in
+  runs.csv. **armA:bug02 EXCLUDED — `api_error` crash** at 57 min /
+  $14.76 / 103 turns (infra, not a method verdict); fresh rerun QUEUED
+  (tools/run_solo.sh, gated behind the bug01 solo, pid-watch on 1205320)
+  to avoid 4-way concurrency (suspected factor in the api_error).
+  Contamination log grows: orchestrator read B:bug02's self-report
+  (mkHalf WN-vs-WP root cause). In flight: solo armA:bug01-rerun +
+  pair bug03; armA:bug02-rerun queued.
