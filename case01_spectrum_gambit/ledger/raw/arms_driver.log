@@ -40,3 +40,5 @@
 2026-07-30T10:07:25+02:00 pair bug04 done
 2026-07-30T10:07:25+02:00 prep bug05
 2026-07-30T10:07:25+02:00 launch pair bug05 (A+B concurrent)
+2026-07-30T11:02:17+02:00 V2-REQUEUE START (serial: A03 A04 B02 B03 B04 B01 A01)
+2026-07-30T11:02:17+02:00 armA bug03-rerunv2 START (A4 no-cap, 8h backstop) pid=1398178

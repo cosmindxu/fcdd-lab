@@ -6,6 +6,7 @@
 # "pair <bug>-rerun done (arm<ARM> solo rc=N)" for the standing monitor.
 set -u
 ARM=$1; BUG=$2; GATE_PID="${3:-}"
+TAG="${RESULT_TAG:-rerun}"          # e.g. rerunv2 -> arm<ARM>_<bug>_rerunv2_result.json
 CASE=/media/sf_Projects/fcdd_lab/case01_spectrum_gambit
 WORK="$HOME/fcdd_arms"; RAW="$CASE/ledger/raw"
 WS="$WORK/${BUG}_arm${ARM}"
@@ -15,7 +16,7 @@ TOOLS="Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite"
 log() { echo "$(date -Is) $*" >> "$RAW/arms_driver.log"; }
 
 if [ -n "$GATE_PID" ]; then
-  log "arm$ARM $BUG-rerun QUEUED behind pid $GATE_PID"
+  log "arm$ARM $BUG-$TAG QUEUED behind pid $GATE_PID"
   while kill -0 "$GATE_PID" 2>/dev/null; do sleep 60; done
 fi
 
@@ -39,11 +40,11 @@ grep -rl --exclude='*.olean' --exclude='*.png' --exclude='*.sna' \
   cat "$CASE/prompts/arm_footer.md"
 } | sed "s/BUGNN/$BUG/g" > "$WS/PROMPT.md"
 
-log "arm$ARM $BUG-rerun START (A4 no-cap, 8h backstop) pid=$$"
+log "arm$ARM $BUG-$TAG START (A4 no-cap, 8h backstop) pid=$$"
 cd "$WS" || exit 9
 timeout 28800 "$CLAUDE_BIN" -p "$(cat PROMPT.md)" \
     --model claude-opus-5 --effort max --output-format json \
     --allowedTools "$TOOLS" \
-    > "$RAW/arm${ARM}_${BUG}_rerun_result.json" 2> "$RAW/arm${ARM}_${BUG}_rerun_stderr.log"
+    > "$RAW/arm${ARM}_${BUG}_${TAG}_result.json" 2> "$RAW/arm${ARM}_${BUG}_${TAG}_stderr.log"
 RC=$?
-log "pair ${BUG}-rerun done (arm$ARM solo rc=$RC)"
+log "pair ${BUG}-${TAG} done (arm$ARM solo rc=$RC)"

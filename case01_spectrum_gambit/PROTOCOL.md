@@ -198,6 +198,15 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   is unaffected — it judges the artifacts, not self-claims. Whether any v1
   run is re-run under v2 is an operator call (cost vs rigor).
 
+- **2026-07-30 A7 (operator ruling on A6):** every prompt-v1 run is
+  **re-run under prompt v2**, and the v2 result becomes the headline
+  measurement for that arm×bug; v1 rows stay in the ledger labeled
+  SUPERSEDED (raw counters remain ground truth, v1 workspaces preserved as
+  `_prev_*`). Serial chain, one at a time (api-error prudence): A03, A04,
+  B02, B03, B04, B01, then A01 gated behind the still-running v1 solo.
+  k=1 semantics unchanged — the v2 run IS the k=1 measurement; v1 is a
+  discarded harness-defect casualty, not a second sample.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·
