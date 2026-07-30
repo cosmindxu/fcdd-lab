@@ -166,6 +166,19 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   round routes subagents to claude-fable-5 per the FCDD skill itself —
   treated as part of Arm B's method (and its cost), not a config error.
 
+- **2026-07-30 A5 (operator ruling):** the Fable-routed attack reviewers in
+  Arm B are **accepted as method-inherent** — §Arms' "attack reviewers =
+  same model as Arm A's reviewer" yields, for Arm B only, to the FCDD
+  skill's own reviewer-independence rule (SKILL.md Beat 4: a different
+  model/person than the author; currently the Fable model). Disclosed per
+  run in the ledger; known asymmetries: cost bias AGAINST Arm B (Fable
+  review tokens ≈ 2× Opus-class price), quality confound FOR Arm B
+  (stronger reviewer). The blinded rubric grading stays arm-neutral.
+  Applies retroactively to armB:bug01 and to all subsequent Arm B runs.
+  Companion action outside this protocol: a TODO filed in the FCDD skill's
+  directory to make the reviewer model an explicit user choice in future
+  skill versions instead of a silently baked-in default.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·
