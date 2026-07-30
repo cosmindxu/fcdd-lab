@@ -67,11 +67,49 @@ Concrete shape for a case02:
 
 - **Reuse the existing partial chess specification in Lean**:
   <https://github.com/dwrensha/Chess.lean> (operator-supplied, 2026-07-30).
-  Case 01's `spec/Contract.lean` was written from scratch; a comparison
-  against an independently authored spec is *itself* a finding — it directly
-  attacks case 01's standing residual that spec and twin share one author.
-  Decide deliberately whether case02 is Lean (reuse Chess.lean, extraction
-  story is weaker) or Rocq (extraction story is the point, spec is new work).
+  Verified 2026-07-30: **Lean 4, self-described incomplete** — board
+  representation, move legality, turn tracking, checkmate detection, plus a
+  `get_next_move` tactic backed by Stockfish and worked proofs of mate
+  puzzles ("Morphy mates in two"). So it is oriented to *proving mate
+  positions*, not to specifying an engine: the rules/legality/mate layer
+  overlaps case 01's C1–C6/C11 well, while the strategy layer case 01 cared
+  about (search termination, eval antisymmetry, alpha-beta ≡ minimax, TT
+  soundness) is out of its scope. Highest-value use is therefore **as an
+  independent oracle**, not as the source of truth: differential-test our
+  spec's `genLegal`/terminal decisions against it. That directly attacks
+  case 01's standing residual (spec and twin share one author) in a way no
+  amount of internal review can.
+
+- **Lean → Rocq bridge**: <https://github.com/rocq-community/rocq-lean-import>
+  (operator-supplied). Verified 2026-07-30 — and it does **not** license the
+  obvious plan. It makes Rocq act as a Lean typechecker by translating
+  **Lean export files** (`lean4export`) into Rocq declarations: inductives,
+  constants, axioms, definitions *and* type information. But it is
+  explicitly **experimental alpha**, its own README reports that
+  **extraction is broken for some constructs**, stdlib needs conversion
+  checking disabled to get through (43 s), and **mathlib is intractable**
+  (~10 GB RAM, 11,867 of 66,400 entries skipped). Since almost every Lean 4
+  project of this kind pulls in mathlib, "import Chess.lean, extract
+  certified OCaml" is a **hypothesis to test cheaply, not a plan to adopt**.
+
+  **Spike before committing (≤1 session):** (1) does Chess.lean depend on
+  mathlib, and how deeply? (2) does `lean4export` + `Lean Import` survive
+  that dependency set at all? (3) does Rocq extraction produce OCaml for the
+  imported chess definitions specifically, or hit the broken-construct path?
+  Any red ⇒ fall back to Path 1 below and keep Chess.lean as the oracle.
+
+- **Three candidate paths, pick after the spike:**
+  1. **Rocq-native spec + `Extraction` to OCaml** (recommended default) —
+     extraction is a first-class, well-trodden Rocq feature; cost is that
+     the spec is new work. Chess.lean still serves as the external oracle.
+  2. **Stay in Lean** and reuse Chess.lean directly — cheapest specification
+     path, but Lean's compilation to C is *not* the same guarantee as Coq's
+     extraction-from-proof, so the headline claim weakens to "verified spec,
+     conventionally compiled".
+  3. **Chess.lean → rocq-lean-import → Rocq → OCaml** — the only path that
+     gets both reuse *and* certified extraction, and the one the evidence
+     above says is most likely to fail. Attractive enough to spike, too
+     fragile to plan around.
 - **Toolchain already present**: `rocq` MCP server + the `rocq:*` skills
   (prove/autoprove/golf/axiom-eliminator), and the
   **`verified-extraction-hardening`** skill, which exists precisely for the
