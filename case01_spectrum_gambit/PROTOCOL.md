@@ -149,6 +149,23 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   exists headless, so D5 is fully applicable; the CLI's own
   `total_cost_usd` is recorded alongside tokencount's computation.
 
+- **2026-07-30 A4 (operator directive, after the bug01 pilot pair):** the
+  §Gate rule-4 **$40 per-bug per-arm cap is REMOVED**, and so is the
+  orchestrator's extra-protocol 2 h wall cap ("Resume option 1. Do not
+  impose cap"). Every run is measured **to completion**; tokens-to-gate is
+  the headline; DNF now means only genuine non-completion (crash, or the
+  disclosed **8 h hang-backstop** — wedge protection, not a measurement cap;
+  a run legitimately approaching it is extended, not DNF'd). Consequences:
+  (a) armA:bug01's first attempt ($43.48, truncated at 2 h by the retired
+  cap, gate not reached) is **excluded as a truncated pilot row** and the
+  arm is **re-run fresh, solo**, concurrent with the bug02+ pairs (its
+  same-API-weather pairing with armB:bug01 was already broken); armB:bug01
+  ($89.28 to completion, gate self-reported) **stands** as a valid
+  measurement. (b) The bug02–04 pause-kill remnants stay excluded meta rows;
+  those pairs re-run clean. Observation kept on the record: Arm B's attack
+  round routes subagents to claude-fable-5 per the FCDD skill itself —
+  treated as part of Arm B's method (and its cost), not a config error.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·

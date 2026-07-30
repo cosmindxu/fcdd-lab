@@ -115,17 +115,16 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
 - [ ] ⚠ **D3 price pin for `claude-opus-5`** (lanes ran opus-5 under A3
       "Opus"; frozen table lacks it → cost columns empty, CLI USD in notes).
       Needs a dated PROTOCOL amendment by the operator before report math.
-- [!] Arms **PAUSED 2026-07-30 01:33** after the bug01 pair: BOTH arms blew
-      the frozen $40/bug cap (A: DNF at $43.48 killed at 2 h wall, no gate;
-      B: gate self-reported GREEN 12/12 at $89.28 → headline DNF-at-cap).
-      Cap is miscalibrated for opus-5/max ⇒ continuing = all-DNF void at
-      ~$150/pair. **OPERATOR DECISION PENDING**: (a) dated amendment raising
-      the cap (proposed $100 + 4 h wall) and resume bugs 02+ via
-      `BUGS="bug02 ..." setsid nohup bash tools/run_arms.sh ...`;
-      (b) continue under $40 as-is (not recommended); (c) stop and salvage
-      (step1 package + bug01 pilot + ledger). bug02–04 kill remnants are
-      excluded meta rows; reruns start clean. Full account: TOKEN_LEDGER
-      2026-07-30 01:33 entry.
+- [~] Arms **RESUMED 2026-07-30 07:02 under amendment A4** (operator:
+      "Resume option 1. Do not impose cap"): **cost cap REMOVED**, runs
+      measured to completion, 8 h hang-backstop only (extend, don't DNF, if
+      a real run approaches it). In flight: solo **armA:bug01 rerun**
+      (attempt 1 excluded as truncated pilot; workspace archived
+      `bug01_armA_try1_0702`) concurrent with pairs **bug02→07**
+      (driver pid in `raw/arms_driver.pid`, real pid this time). armB:bug01
+      ($89.28, gate) stands. ETA: solo ~09:00, pairs sequential ≈ 1.5–2 h
+      each → last ~17:00–19:00. Pause history + costs: TOKEN_LEDGER
+      2026-07-30 01:33 entry; per-run rows land as results do.
 - [ ] Grading (blinded) + unseal + report
 
 ## Remote

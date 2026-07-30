@@ -17,3 +17,7 @@
 2026-07-30T01:33:01+02:00 armA bug04 exit rc=143
 2026-07-30T01:33:01+02:00 armB bug04 exit rc=143
 2026-07-30T01:33:05+02:00 OPERATOR-PAUSE v2: REAL driver pid 1083229 killed (first kill hit the setsid wrapper pid — bug02/bug03 2-min deaths were the orchestrator's own pid-file kills, not an API anomaly); bug04 pair killed ~2min in; EXPERIMENT PAUSED
+2026-07-30T07:02:31+02:00 ARMS DRIVER START pid=1205321 bugs='bug02 bug03 bug04 bug05 bug06 bug07' model=claude-opus-5 effort=max timeout=28800s toolsA=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite toolsB=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite,Skill
+2026-07-30T07:02:31+02:00 prep bug02
+2026-07-30T07:02:31+02:00 armA bug01-rerun START (A4 no-cap, 8h backstop) pid=1205320
+2026-07-30T07:02:31+02:00 launch pair bug02 (A+B concurrent)
