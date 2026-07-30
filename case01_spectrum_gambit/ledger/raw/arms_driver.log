@@ -111,3 +111,47 @@
 2026-07-30T20:15:40+02:00 [sup] running armB bug05 (serial)
 2026-07-30T20:15:40+02:00 armB bug05-v2 START (A4 no-cap, 8h backstop) pid=1592126
 2026-07-30T20:18:13+02:00 [sup2] waiting for in-flight pid 1594407 before taking over
+2026-07-30T20:19:13+02:00 [sup2] pid 1594407 finished — taking over
+2026-07-30T20:19:13+02:00 [sup2] SUPERVISOR2 START (resilient/serial) queue='B:bug05 A:bug06 B:bug06 A:bug07 B:bug07'
+2026-07-30T20:19:13+02:00 [sup2] queue -> armB bug05
+2026-07-30T20:19:13+02:00 [res] armB bug05: workspace built (/home/xcos/fcdd_arms/bug05_armB_v3), session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:16+02:00 [res] armB bug05 attempt 1/8: FRESH (session d3461f52-6057-5a2b-9e37-6f6cf1834d2c)
+2026-07-30T20:19:18+02:00 [res] armB bug05 attempt 1 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:21+02:00 [res] armB bug05 attempt 2/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:23+02:00 [res] armB bug05 attempt 2 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:27+02:00 [res] armB bug05 attempt 3/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:28+02:00 [res] armB bug05 attempt 3 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:31+02:00 [res] armB bug05 attempt 4/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:33+02:00 [res] armB bug05 attempt 4 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:36+02:00 [res] armB bug05 attempt 5/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:38+02:00 [res] armB bug05 attempt 5 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:41+02:00 [res] armB bug05 attempt 6/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:42+02:00 [res] armB bug05 attempt 6 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:46+02:00 [res] armB bug05 attempt 7/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:47+02:00 [res] armB bug05 attempt 7 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:51+02:00 [res] armB bug05 attempt 8/8: RESUME session d3461f52-6057-5a2b-9e37-6f6cf1834d2c
+2026-07-30T20:19:52+02:00 [res] armB bug05 attempt 8 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:19:52+02:00 [res] pair bug05-v3 done (armB EXHAUSTED 8 attempts)
+2026-07-30T20:19:52+02:00 [sup2] queue -> armA bug06
+2026-07-30T20:19:53+02:00 [res] armA bug06: workspace built (/home/xcos/fcdd_arms/bug06_armA_v3), session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:19:56+02:00 [res] armA bug06 attempt 1/8: FRESH (session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13)
+2026-07-30T20:19:57+02:00 [res] armA bug06 attempt 1 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:20:01+02:00 [res] armA bug06 attempt 2/8: RESUME session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:20:02+02:00 [res] armA bug06 attempt 2 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:20:06+02:00 [res] armA bug06 attempt 3/8: RESUME session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:20:07+02:00 [res] armA bug06 attempt 3 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:20:11+02:00 [res] armA bug06 attempt 4/8: RESUME session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:20:12+02:00 [res] armA bug06 attempt 4 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:20:16+02:00 [res] armA bug06 attempt 5/8: RESUME session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:20:17+02:00 [res] armA bug06 attempt 5 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:20:21+02:00 [res] armA bug06 attempt 6/8: RESUME session aa4b18fc-cbbd-5a66-8c24-ecebb9698e13
+2026-07-30T20:20:23+02:00 [res] armA bug06 attempt 6 interrupted (rc=1 err=1) — will resume
+2026-07-30T20:22:49+02:00 [res] armA bug06 attempt 1/3: FRESH start
+2026-07-30T20:22:53+02:00 [res] armA bug06 attempt 2/3: FRESH start
+2026-07-30T20:22:57+02:00 [res] armA bug06 attempt 3/3: FRESH start
+2026-07-30T20:22:57+02:00 [res] pair bug06-v3 done (armA EXHAUSTED 3 attempts)
+2026-07-30T20:22:57+02:00 [res] armA ztest: FATAL PROMPT.md missing/empty — aborting run
+2026-07-30T20:23:38+02:00 [res] armA bug06 attempt 1/2: FRESH start
+2026-07-30T20:23:38+02:00 [res] armA bug06 attempt 2/2: FRESH start
+2026-07-30T20:23:38+02:00 [res] pair bug06-v3 done (armA EXHAUSTED 2 attempts)
+2026-07-30T20:23:55+02:00 [sup2] waiting for in-flight pid 1592148 before taking over

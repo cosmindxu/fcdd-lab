@@ -229,6 +229,19 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   disclose attempt count (resumption overhead is a real cost of this
   environment, symmetric across arms). Version labels in `runs.csv`:
   v1 (dangling reviews), v2 (synchronous reviews), v3 (+ checkpointing).
+  **Harness defects found IN the resilience layer itself (20:19, ~$3 of
+  probes, no measured run affected)** — recorded because the same traps
+  apply to anyone reusing these scripts: (i) the API probe did `cd` in the
+  CALLER's shell, so after the first probe the runner was no longer in the
+  workspace and `cat PROMPT.md` yielded an EMPTY prompt ("Input must be
+  provided…") — probes now run in a subshell and the prompt is read by
+  absolute path; (ii) `--session-id <uuid>` does NOT bind in this CLI (the
+  returned `session_id` differs), so resume-by-our-uuid always failed with
+  "No conversation found" — resume now uses the REAL `session_id` parsed
+  from the previous attempt's result JSON; (iii) the retry loop treated an
+  instant $0 failure as an interruption and burned 8 attempts in 15 s —
+  failures are now classified (instant+free ⇒ deterministic ⇒ abort after 2
+  with backoff; costly+long ⇒ genuine interruption ⇒ resume).
 
 ## Report skeleton (end state)
 
