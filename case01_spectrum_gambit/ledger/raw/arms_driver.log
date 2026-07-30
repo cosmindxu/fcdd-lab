@@ -27,3 +27,5 @@
 2026-07-30T07:59:56+02:00 prep bug03
 2026-07-30T07:59:56+02:00 launch pair bug03 (A+B concurrent)
 2026-07-30T08:01:05+02:00 armA bug02-rerun QUEUED behind pid 1205320
+2026-07-30T08:03:27+02:00 armB bug03 exit rc=1
+2026-07-30T08:38:29+02:00 armB bug03-rerun QUEUED behind pid 1264352
