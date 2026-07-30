@@ -155,3 +155,4 @@
 2026-07-30T20:23:38+02:00 [res] armA bug06 attempt 2/2: FRESH start
 2026-07-30T20:23:38+02:00 [res] pair bug06-v3 done (armA EXHAUSTED 2 attempts)
 2026-07-30T20:23:55+02:00 [sup2] waiting for in-flight pid 1592148 before taking over
+2026-07-30T20:54:03+02:00 pair bug05-v2 done (armB solo rc=1)

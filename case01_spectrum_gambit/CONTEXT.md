@@ -125,7 +125,15 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
       ($89.28, gate) stands. ETA: solo ~09:00, pairs sequential ≈ 1.5–2 h
       each → last ~17:00–19:00. Pause history + costs: TOKEN_LEDGER
       2026-07-30 01:33 entry; per-run rows land as results do.
-- [ ] Grading (blinded) + unseal + report
+- [x] **Grading (mechanical, not blinded) + unseal + REPORT DONE 2026-07-30**
+      — key unsealed at grading; sealed acceptance gates run against every
+      arm workspace. 10 PASS, 1 FAIL (bug01/A never fixed), bug06/B running.
+      Conclusions in `REPORT.md`; remaining work in `ROADMAP.md`.
+- [ ] Extension (optional, now feasible on the Max plan): see `ROADMAP.md`
+      §A (bug01/A clean re-run FIRST — it decontaminates the report's
+      strongest pro-FCDD cell — then bug07, blinded rubric, v2/v3 reruns,
+      replication) and §C (Rocq/Coq + certified OCaml extraction case02,
+      reusing dwrensha/Chess.lean).
 
 ## Remote
 
