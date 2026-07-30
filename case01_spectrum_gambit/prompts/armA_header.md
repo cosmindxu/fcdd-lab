@@ -31,3 +31,21 @@ A user filed the bug report below. Your job, in the usual way:
 
 Done means: the reported symptom no longer reproduces, `make test` is green,
 your new test passes, and the review round is clean.
+
+## Interruption resilience (READ THIS — it applies from the first minute)
+
+This environment can cut your session off at any moment (infrastructure
+limits). You may be resumed later, possibly WITHOUT your conversation
+context, into the same workspace. Work so that an interruption costs
+minutes, not hours:
+
+- Keep a **`STATE.md`** at the workspace root, updated as you go — not at
+  the end. It must always answer, in a few lines: what the bug is, what you
+  have established, what you have already changed (files + why), what is
+  verified vs unverified, and the SINGLE next action you intended.
+- Prefer many small verified steps over one long unverified stretch: apply a
+  change, run the check, record the result in `STATE.md`, continue.
+- Never leave the workspace in a state where a fresh reader cannot tell
+  whether a change is finished or half-applied.
+- If you are resumed: read `STATE.md` and your own edits FIRST, re-establish
+  where you were, and continue — do not restart, do not redo finished work.

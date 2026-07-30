@@ -79,3 +79,35 @@
 2026-07-30T12:39:55+02:00 prep bug06
 2026-07-30T12:39:55+02:00 armB bug05-rerunv2 START (A4 no-cap, 8h backstop) pid=1440999
 2026-07-30T12:39:55+02:00 launch pair bug06 (A+B concurrent)
+2026-07-30T15:02:18+02:00 armB bug06 exit rc=1
+2026-07-30T15:02:57+02:00 pair bug05-rerunv2 done (armB solo rc=1)
+2026-07-30T15:02:57+02:00 armA bug02-rerunv2 START (A4 no-cap, 8h backstop) pid=1548508
+2026-07-30T15:03:00+02:00 pair bug02-rerunv2 done (armA solo rc=1)
+2026-07-30T15:03:00+02:00 armA bug03-rerunv2 START (A4 no-cap, 8h backstop) pid=1548702
+2026-07-30T15:03:03+02:00 pair bug03-rerunv2 done (armA solo rc=1)
+2026-07-30T15:03:03+02:00 armA bug04-rerunv2 START (A4 no-cap, 8h backstop) pid=1548887
+2026-07-30T15:03:05+02:00 pair bug04-rerunv2 done (armA solo rc=1)
+2026-07-30T15:03:05+02:00 armB bug02-rerunv2 START (A4 no-cap, 8h backstop) pid=1549051
+2026-07-30T15:03:07+02:00 pair bug02-rerunv2 done (armB solo rc=1)
+2026-07-30T15:03:08+02:00 armB bug03-rerunv2 START (A4 no-cap, 8h backstop) pid=1549236
+2026-07-30T15:03:10+02:00 pair bug03-rerunv2 done (armB solo rc=1)
+2026-07-30T15:03:10+02:00 armB bug04-rerunv2 START (A4 no-cap, 8h backstop) pid=1549418
+2026-07-30T15:03:12+02:00 pair bug04-rerunv2 done (armB solo rc=1)
+2026-07-30T15:03:12+02:00 armB bug01-rerunv2 START (A4 no-cap, 8h backstop) pid=1549591
+2026-07-30T15:03:14+02:00 pair bug01-rerunv2 done (armB solo rc=1)
+2026-07-30T15:03:14+02:00 armA bug01-rerunv2 START (A4 no-cap, 8h backstop) pid=1549761
+2026-07-30T15:03:16+02:00 pair bug01-rerunv2 done (armA solo rc=1)
+2026-07-30T15:03:16+02:00 RESUME2 DONE
+2026-07-30T15:04:09+02:00 armA bug06 exit rc=1
+2026-07-30T15:04:09+02:00 pair bug06 done
+2026-07-30T15:04:09+02:00 prep bug07
+2026-07-30T15:04:09+02:00 launch pair bug07 (A+B concurrent)
+2026-07-30T15:04:11+02:00 armB bug07 exit rc=1
+2026-07-30T15:04:12+02:00 armA bug07 exit rc=1
+2026-07-30T15:04:12+02:00 pair bug07 done
+2026-07-30T15:04:12+02:00 ALL ARMS DONE
+2026-07-30T20:14:35+02:00 OUTAGE2 15:02-20:13 booked; 10 instant-death $0 rows not individually booked (aggregate note in TOKEN_LEDGER)
+2026-07-30T20:15:36+02:00 [sup] SUPERVISOR START (serial, session-limit aware) queue='B:bug05 A:bug06 B:bug06 A:bug07 B:bug07'
+2026-07-30T20:15:40+02:00 [sup] running armB bug05 (serial)
+2026-07-30T20:15:40+02:00 armB bug05-v2 START (A4 no-cap, 8h backstop) pid=1592126
+2026-07-30T20:18:13+02:00 [sup2] waiting for in-flight pid 1594407 before taking over

@@ -207,6 +207,29 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   k=1 semantics unchanged — the v2 run IS the k=1 measurement; v1 is a
   discarded harness-defect casualty, not a second sample.
 
+- **2026-07-30 A8/A9 (infrastructure reality + resilience, orchestrator):**
+  two DISTINCT failure classes hit this case and must not be conflated in
+  the report. **(1) API incident, 11:39–12:38** — genuine provider-side
+  fault; killed armA:bug01-rerun ($53.42), armB:bug05 ($32.75),
+  armA:bug03-v2 ($11.93) + 9 instant $0 refusals. **(2) SUBSCRIPTION
+  SESSION-LIMIT exhaustion, 15:02 (reset 19:40)** — quota, not fault;
+  killed armA:bug06 ($32.33), armB:bug06 ($38.34), armB:bug05-v2 ($56.45)
+  + instant refusals. Operator then moved to a **Pro (~€20/mo) plan**, so
+  class (2) becomes the DOMINANT regime: interruptions are now expected,
+  not exceptional. Response: **strictly serial execution** (under a quota,
+  N concurrent runs burn the window N× faster in wall-clock and lose N runs
+  at its end — serial costs the same tokens per unit work and loses at most
+  one), plus a **resilient runner** (`tools/run_resilient.sh`): pinned
+  deterministic `--session-id`, `--resume` after any interruption,
+  workspace never rebuilt between attempts, API/quota probe + wait-for-reset
+  between attempts, ≤8 attempts. **Prompt v3** (this amendment) adds a
+  mandatory rolling `STATE.md` checkpoint so a context-less cold restart
+  still continues instead of restarting. Measurement rule for the report:
+  **a run's attempts are ONE measurement — sum the attempt costs**, and
+  disclose attempt count (resumption overhead is a real cost of this
+  environment, symmetric across arms). Version labels in `runs.csv`:
+  v1 (dangling reviews), v2 (synchronous reviews), v3 (+ checkpointing).
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·
