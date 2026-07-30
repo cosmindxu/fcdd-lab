@@ -129,6 +129,16 @@ PROTOCOL is **FROZEN v1.0**; amendments must be dated notes there.
       — key unsealed at grading; sealed acceptance gates run against every
       arm workspace. 10 PASS, 1 FAIL (bug01/A never fixed), bug06/B running.
       Conclusions in `REPORT.md`; remaining work in `ROADMAP.md`.
+- [~] **PROTOCOL COMPLETION RUNNING since 2026-07-30 23:53** (operator:
+      "finish the protocol", Max plan). Serial resilient queue of **14
+      cells** under prompt v3 (closed reviews + STATE.md checkpoints),
+      `tools/supervisor2.sh`, order: A:bug01 (decontaminates the report's
+      key cell) → B:bug07 → A:bug07 → B:bug05 → A:bug02 → A:bug06 →
+      B:bug06 → then the A7 v3 re-runs (A:03,04,05 + B:01,02,03,04).
+      ETA ≈ 15–20 h serial. Results auto-book via `tools/ingest.py`
+      (idempotent, sums attempts per A9). THEN: blinded rubric grading
+      (gate item 3, never yet run) → final REPORT update → **scientific
+      article**.
 - [ ] Extension (optional, now feasible on the Max plan): see `ROADMAP.md`
       §A (bug01/A clean re-run FIRST — it decontaminates the report's
       strongest pro-FCDD cell — then bug07, blinded rubric, v2/v3 reruns,
