@@ -179,6 +179,25 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   directory to make the reviewer model an explicit user choice in future
   skill versions instead of a silently baked-in default.
 
+- **2026-07-30 A6 (harness defect + fix, orchestrator):** the prompt packs
+  said "spawn a reviewer agent with the Task tool"; in this environment Task
+  subagents default to BACKGROUND and a headless `-p` main loop that ends
+  its turn ends the run — so runs terminated with reviewers still out.
+  Evidence (final messages): B01 "no second adversarial round ran" (partial
+  close, self-disclosed); B02 "batched … after the reviewers report"; A03
+  reviewer died to a server error, fresh one pending at exit; B03-rerun and
+  A04 explicitly "waiting for reviewers". Consequence: the review/attack
+  gate item is systematically under-closed and its response-cycle tokens
+  UNDERCOUNTED — **symmetrically, in both arms** (comparability degraded
+  less than absolute costs). Fix: **prompt v2** (dated this amendment)
+  requires synchronous reviewers (`run_in_background: false`) and forbids
+  ending with a pending review; applies to every run assembled after
+  2026-07-30 09:55 (bug05–07 pairs, armA:bug02-rerun, any later rerun).
+  Rows are labeled promptv1/promptv2 in notes; v1 rows carry a
+  "review-cycle undercounted" caveat. Blinded rubric grading (gate item 3)
+  is unaffected — it judges the artifacts, not self-claims. Whether any v1
+  run is re-run under v2 is an operator call (cost vs rigor).
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·

@@ -22,8 +22,12 @@ A user filed the bug report below. Your job, in the usual way:
    run or host-side check committed next to the source is fine).
 4. Keep the existing checks green: the variant's `make test` must pass.
 5. Then get your work code-reviewed: spawn a fresh reviewer agent with the
-   Task tool, give it the diff and your reasoning, and address every finding
-   it raises. Iterate until the reviewer has no findings left.
+   Task tool — **run it synchronously (`run_in_background: false`), never in
+   the background** — give it the diff and your reasoning, and address every
+   finding it raises. Iterate until the reviewer has no findings left.
+   **Do not end your session while any reviewer is still running or its
+   findings unaddressed: a session that ends with a pending review has NOT
+   met its gate.**
 
 Done means: the reported symptom no longer reproduces, `make test` is green,
 your new test passes, and the review round is clean.

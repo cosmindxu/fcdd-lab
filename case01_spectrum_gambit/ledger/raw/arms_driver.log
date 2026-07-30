@@ -34,3 +34,5 @@
 2026-07-30T08:51:02+02:00 prep bug04
 2026-07-30T08:51:02+02:00 launch pair bug04 (A+B concurrent)
 2026-07-30T08:51:29+02:00 armB bug03-rerun START (A4 no-cap, 8h backstop) pid=1286298
+2026-07-30T09:20:21+02:00 armA bug04 exit rc=0
+2026-07-30T09:49:55+02:00 pair bug03-rerun done (armB solo rc=0)

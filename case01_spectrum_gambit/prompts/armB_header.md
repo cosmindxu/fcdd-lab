@@ -39,8 +39,12 @@ A user filed the bug report below. Your job, per the method:
    bug's class is pinned — a regression of this fault must trip the bridge).
 5. Keep the existing checks green: the variant's `make test` must pass.
 6. Then run an attack round: spawn a fresh adversarial reviewer agent with
-   the Task tool, give it the diff, your contract delta, and your reasoning;
-   address every finding. Iterate until the attack round is clean.
+   the Task tool — **run it synchronously (`run_in_background: false`),
+   never in the background** — give it the diff, your contract delta, and
+   your reasoning; address every finding. Iterate until the attack round is
+   clean. **Do not end your session while any reviewer is still running or
+   its findings unaddressed: a session that ends with a pending attack
+   round has NOT met its gate.**
 
 Done means: the reported symptom no longer reproduces, `make test` is green,
 the relevant bridge layers pass, the fault's class is pinned by a test or
