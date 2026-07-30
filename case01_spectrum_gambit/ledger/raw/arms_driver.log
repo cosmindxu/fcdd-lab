@@ -42,3 +42,40 @@
 2026-07-30T10:07:25+02:00 launch pair bug05 (A+B concurrent)
 2026-07-30T11:02:17+02:00 V2-REQUEUE START (serial: A03 A04 B02 B03 B04 B01 A01)
 2026-07-30T11:02:17+02:00 armA bug03-rerunv2 START (A4 no-cap, 8h backstop) pid=1398178
+2026-07-30T11:27:20+02:00 armA bug05 exit rc=0
+2026-07-30T11:39:13+02:00 pair bug03-rerunv2 done (armA solo rc=1)
+2026-07-30T11:39:13+02:00 armA bug04-rerunv2 START (A4 no-cap, 8h backstop) pid=1430775
+2026-07-30T11:39:15+02:00 pair bug04-rerunv2 done (armA solo rc=1)
+2026-07-30T11:39:15+02:00 armB bug02-rerunv2 START (A4 no-cap, 8h backstop) pid=1430960
+2026-07-30T11:39:18+02:00 pair bug02-rerunv2 done (armB solo rc=1)
+2026-07-30T11:39:18+02:00 armB bug03-rerunv2 START (A4 no-cap, 8h backstop) pid=1431135
+2026-07-30T11:39:20+02:00 pair bug03-rerunv2 done (armB solo rc=1)
+2026-07-30T11:39:20+02:00 armB bug04-rerunv2 START (A4 no-cap, 8h backstop) pid=1431299
+2026-07-30T11:39:23+02:00 pair bug04-rerunv2 done (armB solo rc=1)
+2026-07-30T11:39:23+02:00 armB bug01-rerunv2 START (A4 no-cap, 8h backstop) pid=1431470
+2026-07-30T11:39:25+02:00 pair bug01-rerunv2 done (armB solo rc=1)
+2026-07-30T11:39:25+02:00 armA bug01-rerunv2 QUEUED behind pid 1205320
+2026-07-30T11:40:02+02:00 armB bug05 exit rc=1
+2026-07-30T11:40:02+02:00 pair bug05 done
+2026-07-30T11:40:02+02:00 prep bug06
+2026-07-30T11:40:02+02:00 launch pair bug06 (A+B concurrent)
+2026-07-30T11:40:04+02:00 armA bug06 exit rc=1
+2026-07-30T11:40:05+02:00 armB bug06 exit rc=1
+2026-07-30T11:40:05+02:00 pair bug06 done
+2026-07-30T11:40:05+02:00 prep bug07
+2026-07-30T11:40:05+02:00 launch pair bug07 (A+B concurrent)
+2026-07-30T11:40:07+02:00 armA bug07 exit rc=1
+2026-07-30T11:40:08+02:00 armB bug07 exit rc=1
+2026-07-30T11:40:08+02:00 pair bug07 done
+2026-07-30T11:40:08+02:00 ALL ARMS DONE
+2026-07-30T11:45:09+02:00 pair bug01-rerun done (armA solo rc=1)
+2026-07-30T11:45:25+02:00 armA bug01-rerunv2 START (A4 no-cap, 8h backstop) pid=1431643
+2026-07-30T11:45:27+02:00 pair bug01-rerunv2 done (armA solo rc=1)
+2026-07-30T11:45:27+02:00 V2-REQUEUE DONE
+2026-07-30T11:46:05+02:00 armA bug02-rerun START (A4 no-cap, 8h backstop) pid=1265815
+2026-07-30T11:46:07+02:00 pair bug02-rerun done (armA solo rc=1)
+2026-07-30T12:39:55+02:00 RESUME2 START (serial: B05 A02 A03 A04 B02 B03 B04 B01 A01)
+2026-07-30T12:39:55+02:00 ARMS DRIVER START pid=1440993 bugs='bug06 bug07' model=claude-opus-5 effort=max timeout=28800s toolsA=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite toolsB=Task,Bash,Read,Write,Edit,MultiEdit,Glob,Grep,TodoWrite,Skill
+2026-07-30T12:39:55+02:00 prep bug06
+2026-07-30T12:39:55+02:00 armB bug05-rerunv2 START (A4 no-cap, 8h backstop) pid=1440999
+2026-07-30T12:39:55+02:00 launch pair bug06 (A+B concurrent)
