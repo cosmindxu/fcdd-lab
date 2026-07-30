@@ -8,6 +8,26 @@ is flat-rate; raw token counters in `ledger/runs.csv` are the ground truth).
 
 ---
 
+> ## ⚠ CORRECTION 2026-07-31 00:37 — the §1 counter-signal is FALSIFIED
+>
+> §1 below claimed Arm A "never produced a correct fix" for bug01 while Arm B
+> did, and called it the one point favouring FCDD. **That claim is now known
+> to be an artefact of my own truncation, exactly as its caveat warned.**
+> Given one clean, uninterrupted run under prompt v3, Arm A fixed bug01 in
+> **a single attempt, 44 minutes, $8.66**, passing the sealed acceptance gate
+> (7/7) with a binary **byte-identical to pristine**.
+>
+> bug01 therefore flips from "the bug only FCDD could fix" to **the widest
+> margin in the whole study in favour of typical development**: $8.66 vs
+> $89.28, a factor of **10.3×**. Nothing in this report now supports the
+> claim that FCDD succeeded where typical development failed.
+>
+> Second-order warning for every number below: the clean v3 run cost **less
+> than a third** of what the same cell cost amid caps, retries and outages.
+> The §2 cost table is therefore probably **inflated by infrastructure
+> chaos**, not just under-counted on review tails. Treat all §2 figures as
+> provisional until the 14-cell v3 re-run completes.
+
 ## 1. Headline
 
 On five bugs where **both** arms produced a fix that passes the sealed,
