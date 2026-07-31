@@ -203,3 +203,15 @@
 2026-07-31T19:26:05+02:00 [res] armB bug05: unavailable (probe 12) — sleeping 900s
 2026-07-31T19:41:09+02:00 [res] armB bug05: availability RESTORED after 12 probes
 2026-07-31T19:41:09+02:00 [res] armB bug05 attempt 2/8: RESUME real session 6ad85c2a-154f-405f-9506-3f9f0307e58a
+2026-07-31T21:54:44+02:00 [res] armB bug05 attempt 2: interrupted after 8015s ($54.6376) — will resume from 6ad85c2a-154f-405f-9506-3f9f0307e58a
+2026-07-31T21:55:46+02:00 [res] armB bug05: unavailable (probe 1) — sleeping 900s
+2026-07-31T22:10:49+02:00 [res] armB bug05: unavailable (probe 2) — sleeping 900s
+2026-07-31T22:25:51+02:00 [res] armB bug05: unavailable (probe 3) — sleeping 900s
+2026-07-31T22:40:53+02:00 [res] armB bug05: unavailable (probe 4) — sleeping 900s
+2026-07-31T22:55:55+02:00 [res] armB bug05: unavailable (probe 5) — sleeping 900s
+2026-07-31T23:10:57+02:00 [res] armB bug05: unavailable (probe 6) — sleeping 900s
+2026-07-31T23:25:59+02:00 [res] armB bug05: unavailable (probe 7) — sleeping 900s
+2026-07-31T23:41:01+02:00 [res] armB bug05: unavailable (probe 8) — sleeping 900s
+2026-07-31T23:56:04+02:00 [res] armB bug05: unavailable (probe 9) — sleeping 900s
+2026-08-01T00:11:06+02:00 [res] armB bug05: unavailable (probe 10) — sleeping 900s
+2026-08-01T00:26:08+02:00 [res] armB bug05: unavailable (probe 11) — sleeping 900s

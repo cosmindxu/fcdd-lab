@@ -14,6 +14,8 @@ Done under prompt v3 (clean, closed-review, resilient runner):
 |---|---|
 | armA:bug01 | **COMPLETE** — 1 attempt, 44 min, **$8.66**, sealed gate PASS 7/7, binary byte-identical to pristine |
 | armB:bug07 | **COMPLETE** — 2 attempts (interrupted ~3 h, auto-resumed), **$21.90** total, sealed gate PASS 10/10, binary byte-identical to pristine |
+| armA:bug07 | **COMPLETE** — 1 attempt, 51 min, **$14.68**, sealed gate PASS 10/10, pristine binary. **First complete v3 matched pair**: A $14.68 vs B $21.90 = 1.49x |
+| armB:bug05 | **IN FLIGHT at pause** — attempt 1 spent $28.44 then was interrupted; attempt 2 is waiting out an availability window (probing every 15 min). It will resume and finish on its own; nothing after it will start. |
 
 Everything else still stands on the pre-v3 data described in `REPORT.md`
 (with its 2026-07-31 correction box at the top).
@@ -21,9 +23,16 @@ Everything else still stands on the pre-v3 data described in `REPORT.md`
 ## Remaining queue (12 cells, in the intended order)
 
 ```
-A:bug07 B:bug05 A:bug02 A:bug06 B:bug06 A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04
+A:bug02 A:bug06 B:bug06 A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04
 ```
-(unchanged by the bug07/B completion — A:bug07 is still needed to close that pair)
+(bug07 pair is DONE; B:bug05 is finishing itself outside the queue. Adding
+`B:bug05` back is only needed if its in-flight cell is abandoned.)
+
+**Milestone note:** the first three of that list — `A:bug02 A:bug06 B:bug06` —
+plus the self-finishing B:bug05 complete **seven matched pairs**, which is the
+point at which the article's central table stands on its own. The remaining
+seven cells are A7 re-runs of cells that already have valid-but-older data;
+they buy metric purity, not coverage.
 
 - First seven of those are cells that never completed with a closed review.
 - The last five (A:03, A:04, A:05, B:01…B:04) are the A7 v3 re-runs of cells
