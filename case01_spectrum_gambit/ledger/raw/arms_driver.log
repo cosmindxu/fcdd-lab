@@ -164,3 +164,19 @@
 2026-07-31T00:37:40+02:00 [sup2] queue -> armB bug07
 2026-07-31T00:37:40+02:00 [res] armB bug07: workspace built (/home/xcos/fcdd_arms/bug07_armB_v3)
 2026-07-31T00:37:43+02:00 [res] armB bug07 attempt 1/8: FRESH start
+2026-07-31T01:30:52+02:00 [res] armB bug07 attempt 1: interrupted after 3189s ($21.5521) — will resume from 4f8a7719-95d9-45d5-9a74-91795ca26805
+2026-07-31T01:31:54+02:00 [res] armB bug07: unavailable (probe 1) — sleeping 900s
+2026-07-31T01:46:57+02:00 [res] armB bug07: unavailable (probe 2) — sleeping 900s
+2026-07-31T02:01:59+02:00 [res] armB bug07: unavailable (probe 3) — sleeping 900s
+2026-07-31T02:17:01+02:00 [res] armB bug07: unavailable (probe 4) — sleeping 900s
+2026-07-31T02:32:03+02:00 [res] armB bug07: unavailable (probe 5) — sleeping 900s
+2026-07-31T02:47:06+02:00 [res] armB bug07: unavailable (probe 6) — sleeping 900s
+2026-07-31T03:02:08+02:00 [res] armB bug07: unavailable (probe 7) — sleeping 900s
+2026-07-31T03:17:10+02:00 [res] armB bug07: unavailable (probe 8) — sleeping 900s
+2026-07-31T03:32:12+02:00 [res] armB bug07: unavailable (probe 9) — sleeping 900s
+2026-07-31T03:47:14+02:00 [res] armB bug07: unavailable (probe 10) — sleeping 900s
+2026-07-31T04:02:16+02:00 [res] armB bug07: unavailable (probe 11) — sleeping 900s
+2026-07-31T04:17:18+02:00 [res] armB bug07: unavailable (probe 12) — sleeping 900s
+2026-07-31T04:32:22+02:00 [res] armB bug07: availability RESTORED after 12 probes
+2026-07-31T04:32:22+02:00 [res] armB bug07 attempt 2/8: RESUME real session 4f8a7719-95d9-45d5-9a74-91795ca26805
+2026-07-31T05:34:22+02:00 [res] pair bug07-v3 done (armB COMPLETE attempt 2, $21.9041, 3720s)
