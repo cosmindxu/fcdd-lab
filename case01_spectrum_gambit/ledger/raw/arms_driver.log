@@ -188,3 +188,18 @@
 2026-07-31T15:39:11+02:00 [sup2] queue -> armB bug05
 2026-07-31T15:39:11+02:00 [res] armB bug05: workspace built (/home/xcos/fcdd_arms/bug05_armB_v3)
 2026-07-31T15:39:14+02:00 [res] armB bug05 attempt 1/8: FRESH start
+2026-07-31T16:39:39+02:00 [res] armB bug05 attempt 1: interrupted after 3624s ($28.4410) — will resume from 6ad85c2a-154f-405f-9506-3f9f0307e58a
+2026-07-31T16:40:41+02:00 [res] armB bug05: unavailable (probe 1) — sleeping 900s
+2026-07-31T16:55:43+02:00 [res] armB bug05: unavailable (probe 2) — sleeping 900s
+2026-07-31T17:10:45+02:00 [res] armB bug05: unavailable (probe 3) — sleeping 900s
+2026-07-31T17:25:47+02:00 [res] armB bug05: unavailable (probe 4) — sleeping 900s
+2026-07-31T17:40:49+02:00 [res] armB bug05: unavailable (probe 5) — sleeping 900s
+2026-07-31T17:55:51+02:00 [res] armB bug05: unavailable (probe 6) — sleeping 900s
+2026-07-31T18:10:53+02:00 [res] armB bug05: unavailable (probe 7) — sleeping 900s
+2026-07-31T18:25:56+02:00 [res] armB bug05: unavailable (probe 8) — sleeping 900s
+2026-07-31T18:40:58+02:00 [res] armB bug05: unavailable (probe 9) — sleeping 900s
+2026-07-31T18:56:01+02:00 [res] armB bug05: unavailable (probe 10) — sleeping 900s
+2026-07-31T19:11:03+02:00 [res] armB bug05: unavailable (probe 11) — sleeping 900s
+2026-07-31T19:26:05+02:00 [res] armB bug05: unavailable (probe 12) — sleeping 900s
+2026-07-31T19:41:09+02:00 [res] armB bug05: availability RESTORED after 12 probes
+2026-07-31T19:41:09+02:00 [res] armB bug05 attempt 2/8: RESUME real session 6ad85c2a-154f-405f-9506-3f9f0307e58a

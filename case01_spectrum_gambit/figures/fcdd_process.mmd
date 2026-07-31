@@ -1,0 +1,51 @@
+---
+title: "FCDD — the process encoded in the formal-contract-dev skill"
+---
+flowchart TB
+    classDef beat fill:#1f3a5f,stroke:#4a90d9,stroke-width:2px,color:#ffffff
+    classDef art fill:#eef2f7,stroke:#8a94a6,stroke-width:1px,color:#1a1a1a
+    classDef out fill:#5c3a1f,stroke:#d99a4a,stroke-width:2px,color:#ffffff
+    classDef res fill:#5f1f1f,stroke:#d94a4a,stroke-width:2px,color:#ffffff
+    classDef law fill:#2f2f3f,stroke:#8a8ad9,stroke-width:1px,color:#ffffff
+
+    UP["<b>UPSTREAM — outside FCDD</b><br/>hazard analysis (FMEA / STPA)<br/>yields properties P1..Pn"]:::out
+
+    subgraph PURE["① build the contract — offline, pure, no environment"]
+        direction LR
+        B1["<b>BEAT 1 · PROVE</b><br/>kernel-checked <i>spec of record</i><br/>fail direction per property<br/>completeness gate: zero holes"]:::beat
+        A1["<b>Contract.lean</b><br/>Conforming predicate<br/>witnesses · consequences<br/>incidents as theorems"]:::art
+        B2["<b>BEAT 2 · TWIN</b><br/>pure implementation,<br/>clause for clause<br/>transcription <i>or</i> extraction"]:::beat
+        A2["<b>twin.py</b><br/>no I/O · no clocks<br/>numeric domain ⊇ model's"]:::art
+        B3["<b>BEAT 3 · BRIDGE</b><br/>conformance suite,<br/>one gate, judged by exit code"]:::beat
+        A3["<b>bridge/</b><br/>witnesses · theorem mirrors<br/>mutations · brute force<br/><i>samples, ≠ refinement proof</i>"]:::art
+        B1 --> A1 --> B2 --> A2 --> B3 --> A3
+    end
+
+    subgraph WORLD["② meet the world — the only impure layer"]
+        direction LR
+        B35["<b>BEAT 3.5 · SHELL</b><br/>I/O, logs, devices, orders<br/>observed-sample semantics<br/>provenance per observable"]:::beat
+        A35["<b>falsifiability tiering</b><br/>monitored · attempt-adjacent<br/>inert-until-X · internal-only<br/><i>badge must match detector</i>"]:::art
+        B375["<b>BEAT 3.75 · VALIDATE</b><br/>replay real history +<br/>the motivating incident<br/>boring days stay quiet"]:::beat
+        B35 --> A35 --> B375
+    end
+
+    subgraph ADVERSARY["③ confront it — independence is the point"]
+        direction LR
+        B4["<b>BEAT 4 · ATTACK</b><br/>parallel reviewers, <b>distinct lenses</b><br/>(a) spec adequacy (b) twin fidelity<br/>(c) can the shell lie? (d) integration<br/>findings proved by execution"]:::beat
+        SHIP["<b>SHIP</b><br/>verify where it RUNS<br/>extract + execute payload<br/>rollback = config revert"]:::beat
+        OPS["<b>OPERATE</b><br/>conformance ledger nightly<br/>liveness line every run<br/>independent watchdog"]:::beat
+        B4 --> SHIP --> OPS
+    end
+
+    UP --> B1
+    A3 --> B35
+    B375 --> B4
+
+    B4 -. "findings ⇒ fix at the offending LAYER,<br/>then re-review the fix" .-> B1
+    B4 -.-> B35
+    B375 -. "a false finding on a real case is a defect in<br/>spec, twin or shell — never patch the test" .-> B1
+    OPS == "REAL INCIDENT ⇒ NEW THEOREM (law 6): the lifecycle closes" ==> B1
+
+    LAWS["<b>CROSS-CUTTING LAWS</b> (apply to every beat)<br/>1 degraded input ⇒ conservative verdict · 2 local proofs die at stateful seams<br/>3 the badge must match the detector · 4 verify claims where they run<br/>5 two independent verifiers · 6 real incidents become theorems<br/>7 spec coherence before code conformance · 8 ship assumptions, rejected<br/>alternatives and residuals · 9 silence never encodes a posture<br/>10 a partial FCDD labelled beats a full FCDD pretended"]:::law
+
+    RES["<b>WHAT FCDD DOES NOT ESTABLISH</b><br/>proves COHERENCE, never correctness-of-intent — garbage clauses,<br/>kernel-checked, are still garbage · the bridge cannot catch COMMON-MODE<br/>error: one author writing spec AND twin makes both agree and every layer<br/>pass, yielding maximal false confidence — only an independent reviewer<br/>and reality can · it CAUGHT the hollow monitor, it did not PREVENT it"]:::res
