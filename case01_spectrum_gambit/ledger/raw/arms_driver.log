@@ -180,3 +180,11 @@
 2026-07-31T04:32:22+02:00 [res] armB bug07: availability RESTORED after 12 probes
 2026-07-31T04:32:22+02:00 [res] armB bug07 attempt 2/8: RESUME real session 4f8a7719-95d9-45d5-9a74-91795ca26805
 2026-07-31T05:34:22+02:00 [res] pair bug07-v3 done (armB COMPLETE attempt 2, $21.9041, 3720s)
+2026-07-31T14:47:57+02:00 [sup2] SUPERVISOR2 START (resilient/serial) queue='A:bug07 B:bug05 A:bug02 A:bug06 B:bug06 A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04'
+2026-07-31T14:47:57+02:00 [sup2] queue -> armA bug07
+2026-07-31T14:47:57+02:00 [res] armA bug07: workspace built (/home/xcos/fcdd_arms/bug07_armA_v3)
+2026-07-31T14:48:01+02:00 [res] armA bug07 attempt 1/8: FRESH start
+2026-07-31T15:39:11+02:00 [res] pair bug07-v3 done (armA COMPLETE attempt 1, $14.6825, 3070s)
+2026-07-31T15:39:11+02:00 [sup2] queue -> armB bug05
+2026-07-31T15:39:11+02:00 [res] armB bug05: workspace built (/home/xcos/fcdd_arms/bug05_armB_v3)
+2026-07-31T15:39:14+02:00 [res] armB bug05 attempt 1/8: FRESH start
