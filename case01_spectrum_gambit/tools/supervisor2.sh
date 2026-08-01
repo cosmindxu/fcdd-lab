@@ -20,6 +20,6 @@ log "SUPERVISOR2 START (resilient/serial) queue='$QUEUE'"
 for item in $QUEUE; do
   ARM="${item%%:*}"; BUG="${item##*:}"
   log "queue -> arm$ARM $BUG"
-  RESULT_TAG=v3 MAX_ATTEMPTS=8 bash "$CASE/tools/run_resilient.sh" "$ARM" "$BUG"
+  RESULT_TAG=${RESULT_TAG:-v4} MAX_ATTEMPTS=8 bash "$CASE/tools/run_resilient.sh" "$ARM" "$BUG"
 done
 log "SUPERVISOR2 QUEUE DRAINED"

@@ -32,16 +32,16 @@ def load(path):
 def main():
     existing = open(CSV).read() if os.path.exists(CSV) else ""
     cells = {}
-    pat = re.compile(r"arm([AB])_(bug\d\d)_v3_a(\d+)_result\.json$")
-    for p in sorted(glob.glob(os.path.join(RAW, "arm*_v3_a*_result.json"))):
+    pat = re.compile(r"arm([AB])_(bug\d\d)_v(3|4)_a(\d+)_result\.json$")
+    for p in sorted(glob.glob(os.path.join(RAW, "arm*_v[34]_a*_result.json"))):
         m = pat.search(os.path.basename(p))
         if not m:
             continue
-        arm, bug, att = m.group(1), m.group(2), int(m.group(3))
+        arm, bug, ver, att = m.group(1), m.group(2), m.group(3), int(m.group(4))
         d = load(p)
         if not d:
             continue
-        c = cells.setdefault((arm, bug), {"tok": [0, 0, 0, 0], "usd": 0.0,
+        c = cells.setdefault((arm, bug, ver), {"tok": [0, 0, 0, 0], "usd": 0.0,
                                           "turns": 0, "att": 0, "ok": False,
                                           "models": set(), "files": []})
         for mu in (d.get("modelUsage") or {}):
@@ -56,17 +56,17 @@ def main():
         c["files"].append(os.path.relpath(p, CASE))
 
     new = []
-    for (arm, bug), c in sorted(cells.items()):
-        run_id = f"arm{arm}_{bug}_v3"
+    for (arm, bug, ver), c in sorted(cells.items()):
+        run_id = f"arm{arm}_{bug}_v{ver}"
         if re.search(rf"^{run_id},", existing, re.M):
             continue
         if not c["ok"]:
             continue                      # still running / not yet complete
         models = "+".join(sorted(c["models"])) or "?"
-        gate = "gate-selfreported-v3"
-        note = (f"VALID(v3) {c['att']} attempt(s) summed; "
+        gate = f"gate-selfreported-v{ver}"
+        note = (f"VALID(v{ver}) {c['att']} attempt(s) summed; "
                 f"cli_usd={c['usd']:.2f}; turns={c['turns']}; "
-                f"closed-review prompt; A9 resilient runner")
+                f"prompt v{ver}; A9 resilient runner")
         row = [run_id, "2026-07-31", f"arm{arm}:{bug}", arm, "fix", bug,
                models, "max", ";".join(c["files"])]
         row += [str(t) for t in c["tok"]]
@@ -79,7 +79,7 @@ def main():
     print(f"ingested {len(new)} new cell(s)")
     for r in new:
         print("  " + r[:120])
-    pending = [f"arm{a}:{b}" for (a, b), c in sorted(cells.items()) if not c["ok"]]
+    pending = [f"arm{a}:{b}(v{v})" for (a, b, v), c in sorted(cells.items()) if not c["ok"]]
     if pending:
         print("in progress / incomplete: " + ", ".join(pending))
     return 0

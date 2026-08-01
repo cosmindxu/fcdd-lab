@@ -23,11 +23,17 @@ A user filed the bug report below. Your job, in the usual way:
 4. Keep the existing checks green: the variant's `make test` must pass.
 5. Then get your work code-reviewed: spawn a fresh reviewer agent with the
    Task tool — **run it synchronously (`run_in_background: false`), never in
-   the background** — give it the diff and your reasoning, and address every
-   finding it raises. Iterate until the reviewer has no findings left.
-   **Do not end your session while any reviewer is still running or its
-   findings unaddressed: a session that ends with a pending review has NOT
-   met its gate.**
+   the background** — give it the diff and your reasoning.
+   **Termination rule (read carefully — it is a hard stop, not a target):**
+   - A round that reports **no defect in the fix** CLOSES the review gate.
+     Stop there. Coverage, robustness, style and documentation findings are
+     **recorded in `FIX_NOTES.md` and NOT required to be resolved** — a
+     reviewer can always name one more uncovered case, so "no findings at
+     all" is not a reachable state and is not the bar.
+   - Only a finding that shows the fix is **wrong, incomplete, or breaks
+     something** obliges you to fix it and run one more round.
+   - **Hard cap: 3 rounds.** If you reach it, stop and record why.
+   **Do not end your session while a reviewer is still running.**
 
 Done means: the reported symptom no longer reproduces, `make test` is green,
 your new test passes, and the review round is clean.

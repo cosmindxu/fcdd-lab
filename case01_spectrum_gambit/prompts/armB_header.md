@@ -41,10 +41,18 @@ A user filed the bug report below. Your job, per the method:
 6. Then run an attack round: spawn a fresh adversarial reviewer agent with
    the Task tool — **run it synchronously (`run_in_background: false`),
    never in the background** — give it the diff, your contract delta, and
-   your reasoning; address every finding. Iterate until the attack round is
-   clean. **Do not end your session while any reviewer is still running or
-   its findings unaddressed: a session that ends with a pending attack
-   round has NOT met its gate.**
+   your reasoning.
+   **Termination rule (read carefully — it is a hard stop, not a target):**
+   - A round that reports **no defect in the fix and no violated contract
+     clause** CLOSES the attack gate. Stop there. Coverage, robustness,
+     style and documentation findings are **recorded in `FIX_NOTES.md` and
+     NOT required to be resolved** — an adversary can always name one more
+     uncovered case, so "no findings at all" is not a reachable state.
+   - Only a finding that shows the fix is **wrong, incomplete, breaks
+     something, or violates a clause** obliges you to fix it and run one
+     more round.
+   - **Hard cap: 3 rounds.** If you reach it, stop and record why.
+   **Do not end your session while a reviewer is still running.**
 
 Done means: the reported symptom no longer reproduces, `make test` is green,
 the relevant bridge layers pass, the fault's class is pinned by a test or

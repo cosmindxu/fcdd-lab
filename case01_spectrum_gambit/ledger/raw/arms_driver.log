@@ -242,3 +242,13 @@
 2026-08-01T06:06:38+02:00 [sup2] queue -> armA bug02
 2026-08-01T06:06:38+02:00 [res] armA bug02: workspace built (/home/xcos/fcdd_arms/bug02_armA_v3)
 2026-08-01T06:06:41+02:00 [res] armA bug02 attempt 1/8: FRESH start
+2026-08-01T10:04:19+02:00 [res] armA bug02 attempt 1: interrupted after 14258s ($60.6823) — will resume from 95774d63-6a5f-4ddc-96fc-b5cfb1845d25
+2026-08-01T10:05:21+02:00 [res] armA bug02: unavailable (probe 1) — sleeping 900s
+2026-08-01T10:20:24+02:00 [res] armA bug02: unavailable (probe 2) — sleeping 900s
+2026-08-01T10:35:27+02:00 [res] armA bug02: availability RESTORED after 2 probes
+2026-08-01T10:35:27+02:00 [res] armA bug02 attempt 2/8: RESUME real session 95774d63-6a5f-4ddc-96fc-b5cfb1845d25
+2026-08-01T14:18:34+02:00 [orchestrator] QUEUE HALTED at 13:2x: v3 prompt defect - 'iterate until the reviewer has no findings left' does NOT converge (bug02/A: 12 rounds, 85 findings, zero defects in the fix, no downward trend). bug02/A stopped mid-round-13 with work preserved. All remaining v3 cells would inherit the defect. Awaiting protocol amendment on the review-termination rule.
+2026-08-01T14:22:04+02:00 [sup2] SUPERVISOR2 START (resilient/serial) queue='A:bug02 A:bug06 B:bug06 A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04 A:bug01 A:bug07 B:bug07 B:bug05'
+2026-08-01T14:22:04+02:00 [sup2] queue -> armA bug02
+2026-08-01T14:22:04+02:00 [res] armA bug02: workspace built (/home/xcos/fcdd_arms/bug02_armA_v4)
+2026-08-01T14:22:08+02:00 [res] armA bug02 attempt 1/8: FRESH start

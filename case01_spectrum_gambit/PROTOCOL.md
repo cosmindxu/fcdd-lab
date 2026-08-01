@@ -243,6 +243,28 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   failures are now classified (instant+free ⇒ deterministic ⇒ abort after 2
   with backoff; costly+long ⇒ genuine interruption ⇒ resume).
 
+- **2026-08-01 A10 (design defect found mid-run; operator-approved fix):** the
+  v2/v3 prompts told each arm to iterate its review "until the reviewer has no
+  findings left". **That rule has no fixed point.** A fresh generalist reviewer
+  can always name one more uncovered case, so the loop never terminates.
+  Evidence: armA:bug02 fixed the seeded fault correctly in its first pass (one
+  byte, `cp WN`->`cp WP`), then ran **12 review rounds producing 85 findings,
+  none of which was a defect in the fix** — all coverage/robustness/docs — and
+  was still going at round 13 after ~7 h and $60.68 when the orchestrator
+  halted it. Findings per round (7,7,5,11,8,9,5,5,5,3,8,12) show **no
+  convergence trend**. Worse, the defect is ASYMMETRIC: Arm B's attack round is
+  anchored to contract clauses and a bridge gate that can genuinely go quiet,
+  so FCDD terminates; Arm A's had no anchor. v3 therefore systematically
+  penalised Arm A, while v1 avoided it only by accident (sessions ended with
+  reviews still open). **Neither version measured the intended quantity.**
+  **Prompt v4 (this amendment), applied symmetrically to both arms:** a review
+  /attack round terminates the gate when it finds **no defect in the fix**;
+  coverage, robustness and documentation findings are RECORDED but do not
+  compel another round; **hard cap: 3 rounds**. Cells run under the unbounded
+  rule are labelled v3 and are NOT comparable with v4 cells on cost; they are
+  re-run. Retained as a first-class result: the unbounded-review pathology is
+  itself a finding about generalist review as a stopping criterion.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·
