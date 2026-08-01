@@ -25,8 +25,10 @@ NOT cost-comparable and are being re-measured.
 $18.72 clean (1.14x).** The two bracket the honest ratio; B was interrupted
 once and raw sums carry resumption overhead.
 
+| armA:bug03 | **$11.96** (1 attempt) | 1 | PASS 14/14 |
+
 ### In flight at pause
-`armA:bug03` (started 21:37) — left running to completion; nothing after it starts.
+None — `armA:bug03` finished cleanly at 22:16 and the queue is fully idle.
 
 ## Remaining queue (12 cells, in the intended order)
 
