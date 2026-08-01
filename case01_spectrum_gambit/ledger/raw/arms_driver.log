@@ -267,3 +267,22 @@
 2026-08-01T17:02:36+02:00 [sup2] queue -> armB bug06
 2026-08-01T17:02:36+02:00 [res] armB bug06: workspace built (/home/xcos/fcdd_arms/bug06_armB_v4)
 2026-08-01T17:02:40+02:00 [res] armB bug06 attempt 1/8: FRESH start
+2026-08-01T18:27:33+02:00 [res] armB bug06 attempt 1: interrupted after 5093s ($29.9707) — will resume from 99020d6a-6618-4d85-bc0d-458a3b27d86e
+2026-08-01T18:28:36+02:00 [res] armB bug06: unavailable (probe 1) — sleeping 900s
+2026-08-01T18:43:39+02:00 [res] armB bug06: unavailable (probe 2) — sleeping 900s
+2026-08-01T18:58:41+02:00 [res] armB bug06: unavailable (probe 3) — sleeping 900s
+2026-08-01T19:13:43+02:00 [res] armB bug06: unavailable (probe 4) — sleeping 900s
+2026-08-01T19:28:46+02:00 [res] armB bug06: unavailable (probe 5) — sleeping 900s
+2026-08-01T19:43:48+02:00 [res] armB bug06: unavailable (probe 6) — sleeping 900s
+2026-08-01T19:58:50+02:00 [res] armB bug06: unavailable (probe 7) — sleeping 900s
+2026-08-01T20:13:52+02:00 [res] armB bug06: unavailable (probe 8) — sleeping 900s
+2026-08-01T20:28:54+02:00 [res] armB bug06: unavailable (probe 9) — sleeping 900s
+2026-08-01T20:43:57+02:00 [res] armB bug06: availability RESTORED after 9 probes
+2026-08-01T20:43:57+02:00 [res] armB bug06 attempt 2/8: RESUME real session 99020d6a-6618-4d85-bc0d-458a3b27d86e
+2026-08-01T21:17:47+02:00 [sup2] waiting for in-flight pid 2325552 before taking over
+2026-08-01T21:37:35+02:00 [res] pair bug06-v4 done (armB COMPLETE attempt 2, $18.7226, 3218s)
+2026-08-01T21:37:47+02:00 [sup2] pid 2325552 finished — taking over
+2026-08-01T21:37:47+02:00 [sup2] SUPERVISOR2 START (resilient/serial) queue='A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04 A:bug01 A:bug07 B:bug07 B:bug05'
+2026-08-01T21:37:47+02:00 [sup2] queue -> armA bug03
+2026-08-01T21:37:47+02:00 [res] armA bug03: workspace built (/home/xcos/fcdd_arms/bug03_armA_v4)
+2026-08-01T21:37:51+02:00 [res] armA bug03 attempt 1/8: FRESH start
