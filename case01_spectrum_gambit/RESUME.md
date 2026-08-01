@@ -6,24 +6,32 @@ The serial supervisor loop was stopped; the **cell in flight was left running
 to completion** (armB:bug07, started 00:37). Nothing was killed mid-work, so
 no cost was wasted and no workspace is half-finished.
 
-## Where the protocol stands
+## Where the protocol stands (updated 2026-08-01 21:40 — PAUSED)
 
-Done under prompt v3 (clean, closed-review, resilient runner):
+**Prompt v4 is the current standard** (PROTOCOL A10): a review/attack round
+that finds no defect in the fix CLOSES the gate; coverage findings are recorded
+but do not compel another round; hard cap 3 rounds. v3 and earlier cells are
+NOT cost-comparable and are being re-measured.
 
-| cell | result |
-|---|---|
-| armA:bug01 | **COMPLETE** — 1 attempt, 44 min, **$8.66**, sealed gate PASS 7/7, binary byte-identical to pristine |
-| armB:bug07 | **COMPLETE** — 2 attempts (interrupted ~3 h, auto-resumed), **$21.90** total, sealed gate PASS 10/10, binary byte-identical to pristine |
-| armA:bug07 | **COMPLETE** — 1 attempt, 51 min, **$14.68**, sealed gate PASS 10/10, pristine binary. **First complete v3 matched pair**: A $14.68 vs B $21.90 = 1.49x |
-| armB:bug05 | **IN FLIGHT at pause** — attempt 1 spent $28.44 then was interrupted; attempt 2 is waiting out an availability window (probing every 15 min). It will resume and finish on its own; nothing after it will start. |
+### v4 cells complete (the only figures that measure the intended quantity)
 
-Everything else still stands on the pre-v3 data described in `REPORT.md`
-(with its 2026-07-31 correction box at the top).
+| cell | cost | reviewers | gate |
+|---|---:|---:|---|
+| armA:bug02 | **$7.32** (2 attempts) | 2 | PASS 11/11, pristine binary |
+| armA:bug06 | **$16.44** (1 attempt) | 2 | PASS 10/10 — also fixed a LATENT pre-existing TT defect |
+| armB:bug06 | **$48.69** raw / **$18.72** completing attempt | 3 | PASS 10/10 |
+
+**First legitimate matched pair — bug06: A $16.44 vs B $48.69 raw (2.96x) or
+$18.72 clean (1.14x).** The two bracket the honest ratio; B was interrupted
+once and raw sums carry resumption overhead.
+
+### In flight at pause
+`armA:bug03` (started 21:37) — left running to completion; nothing after it starts.
 
 ## Remaining queue (12 cells, in the intended order)
 
 ```
-A:bug02 A:bug06 B:bug06 A:bug03 A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04
+A:bug04 A:bug05 B:bug01 B:bug02 B:bug03 B:bug04 A:bug01 A:bug07 B:bug07 B:bug05
 ```
 (bug07 pair is DONE; B:bug05 is finishing itself outside the queue. Adding
 `B:bug05` back is only needed if its in-flight cell is abandoned.)
