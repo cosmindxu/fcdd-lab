@@ -299,3 +299,13 @@
 2026-08-02T03:35:05+02:00 [sup2] queue -> armB bug01
 2026-08-02T03:35:05+02:00 [res] armB bug01: workspace built (/home/xcos/fcdd_arms/bug01_armB_v4)
 2026-08-02T03:35:08+02:00 [res] armB bug01 attempt 1/8: FRESH start
+2026-08-02T05:57:51+02:00 [res] armB bug01 attempt 1: interrupted after 8563s ($49.1948) — will resume from a303df66-cf2a-47d5-b8e1-5b9c56a5f727
+2026-08-02T05:58:53+02:00 [res] armB bug01: unavailable (probe 1) — sleeping 900s
+2026-08-02T06:13:55+02:00 [res] armB bug01: unavailable (probe 2) — sleeping 900s
+2026-08-02T06:28:57+02:00 [res] armB bug01: unavailable (probe 3) — sleeping 900s
+2026-08-02T06:44:03+02:00 [res] armB bug01: availability RESTORED after 3 probes
+2026-08-02T06:44:03+02:00 [res] armB bug01 attempt 2/8: RESUME real session a303df66-cf2a-47d5-b8e1-5b9c56a5f727
+2026-08-02T06:44:37+02:00 [res] pair bug01-v4 done (armB COMPLETE attempt 2, $0.4327, 34s)
+2026-08-02T06:44:37+02:00 [sup2] queue -> armB bug02
+2026-08-02T06:44:37+02:00 [res] armB bug02: workspace built (/home/xcos/fcdd_arms/bug02_armB_v4)
+2026-08-02T06:44:41+02:00 [res] armB bug02 attempt 1/8: FRESH start
