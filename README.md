@@ -1,7 +1,8 @@
 # FCDD Lab
 
 Experiments with the `formal-contract-dev` (FCDD) skill
-(`~/.claude/skills/formal-contract-dev/SKILL.md`) — measuring what Formal
+(`skills/formal-contract-dev/SKILL.md` in this repo; installed copy lives at
+`~/.claude/skills/formal-contract-dev/SKILL.md`) — measuring what Formal
 Contract-Driven Development actually costs and buys versus conventional
 LLM-assisted development.
 
