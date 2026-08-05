@@ -587,3 +587,6 @@
 2026-08-05T05:35:41+02:00 [res] armB bug04: unavailable (probe 4) — sleeping 900s
 2026-08-05T05:50:45+02:00 [res] armB bug04: unavailable (probe 5) — sleeping 900s
 2026-08-05T06:05:49+02:00 [res] armB bug04: unavailable (probe 6) — sleeping 900s
+2026-08-05T06:20:54+02:00 [res] armB bug04: availability RESTORED after 6 probes
+2026-08-05T06:20:54+02:00 [res] armB bug04 attempt 2/8: RESUME real session a430e710-156f-4d07-a9ac-c8452cb1234c
+2026-08-05T07:06:09+02:00 [res] pair bug04-v4 done (armB COMPLETE attempt 2, $17.4498, 2715s)
