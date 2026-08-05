@@ -628,3 +628,7 @@
 2026-08-05T19:47:37+02:00 [res] pair bug01-v4r2 done (armA COMPLETE attempt 1, $11.7776, 2535s)
 2026-08-05T19:47:37+02:00 [res] armA bug01: workspace built (/home/xcos/fcdd_arms/bug01_armA_v4r3)
 2026-08-05T19:47:43+02:00 [res] armA bug01 attempt 1/8: FRESH start
+2026-08-05T20:26:32+02:00 [res] armB bug01: workspace built (/home/xcos/fcdd_arms/bug01_armB_v4r2)
+2026-08-05T20:26:35+02:00 [res] armB bug01: workspace built (/home/xcos/fcdd_arms/bug01_armB_v4r3)
+2026-08-05T20:26:38+02:00 [res] armB bug01 attempt 1/8: FRESH start
+2026-08-05T20:26:40+02:00 [res] armB bug01 attempt 1/8: FRESH start
