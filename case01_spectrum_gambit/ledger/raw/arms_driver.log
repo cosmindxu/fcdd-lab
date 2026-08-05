@@ -594,3 +594,21 @@
 2026-08-05T11:20:20+02:00 [sup2] queue -> armA bug01
 2026-08-05T11:20:20+02:00 [res] armA bug01: workspace built (/home/xcos/fcdd_arms/bug01_armA_v4)
 2026-08-05T11:20:25+02:00 [res] armA bug01 attempt 1/8: FRESH start
+2026-08-05T14:22:45+02:00 [res] pair bug01-v4 done (armA COMPLETE attempt 1, $44.2692, 10940s)
+2026-08-05T14:22:45+02:00 [sup2] queue -> armA bug07
+2026-08-05T14:22:45+02:00 [res] armA bug07: workspace built (/home/xcos/fcdd_arms/bug07_armA_v4)
+2026-08-05T14:22:51+02:00 [res] armA bug07 attempt 1/8: FRESH start
+2026-08-05T14:24:53+02:00 [res] armA bug07 attempt 1: interrupted after 122s ($0.9819) — will resume from 24df6e14-1c9b-4d97-bc67-fa7fce4e7e8f
+2026-08-05T14:25:58+02:00 [res] armA bug07: unavailable (probe 1) — sleeping 900s
+2026-08-05T14:41:01+02:00 [res] armA bug07: unavailable (probe 2) — sleeping 900s
+2026-08-05T14:56:06+02:00 [res] armA bug07: unavailable (probe 3) — sleeping 900s
+2026-08-05T15:11:10+02:00 [res] armA bug07: unavailable (probe 4) — sleeping 900s
+2026-08-05T15:26:14+02:00 [res] armA bug07: unavailable (probe 5) — sleeping 900s
+2026-08-05T15:41:18+02:00 [res] armA bug07: unavailable (probe 6) — sleeping 900s
+2026-08-05T15:56:24+02:00 [res] armA bug07: unavailable (probe 7) — sleeping 900s
+2026-08-05T16:11:29+02:00 [res] armA bug07: availability RESTORED after 7 probes
+2026-08-05T16:11:29+02:00 [res] armA bug07 attempt 2/8: RESUME real session 24df6e14-1c9b-4d97-bc67-fa7fce4e7e8f
+2026-08-05T16:34:15+02:00 [res] pair bug07-v4 done (armA COMPLETE attempt 2, $6.1290, 1366s)
+2026-08-05T16:34:15+02:00 [sup2] queue -> armB bug07
+2026-08-05T16:34:15+02:00 [res] armB bug07: workspace built (/home/xcos/fcdd_arms/bug07_armB_v4)
+2026-08-05T16:34:21+02:00 [res] armB bug07 attempt 1/8: FRESH start
