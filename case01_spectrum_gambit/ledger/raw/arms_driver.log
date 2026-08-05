@@ -620,3 +620,5 @@
 2026-08-05T18:28:15+02:00 [res] armB bug05: unavailable (probe 1) — sleeping 900s
 2026-08-05T18:43:20+02:00 [res] armB bug05: availability RESTORED after 1 probes
 2026-08-05T18:43:20+02:00 [res] armB bug05 attempt 2/8: RESUME real session e5ffba26-aa21-48d4-8552-f515df58500b
+2026-08-05T18:59:05+02:00 [res] pair bug05-v4 done (armB COMPLETE attempt 2, $9.3523, 945s)
+2026-08-05T18:59:05+02:00 [sup2] SUPERVISOR2 QUEUE DRAINED

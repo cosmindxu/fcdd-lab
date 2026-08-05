@@ -38,7 +38,7 @@ LABELS = ["quiescence\nguard", "fifty-move\nclock", "promotion\nassembly",
 # bug03/B imputed at pre-registered rates (was $45.76 via a borrowed blended
 # rate, ~1.6x inflated); bug05/B is a lower bound (interrupted, gate passes).
 A = [44.27, 7.32, 11.96, 11.30, 8.88, 16.44, 7.11]
-B = [49.63, 50.37, 23.98, 55.40, 21.70, 48.69, 24.19]
+B = [49.63, 50.37, 23.98, 55.40, 31.05, 48.69, 24.19]
 A_ALL = A
 QUAL_AXES = ["Correctness\nrisk", "Clarity", "Test\nquality", "Overall"]
 QUAL_A = [4.25, 4.50, 4.25, 4.33]
@@ -96,7 +96,7 @@ ax.set_axisbelow(True)
 ax.text(0.02, 0.985, "horizontal bar = median", transform=ax.transAxes,
         fontsize=7, color=MUTED, va="top")
 ax.text(0.02, 0.925,
-        "excluding bug01: 2.31× vs 2.55×\n(finding withdrawn)",
+        "excluding bug01: 2.31× vs 2.31×\n(finding withdrawn)",
         transform=ax.transAxes, fontsize=7, color="#8a1f1f", va="top")
 save(fig, "fig3_dispersion")
 
