@@ -73,3 +73,39 @@ auto-book with `python3 tools/ingest.py`.
 4. **Scientific article** (operator request 2026-07-30): protocol as
    pre-registered, all dated amendments A1–A9 as part of the honest record,
    method, results, threats, conclusions.
+
+## v4 STATE at pause 2026-08-05 06:40
+
+| cell | cost | reviewers | gate |
+|---|---:|---:|---|
+| armA:bug02 | $7.32 | 2 | PASS 11/11, pristine |
+| armA:bug03 | $11.96 | 1 | PASS 14/14 |
+| armA:bug04 | $11.30 | 1 | PASS 10/10, pristine |
+| armA:bug05 | $8.88 | 1 | PASS 21/21, pristine |
+| armA:bug06 | $16.44 | 2 | PASS 10/10 + latent TT defect found |
+| armB:bug01 | $49.62 | 3 | PASS 7/7, pristine |
+| armB:bug02 | $50.37 | 4 | PASS 11/11, pristine |
+| armB:bug03 | **~$45.76** (corrected from $1.06 via transcripts) | 1 | PASS 14/14, pristine |
+| armB:bug06 | $48.69 raw / $18.72 completing | 3 | PASS 10/10 |
+
+**Matched v4 pairs (raw sums):** bug02 6.9x · bug03 3.8x · bug06 3.0x.
+Arm A median $11.63 (spread 2.2x); Arm B clusters $45-50.
+Completing-attempt proxies are much narrower (1.1x-2.0x) — every Arm B cell
+needed a resume, no Arm A cell did, so raw sums charge FCDD for an
+infrastructure property. **Report the bracket, not one figure.**
+
+### In flight at this pause
+`armB:bug04` — attempt 1 interrupted, waiting out an availability window; it
+will resume and finish on its own, then nothing further starts.
+
+### Remaining after it (4 cells, all re-measurements)
+```
+A:bug01 A:bug07 B:bug07 B:bug05
+```
+These re-measure cells that only have v3 figures. bug04's pair completes with
+the in-flight cell, giving **4 matched v4 pairs** — enough for the article.
+
+### Still owed before publication
+1. Blinded rubric grading (gate item 3) — never run.
+2. Rewrite REPORT.md on the v4 dataset.
+3. Finish ARTICLE.md (draft committed; results/abstract/conclusions pending).

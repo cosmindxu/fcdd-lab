@@ -580,3 +580,10 @@
 2026-08-05T03:10:26+02:00 [sup2] queue -> armB bug04
 2026-08-05T03:10:26+02:00 [res] armB bug04: workspace built (/home/xcos/fcdd_arms/bug04_armB_v4)
 2026-08-05T03:10:32+02:00 [res] armB bug04 attempt 1/8: FRESH start
+2026-08-05T04:49:25+02:00 [res] armB bug04 attempt 1: interrupted after 5933s ($37.9462) — will resume from a430e710-156f-4d07-a9ac-c8452cb1234c
+2026-08-05T04:50:30+02:00 [res] armB bug04: unavailable (probe 1) — sleeping 900s
+2026-08-05T05:05:34+02:00 [res] armB bug04: unavailable (probe 2) — sleeping 900s
+2026-08-05T05:20:37+02:00 [res] armB bug04: unavailable (probe 3) — sleeping 900s
+2026-08-05T05:35:41+02:00 [res] armB bug04: unavailable (probe 4) — sleeping 900s
+2026-08-05T05:50:45+02:00 [res] armB bug04: unavailable (probe 5) — sleeping 900s
+2026-08-05T06:05:49+02:00 [res] armB bug04: unavailable (probe 6) — sleeping 900s
