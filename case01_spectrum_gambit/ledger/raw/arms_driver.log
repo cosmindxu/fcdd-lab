@@ -622,3 +622,6 @@
 2026-08-05T18:43:20+02:00 [res] armB bug05 attempt 2/8: RESUME real session e5ffba26-aa21-48d4-8552-f515df58500b
 2026-08-05T18:59:05+02:00 [res] pair bug05-v4 done (armB COMPLETE attempt 2, $9.3523, 945s)
 2026-08-05T18:59:05+02:00 [sup2] SUPERVISOR2 QUEUE DRAINED
+2026-08-05T19:05:16+02:00 [rep] BUG01 REPLICATION START (rule 5): A r2, A r3, B r2, B r3
+2026-08-05T19:05:17+02:00 [res] armA bug01: workspace built (/home/xcos/fcdd_arms/bug01_armA_v4r2)
+2026-08-05T19:05:22+02:00 [res] armA bug01 attempt 1/8: FRESH start

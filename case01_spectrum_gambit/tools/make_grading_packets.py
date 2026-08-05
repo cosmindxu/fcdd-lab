@@ -71,6 +71,8 @@ SCRUB = [
     (r"(?i)\bthe contract\b", "the specification"),
     (r"(?i)\bcontract\b", "specification"),
     (r"(?i)\bcontracted\b", "specified"),
+    (r"(?i)contract[_-][a-z_]+", "spec_identifier"),
+    (r"(?i)[a-z_]+[_-]contract\b", "spec_identifier"),
     (r"(?i)\bcontracts\b", "specifies"),
     (r"(?i)\bhc91_twin\b", "reference implementation"),
     (r"(?i)\bb\d_[a-z_]+\.py\b", "a check script"),
@@ -156,33 +158,32 @@ def main():
         if not done:
             print(f"{bug}: SKIPPED — a cell is still in flight")
             continue
-        # alternate which arm is presented first, by bug parity
-        first, second = ("A", "B") if n % 2 == 0 else ("B", "A")
         ws = {"A": wsA, "B": wsB}
-        packet = [
+        for order_tag, (first, second) in (("XA", ("A", "B")), ("XB", ("B", "A"))):
+            packet = [
             f"# Blind review packet — {bug}",
-            "",
-            "Two independent submissions fixed the SAME reported defect in the same",
-            "Z80 codebase. You are not told who wrote them or by what process, and",
-            "the two are not necessarily comparable in style. Judge only what is here.",
-            "",
-            "## The reported defect", "",
-            scrub(open(os.path.join(CASE, "bug_reports", f"{bug}.md"),
-                       errors="replace").read()),
-            "",
-        ]
-        for label, arm in (("X", first), ("Y", second)):
-            packet += [
-                f"## Submission {label} — source changes", "",
-                "```diff", scrub(diff_for(ws[arm], bug)), "```", "",
-                f"## Submission {label} — tests added", "",
-                "```", scrub(tests_for(ws[arm], bug))[:14000], "```", "",
+                "",
+                "Two independent submissions fixed the SAME reported defect in the same",
+                "Z80 codebase. You are not told who wrote them or by what process, and",
+                "the two are not necessarily comparable in style. Judge only what is here.",
+                "",
+                "## The reported defect", "",
+                scrub(open(os.path.join(CASE, "bug_reports", f"{bug}.md"),
+                           errors="replace").read()),
+                "",
             ]
-        open(os.path.join(OUT, f"PACKET_{bug}.md"), "w").write("\n".join(packet))
-        json.dump({"bug": bug, "X": first, "Y": second},
-                  open(os.path.join(OUT, f"KEY_{bug}.json"), "w"))
-        made += 1
-        print(f"{bug}: packet written (X={first}, Y={second}) — key sealed")
+            for label, arm in (("X", first), ("Y", second)):
+                packet += [
+                    f"## Submission {label} — source changes", "",
+                    "```diff", scrub(diff_for(ws[arm], bug)), "```", "",
+                    f"## Submission {label} — tests added", "",
+                    "```", scrub(tests_for(ws[arm], bug))[:14000], "```", "",
+                ]
+            open(os.path.join(OUT, f"PACKET_{bug}_{order_tag}.md"), "w").write("\n".join(packet))
+            json.dump({"bug": bug, "order": order_tag, "X": first, "Y": second},
+                      open(os.path.join(OUT, f"KEY_{bug}_{order_tag}.json"), "w"))
+            made += 1
+            print(f"{bug} [{order_tag}]: packet written (X={first}, Y={second})")
     print(f"\n{made} packet(s) in {OUT}")
     print("KEY_*.json must NOT be shown to graders.")
 
