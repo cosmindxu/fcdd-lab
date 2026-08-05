@@ -32,15 +32,17 @@ plt.rcParams.update({
 })
 
 # ---- data (v4 cells; bug03/B is the transcript-recovered figure) -----------
-BUGS = ["bug01", "bug02", "bug03", "bug04", "bug06", "bug07"]
+BUGS = ["bug01", "bug02", "bug03", "bug04", "bug05", "bug06", "bug07"]
 LABELS = ["quiescence\nguard", "fifty-move\nclock", "promotion\nassembly",
-          "eval\nsign", "TT depth\nbound", "mate\ndetection"]
-A = [44.27, 7.32, 11.96, 11.30, 16.44, 7.11]
-B = [49.63, 50.37, 45.76, 55.40, 48.69, 24.19]
-A_ALL = A + [8.88]                      # bug05 has no B pair yet
+          "eval\nsign", "castling\nrights", "TT depth\nbound", "mate\ndetection"]
+# bug03/B imputed at pre-registered rates (was $45.76 via a borrowed blended
+# rate, ~1.6x inflated); bug05/B is a lower bound (interrupted, gate passes).
+A = [44.27, 7.32, 11.96, 11.30, 8.88, 16.44, 7.11]
+B = [49.63, 50.37, 23.98, 55.40, 21.70, 48.69, 24.19]
+A_ALL = A
 QUAL_AXES = ["Correctness\nrisk", "Clarity", "Test\nquality", "Overall"]
 QUAL_A = [4.25, 4.50, 4.25, 4.33]
-QUAL_B = [4.50, 4.25, 5.00, 4.58]
+QUAL_B = [4.50, 4.25, 5.00, 4.58]   # shown for completeness; comparison withdrawn
 # reviewer count vs cost, pooled across cells (instrument finding §4.3)
 REV_N = [1, 2, 5, 8, 14, 2, 1, 1, 1, 2, 3, 4, 1, 3, 5]
 REV_USD = [8.66, 14.68, 43.46, 106.69, 60.68, 7.32, 11.96, 11.30, 8.88,
@@ -91,8 +93,11 @@ ax.set_xlim(-0.45, 1.75)
 ax.set_ylabel("Cost per defect (USD)")
 ax.yaxis.grid(True, color=GRID, lw=0.6, zorder=0)
 ax.set_axisbelow(True)
-ax.text(0.02, 0.97, "horizontal bar = median", transform=ax.transAxes,
+ax.text(0.02, 0.985, "horizontal bar = median", transform=ax.transAxes,
         fontsize=7, color=MUTED, va="top")
+ax.text(0.02, 0.925,
+        "excluding bug01: 2.31× vs 2.55×\n(finding withdrawn)",
+        transform=ax.transAxes, fontsize=7, color="#8a1f1f", va="top")
 save(fig, "fig3_dispersion")
 
 # ---- Figure 4: blinded quality ---------------------------------------------
