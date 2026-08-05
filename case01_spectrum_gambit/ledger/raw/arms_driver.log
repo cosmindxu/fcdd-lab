@@ -668,3 +668,4 @@
 2026-08-05T23:44:02+02:00 [res] armA bug01 attempt 2/8: RESUME real session 6b6246bc-bcd5-4cb5-bf52-c65e5de0a42c
 2026-08-05T23:45:18+02:00 [res] armB bug01: availability RESTORED after 9 probes
 2026-08-05T23:45:18+02:00 [res] armB bug01 attempt 2/8: RESUME real session dcb1fe51-afa8-4d97-9cc7-bbe1c11e678d
+2026-08-06T00:46:12+02:00 [res] pair bug01-v4r3 done (armA COMPLETE attempt 2, $15.2241, 3730s)
