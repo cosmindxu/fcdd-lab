@@ -612,3 +612,7 @@
 2026-08-05T16:34:15+02:00 [sup2] queue -> armB bug07
 2026-08-05T16:34:15+02:00 [res] armB bug07: workspace built (/home/xcos/fcdd_arms/bug07_armB_v4)
 2026-08-05T16:34:21+02:00 [res] armB bug07 attempt 1/8: FRESH start
+2026-08-05T17:29:51+02:00 [res] pair bug07-v4 done (armB COMPLETE attempt 1, $24.1858, 3330s)
+2026-08-05T17:29:51+02:00 [sup2] queue -> armB bug05
+2026-08-05T17:29:51+02:00 [res] armB bug05: workspace built (/home/xcos/fcdd_arms/bug05_armB_v4)
+2026-08-05T17:29:58+02:00 [res] armB bug05 attempt 1/8: FRESH start
