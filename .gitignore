@@ -8,3 +8,6 @@ case*/sealed/
 *.wasm
 *.szx
 __pycache__/
+case*/paper/*.aux
+case*/paper/*.log
+case*/paper/*.out
