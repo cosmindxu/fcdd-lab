@@ -26,6 +26,8 @@ import subprocess
 CASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.expanduser("~/fcdd_arms")
 PRISTINE = os.path.join(CASE, "sealed", "seedkit", "pristine")
+SEEDED = os.path.join(CASE, "arms", "variants")   # the buggy tree each arm received
+STEP1 = os.path.join(CASE, "step1_contract")      # Arm B's contract baseline
 OUT = os.path.join(CASE, "grading")
 
 SRC = ["chess.asm", "movegen.inc", "engine.inc", "tt.inc",
@@ -33,6 +35,15 @@ SRC = ["chess.asm", "movegen.inc", "engine.inc", "tt.inc",
 
 # Tells that would identify the FCDD arm. Order matters (longest first).
 SCRUB = [
+    # PATH scrubs MUST come first: diff -ru embeds absolute paths that name the
+    # arm ("bug02_armB_v4"), the lab ("fcdd_arms") and the baseline. Adding the
+    # verification-package diff without these leaked the mapping outright.
+    (r"/home/[A-Za-z0-9_]+/fcdd_arms/bug\d\d_arm[AB]_v\d+", "SUBMISSION"),
+    (r"[A-Za-z0-9_./-]*step1_contract", "BASELINE"),
+    (r"[A-Za-z0-9_./-]*fcdd_lab[A-Za-z0-9_./-]*", "PROJECT"),
+    (r"(?i)fcdd_arms", "workspace"),
+    (r"(?i)\bbug\d\d_arm[AB]_v\d+\b", "SUBMISSION"),
+    (r"(?i)\barm[AB]\b", "the submission"),
     (r"(?i)\bformal[- ]contract[- ]driven development\b", "the development method"),
     (r"(?i)\bFCDD\b", "the method"),
     (r"(?i)\bformal-contract-dev\b", "the method"),
@@ -50,6 +61,19 @@ SCRUB = [
     (r"(?i)\btwin\b", "reference implementation"),
     (r"(?i)\bbridge layer\b", "conformance check"),
     (r"(?i)\barm ?[AB]\b", "the submission"),
+    # leaks found in the first build: "contract C9", bare "contract", "clause",
+    # "spec of record", "conformance", file names under contract/
+    (r"(?i)\bcontract\s+C\d+\b", "a specification rule"),
+    (r"(?i)\bclause\s+C\d+\b", "a specification rule"),
+    (r"(?i)\bC\d+_[a-zA-Z_]+", "a specification rule"),
+    (r"(?i)\bspec of record\b", "the specification"),
+    (r"(?i)\bconformance suite\b", "the check suite"),
+    (r"(?i)\bthe contract\b", "the specification"),
+    (r"(?i)\bcontract\b", "specification"),
+    (r"(?i)\bcontracted\b", "specified"),
+    (r"(?i)\bcontracts\b", "specifies"),
+    (r"(?i)\bhc91_twin\b", "reference implementation"),
+    (r"(?i)\bb\d_[a-z_]+\.py\b", "a check script"),
 ]
 
 
@@ -60,11 +84,16 @@ def scrub(text):
 
 
 def diff_for(ws, bug):
-    """Unified diff of the engine sources against pristine."""
+    """Unified diff of the engine sources against the SEEDED tree the arm was given.
+
+    Baseline correctness matters: diffing against `pristine` shows the fix as
+    EMPTY (a correct minimal fix restores pristine exactly), which is how the
+    first packet build presented every submission as comment-only changes.
+    """
     out = []
     src = os.path.join(ws, "variants", bug)
     for f in SRC:
-        a, b = os.path.join(PRISTINE, f), os.path.join(src, f)
+        a, b = os.path.join(SEEDED, bug, f), os.path.join(src, f)
         if not (os.path.exists(a) and os.path.exists(b)):
             continue
         d = subprocess.run(["diff", "-u", "--label", f"a/{f}", "--label", f"b/{f}", a, b],
@@ -88,6 +117,17 @@ def tests_for(ws, bug):
         except OSError:
             continue
         parts.append(f"--- {f} ({len(body)} bytes) ---\n{body[:12000]}")
+    # Verification artifacts also live OUTSIDE variants/ for some submissions
+    # (a conformance/spec package). Omitting them scored one submission as
+    # having shipped no tests at all, which was false and arm-specific.
+    ext = os.path.join(ws, "contract")
+    if os.path.isdir(ext):
+        d = subprocess.run(["diff", "-ru", "-x", "*.olean", "-x", "__pycache__",
+                            "-x", "*.png", "-x", "*.sna", "-x", "*.tap",
+                            STEP1, ext], capture_output=True, text=True).stdout
+        if d.strip():
+            parts.append("--- changes to the accompanying verification package "
+                         f"({len(d)} bytes of diff) ---\n" + d[:20000])
     return "\n\n".join(parts) or "(no new test files)"
 
 

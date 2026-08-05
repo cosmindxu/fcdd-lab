@@ -110,7 +110,7 @@ for level 3 and up press the digit before `l`, e.g. `--type "3l@700"`.)
          add hl,de
          ld a,b
          and 8
--        ret z
+-        ret nz
 -        ex de,hl
 +        ret z                   ; white piece: already white-positive
 +        ex de,hl                ; black piece: negate
@@ -264,7 +264,7 @@ if __name__ == '__main__':
  ; (material + piece-square), 0 for a king or empty square.
 +;
 +; WHITE-RELATIVE means: a white piece contributes a POSITIVE value and a
-+; black piece a NEGATIVE one (contract clause S6a, spec/the specification
++; black piece a NEGATIVE one (specification clause S6a, spec/the specification
 +; §16.10).  The colour test at the tail must therefore be `ret z` (bit 3
 +; clear = white = return the magnitude as-is); `ret nz` there inverts the
 +; whole material term of pstScore/eval and makes the engine play to LOSE
@@ -277,7 +277,7 @@ if __name__ == '__main__':
          add hl,de
          ld a,b
          and 8
--        ret z
+-        ret nz
 +        ret z                    ; white: +magnitude (white-relative)
          ex de,hl
          ld hl,0
@@ -293,5 +293,291 @@ if __name__ == '__main__':
 ## Submission Y — tests added
 
 ```
-(no new test files)
+--- changes to the accompanying verification package (77949 bytes of diff) ---
+diff -ru -x '*.olean' -x __pycache__ -x '*.png' -x '*.sna' -x '*.tap' BASELINE/bridge/a check script SUBMISSION/the the check suite
+--- BASELINE/bridge/a check script	2026-07-29 22:35:40.234282768 +0200
++++ SUBMISSION/the the check suite	2026-08-05 06:54:41.350143790 +0200
+@@ -118,6 +118,117 @@
+ chk("T20a_start_balanced", evalWhite(startPos), 0)
+ chk("T20b_stm_relative", eval_(kiwiPos.replace(stm=BLACK)), -eval_(kiwiPos))
+ 
++# --- §16.10  clause S6: EVALUATION ORIENTATION ---------------------------
++# The kernel proves S6a over all 640 (piece, square) pairs and S6b/S6c
++# small-scope (4 squares / 1 square).  The reference implementation WIDENS S6b and S6c to every
++# empty square of the two-kings board, and re-checks every §16.10 theorem.
++
++chk("T26a_S6a_domain_640", len(S6aDomain()), 640)
++chk("T26b_S6a_oriented",
++    all(S6a_oriented(pieceValSigned, pc, s) for pc, s in S6aDomain()), True)
++chk("T26c_S6a_mutant_fails_everywhere",
++    any(S6a_oriented(pieceValSignedMut, pc, s) for pc, s in S6aDomain()), False)
++chk("T26d_king_is_zero", pieceValSigned(WK, 0x04), 0)
++chk("T26e_empty_is_zero", pieceValSigned(0, 0x33), 0)
++
++_kb = kingsOnlyPos.board
++_empty = [s for s in scanSquares if bGet(_kb, s) == 0]
++chk("S6_carrier_62_empty", len(_empty), 62)
++# ... and the carrier's kings really do cancel, so any sign that appears in
++# S6b/S6c comes from the added material and nothing else.
++chk("S6_carrier_is_zero", evalWhite(kingsOnlyPos), 0)
++
++chk("T27a_S6b_place_moves_pstScore(620)",
++    all(S6b_placeMoves(_kb, pc, s) for pc in nonKingPieces for s in _empty), True)
++chk("T27b_S6b_mutant_fails_everywhere(620)",
++    any(S6b_placeMoves(_kb, pc, s, pstScoreMut)
++        for pc in nonKingPieces for s in _empty), False)
++
++_fam = [kingsOnlyPos.replace(board=bSet(_kb, s, pc))
++        for pc in nonKingPieces for s in _empty]
++chk("S6c_family_620", len(_fam), 620)
++chk("T27d_S6c_sign_agrees(620)",
++    all(S6c_signAgrees(evalWhite, p) for p in _fam), True)
++chk("T27e_S6c_mutant_fails_everywhere(620)",
++    any(S6c_signAgrees(evalWhiteMut, p) for p in _fam), False)
++chk("T27f_S6c_has_white_up",
++    any(matBalance(p.board) > 0 for p in _fam), True)
++chk("T27g_S6c_has_black_up",
++    any(matBalance(p.board) < 0 for p in _fam), True)
++
++# S6d — the three reported incidents (the method Law 6).
++_cap1, _quiet1 = mkMove(0x54, 0x43, 0), mkMove(0x62, 0x52, 0)
++_cap2, _quiet2 = mkMove(0x21, 0x00, 0), mkMove(0x21, 0x40, 0)
++# the moves must really be legal, or the incident theorems are vacuous
++chk("S6d_cap1_legal", _cap1 in genLegal(bug04Pos1), True)
++chk("S6d_quiet1_legal", _quiet1 in genLegal(bug04Pos1), True)
++chk("S6d_cap2_legal", _cap2 in genLegal(bug04Pos2), True)
++chk("S6d_quiet2_legal", _quiet2 in genLegal(bug04Pos2), True)
++
++chk("T28a_incident1_capture_much_better",
++    evalWhite(makeMove(bug04Pos1, _cap1)) + 800
++    <= evalWhite(makeMove(bug04Pos1, _quiet1)), True)
++chk("T28b_incident1_mutant_prefers_quiet",
++    evalWhiteMut(makeMove(bug04Pos1, _quiet1))
++    < evalWhiteMut(makeMove(bug04Pos1, _cap1)), True)
++chk("T28c_incident2_capture_much_better",
++    evalWhite(makeMove(bug04Pos2, _cap2)) + 400
++    <= evalWhite(makeMove(bug04Pos2, _quiet2)), True)
++chk("T28d_incident2_mutant_prefers_quiet",
++    evalWhiteMut(makeMove(bug04Pos2, _quiet2))
++    < evalWhiteMut(makeMove(bug04Pos2, _cap2)), True)
++chk("T28e_incident3_matl_white_ahead", matBalance(bug04Pos3.board) > 0, True)
++chk("T28f_incident3_eval_agrees", evalWhite(bug04Pos3) > 0, True)
++chk("T28g_incident3_stm_is_losing", eval_(bug04Pos3) < 0, True)
++chk("T28h_incident3_decisive", evalWhite(bug04Pos3) >= 1000, True)
++chk("T28i_incident3_mutant_inverts",
++    matBalance(bug04Pos3.board) > 0 and evalWhiteMut(bug04Pos3) < 0, True)
++
++# S6 is INDEPENDENT of S3 — the fault preserves antisymmetry, which is
++# exactly why T19a..T19e could not see it.
++chk("T29_mutant_still_antisymmetric",
++    evalWhiteMut(mirrorPos(kiwiPos)), -evalWhiteMut(kiwiPos))
++chk("T29a_mutant_still_start_balanced", evalWhiteMut(startPos), 0)
++
++# --- §16.11  clause S6e: the KING piece-square term's orientation --------
++# The kernel proves S6e over 8 king pairs; the reference implementation runs ALL 3,612
++# non-adjacent pairs.  Ground truth is pstKingEG read directly, never
++# kingPstSigned (that would be circular under the mutation being caught).
++
++_kp = S6eDomain()
++_kpnz = [(w, b) for w, b in _kp if kingTblAdvantage(w, b) != 0]
++chk("S6e_domain_3612", len(_kp), 3612)
++chk("S6e_non_degenerate_3004", len(_kpnz), 3004)
++chk("T30a_S6e_king_oriented(3612)",
++    all(S6e_kingOriented(evalWhite, w, b) for w, b in _kp), True)
++chk("T30b_S6e_family_non_degenerate",
++    all(kingTblAdvantage(w, b) != 0 for w, b in
++        [(0x33, 0x70), (0x34, 0x77), (0x44, 0x07), (0x43, 0x00),
++         (0x00, 0x44), (0x07, 0x43), (0x70, 0x34), (0x77, 0x33)]), True)
++chk("T30c_S6e_kmutant_fails_everywhere(3004)",
++    any(S6e_kingOriented(evalWhiteKMut, w, b) for w, b in _kpnz), False)
++
++# ... and the sibling fault really is invisible to everything else — stated
++# on a carrier whose kings are NOT a mirror pair.  On a mirror pair the two
++# kingPstSigned terms cancel and `evalWhiteKMut` is pointwise EQUAL to
++# `evalWhite`, so the claim would collapse to `f = f` (review round 2, N3).
++_kmc = kmutCarrier
++chk("T30d_kmutant_really_bites", evalWhiteKMut(_kmc) != evalWhite(_kmc), True)
++chk("T30e_carrier_is_material_dominated", matBalance(_kmc.board) > 0, True)
++chk("T30f_kmutant_passes_S6c_where_it_bites",
++    S6c_signAgrees(evalWhiteKMut, _kmc), True)
++_kg = kingGeomPos(0x33, 0x70)
++chk("T30g_kmutant_still_antisymmetric",
++    evalWhiteKMut(mirrorPos(_kg)), -evalWhiteKMut(_kg))
++chk("T30h_kmutant_bites_there_too", evalWhiteKMut(_kg) != evalWhite(_kg), True)
++chk("T30i_kmutant_leaves_pstScore_alone",
++    all(S6a_oriented(pieceValSigned, pc, s) for pc, s in S6aDomain()), True)
++# The degeneracy itself, recorded so it cannot be re-introduced silently:
++# on the S6c family every member has mirror-pair kings, so the k-mutant IS
++# the identity there and a claim stated on that family proves nothing.
++chk("S6e_mirror_pair_family_is_degenerate_for_kmut",
++    [p for p in _fam if evalWhiteKMut(p) != evalWhite(p)], [])
++
+ # --- §16.7  ply bound ----------------------------------------------------
+ chk("T22_movebuf_in_range",
+     all(0x6000 + ply * 512 + 511 <= 0x7FFF for ply in range(MAXPLY + 1)), True)
+diff -ru -x '*.olean' -x __pycache__ -x '*.png' -x '*.sna' -x '*.tap' BASELINE/bridge/a check script SUBMISSION/the the check suite
+--- BASELINE/bridge/a check script	2026-07-29 22:59:13.374886388 +0200
++++ SUBMISSION/the the check suite	2026-08-05 04:37:43.898405883 +0200
+@@ -190,7 +190,9 @@
+ #       loop's updateTerminal does.  A forced repetition therefore scores as
+ #       whatever the static eval says, not as 0.
+ # =====================================================================
+-src = open("/media/sf_Projects/HC91_emulator/chess/engine.inc").read()
++# Relative to the shell's own VARIANT_DIR, not an absolute path: a copy of
++# this workspace must assert against ITS OWN source, not this one's.
++src = open(os.path.join(emu.VARIANT_DIR, "engine.inc")).read()
+ ok("countReps" not in src, "F11: engine.inc now mentions countReps")
+ ok("halfmove" not in src, "F11: engine.inc now mentions halfmove")
+ EVID.append("F11 engine.inc (negamax + quiesce) contains no reference to "
+Only in SUBMISSION/specification/bridge: a check script
+diff -ru -x '*.olean' -x __pycache__ -x '*.png' -x '*.sna' -x '*.tap' BASELINE/bridge/emu.py SUBMISSION/the the check suite
+--- BASELINE/bridge/emu.py	2026-07-29 22:44:14.362471728 +0200
++++ SUBMISSION/the the check suite	2026-08-05 06:55:13.603860454 +0200
+@@ -20,10 +20,19 @@
+ import subprocess
+ import tempfile
+ 
+-EMU = "/media/sf_Projects/HC91_emulator/build/hc91emu"
+-ROM = "/media/sf_Projects/HC91_emulator/roms/48.rom"
+-TAP = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+-                   "..", "artifacts", "chess.tap")
++HERE = os.path.dirname(os.path.abspath(__file__))
++WS = os.path.normpath(os.path.join(HERE, "..", ".."))       # workspace root
++
++EMU = os.path.join(WS, "harness", "build", "hc91emu")
++ROM = os.path.join(WS, "harness", "roms", "48.rom")
++# THE BUILD UNDER TEST.  Law 4 (verify claims where they RUN): the bridge
++# judges the tape the variant's `make` produces, not a snapshot of it that
++# can silently go stale.  `HC91_TAP` overrides it, which is how a reviewer
++# points the whole suite at a seeded-fault tape; nothing in the shipped
++# gate sets it.
++TAP = os.environ.get("HC91_TAP",
++                     os.path.join(WS, "variants", "bug04", "chess.tap"))
++VARIANT_DIR = os.path.join(WS, "variants", "bug04")
+ 
+ # --- provenance: chess.asm equates -------------------------------------
+ A_BOARD      = 0xE000   # board    equ 0xE000   (128 bytes, 0x88 indexed)
+@@ -44,7 +53,17 @@
+ A_HASHKEY    = 0xE10C   # hashKey (2 bytes, 16-bit Zobrist)
+ A_HAVELAST   = 0xE124   # haveLast (1 once the engine has moved)
+ A_LASTFROM   = 0xE122   # lastFrom / lastTo
+-A_AIDEPTH    = 0xE08A   # aiDepth
++A_AIDEPTH    = 0xE08A   # aiDepth    — WHITE's search depth
++A_BLACKDEPTH = 0xE15E   # blackDepth — BLACK's, i.e. the ENGINE's
++A_LASTSCORE  = 0xE120   # lastScore (2 bytes, signed) — the panel's `Eval`,
++                        #   from the ENGINE's point of view
++A_PSTSCORE   = 0xE13D   # pstScore  (2 bytes, signed) — "incremental
++                        #   material+PST, non-king, white-rel"; seeded by
++                        #   computePstScore from finalizePosition
++A_GAMEPHASE  = 0xE107   # gamePhase (1 byte), seeded by computePhase
++A_MATBALTMP  = 0xE134   # matBalTmp (2 bytes, signed) — where the ENGINE's
++                        #   OWN materialBalance (chess.asm:988) leaves the
++                        #   `Matl` figure on every panel redraw (chess.asm:956)
+ 
+ 
+ class Snapshot:
+@@ -66,24 +85,119 @@
+         off = 27 + (a - 0x4000)
+         return list(self.raw[off:off + n])
+ 
++    def sword(self, a):
++        """A SIGNED 16-bit word — the engine's scores are two's complement."""
++        v = self.word(a)
++        return v - 0x10000 if v >= 0x8000 else v
++
++
++# One scratch directory per PROCESS, removed at exit.  Previously every
++# run leaked a `mkdtemp` and a `mktemp` .sna into a RAM-backed /tmp — one
++# b8 run leaked ~8 MB.
++_SCRATCH = None
++_scratch_n = 0
++
++
++def scratch(suffix=""):
++    global _SCRATCH, _scratch_n
++    if _SCRATCH is None:
++        import atexit
++        import shutil
++        _SCRATCH = tempfile.mkdtemp(prefix="hc91bridge.")
++        atexit.register(shutil.rmtree, _SCRATCH, True)
++    _scratch_n += 1
++    return os.path.join(_SCRATCH, "t%05d%s" % (_scratch_n, suffix))
++
+ 
+-def run(frames, types=(), sna=None, extra=()):
++def run(frames, types=(), sna=None, extra=(), tap=None):
+     """Boot chess.tap, apply scheduled key events, snapshot.
+ 
+     Returns (screen_text, Snapshot|None).  Raises on emulator failure —
+     a broken harness must be LOUD."""
+-    tmp = sna or tempfile.mktemp(suffix=".sna")
++    tmp = sna or scratch(".sna")
+     cmd = [EMU, "--machine", "48k", "--rom", ROM, "--autoload",
+            "--frames", str(frames), "--text", "--save-sna", tmp]
+     for s, f in types:
+         cmd += ["--type", "%s@%d" % (s, f)]
+-    cmd += list(extra) + [os.path.abspath(TAP)]
++    cmd += list(extra) + [os.path.abspath(tap or TAP)]
+     r = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+     if r.returncode != 0:
+         raise RuntimeError("hc91emu exit %d: %s" % (r.returncode, r.stderr[:400]))
+     return r.stdout, Snapshot(tmp)
+ 
+ 
++# --- loading an ARBITRARY position into the running engine ---------------
++# The game's own save/load block (`G`/`L`) is a plain ROM data block, so a
++# position is injected by appending one hand-built block to the tape and
++# pressing L — no patch to the engine and none to the emulator.  The builder
++# is the harness's `chesspos.py`; the reference implementation builds the SAME position from the
++# SAME FEN string through `positions.from_fen`, independently, so a
++# transcription slip on either side shows up as a DISAGREEMENT.
++
++_chesspos = None
++
++
++def _cp():
++    global _chesspos
++    if _chesspos is None:
++        import sys
++        sys.path.insert(0, os.path.join(WS, "harness", "tools"))
++        import chesspos
++        _chesspos = chesspos
++    return _chesspos
++
++
++def run_fen(fen, depth=2, move=False, frames=None, tap=None):
++    """Load `fen` into the engine and snapshot.
++
++    move=False presses `V` (two-player) BEFORE `L`, so the engine never
++    moves and the snapshot holds the position exactly as loaded — that is
++    what makes the static-eval observables (pstScore, gamePhase, matBalTmp)
++    readable.  move=True lets the engine reply, which needs `fen` to have
++    Black to move (the engine plays Black).
++
++    The depth digit must precede `L`: a tape load only restores White's
++    level (harness/HOWTO.md §Caveats).
++    """
++    tapfile = os.path.abspath(tap or TAP)
++    blk = _cp().tap_data_block(_cp().fen_to_block(fen, depth))
++    path = scratch(".tap")
++    with open(path, "wb") as f:
++        f.write(open(tapfile, "rb").read() + blk)
++    keys = ("%d" % depth) + ("" if move else "v") + "l"
++    return run(frames or (1400 if not move else 2400),
++               types=[(keys, 700)], tap=path)
++
++
++def read_eval_state(sn):
++    """The engine's OWN evaluation observables, with provenance.
++
++    Falsifiability tier: MONITORED.  `pstScore` is computed by the Z80 from
++    its own tables and `matBalTmp` by a SEPARATE Z80 routine
++    (`materialBalance`); the reference implementation derives both from the FEN independently.
++    A disagreement is a real finding, not a format regression.
++    """
++    return {
++        "board": sn.block(A_BOARD, 128),
++        "stm": sn.byte(A_STM),
++        "wking": sn.byte(A_WKING),
++        "
 ```
