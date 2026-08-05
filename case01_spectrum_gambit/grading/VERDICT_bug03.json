@@ -1,0 +1,1 @@
+{"bug":"bug03","X":{"correctness_risk":3,"clarity":4,"test_quality":5},"Y":{"correctness_risk":5,"clarity":5,"test_quality":4},"which_is_better_overall":"Y","scope_note":"X changed considerably more than minimal (verification-package rework, md5 staleness stamp, path refactor, clause strengthening); some justified diligence, some scope creep. Y did not exceed minimal."}
