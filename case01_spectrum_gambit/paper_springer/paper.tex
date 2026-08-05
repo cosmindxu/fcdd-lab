@@ -1,0 +1,261 @@
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+
+\title{The Price of a Proof: A Controlled Token-Cost Comparison of Formal
+Contract-Driven Development and Ordinary Development-plus-Review}
+\titlerunning{The Price of a Proof}
+
+\author{Withheld for review}
+\authorrunning{Withheld for review}
+\institute{Study repository and full data available; see Data Availability}
+
+\maketitle
+
+\begin{abstract}
+Formal methods are defended on correctness and attacked on cost, yet the cost
+claim is seldom measured against a realistic alternative doing the same work.
+We ran a controlled comparison on a 7{,}343-line Z80 assembly chess engine into
+which an independent agent seeded seven single-byte faults, each with a sealed
+acceptance test written before any repair was attempted. Two arms fixed every
+fault: ordinary development-plus-review, and Formal Contract-Driven Development
+(FCDD) working from a pre-built machine-checked contract. Across seven matched
+pairs FCDD was more expensive on 7 of 7 (exact two-sided sign test $p=0.016$),
+median ratio $3.40\times$; its upfront contract never amortised. Replicating the
+pair whose arms were closest revealed that the ordinary arm is \emph{bimodal} —
+it produced either a minimal one-byte repair (\$8.66, \$11.78) or a redesign
+(\$44.27, \$41.35) — while FCDD produced the minimal repair in all three runs.
+Matched on solution, FCDD costs a median $5.0\times$ more. Blinded, order-
+counterbalanced grading of 14 judgements favoured FCDD on 6 of 7 pairs
+($p=0.125$), concentrated in test quality. We report three measurement findings
+we regard as more transferable than the ratio: an instruction to review ``until
+no findings remain'' has no fixed point; measured cost covaries with review-loop
+length; and processes killed by infrastructure emit no cost record.
+
+\keywords{Formal methods \and Empirical software engineering \and Cost
+measurement \and LLM agents \and Code review}
+\end{abstract}
+
+\section{Introduction}
+
+The case for formal methods is argued on one axis and rebutted on another.
+Proponents show what proof buys; opponents answer that it costs too much. The
+disagreement persists partly because the cost side is rarely measured against a
+competent alternative performing the identical repair on the identical defect,
+judged by the identical gate.
+
+This study measures it, and its more useful contribution turned out to be how
+badly that measurement can go wrong. Five times a confident, plausible finding
+proved to be an artefact of our own apparatus rather than a property of the
+methods; three were caught by our own mechanical checks and two only by
+adversarial review of a finished draft. Each correction moved the headline, and
+two reversed its direction.
+
+\section{Related Work}
+
+\paragraph{Empirical cost of formal methods.}
+The field's own guidance notes that empirical studies of formal methods are
+rare~\cite{terbeek2022}. What exists is largely retrospective single-project
+accounting with no control arm: seL4 required 2.2 person-years to build and over
+20 to verify~\cite{staples2014,klein2009}; ShardStore's authors compare their
+overhead to figures \emph{drawn from other papers}~\cite{bornholt2021}; the AWS
+TLA+ reports rest on counterfactual testimony~\cite{newcombe2015}. The largest
+survey concedes the gap outright: in a majority of projects surveyed there is no
+data available on relative time and costs~\cite{woodcock2009}. The classic
+negative industrial result is observational and unpriced~\cite{pfleeger1997}.
+
+\paragraph{The one controlled precedent.}
+Sobel and Clarkson ran a controlled formal-versus-informal experiment with
+twenty student teams~\cite{sobel2002}; we therefore do not claim the first
+controlled comparison. They measured product quality and never priced either
+arm, and Berry and Tichy argued in print that the design could not support even
+the quality claim~\cite{berry2003}. Our sealed acceptance tests and
+order-counterbalanced blinded grading respond directly to that critique. The
+closest work in unit of analysis reports 87 minutes to develop each of 73 unit
+proofs~\cite{amusuo2025}, but against a detection-rate baseline rather than a
+competing method, and in human minutes rather than tokens.
+
+\paragraph{Agentic repair and its cost.}
+LLM agents repairing real defects is established~\cite{jimenez2024}, as is the
+finding that simpler structured pipelines can beat autonomous agents on quality
+and dollars alike~\cite{xia2024}. Our contribution is therefore not that
+structure helps but \emph{which} structure, at what price. Cost-aware agent
+evaluation is likewise prior art~\cite{kapoor2024}, and per-task token
+consumption has been characterised in detail, including the finding that runs of
+the same task can differ by up to $30\times$~\cite{bai2026} --- a noise floor any
+cost delta must clear. Benchmark contamination motivated seeding our own
+faults~\cite{aleithan2024}. The nearest neighbour varies one prompt line
+controlling specification grounding for $+38$ percentage points of correct
+code~\cite{haeri2026}, but reports no cost accounting.
+
+\paragraph{Review effectiveness --- our instrument findings are replication.}
+That review surfaces far more maintainability issues than defects is long
+established --- 75\% evolvability to 25\% functional~\cite{mantyla2009},
+replicated in open source with 7--35\% of comments discarded~\cite{beller2014}.
+Porter et al.\ already quantified the signal-to-noise ratio we
+observed~\cite{porter1998}, and Rigby and Bird state from industrial data that
+more reviewers yield ``only a minimal increase in the number of comments'' and
+``no increase in the number of change sets submitted''~\cite{rigby2013}. Our 85
+findings without a defect in the fix is therefore a replication. What appears
+unclaimed is the \emph{stopping rule}: over 80\% of human changes involve at most
+one review iteration~\cite{sadowski2018}, so twelve rounds under an unbounded
+instruction is an order-of-magnitude departure.
+
+\paragraph{Seeded faults and grading: threats we inherit.}
+Mutants couple to 73\% of real faults but not to 17\%~\cite{just2014};
+correlation with real-fault detection weakens once suite size is
+controlled~\cite{papadakis2018}; hand-seeded faults tend to be harder to detect
+than real ones~\cite{andrews2005}. Our defence is that single-statement bugs are
+an abundant measured class~\cite{karampatsis2020}. Position bias in LLM judges
+was reported by Zheng et al.~\cite{zheng2023}, demonstrated as rank-hacking by
+reordering~\cite{wang2024}, and shown strongest when the quality gap is
+small~\cite{shi2025} --- exactly our regime. Our first grading round reproduced
+this failure and we applied the established remedy; that is a confession, not a
+finding. For method comparison we follow standard guidance~\cite{ko2015}, and
+adopt the pair-programming meta-analysis framing of reporting effort as a
+separate dependent variable rather than equalising it~\cite{hannay2009}.
+
+\paragraph{What remains ours.}
+Searching for prior work pricing a formal-methods workflow in LLM token cost
+against a conventional one returned nothing we could verify; we state that as a
+searched-and-not-found result. The defensible contribution is the conjunction: a
+concurrently-run control arm on the same faults, a directly metered cost unit, a
+repeated-measures design, pre-committed outcome measurement, and the
+stopping-rule and bimodality results.
+
+\section{Method}
+
+An independent agent seeded seven single-fault variants into the engine, each
+differing from pristine by exactly one byte in the assembled binary, wrote
+symptom-level reports with no location hints, and sealed an answer key whose
+hash was published before any repair began. Each arm$\times$defect cell ran as an
+isolated headless session on the same model at the same effort. FCDD's contract
+was built once as a separately measured phase (1{,}271 lines of specification, 95
+machine-checked theorems, empty axiom profile) at \$21.75.
+
+Cost is reported three ways --- the platform figure, the same tokens priced with
+our pre-registered rate table, and raw token totals --- because they disagree.
+Token totals come from each session's \texttt{modelUsage}, which includes
+reviewer subagents; an earlier ledger recorded main-loop usage only and
+under-counted by 29--99\%.
+
+\paragraph{Disclosed asymmetry.} FCDD's contract was built by reading the
+\emph{pristine} engine, so Arm~B held an executable model of correct behaviour
+covering all seven faults by construction; Arm~A received only the symptom
+report. This is the most consequential design flaw and would not transfer to
+faults of omission.
+
+\section{Instrument findings}\label{sec:instr}
+
+\textbf{Unbounded review has no fixed point.} In one cell Arm~A fixed the seeded
+fault correctly on its first pass, then ran 12 review rounds producing 85
+findings, none of which was a defect in the fix (OLS slope $+0.025$
+findings/round, $R^2=0.001$). Bounding the rule --- a round finding no defect
+closes the gate, cap three rounds --- cut the same cell from at least \$128.62
+with no completion to \$7.32 with a passing gate.
+
+\textbf{Cost covaries with review effort.} Over all 13 final-instrument cells,
+cost $=4.13+21.35\cdot\mathrm{ArmB}+7.13\cdot\mathrm{reviewers}$, $R^2=0.826$;
+controlling for reviewer count attenuates the arm gap from \$30.34 to \$21.35.
+
+\textbf{Killed processes emit no cost record.} One cell reported \$1.06; its
+first attempt had been killed without emitting a result record. Priced from
+recovered transcripts at our pre-registered rates the true figure is \$23.98 ---
+an under-count of roughly $20\times$.
+
+\section{Results}
+
+\begin{table}[t]
+\caption{Cost per defect, final instrument. $\dagger$ imputed from recovered tokens.}
+\label{tab:cost}
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Defect & Arm~A & Arm~B & Ratio\\
+\midrule
+bug01 quiescence & \$44.27 & \$49.63 & $1.12\times$\\
+bug02 fifty-move & \$7.32 & \$50.37 & $6.88\times$\\
+bug03 promotion & \$11.96 & \$23.98$\dagger$ & $2.01\times$\\
+bug04 eval sign & \$11.30 & \$55.40 & $4.90\times$\\
+bug05 castling & \$8.88 & \$31.05 & $3.50\times$\\
+bug06 TT bound & \$16.44 & \$48.69 & $2.96\times$\\
+bug07 mate detect & \$7.11 & \$24.19 & $3.40\times$\\
+\midrule
+\multicolumn{3}{l}{Median ratio (platform / rates / tokens)} & $\mathbf{3.40\times}$ / $3.28\times$ / $4.74\times$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+FCDD was dearer on 7 of 7 pairs (sign test $p=0.016$), the only statistically
+supportable cost result here (Table~\ref{tab:cost}, Fig.~\ref{fig:cost}). No
+crossover exists: $N$ is undefined when the saving is negative on every pair.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig2_cost_per_defect.pdf}
+\caption{Cost per defect. FCDD is more expensive on every pair.}
+\label{fig:cost}
+\end{figure}
+
+\paragraph{Replication and bimodality.}
+Replicating bug01 --- required by our pre-registered rule for pairs whose arms
+differ by under 30\% --- showed Arm~A is \emph{bimodal}: two runs produced a
+minimal one-byte repair (\$8.66, \$11.78, pristine binary) and two produced a
+redesign of the quiescence policy (\$44.27, \$41.35). Arm~B produced the minimal
+repair in all three runs (\$49.63, \$79.28, \$51.40). Matched on solution, FCDD
+costs a median $5.0\times$ (range 4.2--9.2). This is distinct from stochastic
+token variance~\cite{bai2026}: it is strategy selection, and the expensive Arm~A
+branch is the one graders scored at or below the gate floor --- which the sealed
+acceptance script passed regardless.
+
+\paragraph{Quality.}
+All submissions cleared the pre-registered threshold. After the first grading
+round proved order-confounded, we re-graded all seven pairs in both presentation
+orders with 14 independent graders: position came out exactly 7/7, every pair was
+order-consistent, and FCDD was favoured on 6 of 7 ($p=0.125$). Axis means
+(A / B): correctness 4.36 / 4.50; clarity 4.64 / 4.29; test quality 4.14 / 4.86.
+On three defects the two source fixes were byte-identical, so the verdict turned
+entirely on verification: FCDD produced better \emph{evidence}, not better fixes.
+
+\section{Threats to Validity}
+
+Seven defects, one codebase, one model. The oracle asymmetry above is the most
+consequential flaw. The instrument changed four times; only final-version cells
+are compared. Five of seven Arm~B and two of seven Arm~A cells required a resume
+after infrastructure interruptions, and summed cost therefore overstates FCDD.
+The bounded rule caps review rounds, not invocations, granting Arm~B $1.8\times$
+the reviewer invocations. Acceptance scripts were written by the fault-injecting
+agent, so a shared misconception is undetectable. Grading is label-blind, not
+treatment-blind. The authors evaluate their own method; every withdrawn claim is
+published rather than deleted.
+
+\section{Conclusions}
+
+Both methods reliably repaired real assembly defects. FCDD was more expensive on
+7 of 7 matched pairs and never amortised; matched on solution the gap widens to
+$5.0\times$. We make no claim about cost predictability. Quality was close, with
+FCDD ahead on test quality. Most transferably: review-loop termination dominates
+measured cost, self-reported costs must be reconciled against transcripts, and
+grading order must be counterbalanced --- we failed each of these at least once,
+and each failure produced a publishable-looking result that was false.
+
+\begin{credits}
+\subsubsection{\ackname} None.
+\subsubsection{\discintname}
+The method under test was authored by the same human--agent pair conducting this
+evaluation. Mitigations: pre-registration, independently seeded faults with a
+sealed key, mechanical gates written before repair, blinded counterbalanced
+grading, adversarial review against raw data, and publication of every withdrawn
+claim. External replication is warranted.
+\end{credits}
+
+\bibliographystyle{splncs04}
+\bibliography{refs}
+
+\end{document}
