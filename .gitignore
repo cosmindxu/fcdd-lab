@@ -11,3 +11,9 @@ __pycache__/
 case*/paper/*.aux
 case*/paper/*.log
 case*/paper/*.out
+
+# Manuscript — LOCAL ONLY, never published to the remote (operator, 2026-08-06)
+case*/ARTICLE.md
+case*/REPORT.md
+case*/paper/
+case*/paper_springer/
