@@ -65,7 +65,12 @@ def median_ci(vals, conf=0.95):
     s = sorted(vals)
     best = (s[0], s[-1], 0.0)
     for i in range(n // 2 + 1):
-        cov = 1 - 2 * sum(comb(n, k) for k in range(i)) / 2 ** n
+        # coverage of [x_(i+1), x_(n-i)] is 1 - 2*P(B <= i), B ~ Bin(n, 1/2).
+        # An earlier version used range(i), i.e. P(B <= i-1) — an off-by-one that
+        # assigned the WIDER interval's coverage to the narrower one and caused
+        # us to publish an 87.5% interval labelled 98%. Found by adversarial
+        # review of this script, not by our own checks.
+        cov = 1 - 2 * sum(comb(n, k) for k in range(i + 1)) / 2 ** n
         if cov >= conf:
             best = (s[i], s[n - 1 - i], cov)
     return best
