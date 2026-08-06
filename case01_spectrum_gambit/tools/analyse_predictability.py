@@ -143,6 +143,31 @@ for nm, v in (("A", AV), ("B", BV)):
           % (nm, max(v) / min(v), st.stdev(v) / st.mean(v),
              max(w) / min(w), st.stdev(w) / st.mean(w)))
 
+# ------------------- fault-layer dispersion (target-language threat, sec. 7)
+print("\n== fault-layer dispersion (within-study PROXY quoted by the "
+      "target-language threat -- NOT a language test) ==")
+BUGS7 = ["bug01", "bug02", "bug03", "bug04", "bug05", "bug06", "bug07"]
+SE_LAYER = {"bug01", "bug04", "bug06"}  # search/eval layer, outside C1-C14
+for nm, v in (("A", AV), ("B", BV)):
+    rl_v = [x for b, x in zip(BUGS7, v) if b not in SE_LAYER]
+    se_v = [x for b, x in zip(BUGS7, v) if b in SE_LAYER]
+    print("  arm%s rule-layer (n=4) spread %.2fx | search/eval (n=3) "
+          "spread %.2fx" % (nm, max(rl_v) / min(rl_v), max(se_v) / min(se_v)))
+print("  CAVEAT: the target language never varies in this study; subsystem is")
+print("  its only heterogeneity. The Arm A layer contrast is carried by bug01")
+print("  again and is confounded with defect difficulty and contract coverage;")
+print("  it carries NO information about the target language.")
+
+# ------------------------- cross-language replication budget (paper sec. 8.2)
+print("\n== per-cell means for the sec. 8.2 cross-language budget ==")
+pair = st.mean(AV) + st.mean(BV)
+print("  mean cell cost: arm A $%.2f, arm B $%.2f (pair $%.2f)"
+      % (st.mean(AV), st.mean(BV), pair))
+print("  one added language, 7 defects x 2 arms: ~$%.0f of runs at k=1, "
+      "~$%.0f at k=3" % (7 * pair, 21 * pair))
+print("  (plus contract build and seeding; contract build cost is itself a")
+print("  primary measurement in that design)")
+
 # --------------------------------------------- counterbalanced quality round
 print("\n== counterbalanced quality round (14 verdicts, 7 pairs x 2 orders) ==")
 axes = ("correctness_risk", "clarity", "test_quality")

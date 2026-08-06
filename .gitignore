@@ -16,4 +16,8 @@ case*/paper/*.out
 case*/ARTICLE.md
 case*/REPORT.md
 case*/paper/
-case*/paper_springer/
+case*/paper_springer/*.aux
+case*/paper_springer/*.log
+case*/paper_springer/*.out
+case*/paper_springer/*.bbl
+case*/paper_springer/*.blg

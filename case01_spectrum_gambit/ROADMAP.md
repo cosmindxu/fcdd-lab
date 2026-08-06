@@ -127,6 +127,45 @@ Concrete shape for a case02:
   extraction drives the marginal cost of a whole defect class to ~zero, the
   crossover arithmetic changes qualitatively — that is the hypothesis.
 
+## C2. New direction — cross-language replication (added 2026-08-06, from external review)
+
+A reviewer asked whether the *output language* affects dispersion. The
+primary reading — the target language being repaired — is a real
+external-validity threat the case cannot test: Z80 assembly never varies
+across cells, and it is both far sparser in LLM training corpora than
+mainstream languages (plausibly *widening* the unguided arm — part of
+Arm A's spread may be a property of Z80, not of the missing contract) and
+semantically closed (no runtime/library surface — making the $21.75
+finite-scope contract unusually cheap and unusually binding, flattering
+FCDD). Signed expectations, argued in ARTICLE §7 item 9: a
+mainstream-language replication should **raise** the cost ratio (the
+measured 3–5× is a plausible floor) and **shrink** the dispersion contrast
+(the Goal-1 observation is anti-conservative on language grounds).
+
+Concrete experiment (ARTICLE §8.2):
+
+- Seed the **same seven fault classes** (all language-portable: inverted
+  guard, unreset counter, generation mask, evaluation sign,
+  rights-bookkeeping slip, cache depth bound, terminal misclassification)
+  into a chess engine of comparable scope in ≥1 high-resource language
+  (Python or C; compact open-source engines exist in both).
+- Build the contract **fresh** for that engine — the build cost is itself a
+  primary measurement (prediction: it rises with runtime/library surface).
+- Run both arms under §8.1's controls (cost-matched control-arm artefact,
+  pre-registered dispersion estimator, mechanical solution-mode coding).
+- Budget at case01's measured per-cell means ($15.33 A / $40.47 B, derived
+  in `tools/analyse_predictability.py`): ≈$390 of runs at k=1, ≈$1,170 at
+  k=3 per added language, plus contract build and seeding; shares runs with
+  the §8.1 k≥6 replication if those defects are drawn from the new
+  language. A third, mid-frequency language turns the contrast into a trend
+  for roughly another $1,200.
+- Limits to state up front: a different engine is a different program
+  (language separated from codebase only up to fault-class matching); still
+  silent on faults of omission and on other model families.
+- Two references were added for the training-distribution premise
+  (Cassano et al. arXiv:2208.08227; Orlanski et al. ICML 2023) —
+  verification record in `paper/references_verified.md`.
+
 ## D. Housekeeping
 
 - **D3 price pin**: `claude-opus-5` is absent from the frozen price table, so
