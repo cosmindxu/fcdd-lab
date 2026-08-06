@@ -3,16 +3,19 @@
 
 For each bug with two completed v4 cells, writes a packet containing both
 arms' work with every arm-identifying marker removed, presented as
-"Submission X" and "Submission Y". Which arm is X alternates by bug parity
-(even bug number -> X=A, odd -> X=B) so a grader cannot learn the mapping
-from one packet and apply it to the next.
+"Submission X" and "Submission Y". BOTH orders are emitted per bug: the XA
+packet presents Arm A first, the XB packet presents Arm B first (see the
+order loop below, which is the authoritative mapping). An earlier docstring
+described a bug-parity alternation; that was superseded by counterbalancing
+and would invert four of seven pairs if trusted.
 
-Blinding is the load-bearing part, so it is deliberately aggressive: file
+Blinding is the load-bearing part, so it is deliberately aggressive.
 names, contract paths, FCDD vocabulary and skill references are the obvious
 tells. Anything not scrubbable is dropped rather than shipped.
 
-The true mapping is written to grading/KEY_<bug>.json, which the grader agents
-never see; the orchestrator only reads it after verdicts are in.
+The true mapping is written to grading/KEY_<bug>_<order>.json, which the grader
+agents never see. NOTE: those key files are gitignored, so the mapping in the
+order loop below is the only deposited record of it.
 
 Usage: python3 tools/make_grading_packets.py
 """
