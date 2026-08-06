@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: paper.aux
 The style file: splncs04.bst
 Database file #1: refs.bib
+Warning--empty journal in shi2025
 You've used 30 entries,
             2850 wiz_defined-function locations,
-            780 strings with 11615 characters,
-and the built_in function-call counts, 19792 in all, are:
-= -- 1588
+            782 strings with 11618 characters,
+and the built_in function-call counts, 20030 in all, are:
+= -- 1616
 > -- 840
-< -- 28
+< -- 30
 + -- 344
 - -- 312
-* -- 1339
-:= -- 2616
+* -- 1358
+:= -- 2633
 add.period$ -- 61
 call.type$ -- 30
-change.case$ -- 274
+change.case$ -- 275
 chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 1664
-empty$ -- 1603
+cite$ -- 31
+duplicate$ -- 1682
+empty$ -- 1618
 format.name$ -- 342
-if$ -- 4207
+if$ -- 4265
 int.to.chr$ -- 0
 int.to.str$ -- 30
-missing$ -- 364
+missing$ -- 368
 newline$ -- 96
 num.names$ -- 60
-pop$ -- 707
+pop$ -- 712
 preamble$ -- 1
 purify$ -- 216
 quote$ -- 0
-skip$ -- 484
+skip$ -- 496
 stack$ -- 0
-substring$ -- 947
-swap$ -- 946
-text.length$ -- 28
+substring$ -- 981
+swap$ -- 963
+text.length$ -- 30
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 120
-warning$ -- 0
-while$ -- 144
+warning$ -- 1
+while$ -- 147
 width$ -- 32
-write$ -- 339
+write$ -- 340
+(There was 1 warning)
