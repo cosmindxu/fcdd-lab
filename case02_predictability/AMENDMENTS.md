@@ -129,3 +129,44 @@ is the artefact shipped to Arm A runs.
    `material` and lopsided-`search` cases were added. The delivered suite catches
    four single-byte mutants and a different build (44 red). Four mutants is the
    whole evidence that the case selection bites.
+
+---
+
+## A5 — two driver defects, found and fixed in the first two cells; one cell restarted
+**2026-08-07, after run 1, before the schedule ran unattended.**
+
+Logged under §6 ("every such event is logged"). Neither defect touches the
+design, the artefacts, or the analysis; both are in the shell script that walks
+the frozen schedule.
+
+**Defect 1 — the schedule stopped after one run.** `schedule.json` was piped into
+a `while read` loop; the model invocation inside the body consumed the pipe and
+swallowed the remaining 55 lines. The driver logged `case02 COMPLETE` after cell
+1 of 56. Fixed by reading the schedule into an array first, plus `</dev/null` on
+the run. Verified by a dry run with a deliberately stdin-consuming body: 56/56
+cells iterated.
+
+**Defect 2 — the resume check could have silently dropped a cell.** The driver
+skipped a cell when `arm<A>_<bug>_c2r<k>_a1_result.json` existed. But
+`run_resilient.sh` creates that file **empty, by redirect, at attempt start**, so
+a crashed or still-running cell has one — on any relaunch that cell would be
+skipped and the design would quietly finish with fewer than 56 runs. The same
+check is wrong in the other direction: a cell that succeeds on attempt 2 writes
+`_a2_`, and an `_a1_`-only test would re-run a completed cell. Replaced with a
+predicate that globs all attempts and requires JSON with `is_error` false —
+exactly the condition under which `run_resilient.sh` exits 0. Unit-tested against
+the real completed run, the empty stub, an absent file, and an `is_error:true`
+file; all four classify correctly.
+
+**Consequence for the data.** Cell **bug06 / arm A / run 4** had been executing
+for ~8 minutes when the driver was stopped to apply defect 2's fix. Its workspace
+carried partial edits, and a fresh agent starting on a dirty workspace is not the
+run the design specifies, so the workspace is deleted and the cell is re-run from
+pristine. The aborted attempt wrote no result JSON (the file was still the empty
+stub), so **its partial cost is not captured in the ledger** — an under-count of
+a few dollars against a ~$1,560 study, recorded here rather than estimated. The
+driver now clears a dirty workspace before any restart of a cell, so this cannot
+recur silently.
+
+Cell 1 (bug01 / arm B / run 3) completed normally under the old driver and is
+unaffected: the defects are in schedule traversal, not in how a run is executed.
