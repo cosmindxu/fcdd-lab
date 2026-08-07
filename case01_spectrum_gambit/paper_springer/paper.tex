@@ -741,6 +741,54 @@ moved one cell $17.6\times$); randomise presentation order in grading; and
 re-derive every published number from the deposited artefacts before each
 revision, because one of ours could not be.
 
+
+\subsection{An illustrative parallel: the same model, with and without a solver}
+
+A side experiment on unrelated infrastructure offers a parallel worth stating,
+with the caveat that it is an illustration and not evidence: it was not
+controlled, each cell ran once, and it measures chess rather than repair.
+
+The same model played a five-game ladder against a deterministic 1--5 ply chess
+engine twice: once choosing every move from its own judgement, once with
+Stockfish~18 at fixed depth selecting the moves. Unaided it went 3--2, and
+unpredictably so---the two losses were not at the two hardest levels (it lost at
+levels~3 and~5, winning level~4 in 73 moves). Aided it went 5--0, with the won
+games roughly halved in length (27, 26, 15, 36 and 45 moves).
+
+The interesting part is \emph{where} the solver helped. The agents logged their
+own candidate move before each engine query. At level~2 the engine twice averted
+material loss; at levels~3, 4 and~5 it never rescued anything---the model's own
+worst candidate was still winning at every decision point. The solver removed a
+tail; it did not raise a mean.
+
+That is the shape this study measured, and it suggests why. \textbf{A chess
+engine is a generator; a proof kernel is a filter.} Stockfish proposes a better
+move than the model would have chosen. Lean proposes nothing---it refuses claims
+that do not follow. FCDD therefore leaves the generator untouched and adds a
+filter, which predicts exactly what we observed: dispersion narrows
+(\S\ref{sec:dispersion}) while the paired quality difference stays
+indistinguishable from zero (\S\ref{sec:quality}). A filter removes the
+catastrophic tail; it does not make the typical repair better. Our null result on
+quality is not a failure to detect an effect that ought to be there---it is what
+a filter-shaped intervention should produce.
+
+The parallel also marks its own limits, and they cut against the method rather
+than for it. Chess supplies a total, cheap, decidable oracle: Stockfish evaluates
+\emph{any} legal position, and the objective---win---is given. Design supplies
+none of that. A contract constrains only what it states, the statement must be
+written by the same fallible agent whose work it is meant to bound, and writing
+it is where the cost and the errors concentrate. The seven cells here are the
+direct evidence: every one required \emph{extending} the contract by 12 to 35
+theorems before the fault was even expressible (\S\ref{sec:asymmetry}), and an
+earlier draft's claim that the contract covered all seven faults by construction
+was false and withdrawn.
+
+The honest reading is narrow: where an external, machine-checked oracle covers
+the decision, it converts a variable outcome into a bounded one at a price. Chess
+is the easy case, because the oracle is total and free. Formal contracts are the
+hard case, because the oracle must first be built---and this paper's headline
+cost is largely the bill for building it.
+
 \section{Threats to Validity}\label{sec:threats}
 
 \emph{Sample size:} seven defects, $k=1$ except one cell at $k=3$, one
