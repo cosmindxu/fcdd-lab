@@ -1,0 +1,470 @@
+{
+ "cases": {
+  "game/italian_d2": {
+   "castling": 15,
+   "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 1 5",
+   "gameStateName": "play",
+   "halfmove": 1,
+   "moveLog": "e2e4 e7e5 g1f3 b8c6 f1c4 f8c5 d2d3 g8f6",
+   "moveLogN": 8
+  },
+  "game/open_captures_d1": {
+   "castling": 15,
+   "fen": "rnbqk1nr/pppp1ppp/8/8/1b2P3/5N2/PpP1BPPP/R1BQK2R w KQkq - 0 6",
+   "gameStateName": "play",
+   "halfmove": 0,
+   "moveLog": "e2e4 e7e5 d2d4 e5d4 g1f3 f8b4 b1c3 d4c3 f1e2 c3b2",
+   "moveLogN": 10
+  },
+  "game/queens_pawn_d3": {
+   "castling": 15,
+   "fen": "rnbqkb1r/ppp2ppp/4pn2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5",
+   "gameStateName": "play",
+   "halfmove": 0,
+   "moveLog": "d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 g1f3 d5c4",
+   "moveLogN": 8
+  },
+  "search/bishop_pair_d1": {
+   "fen": "8/4k3/8/8/8/8/8/2B1KB2 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -650,
+   "moveLogN": 1
+  },
+  "search/bishop_pair_d2": {
+   "fen": "8/4k3/8/8/8/8/8/2B1KB2 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -670,
+   "moveLogN": 1
+  },
+  "search/bishop_pair_d3": {
+   "fen": "8/4k3/8/8/8/8/8/2B1KB2 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -640,
+   "moveLogN": 1
+  },
+  "search/in_check_d1": {
+   "fen": "r1bqkbnr/ppp2ppp/2n5/1B1pp3/4P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 4",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": 54,
+   "moveLogN": 1
+  },
+  "search/in_check_d2": {
+   "fen": "rn1qkbnr/pppb1ppp/8/1B1pp3/4P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 4",
+   "gameStateName": "play",
+   "lastMove": "c8d7",
+   "lastScore": 20,
+   "moveLogN": 1
+  },
+  "search/in_check_d3": {
+   "fen": "rn1qkbnr/pppb1ppp/8/1B1pp3/4P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 4",
+   "gameStateName": "play",
+   "lastMove": "c8d7",
+   "lastScore": 20,
+   "moveLogN": 1
+  },
+  "search/italian_d1": {
+   "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 5 5",
+   "gameStateName": "play",
+   "lastMove": "f8c5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/italian_d2": {
+   "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 5 5",
+   "gameStateName": "play",
+   "lastMove": "f8c5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/italian_d3": {
+   "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 5 5",
+   "gameStateName": "play",
+   "lastMove": "f8c5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/italian_d3_hc128": {
+   "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 5 5",
+   "gameStateName": "play",
+   "lastMove": "f8c5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/italian_d4": {
+   "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 5 5",
+   "gameStateName": "play",
+   "lastMove": "f8c5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/kiwipete_d1": {
+   "fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/4P3/2p2Q1p/PPPBBPPP/R3K2R w KQkq - 0 2",
+   "gameStateName": "play",
+   "lastMove": "b4c3",
+   "lastScore": 224,
+   "moveLogN": 1
+  },
+  "search/kiwipete_d2": {
+   "fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/4P3/2p2Q1p/PPPBBPPP/R3K2R w KQkq - 0 2",
+   "gameStateName": "play",
+   "lastMove": "b4c3",
+   "lastScore": 273,
+   "moveLogN": 1
+  },
+  "search/kiwipete_d3": {
+   "fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/4P3/2p2Q1p/PPPBBPPP/R3K2R w KQkq - 0 2",
+   "gameStateName": "play",
+   "lastMove": "b4c3",
+   "lastScore": 273,
+   "moveLogN": 1
+  },
+  "search/kiwipete_d4": {
+   "fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/4P3/2p2Q1p/PPPBBPPP/R3K2R w KQkq - 0 2",
+   "gameStateName": "play",
+   "lastMove": "b4c3",
+   "lastScore": 273,
+   "moveLogN": 1
+  },
+  "search/knight_fork_d1": {
+   "fen": "4k3/8/8/8/5n2/8/4K3/3Q4 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "d5f4",
+   "lastScore": -580,
+   "moveLogN": 1
+  },
+  "search/knight_fork_d2": {
+   "fen": "4k3/8/8/8/8/2n5/4K3/3Q4 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "d5c3",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/knight_fork_d3": {
+   "fen": "4k3/8/8/8/8/2n5/4K3/3Q4 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "d5c3",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/kqk_d1": {
+   "fen": "8/4k3/8/8/8/8/Q7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -874,
+   "moveLogN": 1
+  },
+  "search/kqk_d2": {
+   "fen": "8/4k3/8/8/8/8/Q7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -899,
+   "moveLogN": 1
+  },
+  "search/kqk_d3": {
+   "fen": "8/4k3/8/8/8/8/Q7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -875,
+   "moveLogN": 1
+  },
+  "search/krk_black_up_d1": {
+   "fen": "8/3k4/8/8/8/8/r7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8d7",
+   "lastScore": 530,
+   "moveLogN": 1
+  },
+  "search/krk_black_up_d2": {
+   "fen": "8/4k3/8/8/8/8/r7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": 530,
+   "moveLogN": 1
+  },
+  "search/krk_black_up_d3": {
+   "fen": "8/4k3/8/8/8/8/r7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": 564,
+   "moveLogN": 1
+  },
+  "search/krk_white_up_d1": {
+   "fen": "8/4k3/8/8/8/8/R7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -479,
+   "moveLogN": 1
+  },
+  "search/krk_white_up_d2": {
+   "fen": "8/4k3/8/8/8/8/R7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": -504,
+   "moveLogN": 1
+  },
+  "search/krk_white_up_d3": {
+   "fen": "8/5k2/8/8/8/8/R7/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8f7",
+   "lastScore": -479,
+   "moveLogN": 1
+  },
+  "search/mate_defence_d1": {
+   "fen": "R5k1/5ppp/8/8/8/8/8/6K1 b - - 0 30",
+   "gameStateName": "black-mated",
+   "lastMove": "-",
+   "lastScore": -29000,
+   "moveLogN": 1
+  },
+  "search/mate_defence_d2": {
+   "fen": "R5k1/5ppp/8/8/8/8/8/6K1 b - - 0 30",
+   "gameStateName": "black-mated",
+   "lastMove": "-",
+   "lastScore": -29000,
+   "moveLogN": 1
+  },
+  "search/mate_defence_d3": {
+   "fen": "R5k1/5ppp/8/8/8/8/8/6K1 b - - 0 30",
+   "gameStateName": "black-mated",
+   "lastMove": "-",
+   "lastScore": -29000,
+   "moveLogN": 1
+  },
+  "search/middlegame_d1": {
+   "fen": "r2q1rk1/pp1bbppp/2n1pn2/3p4/2pP1B2/2PBPN2/PP1N1PPP/R2Q1RK1 w - - 0 11",
+   "gameStateName": "play",
+   "lastMove": "c5c4",
+   "lastScore": 5,
+   "moveLogN": 1
+  },
+  "search/middlegame_d2": {
+   "fen": "r2q1rk1/pp1bbppp/2n1pn2/3p4/2pP1B2/2PBPN2/PP1N1PPP/R2Q1RK1 w - - 0 11",
+   "gameStateName": "play",
+   "lastMove": "c5c4",
+   "lastScore": 15,
+   "moveLogN": 1
+  },
+  "search/middlegame_d3": {
+   "fen": "r2q1rk1/pp1bbppp/2n1pn2/3p4/2pP1B2/2PBPN2/PP1N1PPP/R2Q1RK1 w - - 0 11",
+   "gameStateName": "play",
+   "lastMove": "c5c4",
+   "lastScore": 15,
+   "moveLogN": 1
+  },
+  "search/must_recapture_d1": {
+   "fen": "r1bqk2r/pppp1ppp/2nb1n2/4p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 7 6",
+   "gameStateName": "play",
+   "lastMove": "f8d6",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/must_recapture_d2": {
+   "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 7 6",
+   "gameStateName": "play",
+   "lastMove": "f8b4",
+   "lastScore": -10,
+   "moveLogN": 1
+  },
+  "search/must_recapture_d3": {
+   "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 7 6",
+   "gameStateName": "play",
+   "lastMove": "f8b4",
+   "lastScore": -10,
+   "moveLogN": 1
+  },
+  "search/open_e4_d1": {
+   "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+   "gameStateName": "play",
+   "lastMove": "e7e5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/open_e4_d2": {
+   "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+   "gameStateName": "play",
+   "lastMove": "e7e5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/open_e4_d3": {
+   "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+   "gameStateName": "play",
+   "lastMove": "e7e5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/open_e4_d3_hc128": {
+   "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+   "gameStateName": "play",
+   "lastMove": "e7e5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/open_e4_d4": {
+   "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+   "gameStateName": "play",
+   "lastMove": "e7e5",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/opposition_d1": {
+   "fen": "8/8/8/3k4/8/4K3/4P3/8 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e5d5",
+   "lastScore": -64,
+   "moveLogN": 1
+  },
+  "search/opposition_d2": {
+   "fen": "8/8/8/3k4/8/4K3/4P3/8 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e5d5",
+   "lastScore": -64,
+   "moveLogN": 1
+  },
+  "search/opposition_d3": {
+   "fen": "8/8/8/3k4/8/4K3/4P3/8 w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e5d5",
+   "lastScore": -64,
+   "moveLogN": 1
+  },
+  "search/pawn_endgame_d1": {
+   "fen": "8/pp2k3/8/8/8/8/PP6/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": 20,
+   "moveLogN": 1
+  },
+  "search/pawn_endgame_d2": {
+   "fen": "8/pp2k3/8/8/8/8/PP6/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": 0,
+   "moveLogN": 1
+  },
+  "search/pawn_endgame_d3": {
+   "fen": "8/pp2k3/8/8/8/8/PP6/4K3 w - - 1 2",
+   "gameStateName": "play",
+   "lastMove": "e8e7",
+   "lastScore": 30,
+   "moveLogN": 1
+  },
+  "search/promotion_race_d1": {
+   "fen": "8/P7/5k2/8/8/8/6p1/6K1 w - - 1 51",
+   "gameStateName": "play",
+   "lastMove": "g7f6",
+   "lastScore": -636,
+   "moveLogN": 1
+  },
+  "search/promotion_race_d2": {
+   "fen": "8/P7/5k2/8/8/8/6p1/6K1 w - - 1 51",
+   "gameStateName": "play",
+   "lastMove": "g7f6",
+   "lastScore": -636,
+   "moveLogN": 1
+  },
+  "search/promotion_race_d3": {
+   "fen": "8/P7/6k1/8/8/8/6p1/6K1 w - - 1 51",
+   "gameStateName": "play",
+   "lastMove": "g7g6",
+   "lastScore": -666,
+   "moveLogN": 1
+  },
+  "search/rook_endgame_d1": {
+   "fen": "8/8/8/8/8/4k3/6r1/4K2R w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e2g2",
+   "lastScore": 60,
+   "moveLogN": 1
+  },
+  "search/rook_endgame_d2": {
+   "fen": "8/8/8/8/8/3k4/4r3/4K2R w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e3d3",
+   "lastScore": 60,
+   "moveLogN": 1
+  },
+  "search/rook_endgame_d3": {
+   "fen": "8/8/8/8/8/3k4/4r3/4K2R w - - 1 61",
+   "gameStateName": "play",
+   "lastMove": "e3d3",
+   "lastScore": 60,
+   "moveLogN": 1
+  },
+  "search/sicilian_d1": {
+   "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": -40,
+   "moveLogN": 1
+  },
+  "search/sicilian_d2": {
+   "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": -90,
+   "moveLogN": 1
+  },
+  "search/sicilian_d3": {
+   "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": -40,
+   "moveLogN": 1
+  },
+  "search/sicilian_d3_hc128": {
+   "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": -40,
+   "moveLogN": 1
+  },
+  "search/sicilian_d4": {
+   "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+   "gameStateName": "play",
+   "lastMove": "b8c6",
+   "lastScore": -40,
+   "moveLogN": 1
+  },
+  "term/fifty_move_boundary": {
+   "castling": 0,
+   "ep": 255,
+   "fen": "4k3/8/8/8/8/R7/8/4K3 b - - 100 60",
+   "gameStateName": "draw",
+   "halfmove": 100,
+   "moveLogN": 1
+  },
+  "term/threefold": {
+   "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 8 5",
+   "gameStateName": "draw",
+   "moveLogN": 8
+  },
+  "ui/endgame_demo": {
+   "castling": 0,
+   "ep": 255,
+   "fen": "r3k3/8/8/8/8/8/8/4K3 b - - 0 1",
+   "gameStateName": "play",
+   "halfmove": 0,
+   "moveLogN": 0
+  },
+  "ui/takeback_movelog": {
+   "moveLog": "e2e4",
+   "moveLogN": 1
+  },
+  "ui/takeback_vs_engine": {
+   "castling": 15,
+   "ep": 255,
+   "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+   "gameStateName": "play",
+   "halfmove": 0,
+   "moveLogN": 2
+  }
+ },
+ "note": "Values recorded from the pristine build. Tier-1 cases carry their expectations in cases.py instead.",
+ "recorded_at": "2026-08-07T16:56:42",
+ "recorded_from": "chess.tap"
+}

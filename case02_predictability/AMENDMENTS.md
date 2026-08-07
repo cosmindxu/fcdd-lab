@@ -1,0 +1,78 @@
+# Case 02 — amendments to the frozen pre-registration
+
+Dated, appended, never rewritten. The pre-registration (commit `16b95fe`) is
+frozen; everything that departs from it is recorded here with its reason, as
+case01's A1–A10 were.
+
+---
+
+## A1 — the Arm A artefact came in under budget, and was not padded to match
+**2026-08-07, before any repair run.**
+
+Pre-registration §3 specified a cost-matched artefact at **$21.75**, the measured
+cost of Arm B's contract. The delivered suite cost an estimated **~$8** (the
+builder could not observe its own spend; it will be measured from the transcript
+the same way step 1's $21.75 was).
+
+The builder stopped early and explained why, and its reasoning is accepted: the
+binding constraint was not money but the engine's **observable surface**. The
+program's only outputs are keystrokes in, screen OCR out, and a 48K memory
+snapshot; there is no way to ask it for a move list, a static evaluation, or
+perft on an arbitrary position. Emulator runs cost seconds and zero tokens, so
+~500 were used freely. Additional budget would have bought more *positions*, not
+more *kinds of observation*, and padding to the number with near-duplicate
+goldens would have produced a worse artefact.
+
+**Consequence for the design:** the artefacts are **scope-matched, not
+cost-matched.** This is a departure from §3 as written and is reported as such.
+It weakens the symmetry claim in one direction (Arm A's oracle was cheaper) while
+strengthening it in another (it was not inflated with filler). Any predictability
+result must be read with this stated, not with §3's original wording.
+
+---
+
+## A2 — the artefact builder had seen the fault-class list; artefact rebuilt
+**2026-08-07, before any repair run.**
+
+The builder disclosed, unprompted, that it had read
+`case01_spectrum_gambit/prompts/seeding_prompt.md`, which **names the seven
+seeded fault classes**. Arm B's contract author never saw that document.
+
+This is an asymmetry pointing the opposite way to case01's: it hands Arm A's
+oracle author knowledge of *where the faults live*. The builder argued its
+coverage checklist derived from the contract's own C1–C14 / S1–S4 clause map and
+from the task statement, both of which predate and are independent of that
+prompt, and that no test was aimed at a specific fault. It named the residual
+honestly as one of **emphasis** — `term/`, `clock/` and the draw goldens are
+where over-weighting would show.
+
+That mitigation is plausible but not verifiable, and the entire purpose of case02
+is to *remove* case01's confound rather than restate it. Launching a $1,560 study
+with a known, avoidable asymmetry — when removing it costs roughly 0.5% of the
+budget — would repeat the mistake this study exists to correct.
+
+**Action:** the artefact is rebuilt by a fresh agent explicitly forbidden from
+reading `prompts/`, the sealed directory, or the variants. The first artefact is
+**retained, not deleted**, and the two are compared: if they cover substantially
+the same ground, that is evidence the exposure did not bias the first, and the
+comparison is reported either way. The rebuilt artefact is the one shipped to Arm
+A runs.
+
+---
+
+## A3 — a predicted asymmetry in artefact *character*, recorded before data
+**2026-08-07, before any repair run.**
+
+Recorded now so it cannot be offered as a post-hoc explanation later. The builder
+observed that **half its suite is not falsifiable as "wrong"**: 66 of 132 cases
+are goldens, and a golden diff is not a defect — an Arm A run that legitimately
+changes the search will correctly see red tier-2 cases. Arm B's contract has no
+such category; every clause is a claim.
+
+Its prediction, verbatim: this "may make the artefact **less decision-forcing**
+than the contract, and it is the most likely route by which the two arms'
+artefacts differ in their effect on run cost. If you expect the artefacts to
+equalise dispersion and they don't, this is the first place to look."
+
+If case02 finds a dispersion difference, this is a live alternative explanation
+for it, and it was written down before any run.
