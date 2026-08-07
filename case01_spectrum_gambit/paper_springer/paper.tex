@@ -279,7 +279,20 @@ differing from pristine by \emph{exactly one byte} in the assembled binary,
 wrote symptom-level reports with no location hints, and sealed an answer key
 whose hash was published before any repair began. Each arm$\times$defect cell
 ran as an isolated headless session on the same model at the same effort,
-with no network access. FCDD's contract was built once as a separately
+with no network access.
+\paragraph{Which version of the method was measured.} Arm B loads the method at
+run time---its prompt directs the agent to invoke the \texttt{formal-contract-dev}
+skill before working---so the arm is bound to whatever that document said during
+the runs. That document is mutable and has since changed. The version measured
+here is archived in the study repository at
+\texttt{skills/formal-contract-dev/SKILL.md} (commit \texttt{4ca5bb3},
+2026-08-04; 436 lines; sha256 \texttt{68e384df562bad87\ldots}), and every number
+in this paper refers to it. The installed copy has since gained one additional
+item (16.5, a solver/reviewer serialisation turnstile, added 2026-08-07 in
+response to an unrelated incident); the change is purely additive, so re-running
+Arm B today would follow strictly more process than we measured, which can only
+raise its cost.
+ FCDD's contract was built once as a separately
 measured phase at \$21.75.
 
 \subsection{An asymmetry we did not design and must disclose}\label{sec:asymmetry}

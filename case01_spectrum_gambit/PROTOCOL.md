@@ -26,7 +26,11 @@ a reviewer agent; address findings; stop when the gate passes." Reviewer =
 same model, fresh context. No formal methods vocabulary in the prompt.
 
 **Arm B — FCDD.** Fresh session per bug, with the `formal-contract-dev` skill
-and the step-1 contract available. Prompt pack: the same bug report + "work
+and the step-1 contract available. **Skill version pinned:** the measured
+version is archived at `skills/formal-contract-dev/SKILL.md` (commit `4ca5bb3`,
+2026-08-04, 436 lines, sha256 `68e384df562bad87…`). Arm B loads the skill at run
+time, so results are bound to that text; the installed copy has since gained
+item 16.5 (added 2026-08-07, purely additive). Prompt pack: the same bug report + "work
 per FCDD: locate the violated clause (or extend the contract), fix, prove /
 bridge, attack round; stop when the gate passes." Attack reviewers = same
 model as Arm A's reviewer.
