@@ -879,15 +879,35 @@ each candidate improvement would buy per dollar.
 \paragraph{(1) Power the predictability claim before making it.} The
 phenomenon is identified: bimodal strategy selection, detectable mechanically
 (binary diff against pristine classifies minimal-fix vs redesign at zero
-marginal cost). A decidable design needs $k\geq 6$ runs per arm per defect on
-at least three defects (at $k=3$ the attainable two-sided $p$ floors at 0.10;
-at $k=6$ a clean 6/0-vs-3/3 strategy split reaches $p\approx 0.01$); a
-pre-registered dispersion estimator (log-cost CV with a permutation test);
-and the control arm equipped with a cost-matched pristine-derived artefact
-($\approx$\$21.75 of characterisation tests) so the oracle confound is spent
-symmetrically. At observed per-cell prices this is roughly
-\$1{,}400--\$2{,}000 of runs --- comparable to this entire study, for one
-decidable bit. That is the actual price of the predictability claim.
+marginal cost). An earlier draft costed this design against an arithmetic
+error, corrected here because it would have bought a null: we claimed a
+6/0-vs-3/3 strategy split at $k=6$ reaches $p\approx0.01$. It does not---that
+table's exact two-sided $p$ is \textbf{0.18} (hypergeometric support $20/220$,
+$90/220$, $90/220$, $20/220$; the two tails sum to $40/220$). For \emph{perfect}
+separation the attainable floor is $0.10$ at $k=3$, $0.029$ at $k=4$, $0.0079$
+at $k=5$ and $0.0022$ at $k=6$, so $k=4$ is the smallest run count that can
+clear $0.05$ at all; but bug01's replication gave 3/3 minimal for Arm~B against
+1~minimal/2~redesign for Arm~A, and powering for that realistic 2:1 forking rate
+needs $k=10$ to clear $0.05$ ($p=0.033$).
+
+The implication is not simply to buy more runs. A $2\times2$ Fisher test on
+strategy \emph{labels} discards the magnitude information that motivated the
+claim. The primary test should be a pre-registered dispersion estimator on the
+cost data itself (log-cost CV, paired across defects, permutation test), with
+strategy classification as a mechanistic secondary outcome. Paired across
+defects the sign-test floor is $0.031$ at six defects and $0.016$ at seven, so
+breadth buys power more cheaply than depth for the across-defect claim, while
+depth buys the within-cell variance estimate; this study has seven defects at
+$k=1$ and one at $k=3$, which is why a single defect carries the contrast. A
+defensible design needs breadth ($\geq7$ defects), depth ($k\geq4$ per arm per
+defect), a pre-registered estimator and test, and a control arm equipped with a
+cost-matched pristine-derived artefact ($\approx\$21.75$ of characterisation
+tests) so the oracle confound is spent symmetrically. One lever we never pulled:
+our faults were deliberately homogeneous, and dispersion can only appear where
+problems differ enough to fork. Cost at observed per-cell prices: seven defects
+at $k=4$ is 28 pairs $\approx\$1{,}560$; at $k=6$, 42 pairs
+$\approx\$2{,}340$---one to two times what this entire study cost, for one
+decidable bit.
 
 \paragraph{(2) A cross-language replication prices the language confound.}
 The target-language threat (Sect.~\ref{sec:threats}) is untestable in this
