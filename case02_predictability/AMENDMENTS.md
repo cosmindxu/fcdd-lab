@@ -76,3 +76,56 @@ equalise dispersion and they don't, this is the first place to look."
 
 If case02 finds a dispersion difference, this is a live alternative explanation
 for it, and it was written down before any run.
+
+---
+
+## A4 — rebuild delivered; the v1/v2 comparison supports the decision to rebuild
+**2026-08-07, before any repair run.**
+
+The clean artefact is delivered and verified green on pristine independently by
+the orchestrator (57 cases, 0 failed, exit 0). The rebuild agent confirmed it
+read none of the forbidden paths; one disclosed nuance is that an `ls` of
+`case02_predictability/` showed it the v1 directory's *name*, nothing inside.
+
+**The comparison A2 promised.** A2 said that if the two artefacts covered
+substantially the same ground, that would be evidence the fault-class exposure
+had not biased v1. They do not. Counting identifier mentions in each suite's
+case file, in exactly the areas v1's own builder predicted over-weighting would
+show:
+
+| area    | v1 (exposed) | v2 (clean) |
+|---------|--------------|------------|
+| clock   | 15           | 5          |
+| draw    | 8            | 2          |
+| terminal| 10           | 11         |
+
+Three times the clock emphasis and four times the draw emphasis. This is a crude
+proxy — the suites are structured differently and raw string counts are not
+coverage — so it is offered as directional, not decisive. But the direction
+matches a prediction recorded **before** the comparison was run, which is the
+only version of this test worth anything. **The rebuild was justified**, and v2
+is the artefact shipped to Arm A runs.
+
+**New residuals from v2, recorded before data:**
+
+1. **One observation channel was inherited, not discovered.** The legal-move
+   buffer at `0x6000`/`genCount` — the sharpest instrument in the suite — came
+   from D7 of `step1_contract/DECISIONS.md`, a read the task permitted. Not
+   independently sourced.
+2. **The artefacts are not nested.** Save/load round-trips are covered by v2 and
+   were explicitly *out of scope* for Arm B's contract (D-SCOPE-1). Each artefact
+   covers ground the other does not, so "same scope" is false in both directions.
+3. **Extensional vs intensional.** The contract states properties that judge any
+   position; the suite records what happened at 57 points. A repair can be green
+   here while changing behaviour everywhere unobserved. No number of cases
+   converts one into the other.
+4. **A characterisation failure cannot distinguish a regression from a fix**,
+   and names a position rather than a clause. Per v2's builder: *"if Arm B turns
+   out more predictable, 'the contract localises the fault and the suite does
+   not' is a live alternative explanation that this rebuild does not remove."*
+   Recorded now, before any run, so it cannot be produced afterwards.
+5. **Coverage calibration, measured.** An earlier 49-case version of v2 passed a
+   pawn-value single-byte mutant 49/49 — the value table was invisible until
+   `material` and lopsided-`search` cases were added. The delivered suite catches
+   four single-byte mutants and a different build (44 red). Four mutants is the
+   whole evidence that the case selection bites.
