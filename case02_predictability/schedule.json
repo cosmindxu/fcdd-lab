@@ -1,0 +1,282 @@
+[
+ {
+  "bug": "bug01",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug06",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug02",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug07",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug02",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug04",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug01",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug06",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug03",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug07",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug02",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug02",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug07",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug05",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug01",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug06",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug02",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug03",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug06",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug05",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug04",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug03",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug05",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug02",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug01",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug04",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug07",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug04",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug03",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug06",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug04",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug05",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug06",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug07",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug05",
+  "arm": "A",
+  "run": 1
+ },
+ {
+  "bug": "bug06",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug02",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug05",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug02",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug05",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug07",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug05",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug01",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug01",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug07",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug06",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug03",
+  "arm": "A",
+  "run": 3
+ },
+ {
+  "bug": "bug04",
+  "arm": "B",
+  "run": 3
+ },
+ {
+  "bug": "bug04",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug03",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug01",
+  "arm": "A",
+  "run": 4
+ },
+ {
+  "bug": "bug04",
+  "arm": "B",
+  "run": 1
+ },
+ {
+  "bug": "bug03",
+  "arm": "B",
+  "run": 4
+ },
+ {
+  "bug": "bug07",
+  "arm": "A",
+  "run": 2
+ },
+ {
+  "bug": "bug03",
+  "arm": "B",
+  "run": 2
+ },
+ {
+  "bug": "bug01",
+  "arm": "A",
+  "run": 3
+ }
+]
