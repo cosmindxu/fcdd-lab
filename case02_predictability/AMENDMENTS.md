@@ -170,3 +170,50 @@ recur silently.
 
 Cell 1 (bug01 / arm B / run 3) completed normally under the old driver and is
 unaffected: the defects are in schedule traversal, not in how a run is executed.
+
+---
+
+## A6 — the host rebooted mid-schedule; cell 52 restarted after a nine-day gap
+**2026-08-22, after cell 51, before the final five cells.**
+
+Logged under §6 ("every such event is logged"). Nothing about the design, the
+artefacts or the analysis changed; the machine went down.
+
+**What happened.** The host rebooted at **2026-08-13 14:22:09** (`uptime -s`),
+roughly 37 minutes into cell **52 / bug04 / arm B / run 1**, which had started at
+13:44:50. The driver was `setsid`-detached, which survives a closing session but
+not a reboot, so the schedule stopped at 51 of 56. There is no application-level
+failure behind it: the cell's stderr log is empty, no `FAILED` line was ever
+written, and all 51 completed cells succeeded on attempt 1.
+
+The A5 fixes did their job on restart. `cell_done()` correctly classified cell 52
+as **not** done despite its zero-byte `_a1_` result stub — the exact silent-drop
+failure A5 was written to prevent — and the driver deleted the dirty workspace
+`~/fcdd_arms/bug04_armB_c2r1` (last written 14:09, carrying a partially built
+contract) so the restarted cell begins pristine. As in A5, the aborted attempt
+wrote no result JSON, so **its partial cost is not captured in the ledger**: an
+under-count of roughly one cell-hour against a ~$1,560 study, recorded here
+rather than estimated.
+
+**The confound this introduces, stated plainly.** The schedule resumed on
+**2026-08-22 23:33**, a **nine-day gap** between cell 51 and cell 52. Cells 1–51
+ran against whatever model and CLI build were current 2026-08-07 to 08-13; cells
+52–56 run against whatever is current on 08-22. If either moved in between, the
+last five cells were produced by a different generator than the first 51.
+
+This is not neutral with respect to the design. The randomised schedule put
+**three arm B cells and two arm A cells** in the tail (52 bug04/B, 53 bug03/B,
+54 bug07/A, 55 bug03/B, 56 bug01/A), so any drift lands unevenly across arms and
+falls hardest on bug03, which contributes two of its four arm B replicates from
+after the gap. Because the estimator is a *within-defect dispersion* statistic,
+a level shift in cost between the two eras inflates `CV_log` for exactly the
+defect-arm cells that straddle it — and it inflates arm B's more than arm A's.
+The direction of that bias is toward *less* apparent predictability for arm B,
+which is against the authors' hypothesis, but a bias that happens to be
+conservative is still a bias and is reported as one.
+
+No re-run of the first 51 cells is attempted: re-running them would cost the
+study over again and would itself be run in the new era, trading a known
+five-cell exposure for an unknown fifty-one-cell one. The gap is recorded here
+instead, before the statistic is computed, so it cannot be produced afterwards
+as an explanation of whatever the result turns out to be.
