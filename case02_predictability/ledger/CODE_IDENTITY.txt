@@ -1,0 +1,34 @@
+defect  run binary sha A binary sha B same bin?  same instr?
+bug01   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug01   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug01   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug01   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug02   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug02   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug02   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug02   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug03   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug03   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug03   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug03   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug04   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug04   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug04   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug04   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug05   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug05   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug05   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug05   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug06   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug06   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug06   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug06   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug07   r1  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug07   r2  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug07   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
+bug07   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
+
+pairs where BOTH binaries exist      : 28/28
+  of those, byte-identical binaries  : 28/28
+pairs with identical INSTRUCTION text: 28/28
+pairs with identical RAW source      : 0/28  <- the gap is comments

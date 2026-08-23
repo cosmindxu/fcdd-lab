@@ -489,3 +489,69 @@ compromised and will be reported as such. If they sit at chance, the
 self-grading confound is bounded by the same blinding the term count already
 passed. Either way the check is reported, and it is reported whichever way it
 comes out.
+
+---
+
+## A12 — every run in both arms produced the identical program; H2 as reported in A9 was measuring comments
+**2026-08-23, after the blinded grading returned.**
+
+**The finding.** All 28 blind graders independently reported that the two
+submissions in their packet were byte-identical in executable content. That
+claim was checked rather than accepted. The sha256 of every repaired
+`chess.bin` — all 56, both arms, all seven defects — equals
+`c107dfaf5b124f1d68770dc0937312933e55d4e21ed0e3b458ebc3a8c168dc0f`, which the
+sealed answer key records as the **pristine** binary. Confirmed three ways:
+built-binary hash (28/28 pairs identical), instruction stream with all comments
+stripped and whitespace normalised (28/28 identical), raw source (0/28 identical
+— the entire gap is commentary).
+
+**Every one of the 56 runs found the seeded fault and reverted it exactly.**
+Both arms, every defect, every replicate. The repair is not merely similar
+across arms; it is the same program, and it is the original program.
+
+**This corrects A9's H2 result, which was an artefact of my comment handling.**
+A9 reported a 2×2 of 7/21 (arm A) against 15/13 (arm B) on the "seeded-line
+only" rule, p = 0.0543, and read it as arm B choosing the minimal fix more
+often. That reading is wrong. The `strip_comments` helper dropped blank lines and
+*whole-line* `;` comments but not **trailing** comments, so a line reading
+`cp MAXPLY ; new note` differed from pristine's `cp MAXPLY ; too deep` and was
+counted as a changed hunk. The 2×2 was therefore counting **comment edits**, not
+repair strategy, on all three of its rules — the near-vacuous byte-identity rule
+included.
+
+At the level of emitted code the corrected table is:
+
+|        | minimal | redesign |
+|--------|---------|----------|
+| arm A  | 28      | 0        |
+| arm B  | 28      | 0        |
+
+Fisher exact p = 1.0000, degenerate: there is no variation to test. **H2 is not
+supported, and not because the trend was weak — because the phenomenon H2
+describes does not occur in this data.** H2 held that arm A forks between a
+minimal fix and a redesign while arm B stays stable. Neither arm forked. No
+run in either arm chose a redesign.
+
+**What this does to the quality tier.** The blinded graders were asked which
+repair was better. Since every pair of repairs compiles to the same bytes, there
+was no repair-quality difference available to detect, and the scores they
+returned necessarily reflect the only thing that varied: the prose of the source
+comments. The tier is reported for completeness, but it does not measure repair
+quality, and no claim about repair quality can rest on it. That is a stronger
+statement than §5's pre-registered "under-powered by construction": the tier is
+not under-powered, it is measuring a different variable than intended.
+
+**What this does to the cost result, which is the opposite of weakening it.**
+The §5 cost finding — FCDD dearer on 7 of 7 defects, median 2.26×, sign test
+p = 0.0156 — is now anchored to an identical work product. The premium did not
+buy a different repair, a better repair, or a more minimal repair. It bought the
+same 15,295 bytes, plus a specification package and more comments.
+
+**A limitation this creates for the study's external validity, stated against
+interest.** Total convergence at 56/56 also means these seven defects were, for
+this model at this effort, easy: single-byte faults with unambiguous reports and
+a reachable ground truth. A benchmark on which every run of both arms succeeds
+perfectly cannot discriminate methods on outcome quality, and can only
+discriminate on cost. Whether FCDD's verification apparatus pays for itself on
+defects hard enough to produce failures is a question this study is structurally
+unable to answer, and the design should not be read as having answered it.

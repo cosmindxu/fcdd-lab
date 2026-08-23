@@ -1,0 +1,34 @@
+verdicts joined to keys: 28 / 28
+
+=== per-axis mean score by arm (1-5, higher is better) ===
+axis                  arm A    arm B     B - A
+correctness_risk       4.64     4.61     -0.04
+minimality             4.71     4.32     -0.39
+clarity                4.25     4.46     +0.21
+
+=== overall preference (28 packets) ===
+  arm A preferred: 12    arm B preferred: 13    tie: 3
+  sign test over decided packets: two-sided p = 1.0000
+
+=== ORDER EFFECT (what counterbalancing is for) ===
+  Submission X preferred: 14    Submission Y preferred: 11    tie: 3
+  position bias sign test: two-sided p = 0.6900
+
+=== primary: paired at DEFECT level (§2 pairs by defect) ===
+defect  correc B-A  minima B-A  clarit B-A
+bug01       -0.25     +0.00     -0.75   (n=4)
+bug02       +0.00     -0.50     +0.50   (n=4)
+bug03       -0.25     -0.50     +0.50   (n=4)
+bug04       +0.00     -1.00     +0.25   (n=4)
+bug05       +0.00     -0.25     +0.25   (n=4)
+bug06       +0.25     -0.25     -0.25   (n=4)
+bug07       +0.00     -0.25     +1.00   (n=4)
+
+  correctness_risk   mean B-A = -0.036   exact paired permutation p = 1.0000
+  minimality         mean B-A = -0.393   exact paired permutation p = 0.0312
+  clarity            mean B-A = +0.214   exact paired permutation p = 0.4375
+
+=== blinding manipulation check ===
+  packets probed: 7   'cannot tell': 3   decided: 4
+  correctly identified the formal arm: 3/4 (75%)  exact p vs chance = 0.6250
+  accuracy counting 'cannot tell' as a coin flip: 64%
