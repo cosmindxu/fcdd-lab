@@ -383,3 +383,72 @@ number of independent units is nearer seven than fifty-six, so the reported p is
 anti-conservative. Since S2 does not reach significance even at its
 anti-conservative value, the conclusion is unaffected; a defect-clustered test
 would only widen it further.
+
+---
+
+## A10 — the quality tier redesigned so that blinding actually occurs
+**2026-08-23, packets built and audited before any grader saw one.**
+
+§5 asks for "blinded, counterbalanced grading as in case01 §5.3, **with the
+packet defects of §4.5 fixed**". §4.5's central finding was not that case01's
+scrubbing was imperfect. It was that blinding **did not happen at all**:
+signature terms ran 0 for the ordinary arm against 37 for FCDD in a single
+packet, so "every grader could identify the treatment with certainty", and
+"blinded grading must be withdrawn as a competing-interest mitigation".
+
+**Why scrubbing harder cannot fix it.** Measured across this study's own
+workspaces: all 28 arm B workspaces carry a `contract/` package — a Lean
+specification, a Python twin, a bridge conformance suite, z3 scripts. None of
+the 28 arm A workspaces does; arm A's tests are loose scripts inside
+`variants/`. The artefact **category** is the treatment label. No vocabulary
+substitution disguises a Lean file as a pytest script.
+
+**The change.** The blinded tier grades **the source repair only** — the
+unified diff against the seeded tree, across the seven engine sources — where
+both arms emit the same kind of object. Verification packages are excluded from
+it entirely, and with them the **test-quality axis is dropped**, because §4.5
+showed that axis "mechanically rewards shipping more verification material,
+which is FCDD's definition". The blinded axes are correctness risk, minimality
+and clarity. Counterbalancing is deterministic and balanced *within* every
+defect: run indices 1 and 3 present arm A as Submission X, 2 and 4 present arm
+B, so each defect contributes two packets each way and order cannot align with
+arm.
+
+**What this costs, stated plainly.** The blinded tier can no longer speak to
+FCDD's principal deliverable. If the method's value is the specification and the
+conformance suite rather than the diff, this tier is blind to exactly that. It
+answers a narrower question — *is the repair itself better?* — and that is the
+only quality question this design can ask under genuine blinding. Any claim
+about artefact quality would require an openly unblinded comparison and must be
+labelled as such; none is made here.
+
+**Blinding audited before grading, not after.** Case01 measured its blinding
+only once the verdicts were in. The same signature-term count was run here on
+all 28 packets, on the post-scrub text graders actually receive, before any
+grader was launched.
+
+The first build **failed** that audit: 0 for arm A against 5 for arm B, leaking
+in 3 of 28 packets. The cause was the scrubber itself. Its replacement
+vocabulary — "specification", "a specification rule" — consisted of signature
+terms, so scrubbing *introduced* the tell it was removing, and two overlapping
+rules collided into the visibly censored phrase "specification a specification
+rule", which announces that the text was redacted. Only the treated arm can
+trigger that. The replacement vocabulary was made arm-neutral ("the design
+note", which either arm could plausibly cite) and a collapse pass added for
+overlapping rules. The rebuilt packets audit at **0 against 0**, with no packet
+decidable on that signal.
+
+**An independent manipulation check.** Term counting is a proxy. Seven further
+agents — one per defect, separate from the graders so the scoring is not primed
+— are given a packet, told that one submission came from a formal-methods
+process and the other from ordinary development plus review, and asked which,
+with "cannot tell" offered as an explicitly acceptable answer. Their accuracy is
+the real blinding measure, and it is reported whatever it shows.
+
+**Graders run on a different model from the one under study.** All 56 repairs
+were produced by `claude-opus-5`. Grading them with `claude-opus-5` would have
+the model score its own output, on a study whose authors are evaluating their
+own method — a second conflict layered on the one §4.5 already withdrew a
+mitigation for. Graders and blinding-checkers therefore run on `fable`. This is
+a departure from case01, where grading used the same model as the arms, and it
+is recorded rather than quietly adopted.

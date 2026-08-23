@@ -1,0 +1,12 @@
+packets audited: 28
+
+signature-term counts, per submission, in the text graders will see
+  arm A : total    0   mean 0.00   median 0.0   max 0   packets with >0: 0/28
+  arm B : total    0   mean 0.00   median 0.0   max 0   packets with >0: 0/28
+
+case01 §4.5 comparison point: 0 vs 37 in a single packet.
+
+packets where the two submissions differ in signature-term count: 0/28
+
+adversary model — guess 'more signature terms = the formal arm':
+   no packet is decidable on this signal — blinding holds against it
