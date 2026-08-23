@@ -452,3 +452,40 @@ own method — a second conflict layered on the one §4.5 already withdrew a
 mitigation for. Graders and blinding-checkers therefore run on `fable`. This is
 a departure from case01, where grading used the same model as the arms, and it
 is recorded rather than quietly adopted.
+
+---
+
+## A11 — grader model: Fable was unavailable; graders run on the model under study
+**2026-08-23, after A10's first grading launch failed, before any grading data existed.**
+
+A10 specified `fable` for graders and blinding-checkers, to avoid having
+`claude-opus-5` — the model that produced all 56 repairs — score its own output.
+That launch failed outright: all 35 agents returned "You've reached your Fable 5
+limit" within 13 seconds, producing zero tokens, zero cost and zero verdicts.
+A10's routing is therefore superseded here rather than in place, since this log
+is append-only.
+
+**Decision, taken by the operator when the alternatives were put to them:**
+grading proceeds on **`claude-opus-5`**, the same model that wrote every
+submission. The alternatives offered and declined were: Sonnet 5 (a different
+model, available immediately), waiting for the Fable quota to reset, and running
+both models for an inter-model reliability measure.
+
+**The limitation this creates, stated without hedging.** The grader is the
+author. On a study whose authors already evaluate their own method, the judge is
+now the same system that produced both arms' work. If `claude-opus-5` has any
+systematic preference for the style of output it generates under a formal
+process, this design cannot separate that preference from a genuine quality
+difference. No result from this tier should be read as independent evaluation.
+
+**What bounds it, and why the bound is checkable rather than asserted.** The
+grader sees only blinded source diffs, with verification packages excluded and
+the arm-identifying vocabulary removed; that material audits at 0 signature
+terms against 0 across all 28 packets (A10). So the grader cannot straightforwardly
+identify which submission came from which process — and the seven blinding-check
+agents, which run on the same model, measure precisely that. If they identify
+the treated submission at better than chance, this tier's verdicts are
+compromised and will be reported as such. If they sit at chance, the
+self-grading confound is bounded by the same blinding the term count already
+passed. Either way the check is reported, and it is reported whichever way it
+comes out.
