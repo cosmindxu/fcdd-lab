@@ -1,0 +1,9 @@
+arm  rounds min..max,med    spread   r(rounds,cost)   median within-cell cost spread
+A    1..3, 2                3x       -0.213           1.30x
+B    1..18, 3               18x      0.719            1.75x
+
+what the extra rounds bought:
+  arm B >=6 rounds  n= 9  mean cost $48.33
+  arm B <=2 rounds  n=12  mean cost $28.42
+  all 56 runs produced a binary byte-identical to pristine (case02 A12),
+  so no extra round changed any artefact.
