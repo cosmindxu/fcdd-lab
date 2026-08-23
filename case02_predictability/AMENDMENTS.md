@@ -217,3 +217,104 @@ study over again and would itself be run in the new era, trading a known
 five-cell exposure for an unknown fifty-one-cell one. The gap is recorded here
 instead, before the statistic is computed, so it cannot be produced afterwards
 as an explanation of whatever the result turns out to be.
+
+---
+
+## A7 — a defect in the frozen analysis script: the excluded partial run was not excluded
+**2026-08-23, after all 56 cells completed, before the analysis script was run.**
+
+Recorded under §6, which permits exactly this: the script "is not edited
+afterwards except to fix a defect, which is recorded as an amendment." Written
+and committed **before** `analyse_case02.py` was executed for the first time. No
+dispersion statistic had been computed or inspected at the time of writing.
+
+**The defect.** `cell_costs()` globbed `arm<A>_<bug>_c2r*_result.json` and kept
+every file carrying a truthy `total_cost_usd`. It never tested `is_error`. Since
+`run_resilient.sh` writes one result file **per attempt**, a cell that needed a
+second attempt leaves two files, and both would enter the estimator.
+
+**Blast radius: exactly one cell.** Thirteen of the fourteen (defect, arm) cells
+glob exactly four clean files. The exception is **bug05 / arm B**, where run 1's
+first attempt hit the weekly usage limit after 108 turns and $19.51, and a second
+attempt resumed the same session and completed in 34 turns for $8.59. That cell
+would have been analysed with **five** observations, one of them a partial run
+that §6 requires be "recorded and excluded".
+
+**The fix.** One line — `if d.get("is_error"): continue` — before the cost is
+read. Nothing else in the script changed: the estimator, the test, the
+enumeration and the verdict logic are untouched.
+
+**The residual this does not fix, stated before the result was seen.** §6
+specifies that an infrastructure-killed run is **re-run** at the same cell. The
+runner **resumed** it instead, so the retained observation ($8.59) is the cost of
+*finishing* a repair that was already 108 turns advanced — not the cost of a
+whole repair, which is what the other 55 observations measure. Excluding the
+partial attempt satisfies §6's letter while leaving one non-exchangeable,
+unusually cheap observation in bug05 arm B.
+
+The direction is determinate. A single low outlier among four widens that cell's
+spread of log cost, so `CV_log(bug05, B)` is **inflated**. H1 predicts arm B is
+the *less* dispersed arm, so this defect works **against** the authors'
+hypothesis. A conservative bias is still a bias, and bug05 arm B should be read
+with it in mind — including in the sensitivity direction, since dropping the cell
+would remove one of only seven paired defects.
+
+No attempt is made to repair this by re-running the cell. Doing so now would run
+it in the post-gap era described in A6, trading a known distortion for an unknown
+one, and would be a re-run chosen **after** the schedule completed — precisely
+the discretion this pre-registration exists to remove.
+
+**A §7 conformance check that passed, recorded for completeness.** §7 fixes the
+cost measure as "the `modelUsage` total including subagents", and the script
+reads `total_cost_usd` instead — its `KEYS` tuple of modelUsage fields is
+defined and never used. All 57 case02 result files were checked: `total_cost_usd`
+equals the sum of per-model `costUSD` **exactly**, to zero relative deviation.
+The script therefore measures the pre-registered quantity. The mismatch is a dead
+constant and a docstring, not a data defect, and is left in place rather than
+edited, since §6 permits editing only to fix a defect.
+
+---
+
+## A8 — a second defect in the frozen script: it read a directory that does not exist
+**2026-08-23, minutes after A7, still before the analysis script was run.**
+
+Recorded separately from A7 rather than folded into it, because it was found
+after A7 was written. The amendment log is append-only and its value is that it
+preserves the true order of discovery.
+
+**The defect.** The script derived its input directory from its own location:
+
+    CASE = dirname(dirname(abspath(__file__)))       # .../case02_predictability
+    RAW  = join(CASE, "ledger", "raw")               # .../case02_predictability/ledger/raw
+
+That directory **does not exist**. Every case02 result file is in
+`case01_spectrum_gambit/ledger/raw`, because the runner is case01's
+`run_resilient.sh`, which hardcodes `CASE=/…/case01_spectrum_gambit` at line 20
+and derives `RAW` from it. The case02 driver reuses that runner deliberately —
+identical execution machinery across both cases — and inherited its output path
+with it. All 57 result files (56 cells + one excluded partial) are there; zero
+are where the analysis script looked.
+
+**The fix.** `RAW` now points at the directory the runner actually writes to,
+expressed relative to the repository rather than as an absolute path. No
+estimator, test, selection rule or verdict logic is touched.
+
+**Why this one could not have corrupted a result.** It is fail-loud, not
+fail-silent. With `RAW` pointing at a non-existent directory the glob returns
+nothing, `cell_costs` returns an empty list for all fourteen cells, and the
+script exits at its own guard — `not enough complete defects yet (need >=2,
+have 0)`. It cannot produce a wrong number; it can only produce no number. That
+is the opposite failure mode from A7, which would have silently admitted a fifth
+observation into one cell, and it is why A7 is the one that needed care.
+
+**What this says about the freeze.** `analyse_case02.py` was committed in
+`16b95fe` on 2026-08-07, before the first run began at 18:07:57 that day — the
+freeze §6 requires genuinely held. But committing a script before the data
+exists means committing a script that has never been run against real data, and
+both A7 and A8 are the consequence. The pre-registration bought the property it
+was designed to buy (no estimator choice was made after seeing results) at the
+cost of shipping two defects into the frozen artefact. Self-testing the script
+against synthetic fixtures — which was done, and which caught neither — does not
+substitute for pointing it at the real ledger. For any future case, freeze the
+script **and** dry-run it against a single completed cell before the schedule
+starts.

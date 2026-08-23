@@ -671,3 +671,527 @@
 2026-08-06T00:46:12+02:00 [res] pair bug01-v4r3 done (armA COMPLETE attempt 2, $15.2241, 3730s)
 2026-08-06T00:56:34+02:00 [res] pair bug01-v4r2 done (armB COMPLETE attempt 2, $38.7747, 4388s)
 2026-08-06T01:00:12+02:00 [res] pair bug01-v4r3 done (armB COMPLETE attempt 2, $28.3449, 4494s)
+2026-08-07T18:07:58+02:00 [c02] armB bug01 r3: workspace built (/home/xcos/fcdd_arms/bug01_armB_c2r3)
+2026-08-07T18:08:06+02:00 [res] armB bug01 attempt 1/6: FRESH start
+2026-08-07T19:15:15+02:00 [res] pair bug01-c2r3 done (armB COMPLETE attempt 1, $35.6184, 4029s)
+2026-08-07T20:01:06+02:00 [c02] armA bug06 r4: workspace built (/home/xcos/fcdd_arms/bug06_armA_c2r4)
+2026-08-07T20:01:11+02:00 [res] armA bug06 attempt 1/6: FRESH start
+2026-08-07T20:07:31+02:00 [c02] armA bug06 r4: workspace built (/home/xcos/fcdd_arms/bug06_armA_c2r4)
+2026-08-07T20:07:36+02:00 [res] armA bug06 attempt 1/6: FRESH start
+2026-08-07T20:44:15+02:00 [res] pair bug06-c2r4 done (armA COMPLETE attempt 1, $14.6539, 2199s)
+2026-08-07T20:44:15+02:00 [c02] armA bug02 r1: workspace built (/home/xcos/fcdd_arms/bug02_armA_c2r1)
+2026-08-07T20:44:21+02:00 [res] armA bug02 attempt 1/6: FRESH start
+2026-08-07T21:17:24+02:00 [res] pair bug02-c2r1 done (armA COMPLETE attempt 1, $14.0985, 1983s)
+2026-08-07T21:17:25+02:00 [c02] armB bug07 r2: workspace built (/home/xcos/fcdd_arms/bug07_armB_c2r2)
+2026-08-07T21:17:30+02:00 [res] armB bug07 attempt 1/6: FRESH start
+2026-08-07T23:33:23+02:00 [res] pair bug07-c2r2 done (armB COMPLETE attempt 1, $54.0095, 8153s)
+2026-08-07T23:33:23+02:00 [c02] armA bug02 r4: workspace built (/home/xcos/fcdd_arms/bug02_armA_c2r4)
+2026-08-07T23:33:29+02:00 [res] armA bug02 attempt 1/6: FRESH start
+2026-08-08T00:06:14+02:00 [res] pair bug02-c2r4 done (armA COMPLETE attempt 1, $13.1413, 1965s)
+2026-08-08T00:06:14+02:00 [c02] armB bug04 r4: workspace built (/home/xcos/fcdd_arms/bug04_armB_c2r4)
+2026-08-08T00:06:20+02:00 [res] armB bug04 attempt 1/6: FRESH start
+2026-08-08T01:17:13+02:00 [res] pair bug04-c2r4 done (armB COMPLETE attempt 1, $28.1705, 4253s)
+2026-08-08T01:17:13+02:00 [c02] armB bug01 r4: workspace built (/home/xcos/fcdd_arms/bug01_armB_c2r4)
+2026-08-08T01:17:19+02:00 [res] armB bug01 attempt 1/6: FRESH start
+2026-08-08T03:31:31+02:00 [res] pair bug01-c2r4 done (armB COMPLETE attempt 1, $48.5146, 8052s)
+2026-08-08T03:31:31+02:00 [c02] armB bug06 r2: workspace built (/home/xcos/fcdd_arms/bug06_armB_c2r2)
+2026-08-08T03:31:38+02:00 [res] armB bug06 attempt 1/6: FRESH start
+2026-08-08T04:42:54+02:00 [res] pair bug06-c2r2 done (armB COMPLETE attempt 1, $24.8849, 4276s)
+2026-08-08T04:42:54+02:00 [c02] armA bug03 r1: workspace built (/home/xcos/fcdd_arms/bug03_armA_c2r1)
+2026-08-08T04:43:00+02:00 [res] armA bug03 attempt 1/6: FRESH start
+2026-08-08T05:19:43+02:00 [res] pair bug03-c2r1 done (armA COMPLETE attempt 1, $15.6197, 2203s)
+2026-08-08T05:19:43+02:00 [c02] armB bug07 r4: workspace built (/home/xcos/fcdd_arms/bug07_armB_c2r4)
+2026-08-08T05:19:48+02:00 [res] armB bug07 attempt 1/6: FRESH start
+2026-08-08T06:11:37+02:00 [res] pair bug07-c2r4 done (armB COMPLETE attempt 1, $18.5233, 3109s)
+2026-08-08T06:11:37+02:00 [c02] armB bug02 r1: workspace built (/home/xcos/fcdd_arms/bug02_armB_c2r1)
+2026-08-08T06:11:48+02:00 [res] armB bug02 attempt 1/6: FRESH start
+2026-08-08T07:14:45+02:00 [res] pair bug02-c2r1 done (armB COMPLETE attempt 1, $29.3425, 3776s)
+2026-08-08T07:14:45+02:00 [c02] armB bug02 r4: workspace built (/home/xcos/fcdd_arms/bug02_armB_c2r4)
+2026-08-08T07:14:51+02:00 [res] armB bug02 attempt 1/6: FRESH start
+2026-08-08T07:58:51+02:00 [res] pair bug02-c2r4 done (armB COMPLETE attempt 1, $21.9397, 2640s)
+2026-08-08T07:58:51+02:00 [c02] armB bug07 r3: workspace built (/home/xcos/fcdd_arms/bug07_armB_c2r3)
+2026-08-08T07:58:57+02:00 [res] armB bug07 attempt 1/6: FRESH start
+2026-08-08T08:48:19+02:00 [res] pair bug07-c2r3 done (armB COMPLETE attempt 1, $21.2988, 2962s)
+2026-08-08T08:48:19+02:00 [c02] armB bug05 r1: workspace built (/home/xcos/fcdd_arms/bug05_armB_c2r1)
+2026-08-08T08:48:24+02:00 [res] armB bug05 attempt 1/6: FRESH start
+2026-08-08T09:32:14+02:00 [res] armB bug05 attempt 1: interrupted after 2630s ($19.5122) — will resume from 54d95ae8-c044-485a-bcf5-112159606101
+2026-08-08T09:33:19+02:00 [res] armB bug05: unavailable (probe 1) — sleeping 900s
+2026-08-08T09:48:23+02:00 [res] armB bug05: unavailable (probe 2) — sleeping 900s
+2026-08-08T10:03:28+02:00 [res] armB bug05: unavailable (probe 3) — sleeping 900s
+2026-08-08T10:18:32+02:00 [res] armB bug05: unavailable (probe 4) — sleeping 900s
+2026-08-08T10:33:36+02:00 [res] armB bug05: unavailable (probe 5) — sleeping 900s
+2026-08-08T10:48:40+02:00 [res] armB bug05: unavailable (probe 6) — sleeping 900s
+2026-08-08T11:03:44+02:00 [res] armB bug05: unavailable (probe 7) — sleeping 900s
+2026-08-08T11:18:48+02:00 [res] armB bug05: unavailable (probe 8) — sleeping 900s
+2026-08-08T11:33:52+02:00 [res] armB bug05: unavailable (probe 9) — sleeping 900s
+2026-08-08T11:48:57+02:00 [res] armB bug05: unavailable (probe 10) — sleeping 900s
+2026-08-08T12:04:01+02:00 [res] armB bug05: unavailable (probe 11) — sleeping 900s
+2026-08-08T12:19:05+02:00 [res] armB bug05: unavailable (probe 12) — sleeping 900s
+2026-08-08T12:34:08+02:00 [res] armB bug05: unavailable (probe 13) — sleeping 900s
+2026-08-08T12:49:13+02:00 [res] armB bug05: unavailable (probe 14) — sleeping 900s
+2026-08-08T13:04:17+02:00 [res] armB bug05: unavailable (probe 15) — sleeping 900s
+2026-08-08T13:19:21+02:00 [res] armB bug05: unavailable (probe 16) — sleeping 900s
+2026-08-08T13:34:25+02:00 [res] armB bug05: unavailable (probe 17) — sleeping 900s
+2026-08-08T13:49:29+02:00 [res] armB bug05: unavailable (probe 18) — sleeping 900s
+2026-08-08T14:04:33+02:00 [res] armB bug05: unavailable (probe 19) — sleeping 900s
+2026-08-08T14:19:37+02:00 [res] armB bug05: unavailable (probe 20) — sleeping 900s
+2026-08-08T14:34:41+02:00 [res] armB bug05: unavailable (probe 21) — sleeping 900s
+2026-08-08T14:49:46+02:00 [res] armB bug05: unavailable (probe 22) — sleeping 900s
+2026-08-08T15:04:50+02:00 [res] armB bug05: unavailable (probe 23) — sleeping 900s
+2026-08-08T15:19:54+02:00 [res] armB bug05: unavailable (probe 24) — sleeping 900s
+2026-08-08T15:34:58+02:00 [res] armB bug05: unavailable (probe 25) — sleeping 900s
+2026-08-08T15:50:01+02:00 [res] armB bug05: unavailable (probe 26) — sleeping 900s
+2026-08-08T16:05:05+02:00 [res] armB bug05: unavailable (probe 27) — sleeping 900s
+2026-08-08T16:20:10+02:00 [res] armB bug05: unavailable (probe 28) — sleeping 900s
+2026-08-08T16:35:14+02:00 [res] armB bug05: unavailable (probe 29) — sleeping 900s
+2026-08-08T16:50:18+02:00 [res] armB bug05: unavailable (probe 30) — sleeping 900s
+2026-08-08T17:05:22+02:00 [res] armB bug05: unavailable (probe 31) — sleeping 900s
+2026-08-08T17:20:26+02:00 [res] armB bug05: unavailable (probe 32) — sleeping 900s
+2026-08-08T17:35:30+02:00 [res] armB bug05: unavailable (probe 33) — sleeping 900s
+2026-08-08T17:50:34+02:00 [res] armB bug05: unavailable (probe 34) — sleeping 900s
+2026-08-08T18:05:38+02:00 [res] armB bug05: unavailable (probe 35) — sleeping 900s
+2026-08-08T18:20:42+02:00 [res] armB bug05: unavailable (probe 36) — sleeping 900s
+2026-08-08T18:35:46+02:00 [res] armB bug05: unavailable (probe 37) — sleeping 900s
+2026-08-08T18:50:50+02:00 [res] armB bug05: unavailable (probe 38) — sleeping 900s
+2026-08-08T19:05:54+02:00 [res] armB bug05: unavailable (probe 39) — sleeping 900s
+2026-08-08T19:20:58+02:00 [res] armB bug05: unavailable (probe 40) — sleeping 900s
+2026-08-08T19:36:02+02:00 [res] armB bug05: unavailable (probe 41) — sleeping 900s
+2026-08-08T19:51:05+02:00 [res] armB bug05: unavailable (probe 42) — sleeping 900s
+2026-08-08T20:06:09+02:00 [res] armB bug05: unavailable (probe 43) — sleeping 900s
+2026-08-08T20:21:13+02:00 [res] armB bug05: unavailable (probe 44) — sleeping 900s
+2026-08-08T20:36:17+02:00 [res] armB bug05: unavailable (probe 45) — sleeping 900s
+2026-08-08T20:51:22+02:00 [res] armB bug05: unavailable (probe 46) — sleeping 900s
+2026-08-08T21:06:26+02:00 [res] armB bug05: unavailable (probe 47) — sleeping 900s
+2026-08-08T21:21:30+02:00 [res] armB bug05: unavailable (probe 48) — sleeping 900s
+2026-08-08T21:36:34+02:00 [res] armB bug05: unavailable (probe 49) — sleeping 900s
+2026-08-08T21:51:38+02:00 [res] armB bug05: unavailable (probe 50) — sleeping 900s
+2026-08-08T22:06:41+02:00 [res] armB bug05: unavailable (probe 51) — sleeping 900s
+2026-08-08T22:21:45+02:00 [res] armB bug05: unavailable (probe 52) — sleeping 900s
+2026-08-08T22:36:49+02:00 [res] armB bug05: unavailable (probe 53) — sleeping 900s
+2026-08-08T22:51:53+02:00 [res] armB bug05: unavailable (probe 54) — sleeping 900s
+2026-08-08T23:06:58+02:00 [res] armB bug05: unavailable (probe 55) — sleeping 900s
+2026-08-08T23:22:02+02:00 [res] armB bug05: unavailable (probe 56) — sleeping 900s
+2026-08-08T23:37:06+02:00 [res] armB bug05: unavailable (probe 57) — sleeping 900s
+2026-08-08T23:52:10+02:00 [res] armB bug05: unavailable (probe 58) — sleeping 900s
+2026-08-09T00:07:14+02:00 [res] armB bug05: unavailable (probe 59) — sleeping 900s
+2026-08-09T00:22:18+02:00 [res] armB bug05: unavailable (probe 60) — sleeping 900s
+2026-08-09T00:37:22+02:00 [res] armB bug05: unavailable (probe 61) — sleeping 900s
+2026-08-09T00:52:26+02:00 [res] armB bug05: unavailable (probe 62) — sleeping 900s
+2026-08-09T01:07:30+02:00 [res] armB bug05: unavailable (probe 63) — sleeping 900s
+2026-08-09T01:22:34+02:00 [res] armB bug05: unavailable (probe 64) — sleeping 900s
+2026-08-09T01:37:38+02:00 [res] armB bug05: unavailable (probe 65) — sleeping 900s
+2026-08-09T01:52:42+02:00 [res] armB bug05: unavailable (probe 66) — sleeping 900s
+2026-08-09T02:07:46+02:00 [res] armB bug05: unavailable (probe 67) — sleeping 900s
+2026-08-09T02:22:50+02:00 [res] armB bug05: unavailable (probe 68) — sleeping 900s
+2026-08-09T02:37:54+02:00 [res] armB bug05: unavailable (probe 69) — sleeping 900s
+2026-08-09T02:52:57+02:00 [res] armB bug05: unavailable (probe 70) — sleeping 900s
+2026-08-09T03:08:01+02:00 [res] armB bug05: unavailable (probe 71) — sleeping 900s
+2026-08-09T03:23:05+02:00 [res] armB bug05: unavailable (probe 72) — sleeping 900s
+2026-08-09T03:38:09+02:00 [res] armB bug05: unavailable (probe 73) — sleeping 900s
+2026-08-09T03:53:13+02:00 [res] armB bug05: unavailable (probe 74) — sleeping 900s
+2026-08-09T04:08:17+02:00 [res] armB bug05: unavailable (probe 75) — sleeping 900s
+2026-08-09T04:23:21+02:00 [res] armB bug05: unavailable (probe 76) — sleeping 900s
+2026-08-09T04:38:25+02:00 [res] armB bug05: unavailable (probe 77) — sleeping 900s
+2026-08-09T04:53:29+02:00 [res] armB bug05: unavailable (probe 78) — sleeping 900s
+2026-08-09T05:08:32+02:00 [res] armB bug05: unavailable (probe 79) — sleeping 900s
+2026-08-09T05:23:36+02:00 [res] armB bug05: unavailable (probe 80) — sleeping 900s
+2026-08-09T05:38:40+02:00 [res] armB bug05: unavailable (probe 81) — sleeping 900s
+2026-08-09T05:53:44+02:00 [res] armB bug05: unavailable (probe 82) — sleeping 900s
+2026-08-09T06:08:48+02:00 [res] armB bug05: unavailable (probe 83) — sleeping 900s
+2026-08-09T06:23:52+02:00 [res] armB bug05: unavailable (probe 84) — sleeping 900s
+2026-08-09T06:38:57+02:00 [res] armB bug05: unavailable (probe 85) — sleeping 900s
+2026-08-09T06:54:01+02:00 [res] armB bug05: unavailable (probe 86) — sleeping 900s
+2026-08-09T07:09:05+02:00 [res] armB bug05: unavailable (probe 87) — sleeping 900s
+2026-08-09T07:24:09+02:00 [res] armB bug05: unavailable (probe 88) — sleeping 900s
+2026-08-09T07:39:13+02:00 [res] armB bug05: unavailable (probe 89) — sleeping 900s
+2026-08-09T07:54:17+02:00 [res] armB bug05: unavailable (probe 90) — sleeping 900s
+2026-08-09T08:09:21+02:00 [res] armB bug05: unavailable (probe 91) — sleeping 900s
+2026-08-09T08:24:25+02:00 [res] armB bug05: unavailable (probe 92) — sleeping 900s
+2026-08-09T08:39:29+02:00 [res] armB bug05: unavailable (probe 93) — sleeping 900s
+2026-08-09T08:54:34+02:00 [res] armB bug05: unavailable (probe 94) — sleeping 900s
+2026-08-09T09:09:38+02:00 [res] armB bug05: unavailable (probe 95) — sleeping 900s
+2026-08-09T09:24:42+02:00 [res] armB bug05: unavailable (probe 96) — sleeping 900s
+2026-08-09T09:39:46+02:00 [res] armB bug05: unavailable (probe 97) — sleeping 900s
+2026-08-09T09:54:50+02:00 [res] armB bug05: unavailable (probe 98) — sleeping 900s
+2026-08-09T10:09:54+02:00 [res] armB bug05: unavailable (probe 99) — sleeping 900s
+2026-08-09T10:24:58+02:00 [res] armB bug05: unavailable (probe 100) — sleeping 900s
+2026-08-09T10:40:02+02:00 [res] armB bug05: unavailable (probe 101) — sleeping 900s
+2026-08-09T10:55:06+02:00 [res] armB bug05: unavailable (probe 102) — sleeping 900s
+2026-08-09T11:10:10+02:00 [res] armB bug05: unavailable (probe 103) — sleeping 900s
+2026-08-09T11:25:14+02:00 [res] armB bug05: unavailable (probe 104) — sleeping 900s
+2026-08-09T11:40:18+02:00 [res] armB bug05: unavailable (probe 105) — sleeping 900s
+2026-08-09T11:55:21+02:00 [res] armB bug05: unavailable (probe 106) — sleeping 900s
+2026-08-09T12:10:25+02:00 [res] armB bug05: unavailable (probe 107) — sleeping 900s
+2026-08-09T12:25:29+02:00 [res] armB bug05: unavailable (probe 108) — sleeping 900s
+2026-08-09T12:40:33+02:00 [res] armB bug05: unavailable (probe 109) — sleeping 900s
+2026-08-09T12:55:37+02:00 [res] armB bug05: unavailable (probe 110) — sleeping 900s
+2026-08-09T13:10:41+02:00 [res] armB bug05: unavailable (probe 111) — sleeping 900s
+2026-08-09T13:25:45+02:00 [res] armB bug05: unavailable (probe 112) — sleeping 900s
+2026-08-09T13:40:49+02:00 [res] armB bug05: unavailable (probe 113) — sleeping 900s
+2026-08-09T13:55:53+02:00 [res] armB bug05: unavailable (probe 114) — sleeping 900s
+2026-08-09T14:10:57+02:00 [res] armB bug05: unavailable (probe 115) — sleeping 900s
+2026-08-09T14:26:01+02:00 [res] armB bug05: unavailable (probe 116) — sleeping 900s
+2026-08-09T14:41:05+02:00 [res] armB bug05: unavailable (probe 117) — sleeping 900s
+2026-08-09T14:56:10+02:00 [res] armB bug05: unavailable (probe 118) — sleeping 900s
+2026-08-09T15:11:14+02:00 [res] armB bug05: unavailable (probe 119) — sleeping 900s
+2026-08-09T15:26:17+02:00 [res] armB bug05: unavailable (probe 120) — sleeping 900s
+2026-08-09T15:41:21+02:00 [res] armB bug05: unavailable (probe 121) — sleeping 900s
+2026-08-09T15:56:25+02:00 [res] armB bug05: unavailable (probe 122) — sleeping 900s
+2026-08-09T16:11:29+02:00 [res] armB bug05: unavailable (probe 123) — sleeping 900s
+2026-08-09T16:26:34+02:00 [res] armB bug05: unavailable (probe 124) — sleeping 900s
+2026-08-09T16:41:38+02:00 [res] armB bug05: unavailable (probe 125) — sleeping 900s
+2026-08-09T16:56:44+02:00 [res] armB bug05: unavailable (probe 126) — sleeping 900s
+2026-08-09T17:11:48+02:00 [res] armB bug05: unavailable (probe 127) — sleeping 900s
+2026-08-09T17:26:52+02:00 [res] armB bug05: unavailable (probe 128) — sleeping 900s
+2026-08-09T17:41:56+02:00 [res] armB bug05: unavailable (probe 129) — sleeping 900s
+2026-08-09T17:57:00+02:00 [res] armB bug05: unavailable (probe 130) — sleeping 900s
+2026-08-09T18:12:04+02:00 [res] armB bug05: unavailable (probe 131) — sleeping 900s
+2026-08-09T18:27:09+02:00 [res] armB bug05: unavailable (probe 132) — sleeping 900s
+2026-08-09T18:42:12+02:00 [res] armB bug05: unavailable (probe 133) — sleeping 900s
+2026-08-09T18:57:16+02:00 [res] armB bug05: unavailable (probe 134) — sleeping 900s
+2026-08-09T19:12:21+02:00 [res] armB bug05: unavailable (probe 135) — sleeping 900s
+2026-08-09T19:27:25+02:00 [res] armB bug05: unavailable (probe 136) — sleeping 900s
+2026-08-09T19:42:29+02:00 [res] armB bug05: unavailable (probe 137) — sleeping 900s
+2026-08-09T19:57:33+02:00 [res] armB bug05: unavailable (probe 138) — sleeping 900s
+2026-08-09T20:12:37+02:00 [res] armB bug05: unavailable (probe 139) — sleeping 900s
+2026-08-09T20:27:42+02:00 [res] armB bug05: unavailable (probe 140) — sleeping 900s
+2026-08-09T20:42:46+02:00 [res] armB bug05: unavailable (probe 141) — sleeping 900s
+2026-08-09T20:57:50+02:00 [res] armB bug05: unavailable (probe 142) — sleeping 900s
+2026-08-09T21:12:54+02:00 [res] armB bug05: unavailable (probe 143) — sleeping 900s
+2026-08-09T21:27:58+02:00 [res] armB bug05: unavailable (probe 144) — sleeping 900s
+2026-08-09T21:43:02+02:00 [res] armB bug05: unavailable (probe 145) — sleeping 900s
+2026-08-09T21:58:06+02:00 [res] armB bug05: unavailable (probe 146) — sleeping 900s
+2026-08-09T22:13:10+02:00 [res] armB bug05: unavailable (probe 147) — sleeping 900s
+2026-08-09T22:28:18+02:00 [res] armB bug05: unavailable (probe 148) — sleeping 900s
+2026-08-09T22:43:22+02:00 [res] armB bug05: unavailable (probe 149) — sleeping 900s
+2026-08-09T22:58:26+02:00 [res] armB bug05: unavailable (probe 150) — sleeping 900s
+2026-08-09T23:13:30+02:00 [res] armB bug05: unavailable (probe 151) — sleeping 900s
+2026-08-09T23:28:34+02:00 [res] armB bug05: unavailable (probe 152) — sleeping 900s
+2026-08-09T23:43:39+02:00 [res] armB bug05: unavailable (probe 153) — sleeping 900s
+2026-08-09T23:58:43+02:00 [res] armB bug05: unavailable (probe 154) — sleeping 900s
+2026-08-10T00:13:46+02:00 [res] armB bug05: unavailable (probe 155) — sleeping 900s
+2026-08-10T00:28:51+02:00 [res] armB bug05: unavailable (probe 156) — sleeping 900s
+2026-08-10T00:43:54+02:00 [res] armB bug05: unavailable (probe 157) — sleeping 900s
+2026-08-10T00:58:59+02:00 [res] armB bug05: unavailable (probe 158) — sleeping 900s
+2026-08-10T01:14:02+02:00 [res] armB bug05: unavailable (probe 159) — sleeping 900s
+2026-08-10T01:29:07+02:00 [res] armB bug05: unavailable (probe 160) — sleeping 900s
+2026-08-10T01:44:11+02:00 [res] armB bug05: unavailable (probe 161) — sleeping 900s
+2026-08-10T01:59:15+02:00 [res] armB bug05: unavailable (probe 162) — sleeping 900s
+2026-08-10T02:14:18+02:00 [res] armB bug05: unavailable (probe 163) — sleeping 900s
+2026-08-10T02:29:23+02:00 [res] armB bug05: unavailable (probe 164) — sleeping 900s
+2026-08-10T02:44:26+02:00 [res] armB bug05: unavailable (probe 165) — sleeping 900s
+2026-08-10T02:59:30+02:00 [res] armB bug05: unavailable (probe 166) — sleeping 900s
+2026-08-10T03:14:35+02:00 [res] armB bug05: unavailable (probe 167) — sleeping 900s
+2026-08-10T03:29:38+02:00 [res] armB bug05: unavailable (probe 168) — sleeping 900s
+2026-08-10T03:44:42+02:00 [res] armB bug05: unavailable (probe 169) — sleeping 900s
+2026-08-10T03:59:46+02:00 [res] armB bug05: unavailable (probe 170) — sleeping 900s
+2026-08-10T04:14:50+02:00 [res] armB bug05: unavailable (probe 171) — sleeping 900s
+2026-08-10T04:29:54+02:00 [res] armB bug05: unavailable (probe 172) — sleeping 900s
+2026-08-10T04:44:58+02:00 [res] armB bug05: unavailable (probe 173) — sleeping 900s
+2026-08-10T05:00:02+02:00 [res] armB bug05: unavailable (probe 174) — sleeping 900s
+2026-08-10T05:15:06+02:00 [res] armB bug05: unavailable (probe 175) — sleeping 900s
+2026-08-10T05:30:10+02:00 [res] armB bug05: unavailable (probe 176) — sleeping 900s
+2026-08-10T05:45:14+02:00 [res] armB bug05: unavailable (probe 177) — sleeping 900s
+2026-08-10T06:00:18+02:00 [res] armB bug05: unavailable (probe 178) — sleeping 900s
+2026-08-10T06:15:22+02:00 [res] armB bug05: unavailable (probe 179) — sleeping 900s
+2026-08-10T06:30:26+02:00 [res] armB bug05: unavailable (probe 180) — sleeping 900s
+2026-08-10T06:45:30+02:00 [res] armB bug05: unavailable (probe 181) — sleeping 900s
+2026-08-10T07:00:34+02:00 [res] armB bug05: unavailable (probe 182) — sleeping 900s
+2026-08-10T07:15:38+02:00 [res] armB bug05: unavailable (probe 183) — sleeping 900s
+2026-08-10T07:30:42+02:00 [res] armB bug05: unavailable (probe 184) — sleeping 900s
+2026-08-10T07:45:46+02:00 [res] armB bug05: unavailable (probe 185) — sleeping 900s
+2026-08-10T08:00:50+02:00 [res] armB bug05: unavailable (probe 186) — sleeping 900s
+2026-08-10T08:15:54+02:00 [res] armB bug05: unavailable (probe 187) — sleeping 900s
+2026-08-10T08:30:58+02:00 [res] armB bug05: unavailable (probe 188) — sleeping 900s
+2026-08-10T08:46:03+02:00 [res] armB bug05: unavailable (probe 189) — sleeping 900s
+2026-08-10T09:01:07+02:00 [res] armB bug05: unavailable (probe 190) — sleeping 900s
+2026-08-10T09:16:11+02:00 [res] armB bug05: unavailable (probe 191) — sleeping 900s
+2026-08-10T09:31:16+02:00 [res] armB bug05: unavailable (probe 192) — sleeping 900s
+2026-08-10T09:46:20+02:00 [res] armB bug05: unavailable (probe 193) — sleeping 900s
+2026-08-10T10:01:24+02:00 [res] armB bug05: unavailable (probe 194) — sleeping 900s
+2026-08-10T10:16:28+02:00 [res] armB bug05: unavailable (probe 195) — sleeping 900s
+2026-08-10T10:31:32+02:00 [res] armB bug05: unavailable (probe 196) — sleeping 900s
+2026-08-10T10:46:36+02:00 [res] armB bug05: unavailable (probe 197) — sleeping 900s
+2026-08-10T11:01:40+02:00 [res] armB bug05: unavailable (probe 198) — sleeping 900s
+2026-08-10T11:16:44+02:00 [res] armB bug05: unavailable (probe 199) — sleeping 900s
+2026-08-10T11:31:48+02:00 [res] armB bug05: unavailable (probe 200) — sleeping 900s
+2026-08-10T11:46:52+02:00 [res] armB bug05: unavailable (probe 201) — sleeping 900s
+2026-08-10T12:01:56+02:00 [res] armB bug05: unavailable (probe 202) — sleeping 900s
+2026-08-10T12:17:01+02:00 [res] armB bug05: unavailable (probe 203) — sleeping 900s
+2026-08-10T12:32:05+02:00 [res] armB bug05: unavailable (probe 204) — sleeping 900s
+2026-08-10T12:47:09+02:00 [res] armB bug05: unavailable (probe 205) — sleeping 900s
+2026-08-10T13:02:13+02:00 [res] armB bug05: unavailable (probe 206) — sleeping 900s
+2026-08-10T13:17:17+02:00 [res] armB bug05: unavailable (probe 207) — sleeping 900s
+2026-08-10T13:32:22+02:00 [res] armB bug05: unavailable (probe 208) — sleeping 900s
+2026-08-10T13:47:26+02:00 [res] armB bug05: unavailable (probe 209) — sleeping 900s
+2026-08-10T14:02:31+02:00 [res] armB bug05: unavailable (probe 210) — sleeping 900s
+2026-08-10T14:17:35+02:00 [res] armB bug05: unavailable (probe 211) — sleeping 900s
+2026-08-10T14:32:39+02:00 [res] armB bug05: unavailable (probe 212) — sleeping 900s
+2026-08-10T14:47:43+02:00 [res] armB bug05: unavailable (probe 213) — sleeping 900s
+2026-08-10T15:02:48+02:00 [res] armB bug05: unavailable (probe 214) — sleeping 900s
+2026-08-10T15:17:52+02:00 [res] armB bug05: unavailable (probe 215) — sleeping 900s
+2026-08-10T15:32:57+02:00 [res] armB bug05: unavailable (probe 216) — sleeping 900s
+2026-08-10T15:48:01+02:00 [res] armB bug05: unavailable (probe 217) — sleeping 900s
+2026-08-10T16:03:05+02:00 [res] armB bug05: unavailable (probe 218) — sleeping 900s
+2026-08-10T16:18:10+02:00 [res] armB bug05: unavailable (probe 219) — sleeping 900s
+2026-08-10T16:33:14+02:00 [res] armB bug05: unavailable (probe 220) — sleeping 900s
+2026-08-10T16:48:19+02:00 [res] armB bug05: unavailable (probe 221) — sleeping 900s
+2026-08-10T17:03:24+02:00 [res] armB bug05: unavailable (probe 222) — sleeping 900s
+2026-08-10T17:18:28+02:00 [res] armB bug05: unavailable (probe 223) — sleeping 900s
+2026-08-10T17:33:32+02:00 [res] armB bug05: unavailable (probe 224) — sleeping 900s
+2026-08-10T17:48:36+02:00 [res] armB bug05: unavailable (probe 225) — sleeping 900s
+2026-08-10T18:03:40+02:00 [res] armB bug05: unavailable (probe 226) — sleeping 900s
+2026-08-10T18:18:46+02:00 [res] armB bug05: unavailable (probe 227) — sleeping 900s
+2026-08-10T18:33:50+02:00 [res] armB bug05: unavailable (probe 228) — sleeping 900s
+2026-08-10T18:48:54+02:00 [res] armB bug05: unavailable (probe 229) — sleeping 900s
+2026-08-10T19:03:58+02:00 [res] armB bug05: unavailable (probe 230) — sleeping 900s
+2026-08-10T19:19:03+02:00 [res] armB bug05: unavailable (probe 231) — sleeping 900s
+2026-08-10T19:34:07+02:00 [res] armB bug05: unavailable (probe 232) — sleeping 900s
+2026-08-10T19:49:11+02:00 [res] armB bug05: unavailable (probe 233) — sleeping 900s
+2026-08-10T20:04:15+02:00 [res] armB bug05: unavailable (probe 234) — sleeping 900s
+2026-08-10T20:19:19+02:00 [res] armB bug05: unavailable (probe 235) — sleeping 900s
+2026-08-10T20:34:23+02:00 [res] armB bug05: unavailable (probe 236) — sleeping 900s
+2026-08-10T20:49:27+02:00 [res] armB bug05: unavailable (probe 237) — sleeping 900s
+2026-08-10T21:04:32+02:00 [res] armB bug05: unavailable (probe 238) — sleeping 900s
+2026-08-10T21:19:36+02:00 [res] armB bug05: unavailable (probe 239) — sleeping 900s
+2026-08-10T21:34:39+02:00 [res] armB bug05: unavailable (probe 240) — sleeping 900s
+2026-08-10T21:49:43+02:00 [res] armB bug05: unavailable (probe 241) — sleeping 900s
+2026-08-10T22:04:47+02:00 [res] armB bug05: unavailable (probe 242) — sleeping 900s
+2026-08-10T22:19:51+02:00 [res] armB bug05: unavailable (probe 243) — sleeping 900s
+2026-08-10T22:34:56+02:00 [res] armB bug05: unavailable (probe 244) — sleeping 900s
+2026-08-10T22:50:02+02:00 [res] armB bug05: unavailable (probe 245) — sleeping 900s
+2026-08-10T23:05:06+02:00 [res] armB bug05: unavailable (probe 246) — sleeping 900s
+2026-08-10T23:20:10+02:00 [res] armB bug05: unavailable (probe 247) — sleeping 900s
+2026-08-10T23:35:14+02:00 [res] armB bug05: unavailable (probe 248) — sleeping 900s
+2026-08-10T23:50:19+02:00 [res] armB bug05: unavailable (probe 249) — sleeping 900s
+2026-08-11T00:05:24+02:00 [res] armB bug05: unavailable (probe 250) — sleeping 900s
+2026-08-11T00:20:28+02:00 [res] armB bug05: unavailable (probe 251) — sleeping 900s
+2026-08-11T00:35:32+02:00 [res] armB bug05: unavailable (probe 252) — sleeping 900s
+2026-08-11T00:50:36+02:00 [res] armB bug05: unavailable (probe 253) — sleeping 900s
+2026-08-11T01:05:40+02:00 [res] armB bug05: unavailable (probe 254) — sleeping 900s
+2026-08-11T01:20:43+02:00 [res] armB bug05: unavailable (probe 255) — sleeping 900s
+2026-08-11T01:35:48+02:00 [res] armB bug05: unavailable (probe 256) — sleeping 900s
+2026-08-11T01:50:52+02:00 [res] armB bug05: unavailable (probe 257) — sleeping 900s
+2026-08-11T02:05:56+02:00 [res] armB bug05: unavailable (probe 258) — sleeping 900s
+2026-08-11T02:21:00+02:00 [res] armB bug05: unavailable (probe 259) — sleeping 900s
+2026-08-11T02:36:04+02:00 [res] armB bug05: unavailable (probe 260) — sleeping 900s
+2026-08-11T02:51:08+02:00 [res] armB bug05: unavailable (probe 261) — sleeping 900s
+2026-08-11T03:06:12+02:00 [res] armB bug05: unavailable (probe 262) — sleeping 900s
+2026-08-11T03:21:16+02:00 [res] armB bug05: unavailable (probe 263) — sleeping 900s
+2026-08-11T03:36:21+02:00 [res] armB bug05: unavailable (probe 264) — sleeping 900s
+2026-08-11T03:51:25+02:00 [res] armB bug05: unavailable (probe 265) — sleeping 900s
+2026-08-11T04:06:29+02:00 [res] armB bug05: unavailable (probe 266) — sleeping 900s
+2026-08-11T04:21:32+02:00 [res] armB bug05: unavailable (probe 267) — sleeping 900s
+2026-08-11T04:36:37+02:00 [res] armB bug05: unavailable (probe 268) — sleeping 900s
+2026-08-11T04:51:41+02:00 [res] armB bug05: unavailable (probe 269) — sleeping 900s
+2026-08-11T05:06:45+02:00 [res] armB bug05: unavailable (probe 270) — sleeping 900s
+2026-08-11T05:21:49+02:00 [res] armB bug05: unavailable (probe 271) — sleeping 900s
+2026-08-11T05:36:53+02:00 [res] armB bug05: unavailable (probe 272) — sleeping 900s
+2026-08-11T05:51:58+02:00 [res] armB bug05: unavailable (probe 273) — sleeping 900s
+2026-08-11T06:07:01+02:00 [res] armB bug05: unavailable (probe 274) — sleeping 900s
+2026-08-11T06:22:06+02:00 [res] armB bug05: unavailable (probe 275) — sleeping 900s
+2026-08-11T06:37:10+02:00 [res] armB bug05: unavailable (probe 276) — sleeping 900s
+2026-08-11T06:52:13+02:00 [res] armB bug05: unavailable (probe 277) — sleeping 900s
+2026-08-11T07:07:18+02:00 [res] armB bug05: unavailable (probe 278) — sleeping 900s
+2026-08-11T07:22:22+02:00 [res] armB bug05: unavailable (probe 279) — sleeping 900s
+2026-08-11T07:37:26+02:00 [res] armB bug05: unavailable (probe 280) — sleeping 900s
+2026-08-11T07:52:29+02:00 [res] armB bug05: unavailable (probe 281) — sleeping 900s
+2026-08-11T08:07:33+02:00 [res] armB bug05: unavailable (probe 282) — sleeping 900s
+2026-08-11T08:22:38+02:00 [res] armB bug05: unavailable (probe 283) — sleeping 900s
+2026-08-11T08:37:42+02:00 [res] armB bug05: unavailable (probe 284) — sleeping 900s
+2026-08-11T08:52:45+02:00 [res] armB bug05: unavailable (probe 285) — sleeping 900s
+2026-08-11T09:07:50+02:00 [res] armB bug05: unavailable (probe 286) — sleeping 900s
+2026-08-11T09:22:54+02:00 [res] armB bug05: unavailable (probe 287) — sleeping 900s
+2026-08-11T09:37:58+02:00 [res] armB bug05: unavailable (probe 288) — sleeping 900s
+2026-08-11T09:53:02+02:00 [res] armB bug05: unavailable (probe 289) — sleeping 900s
+2026-08-11T10:08:06+02:00 [res] armB bug05: unavailable (probe 290) — sleeping 900s
+2026-08-11T10:23:10+02:00 [res] armB bug05: unavailable (probe 291) — sleeping 900s
+2026-08-11T10:38:16+02:00 [res] armB bug05: unavailable (probe 292) — sleeping 900s
+2026-08-11T10:53:21+02:00 [res] armB bug05: unavailable (probe 293) — sleeping 900s
+2026-08-11T11:08:25+02:00 [res] armB bug05: unavailable (probe 294) — sleeping 900s
+2026-08-11T11:23:28+02:00 [res] armB bug05: unavailable (probe 295) — sleeping 900s
+2026-08-11T11:38:33+02:00 [res] armB bug05: unavailable (probe 296) — sleeping 900s
+2026-08-11T11:53:37+02:00 [res] armB bug05: unavailable (probe 297) — sleeping 900s
+2026-08-11T12:08:41+02:00 [res] armB bug05: unavailable (probe 298) — sleeping 900s
+2026-08-11T12:23:45+02:00 [res] armB bug05: unavailable (probe 299) — sleeping 900s
+2026-08-11T12:38:50+02:00 [res] armB bug05: unavailable (probe 300) — sleeping 900s
+2026-08-11T12:53:53+02:00 [res] armB bug05: unavailable (probe 301) — sleeping 900s
+2026-08-11T13:08:57+02:00 [res] armB bug05: unavailable (probe 302) — sleeping 900s
+2026-08-11T13:24:01+02:00 [res] armB bug05: unavailable (probe 303) — sleeping 900s
+2026-08-11T13:39:05+02:00 [res] armB bug05: unavailable (probe 304) — sleeping 900s
+2026-08-11T13:54:09+02:00 [res] armB bug05: unavailable (probe 305) — sleeping 900s
+2026-08-11T14:09:13+02:00 [res] armB bug05: unavailable (probe 306) — sleeping 900s
+2026-08-11T14:24:17+02:00 [res] armB bug05: unavailable (probe 307) — sleeping 900s
+2026-08-11T14:39:21+02:00 [res] armB bug05: unavailable (probe 308) — sleeping 900s
+2026-08-11T14:54:25+02:00 [res] armB bug05: unavailable (probe 309) — sleeping 900s
+2026-08-11T15:09:29+02:00 [res] armB bug05: unavailable (probe 310) — sleeping 900s
+2026-08-11T15:24:33+02:00 [res] armB bug05: unavailable (probe 311) — sleeping 900s
+2026-08-11T15:39:37+02:00 [res] armB bug05: unavailable (probe 312) — sleeping 900s
+2026-08-11T15:54:41+02:00 [res] armB bug05: unavailable (probe 313) — sleeping 900s
+2026-08-11T16:09:46+02:00 [res] armB bug05: unavailable (probe 314) — sleeping 900s
+2026-08-11T16:24:50+02:00 [res] armB bug05: unavailable (probe 315) — sleeping 900s
+2026-08-11T16:39:54+02:00 [res] armB bug05: unavailable (probe 316) — sleeping 900s
+2026-08-11T16:54:58+02:00 [res] armB bug05: unavailable (probe 317) — sleeping 900s
+2026-08-11T17:10:02+02:00 [res] armB bug05: unavailable (probe 318) — sleeping 900s
+2026-08-11T17:25:07+02:00 [res] armB bug05: unavailable (probe 319) — sleeping 900s
+2026-08-11T17:40:11+02:00 [res] armB bug05: unavailable (probe 320) — sleeping 900s
+2026-08-11T17:55:15+02:00 [res] armB bug05: unavailable (probe 321) — sleeping 900s
+2026-08-11T18:10:20+02:00 [res] armB bug05: unavailable (probe 322) — sleeping 900s
+2026-08-11T18:25:24+02:00 [res] armB bug05: unavailable (probe 323) — sleeping 900s
+2026-08-11T18:40:28+02:00 [res] armB bug05: unavailable (probe 324) — sleeping 900s
+2026-08-11T18:55:32+02:00 [res] armB bug05: unavailable (probe 325) — sleeping 900s
+2026-08-11T19:10:36+02:00 [res] armB bug05: unavailable (probe 326) — sleeping 900s
+2026-08-11T19:25:40+02:00 [res] armB bug05: unavailable (probe 327) — sleeping 900s
+2026-08-11T19:40:45+02:00 [res] armB bug05: unavailable (probe 328) — sleeping 900s
+2026-08-11T19:55:49+02:00 [res] armB bug05: unavailable (probe 329) — sleeping 900s
+2026-08-11T20:10:54+02:00 [res] armB bug05: unavailable (probe 330) — sleeping 900s
+2026-08-11T20:25:58+02:00 [res] armB bug05: unavailable (probe 331) — sleeping 900s
+2026-08-11T20:41:02+02:00 [res] armB bug05: unavailable (probe 332) — sleeping 900s
+2026-08-11T20:56:06+02:00 [res] armB bug05: unavailable (probe 333) — sleeping 900s
+2026-08-11T21:11:10+02:00 [res] armB bug05: unavailable (probe 334) — sleeping 900s
+2026-08-11T21:26:14+02:00 [res] armB bug05: unavailable (probe 335) — sleeping 900s
+2026-08-11T21:41:18+02:00 [res] armB bug05: unavailable (probe 336) — sleeping 900s
+2026-08-11T21:56:22+02:00 [res] armB bug05: unavailable (probe 337) — sleeping 900s
+2026-08-11T22:11:26+02:00 [res] armB bug05: unavailable (probe 338) — sleeping 900s
+2026-08-11T22:26:30+02:00 [res] armB bug05: unavailable (probe 339) — sleeping 900s
+2026-08-11T22:41:34+02:00 [res] armB bug05: unavailable (probe 340) — sleeping 900s
+2026-08-11T22:56:38+02:00 [res] armB bug05: unavailable (probe 341) — sleeping 900s
+2026-08-11T23:11:42+02:00 [res] armB bug05: unavailable (probe 342) — sleeping 900s
+2026-08-11T23:26:46+02:00 [res] armB bug05: unavailable (probe 343) — sleeping 900s
+2026-08-11T23:41:50+02:00 [res] armB bug05: unavailable (probe 344) — sleeping 900s
+2026-08-11T23:56:54+02:00 [res] armB bug05: unavailable (probe 345) — sleeping 900s
+2026-08-12T00:11:58+02:00 [res] armB bug05: unavailable (probe 346) — sleeping 900s
+2026-08-12T00:27:02+02:00 [res] armB bug05: unavailable (probe 347) — sleeping 900s
+2026-08-12T00:42:06+02:00 [res] armB bug05: unavailable (probe 348) — sleeping 900s
+2026-08-12T00:57:10+02:00 [res] armB bug05: unavailable (probe 349) — sleeping 900s
+2026-08-12T01:12:16+02:00 [res] armB bug05: availability RESTORED after 349 probes
+2026-08-12T01:12:16+02:00 [res] armB bug05 attempt 2/6: RESUME real session 54d95ae8-c044-485a-bcf5-112159606101
+2026-08-12T01:23:23+02:00 [res] pair bug05-c2r1 done (armB COMPLETE attempt 2, $8.5945, 667s)
+2026-08-12T01:23:24+02:00 [c02] armA bug01 r2: workspace built (/home/xcos/fcdd_arms/bug01_armA_c2r2)
+2026-08-12T01:23:30+02:00 [res] armA bug01 attempt 1/6: FRESH start
+2026-08-12T02:18:00+02:00 [res] pair bug01-c2r2 done (armA COMPLETE attempt 1, $22.6723, 3270s)
+2026-08-12T02:18:00+02:00 [c02] armA bug06 r2: workspace built (/home/xcos/fcdd_arms/bug06_armA_c2r2)
+2026-08-12T02:18:06+02:00 [res] armA bug06 attempt 1/6: FRESH start
+2026-08-12T03:00:43+02:00 [res] pair bug06-c2r2 done (armA COMPLETE attempt 1, $15.2452, 2557s)
+2026-08-12T03:00:43+02:00 [c02] armA bug02 r3: workspace built (/home/xcos/fcdd_arms/bug02_armA_c2r3)
+2026-08-12T03:00:48+02:00 [res] armA bug02 attempt 1/6: FRESH start
+2026-08-12T03:32:02+02:00 [res] pair bug02-c2r3 done (armA COMPLETE attempt 1, $11.8624, 1874s)
+2026-08-12T03:32:02+02:00 [c02] armA bug03 r4: workspace built (/home/xcos/fcdd_arms/bug03_armA_c2r4)
+2026-08-12T03:32:08+02:00 [res] armA bug03 attempt 1/6: FRESH start
+2026-08-12T04:10:32+02:00 [res] pair bug03-c2r4 done (armA COMPLETE attempt 1, $15.3457, 2304s)
+2026-08-12T04:10:32+02:00 [c02] armB bug06 r1: workspace built (/home/xcos/fcdd_arms/bug06_armB_c2r1)
+2026-08-12T04:10:38+02:00 [res] armB bug06 attempt 1/6: FRESH start
+2026-08-12T05:13:50+02:00 [res] pair bug06-c2r1 done (armB COMPLETE attempt 1, $29.1888, 3792s)
+2026-08-12T05:13:50+02:00 [c02] armA bug05 r4: workspace built (/home/xcos/fcdd_arms/bug05_armA_c2r4)
+2026-08-12T05:13:56+02:00 [res] armA bug05 attempt 1/6: FRESH start
+2026-08-12T05:42:11+02:00 [res] pair bug05-c2r4 done (armA COMPLETE attempt 1, $13.1039, 1695s)
+2026-08-12T05:42:11+02:00 [c02] armA bug04 r2: workspace built (/home/xcos/fcdd_arms/bug04_armA_c2r2)
+2026-08-12T05:42:18+02:00 [res] armA bug04 attempt 1/6: FRESH start
+2026-08-12T06:22:20+02:00 [res] pair bug04-c2r2 done (armA COMPLETE attempt 1, $16.7837, 2402s)
+2026-08-12T06:22:20+02:00 [c02] armB bug03 r3: workspace built (/home/xcos/fcdd_arms/bug03_armB_c2r3)
+2026-08-12T06:22:28+02:00 [res] armB bug03 attempt 1/6: FRESH start
+2026-08-12T07:38:03+02:00 [res] pair bug03-c2r3 done (armB COMPLETE attempt 1, $26.6474, 4535s)
+2026-08-12T07:38:03+02:00 [c02] armB bug05 r2: workspace built (/home/xcos/fcdd_arms/bug05_armB_c2r2)
+2026-08-12T07:38:09+02:00 [res] armB bug05 attempt 1/6: FRESH start
+2026-08-12T09:01:21+02:00 [res] pair bug05-c2r2 done (armB COMPLETE attempt 1, $38.3697, 4992s)
+2026-08-12T09:01:21+02:00 [c02] armB bug02 r2: workspace built (/home/xcos/fcdd_arms/bug02_armB_c2r2)
+2026-08-12T09:01:27+02:00 [res] armB bug02 attempt 1/6: FRESH start
+2026-08-12T09:51:59+02:00 [res] pair bug02-c2r2 done (armB COMPLETE attempt 1, $22.3177, 3032s)
+2026-08-12T09:51:59+02:00 [c02] armA bug01 r1: workspace built (/home/xcos/fcdd_arms/bug01_armA_c2r1)
+2026-08-12T09:52:06+02:00 [res] armA bug01 attempt 1/6: FRESH start
+2026-08-12T11:08:40+02:00 [res] pair bug01-c2r1 done (armA COMPLETE attempt 1, $21.7341, 4594s)
+2026-08-12T11:08:40+02:00 [c02] armA bug04 r3: workspace built (/home/xcos/fcdd_arms/bug04_armA_c2r3)
+2026-08-12T11:08:46+02:00 [res] armA bug04 attempt 1/6: FRESH start
+2026-08-12T11:41:26+02:00 [res] pair bug04-c2r3 done (armA COMPLETE attempt 1, $14.0887, 1960s)
+2026-08-12T11:41:26+02:00 [c02] armA bug07 r4: workspace built (/home/xcos/fcdd_arms/bug07_armA_c2r4)
+2026-08-12T11:41:32+02:00 [res] armA bug07 attempt 1/6: FRESH start
+2026-08-12T12:12:26+02:00 [res] pair bug07-c2r4 done (armA COMPLETE attempt 1, $14.3878, 1854s)
+2026-08-12T12:12:26+02:00 [c02] armA bug04 r1: workspace built (/home/xcos/fcdd_arms/bug04_armA_c2r1)
+2026-08-12T12:12:32+02:00 [res] armA bug04 attempt 1/6: FRESH start
+2026-08-12T12:40:27+02:00 [res] pair bug04-c2r1 done (armA COMPLETE attempt 1, $12.8812, 1675s)
+2026-08-12T12:40:27+02:00 [c02] armA bug03 r2: workspace built (/home/xcos/fcdd_arms/bug03_armA_c2r2)
+2026-08-12T12:40:32+02:00 [res] armA bug03 attempt 1/6: FRESH start
+2026-08-12T13:17:12+02:00 [res] pair bug03-c2r2 done (armA COMPLETE attempt 1, $14.6317, 2200s)
+2026-08-12T13:17:12+02:00 [c02] armB bug06 r3: workspace built (/home/xcos/fcdd_arms/bug06_armB_c2r3)
+2026-08-12T13:17:18+02:00 [res] armB bug06 attempt 1/6: FRESH start
+2026-08-12T14:34:31+02:00 [res] pair bug06-c2r3 done (armB COMPLETE attempt 1, $27.9889, 4633s)
+2026-08-12T14:34:31+02:00 [c02] armB bug04 r2: workspace built (/home/xcos/fcdd_arms/bug04_armB_c2r2)
+2026-08-12T14:34:37+02:00 [res] armB bug04 attempt 1/6: FRESH start
+2026-08-12T15:29:23+02:00 [res] pair bug04-c2r2 done (armB COMPLETE attempt 1, $29.9644, 3286s)
+2026-08-12T15:29:23+02:00 [c02] armA bug05 r2: workspace built (/home/xcos/fcdd_arms/bug05_armA_c2r2)
+2026-08-12T15:29:29+02:00 [res] armA bug05 attempt 1/6: FRESH start
+2026-08-12T16:01:03+02:00 [res] pair bug05-c2r2 done (armA COMPLETE attempt 1, $12.0341, 1894s)
+2026-08-12T16:01:03+02:00 [c02] armA bug06 r1: workspace built (/home/xcos/fcdd_arms/bug06_armA_c2r1)
+2026-08-12T16:01:09+02:00 [res] armA bug06 attempt 1/6: FRESH start
+2026-08-12T16:37:42+02:00 [res] pair bug06-c2r1 done (armA COMPLETE attempt 1, $13.9483, 2193s)
+2026-08-12T16:37:42+02:00 [c02] armA bug07 r1: workspace built (/home/xcos/fcdd_arms/bug07_armA_c2r1)
+2026-08-12T16:37:48+02:00 [res] armA bug07 attempt 1/6: FRESH start
+2026-08-12T17:07:59+02:00 [res] pair bug07-c2r1 done (armA COMPLETE attempt 1, $13.5899, 1811s)
+2026-08-12T17:08:00+02:00 [c02] armA bug05 r1: workspace built (/home/xcos/fcdd_arms/bug05_armA_c2r1)
+2026-08-12T17:08:06+02:00 [res] armA bug05 attempt 1/6: FRESH start
+2026-08-12T17:36:30+02:00 [res] pair bug05-c2r1 done (armA COMPLETE attempt 1, $12.0148, 1704s)
+2026-08-12T17:36:30+02:00 [c02] armA bug06 r3: workspace built (/home/xcos/fcdd_arms/bug06_armA_c2r3)
+2026-08-12T17:36:36+02:00 [res] armA bug06 attempt 1/6: FRESH start
+2026-08-12T18:19:16+02:00 [res] pair bug06-c2r3 done (armA COMPLETE attempt 1, $15.8222, 2560s)
+2026-08-12T18:19:17+02:00 [c02] armA bug02 r2: workspace built (/home/xcos/fcdd_arms/bug02_armA_c2r2)
+2026-08-12T18:19:23+02:00 [res] armA bug02 attempt 1/6: FRESH start
+2026-08-12T18:58:11+02:00 [res] pair bug02-c2r2 done (armA COMPLETE attempt 1, $16.2656, 2328s)
+2026-08-12T18:58:11+02:00 [c02] armB bug05 r4: workspace built (/home/xcos/fcdd_arms/bug05_armB_c2r4)
+2026-08-12T18:58:17+02:00 [res] armB bug05 attempt 1/6: FRESH start
+2026-08-12T20:02:31+02:00 [res] pair bug05-c2r4 done (armB COMPLETE attempt 1, $26.2268, 3854s)
+2026-08-12T20:02:31+02:00 [c02] armB bug02 r3: workspace built (/home/xcos/fcdd_arms/bug02_armB_c2r3)
+2026-08-12T20:02:37+02:00 [res] armB bug02 attempt 1/6: FRESH start
+2026-08-12T20:56:14+02:00 [res] pair bug02-c2r3 done (armB COMPLETE attempt 1, $23.9755, 3217s)
+2026-08-12T20:56:14+02:00 [c02] armA bug05 r3: workspace built (/home/xcos/fcdd_arms/bug05_armA_c2r3)
+2026-08-12T20:56:21+02:00 [res] armA bug05 attempt 1/6: FRESH start
+2026-08-12T21:24:29+02:00 [res] pair bug05-c2r3 done (armA COMPLETE attempt 1, $12.0194, 1688s)
+2026-08-12T21:24:29+02:00 [c02] armA bug07 r3: workspace built (/home/xcos/fcdd_arms/bug07_armA_c2r3)
+2026-08-12T21:24:35+02:00 [res] armA bug07 attempt 1/6: FRESH start
+2026-08-12T21:52:30+02:00 [res] pair bug07-c2r3 done (armA COMPLETE attempt 1, $12.1870, 1675s)
+2026-08-12T21:52:30+02:00 [c02] armB bug05 r3: workspace built (/home/xcos/fcdd_arms/bug05_armB_c2r3)
+2026-08-12T21:52:36+02:00 [res] armB bug05 attempt 1/6: FRESH start
+2026-08-12T23:18:16+02:00 [res] pair bug05-c2r3 done (armB COMPLETE attempt 1, $36.2646, 5140s)
+2026-08-12T23:18:16+02:00 [c02] armB bug01 r2: workspace built (/home/xcos/fcdd_arms/bug01_armB_c2r2)
+2026-08-12T23:18:22+02:00 [res] armB bug01 attempt 1/6: FRESH start
+2026-08-13T04:00:27+02:00 [res] pair bug01-c2r2 done (armB COMPLETE attempt 1, $91.9505, 16925s)
+2026-08-13T04:00:27+02:00 [c02] armB bug01 r1: workspace built (/home/xcos/fcdd_arms/bug01_armB_c2r1)
+2026-08-13T04:00:33+02:00 [res] armB bug01 attempt 1/6: FRESH start
+2026-08-13T07:00:14+02:00 [res] pair bug01-c2r1 done (armB COMPLETE attempt 1, $61.8424, 10781s)
+2026-08-13T07:00:16+02:00 [c02] armB bug07 r1: workspace built (/home/xcos/fcdd_arms/bug07_armB_c2r1)
+2026-08-13T07:00:23+02:00 [res] armB bug07 attempt 1/6: FRESH start
+2026-08-13T08:14:55+02:00 [res] pair bug07-c2r1 done (armB COMPLETE attempt 1, $26.1279, 4472s)
+2026-08-13T08:14:55+02:00 [c02] armB bug06 r4: workspace built (/home/xcos/fcdd_arms/bug06_armB_c2r4)
+2026-08-13T08:15:02+02:00 [res] armB bug06 attempt 1/6: FRESH start
+2026-08-13T09:14:09+02:00 [res] pair bug06-c2r4 done (armB COMPLETE attempt 1, $26.8795, 3547s)
+2026-08-13T09:14:10+02:00 [c02] armA bug03 r3: workspace built (/home/xcos/fcdd_arms/bug03_armA_c2r3)
+2026-08-13T09:14:16+02:00 [res] armA bug03 attempt 1/6: FRESH start
+2026-08-13T09:54:55+02:00 [res] pair bug03-c2r3 done (armA COMPLETE attempt 1, $14.0787, 2439s)
+2026-08-13T09:54:56+02:00 [c02] armB bug04 r3: workspace built (/home/xcos/fcdd_arms/bug04_armB_c2r3)
+2026-08-13T09:55:02+02:00 [res] armB bug04 attempt 1/6: FRESH start
+2026-08-13T11:02:14+02:00 [res] pair bug04-c2r3 done (armB COMPLETE attempt 1, $48.9641, 4032s)
+2026-08-13T11:02:14+02:00 [c02] armA bug04 r4: workspace built (/home/xcos/fcdd_arms/bug04_armA_c2r4)
+2026-08-13T11:02:19+02:00 [res] armA bug04 attempt 1/6: FRESH start
+2026-08-13T11:39:55+02:00 [res] pair bug04-c2r4 done (armA COMPLETE attempt 1, $15.3205, 2256s)
+2026-08-13T11:39:55+02:00 [c02] armB bug03 r1: workspace built (/home/xcos/fcdd_arms/bug03_armB_c2r1)
+2026-08-13T11:40:01+02:00 [res] armB bug03 attempt 1/6: FRESH start
+2026-08-13T12:38:15+02:00 [res] pair bug03-c2r1 done (armB COMPLETE attempt 1, $27.2978, 3494s)
+2026-08-13T12:38:15+02:00 [c02] armA bug01 r4: workspace built (/home/xcos/fcdd_arms/bug01_armA_c2r4)
+2026-08-13T12:38:22+02:00 [res] armA bug01 attempt 1/6: FRESH start
+2026-08-13T13:44:50+02:00 [res] pair bug01-c2r4 done (armA COMPLETE attempt 1, $26.6450, 3988s)
+2026-08-13T13:44:50+02:00 [c02] armB bug04 r1: workspace built (/home/xcos/fcdd_arms/bug04_armB_c2r1)
+2026-08-13T13:44:56+02:00 [res] armB bug04 attempt 1/6: FRESH start
+2026-08-22T23:33:41+02:00 [c02] armB bug04 r1: workspace built (/home/xcos/fcdd_arms/bug04_armB_c2r1)
+2026-08-22T23:33:45+02:00 [res] armB bug04 attempt 1/6: FRESH start
+2026-08-23T01:28:01+02:00 [res] pair bug04-c2r1 done (armB COMPLETE attempt 1, $48.7494, 6856s)
+2026-08-23T01:28:01+02:00 [c02] armB bug03 r4: workspace built (/home/xcos/fcdd_arms/bug03_armB_c2r4)
+2026-08-23T01:28:07+02:00 [res] armB bug03 attempt 1/6: FRESH start
+2026-08-23T02:38:46+02:00 [res] pair bug03-c2r4 done (armB COMPLETE attempt 1, $34.5069, 4239s)
+2026-08-23T02:38:47+02:00 [c02] armA bug07 r2: workspace built (/home/xcos/fcdd_arms/bug07_armA_c2r2)
+2026-08-23T02:38:53+02:00 [res] armA bug07 attempt 1/6: FRESH start
+2026-08-23T03:11:27+02:00 [res] pair bug07-c2r2 done (armA COMPLETE attempt 1, $10.8935, 1954s)
+2026-08-23T03:11:27+02:00 [c02] armB bug03 r2: workspace built (/home/xcos/fcdd_arms/bug03_armB_c2r2)
+2026-08-23T03:11:32+02:00 [res] armB bug03 attempt 1/6: FRESH start
+2026-08-23T05:01:04+02:00 [res] pair bug03-c2r2 done (armB COMPLETE attempt 1, $46.6442, 6572s)
+2026-08-23T05:01:04+02:00 [c02] armA bug01 r3: workspace built (/home/xcos/fcdd_arms/bug01_armA_c2r3)
+2026-08-23T05:01:10+02:00 [res] armA bug01 attempt 1/6: FRESH start
+2026-08-23T05:49:46+02:00 [res] pair bug01-c2r3 done (armA COMPLETE attempt 1, $12.8664, 2916s)

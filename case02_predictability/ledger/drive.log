@@ -1,0 +1,178 @@
+2026-08-07T18:07:57+02:00 case02 START — 56 runs from the frozen schedule
+2026-08-07T18:07:58+02:00 [1/56] bug01 armB r3 — start
+2026-08-07T19:15:15+02:00 [1/56] bug01 armB r3 — done
+2026-08-07T19:15:15+02:00 case02 COMPLETE
+2026-08-07T20:01:06+02:00 case02 START — 56 runs from the frozen schedule
+2026-08-07T20:01:06+02:00 schedule loaded: 56 entries
+2026-08-07T20:01:06+02:00 [1/56] bug01 armB r3 — already done, skip
+2026-08-07T20:01:06+02:00 [2/56] bug06 armA r4 — start
+2026-08-07T20:07:31+02:00 case02 START — 56 runs from the frozen schedule
+2026-08-07T20:07:31+02:00 schedule loaded: 56 entries
+2026-08-07T20:07:31+02:00 [1/56] bug01 armB r3 — already done, skip
+2026-08-07T20:07:31+02:00 [2/56] bug06 armA r4 — clearing dirty workspace from an aborted attempt
+2026-08-07T20:07:31+02:00 [2/56] bug06 armA r4 — start
+2026-08-07T20:44:15+02:00 [2/56] bug06 armA r4 — done
+2026-08-07T20:44:15+02:00 [3/56] bug02 armA r1 — start
+2026-08-07T21:17:24+02:00 [3/56] bug02 armA r1 — done
+2026-08-07T21:17:25+02:00 [4/56] bug07 armB r2 — start
+2026-08-07T23:33:23+02:00 [4/56] bug07 armB r2 — done
+2026-08-07T23:33:23+02:00 [5/56] bug02 armA r4 — start
+2026-08-08T00:06:14+02:00 [5/56] bug02 armA r4 — done
+2026-08-08T00:06:14+02:00 [6/56] bug04 armB r4 — start
+2026-08-08T01:17:13+02:00 [6/56] bug04 armB r4 — done
+2026-08-08T01:17:13+02:00 [7/56] bug01 armB r4 — start
+2026-08-08T03:31:31+02:00 [7/56] bug01 armB r4 — done
+2026-08-08T03:31:31+02:00 [8/56] bug06 armB r2 — start
+2026-08-08T04:42:54+02:00 [8/56] bug06 armB r2 — done
+2026-08-08T04:42:54+02:00 [9/56] bug03 armA r1 — start
+2026-08-08T05:19:43+02:00 [9/56] bug03 armA r1 — done
+2026-08-08T05:19:43+02:00 [10/56] bug07 armB r4 — start
+2026-08-08T06:11:37+02:00 [10/56] bug07 armB r4 — done
+2026-08-08T06:11:37+02:00 [11/56] bug02 armB r1 — start
+2026-08-08T07:14:45+02:00 [11/56] bug02 armB r1 — done
+2026-08-08T07:14:45+02:00 [12/56] bug02 armB r4 — start
+2026-08-08T07:58:51+02:00 [12/56] bug02 armB r4 — done
+2026-08-08T07:58:51+02:00 [13/56] bug07 armB r3 — start
+2026-08-08T08:48:19+02:00 [13/56] bug07 armB r3 — done
+2026-08-08T08:48:19+02:00 [14/56] bug05 armB r1 — start
+2026-08-12T01:23:23+02:00 [14/56] bug05 armB r1 — done
+2026-08-12T01:23:23+02:00 [15/56] bug01 armA r2 — start
+2026-08-12T02:18:00+02:00 [15/56] bug01 armA r2 — done
+2026-08-12T02:18:00+02:00 [16/56] bug06 armA r2 — start
+2026-08-12T03:00:43+02:00 [16/56] bug06 armA r2 — done
+2026-08-12T03:00:43+02:00 [17/56] bug02 armA r3 — start
+2026-08-12T03:32:02+02:00 [17/56] bug02 armA r3 — done
+2026-08-12T03:32:02+02:00 [18/56] bug03 armA r4 — start
+2026-08-12T04:10:32+02:00 [18/56] bug03 armA r4 — done
+2026-08-12T04:10:32+02:00 [19/56] bug06 armB r1 — start
+2026-08-12T05:13:50+02:00 [19/56] bug06 armB r1 — done
+2026-08-12T05:13:50+02:00 [20/56] bug05 armA r4 — start
+2026-08-12T05:42:11+02:00 [20/56] bug05 armA r4 — done
+2026-08-12T05:42:11+02:00 [21/56] bug04 armA r2 — start
+2026-08-12T06:22:20+02:00 [21/56] bug04 armA r2 — done
+2026-08-12T06:22:20+02:00 [22/56] bug03 armB r3 — start
+2026-08-12T07:38:03+02:00 [22/56] bug03 armB r3 — done
+2026-08-12T07:38:03+02:00 [23/56] bug05 armB r2 — start
+2026-08-12T09:01:21+02:00 [23/56] bug05 armB r2 — done
+2026-08-12T09:01:21+02:00 [24/56] bug02 armB r2 — start
+2026-08-12T09:51:59+02:00 [24/56] bug02 armB r2 — done
+2026-08-12T09:51:59+02:00 [25/56] bug01 armA r1 — start
+2026-08-12T11:08:40+02:00 [25/56] bug01 armA r1 — done
+2026-08-12T11:08:40+02:00 [26/56] bug04 armA r3 — start
+2026-08-12T11:41:26+02:00 [26/56] bug04 armA r3 — done
+2026-08-12T11:41:26+02:00 [27/56] bug07 armA r4 — start
+2026-08-12T12:12:26+02:00 [27/56] bug07 armA r4 — done
+2026-08-12T12:12:26+02:00 [28/56] bug04 armA r1 — start
+2026-08-12T12:40:27+02:00 [28/56] bug04 armA r1 — done
+2026-08-12T12:40:27+02:00 [29/56] bug03 armA r2 — start
+2026-08-12T13:17:12+02:00 [29/56] bug03 armA r2 — done
+2026-08-12T13:17:12+02:00 [30/56] bug06 armB r3 — start
+2026-08-12T14:34:31+02:00 [30/56] bug06 armB r3 — done
+2026-08-12T14:34:31+02:00 [31/56] bug04 armB r2 — start
+2026-08-12T15:29:23+02:00 [31/56] bug04 armB r2 — done
+2026-08-12T15:29:23+02:00 [32/56] bug05 armA r2 — start
+2026-08-12T16:01:03+02:00 [32/56] bug05 armA r2 — done
+2026-08-12T16:01:03+02:00 [33/56] bug06 armA r1 — start
+2026-08-12T16:37:42+02:00 [33/56] bug06 armA r1 — done
+2026-08-12T16:37:42+02:00 [34/56] bug07 armA r1 — start
+2026-08-12T17:07:59+02:00 [34/56] bug07 armA r1 — done
+2026-08-12T17:08:00+02:00 [35/56] bug05 armA r1 — start
+2026-08-12T17:36:30+02:00 [35/56] bug05 armA r1 — done
+2026-08-12T17:36:30+02:00 [36/56] bug06 armA r3 — start
+2026-08-12T18:19:16+02:00 [36/56] bug06 armA r3 — done
+2026-08-12T18:19:17+02:00 [37/56] bug02 armA r2 — start
+2026-08-12T18:58:11+02:00 [37/56] bug02 armA r2 — done
+2026-08-12T18:58:11+02:00 [38/56] bug05 armB r4 — start
+2026-08-12T20:02:31+02:00 [38/56] bug05 armB r4 — done
+2026-08-12T20:02:31+02:00 [39/56] bug02 armB r3 — start
+2026-08-12T20:56:14+02:00 [39/56] bug02 armB r3 — done
+2026-08-12T20:56:14+02:00 [40/56] bug05 armA r3 — start
+2026-08-12T21:24:29+02:00 [40/56] bug05 armA r3 — done
+2026-08-12T21:24:29+02:00 [41/56] bug07 armA r3 — start
+2026-08-12T21:52:30+02:00 [41/56] bug07 armA r3 — done
+2026-08-12T21:52:30+02:00 [42/56] bug05 armB r3 — start
+2026-08-12T23:18:16+02:00 [42/56] bug05 armB r3 — done
+2026-08-12T23:18:16+02:00 [43/56] bug01 armB r2 — start
+2026-08-13T04:00:27+02:00 [43/56] bug01 armB r2 — done
+2026-08-13T04:00:27+02:00 [44/56] bug01 armB r1 — start
+2026-08-13T07:00:14+02:00 [44/56] bug01 armB r1 — done
+2026-08-13T07:00:15+02:00 [45/56] bug07 armB r1 — start
+2026-08-13T08:14:55+02:00 [45/56] bug07 armB r1 — done
+2026-08-13T08:14:55+02:00 [46/56] bug06 armB r4 — start
+2026-08-13T09:14:10+02:00 [46/56] bug06 armB r4 — done
+2026-08-13T09:14:10+02:00 [47/56] bug03 armA r3 — start
+2026-08-13T09:54:55+02:00 [47/56] bug03 armA r3 — done
+2026-08-13T09:54:55+02:00 [48/56] bug04 armB r3 — start
+2026-08-13T11:02:14+02:00 [48/56] bug04 armB r3 — done
+2026-08-13T11:02:14+02:00 [49/56] bug04 armA r4 — start
+2026-08-13T11:39:55+02:00 [49/56] bug04 armA r4 — done
+2026-08-13T11:39:55+02:00 [50/56] bug03 armB r1 — start
+2026-08-13T12:38:15+02:00 [50/56] bug03 armB r1 — done
+2026-08-13T12:38:15+02:00 [51/56] bug01 armA r4 — start
+2026-08-13T13:44:50+02:00 [51/56] bug01 armA r4 — done
+2026-08-13T13:44:50+02:00 [52/56] bug04 armB r1 — start
+2026-08-22T23:33:39+02:00 case02 START — 56 runs from the frozen schedule
+2026-08-22T23:33:39+02:00 schedule loaded: 56 entries
+2026-08-22T23:33:39+02:00 [1/56] bug01 armB r3 — already done, skip
+2026-08-22T23:33:39+02:00 [2/56] bug06 armA r4 — already done, skip
+2026-08-22T23:33:39+02:00 [3/56] bug02 armA r1 — already done, skip
+2026-08-22T23:33:39+02:00 [4/56] bug07 armB r2 — already done, skip
+2026-08-22T23:33:39+02:00 [5/56] bug02 armA r4 — already done, skip
+2026-08-22T23:33:39+02:00 [6/56] bug04 armB r4 — already done, skip
+2026-08-22T23:33:39+02:00 [7/56] bug01 armB r4 — already done, skip
+2026-08-22T23:33:39+02:00 [8/56] bug06 armB r2 — already done, skip
+2026-08-22T23:33:39+02:00 [9/56] bug03 armA r1 — already done, skip
+2026-08-22T23:33:39+02:00 [10/56] bug07 armB r4 — already done, skip
+2026-08-22T23:33:39+02:00 [11/56] bug02 armB r1 — already done, skip
+2026-08-22T23:33:39+02:00 [12/56] bug02 armB r4 — already done, skip
+2026-08-22T23:33:39+02:00 [13/56] bug07 armB r3 — already done, skip
+2026-08-22T23:33:39+02:00 [14/56] bug05 armB r1 — already done, skip
+2026-08-22T23:33:39+02:00 [15/56] bug01 armA r2 — already done, skip
+2026-08-22T23:33:39+02:00 [16/56] bug06 armA r2 — already done, skip
+2026-08-22T23:33:39+02:00 [17/56] bug02 armA r3 — already done, skip
+2026-08-22T23:33:39+02:00 [18/56] bug03 armA r4 — already done, skip
+2026-08-22T23:33:39+02:00 [19/56] bug06 armB r1 — already done, skip
+2026-08-22T23:33:39+02:00 [20/56] bug05 armA r4 — already done, skip
+2026-08-22T23:33:39+02:00 [21/56] bug04 armA r2 — already done, skip
+2026-08-22T23:33:39+02:00 [22/56] bug03 armB r3 — already done, skip
+2026-08-22T23:33:39+02:00 [23/56] bug05 armB r2 — already done, skip
+2026-08-22T23:33:39+02:00 [24/56] bug02 armB r2 — already done, skip
+2026-08-22T23:33:39+02:00 [25/56] bug01 armA r1 — already done, skip
+2026-08-22T23:33:40+02:00 [26/56] bug04 armA r3 — already done, skip
+2026-08-22T23:33:40+02:00 [27/56] bug07 armA r4 — already done, skip
+2026-08-22T23:33:40+02:00 [28/56] bug04 armA r1 — already done, skip
+2026-08-22T23:33:40+02:00 [29/56] bug03 armA r2 — already done, skip
+2026-08-22T23:33:40+02:00 [30/56] bug06 armB r3 — already done, skip
+2026-08-22T23:33:40+02:00 [31/56] bug04 armB r2 — already done, skip
+2026-08-22T23:33:40+02:00 [32/56] bug05 armA r2 — already done, skip
+2026-08-22T23:33:40+02:00 [33/56] bug06 armA r1 — already done, skip
+2026-08-22T23:33:40+02:00 [34/56] bug07 armA r1 — already done, skip
+2026-08-22T23:33:40+02:00 [35/56] bug05 armA r1 — already done, skip
+2026-08-22T23:33:40+02:00 [36/56] bug06 armA r3 — already done, skip
+2026-08-22T23:33:40+02:00 [37/56] bug02 armA r2 — already done, skip
+2026-08-22T23:33:40+02:00 [38/56] bug05 armB r4 — already done, skip
+2026-08-22T23:33:40+02:00 [39/56] bug02 armB r3 — already done, skip
+2026-08-22T23:33:40+02:00 [40/56] bug05 armA r3 — already done, skip
+2026-08-22T23:33:40+02:00 [41/56] bug07 armA r3 — already done, skip
+2026-08-22T23:33:40+02:00 [42/56] bug05 armB r3 — already done, skip
+2026-08-22T23:33:40+02:00 [43/56] bug01 armB r2 — already done, skip
+2026-08-22T23:33:40+02:00 [44/56] bug01 armB r1 — already done, skip
+2026-08-22T23:33:40+02:00 [45/56] bug07 armB r1 — already done, skip
+2026-08-22T23:33:40+02:00 [46/56] bug06 armB r4 — already done, skip
+2026-08-22T23:33:40+02:00 [47/56] bug03 armA r3 — already done, skip
+2026-08-22T23:33:40+02:00 [48/56] bug04 armB r3 — already done, skip
+2026-08-22T23:33:40+02:00 [49/56] bug04 armA r4 — already done, skip
+2026-08-22T23:33:40+02:00 [50/56] bug03 armB r1 — already done, skip
+2026-08-22T23:33:40+02:00 [51/56] bug01 armA r4 — already done, skip
+2026-08-22T23:33:40+02:00 [52/56] bug04 armB r1 — clearing dirty workspace from an aborted attempt
+2026-08-22T23:33:40+02:00 [52/56] bug04 armB r1 — start
+2026-08-23T01:28:01+02:00 [52/56] bug04 armB r1 — done
+2026-08-23T01:28:01+02:00 [53/56] bug03 armB r4 — start
+2026-08-23T02:38:46+02:00 [53/56] bug03 armB r4 — done
+2026-08-23T02:38:46+02:00 [54/56] bug07 armA r2 — start
+2026-08-23T03:11:27+02:00 [54/56] bug07 armA r2 — done
+2026-08-23T03:11:27+02:00 [55/56] bug03 armB r2 — start
+2026-08-23T05:01:04+02:00 [55/56] bug03 armB r2 — done
+2026-08-23T05:01:04+02:00 [56/56] bug01 armA r3 — start
+2026-08-23T05:49:46+02:00 [56/56] bug01 armA r3 — done
+2026-08-23T05:49:46+02:00 case02 COMPLETE

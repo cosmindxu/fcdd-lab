@@ -10,7 +10,11 @@ import glob, json, os, statistics as st
 from itertools import product
 
 CASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW = os.path.join(CASE, "ledger", "raw")
+# The runner is case01's run_resilient.sh, which HARDCODES its output directory,
+# so every case02 result file is written to case01's ledger — not this case's.
+# As frozen, RAW pointed at a directory that does not exist and the script found
+# zero runs. Defect + fix recorded as AMENDMENTS A8.
+RAW = os.path.join(os.path.dirname(CASE), "case01_spectrum_gambit", "ledger", "raw")
 BUGS = ["bug%02d" % i for i in range(1, 8)]
 KEYS = ("inputTokens", "cacheCreationInputTokens", "cacheReadInputTokens", "outputTokens")
 
@@ -20,6 +24,11 @@ def cell_costs(bug, arm):
     for p in sorted(glob.glob(os.path.join(RAW, "arm%s_%s_c2r*_result.json" % (arm, bug)))):
         try: d = json.load(open(p))
         except Exception: continue
+        # PREREGISTRATION §6: a run killed by infrastructure has its partial cost
+        # "recorded and excluded". run_resilient writes one result file PER ATTEMPT,
+        # so without this test the interrupted first attempt of bug05/armB/r1 enters
+        # that cell as a fifth observation. Defect + fix recorded as AMENDMENTS A7.
+        if d.get("is_error"): continue
         c = d.get("total_cost_usd")
         if c: out.append(float(c))
     return out
