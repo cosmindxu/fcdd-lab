@@ -318,3 +318,68 @@ against synthetic fixtures — which was done, and which caught neither — does
 substitute for pointing it at the real ledger. For any future case, freeze the
 script **and** dry-run it against a single completed cell before the schedule
 starts.
+
+---
+
+## A9 — §5 fixed H2's method but not its threshold; three operationalisations, and a classifier defect fixed mid-analysis
+**2026-08-23, after the primary result, during the secondary analysis.**
+
+**The gap.** §5 says each fix is "classified mechanically as *minimal* or
+*redesign* by binary diff against pristine (zero marginal cost, no judgement)".
+That fixes the *method* — diff against pristine, no LLM in the loop — but never
+fixes a *threshold*. Taken literally, "binary diff" means byte-identity, and
+byte-identity turns out to be nearly vacuous: agents add explanatory comments, so
+**1 of 56** runs is byte-identical to pristine and the 2×2 is degenerate
+(p = 1.0000). Reporting only that would hide the question rather than answer it.
+
+Three judgement-free operationalisations are therefore computed and **all three
+reported**, with the literal one designated primary because it is what §5 says:
+
+| | rule | arm A (min/redes) | arm B | Fisher p |
+|---|---|---|---|---|
+| PRIMARY | byte-identical to pristine | 1 / 27 | 0 / 28 | 1.0000 |
+| S1 | identical after dropping blank lines and whole-line `;` comments | 4 / 24 | 7 / 21 | 0.5027 |
+| S2 | the only non-comment edit is a one-line replace **of the seeded line itself** | 7 / 21 | 15 / 13 | 0.0543 |
+
+No LLM classified anything; all three are lexical operations on the source plus
+the sealed key's own diff hunk. That the threshold was not pre-registered is a
+defect in the pre-registration, disclosed here rather than resolved by picking
+whichever of the three reads best.
+
+**A classifier defect, found and fixed after its first output.** S2's first
+implementation detected only pristine lines that had gone *missing* from the
+fix; insertions were invisible, so a run that reverted the seeded line and then
+added fifty lines of new code scored *minimal*. It was rewritten as a proper
+`SequenceMatcher` alignment in which every non-equal hunk counts, and
+self-tested against seven constructed workspaces (perfect revert; revert plus a
+comment; the seeded line replaced by equivalent text; revert plus fifty added
+lines; an unrelated line deleted; the seeded line fixed plus one edit elsewhere;
+a whole source file removed) — all seven now classify correctly.
+
+Disclosed in full because the fix came **after** seeing the defective version's
+output: S2 moved from 11/19 to **7/15**, and its exact p from 0.0598 to
+**0.0543**. The correction did not manufacture a result — neither version
+crosses α = 0.05, and the shift is a fifth of the distance to it. One of the
+seven self-test expectations was also wrong and was corrected rather than the
+code: a fix that changes only the seeded line, even to semantically equivalent
+text (`cp 15` for `cp MAXPLY`), *is* minimal under S2's definition.
+
+**What H2 actually shows, and it is not what H2 predicted.** H2 held that "Arm
+A's cost dispersion is driven by bimodal strategy selection — forking between a
+minimal fix and a redesign — while Arm B's strategy is stable." Under S2 the
+assignment is **reversed**: arm B is the near-even split (15/13, 54% minimal)
+and arm A is the concentrated one (7/21, 25% minimal, consistently redesigning).
+This is coherent with the primary result — H1 also reversed, with arm A the
+*less* cost-dispersed arm — but at p = 0.0543 it is a trend and is reported as
+one, not as a claim. H2 was offered as the mechanism *for* H1; H1 did not hold in
+the predicted direction, so there is no dispersion difference of the predicted
+kind for this mechanism to explain.
+
+**An independence caveat §5 did not address.** The Fisher test treats the 56
+runs as independent units, as §5 specifies. They are not: runs are nested within
+seven defects, and the per-defect breakdown shows strong defect effects — bug07
+is minimal in 8 of 8 runs across both arms, bug04 redesign in 8 of 8. The true
+number of independent units is nearer seven than fifty-six, so the reported p is
+anti-conservative. Since S2 does not reach significance even at its
+anti-conservative value, the conclusion is unaffected; a defect-clustered test
+would only widen it further.
