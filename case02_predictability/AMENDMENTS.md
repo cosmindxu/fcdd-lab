@@ -555,3 +555,115 @@ perfectly cannot discriminate methods on outcome quality, and can only
 discriminate on cost. Whether FCDD's verification apparatus pays for itself on
 defects hard enough to produce failures is a question this study is structurally
 unable to answer, and the design should not be read as having answered it.
+
+---
+
+## A13 — a second model ran inside 51 of the 56 cells, and its share differs by arm
+**2026-08-23, found by adversarial review of the article draft, after all results were computed.**
+
+§2 of the pre-registration requires "Model and effort: **identical across arms**,
+fixed for the whole study, no mid-study change", and the article draft asserted
+that the study ran on `claude-opus-5` throughout. That is false, and the ledger
+had said so all along in a field nobody read.
+
+Recomputed from the `modelUsage` block of all 56 non-error result files:
+
+| model | runs containing it | spend | share |
+|---|---|---|---|
+| `claude-opus-5` | 56 / 56 | $986.71 | 71.4% |
+| `claude-fable-5` | **51 / 56** | **$396.03** | **28.6%** |
+
+And the mix is **not balanced across arms**:
+
+| arm | total | opus-5 | fable-5 |
+|---|---|---|---|
+| A | $417.94 | $269.75 (64.5%) | $148.18 (**35.5%**) |
+| B | $964.80 | $716.96 (74.3%) | $247.85 (**25.7%**) |
+
+**Mechanism.** Both arm prompts instruct the repair agent to spawn a reviewer
+with the Task tool — arm A a code reviewer, arm B an adversarial attack round.
+Those subagents did not inherit the `--model claude-opus-5` passed to the parent;
+they resolved to `claude-fable-5`. The runner set the model for the session it
+launched and had no control over what the session delegated to. The
+pre-registration's "identical across arms" clause was written about the agent and
+silently did not bind its children.
+
+**What this contaminates.**
+
+1. **The model claim is withdrawn.** The study did not run on a single model. It
+   ran on a *mixture*, in proportions the design did not control and did not
+   measure until now.
+2. **The arms are not model-matched.** Arm A spent 35.5% of its budget on the
+   second model against arm B's 25.7%. Any per-token price difference between
+   the two models therefore enters the cost ratio as a component that is not
+   method.
+3. **It is a source of dispersion unrelated to method.** How much of a run went
+   to subagents varied run to run. That variance lands directly in the primary
+   estimator, which measures within-cell dispersion of cost. Some unknown part
+   of every `CV_log` in §5.1 is subagent-mix variance rather than method
+   variance — in both arms.
+
+**What it does not touch.** The convergence result (A12) is a property of the
+emitted binaries and is independent of which model produced them: all 56 still
+hash to pristine. The 7/7 direction of the cost premium is likewise unaffected,
+since arm B was dearer in every defect in all three units; only the *magnitude*
+of the ratio is now known to carry a model-mix component.
+
+No re-run is attempted. Re-running would cost the study again and could not
+restore the pre-registered condition retroactively. The contamination is
+disclosed, quantified, and carried into the article's threats section instead.
+
+---
+
+## A14 — the pre-registered primary estimator is not scale-invariant; its verdict moves with the currency unit
+**2026-08-23, found by adversarial review, after the primary result was computed and reported.**
+
+§4 fixed the estimator as
+
+    CV_log(d,a) = sd( ln c₁..c₄ ) / | mean( ln c₁..c₄ ) |
+
+and justified it as removing the estimator freedom that moved case01's headline.
+It does not remove that freedom; it hides it. **The statistic is a function of
+the unit the costs are expressed in.** Scaling every cost by *k* sends
+`ln c → ln c + ln k`, which leaves the numerator unchanged and shifts the
+denominator, so the ratio moves. Demonstrated on this study's own data, changing
+nothing but dollars to cents:
+
+| estimator | in dollars | in cents |
+|---|---|---|
+| `CV_log` (pre-registered) | mean −0.0547, *p* = **0.1094** | mean −0.0254, *p* = **0.0469** |
+| `sd(ln c)` (scale-free) | mean −0.2152, *p* = **0.0156** | mean −0.2152, *p* = **0.0156** |
+
+The pre-registered statistic **crosses α = 0.05 on a change of currency unit**.
+A second defect compounds it: because `|mean(ln c)|` sits in the denominator and
+arm B's costs are systematically ~2.26× higher, arm B's dispersion is divided by
+a larger number in every defect (e.g. bug01: 3.01 for A against 4.03 for B). The
+estimator is therefore **biased in favour of H1** — it deflates the treated arm's
+measured dispersion by construction.
+
+**How this is handled, and how it is not.** The pre-registered result stands as
+**primary and is not replaced**: *p* = 0.1094, H1 not supported. Swapping in a
+better estimator after seeing the data is exactly the freedom §4 exists to
+remove, and the fact that the better estimator is more favourable to *our own*
+reported conclusion makes the temptation worse, not better.
+
+What changes is disclosure. Every version of the analysis agrees on **direction**
+— the ordinary arm is the less dispersed one — and they differ only in whether it
+reaches significance:
+
+* pre-registered `CV_log` in dollars: not significant (*p* = 0.1094);
+* the same statistic in cents: significant (*p* = 0.0469);
+* scale-free `sd(ln c)`, in any unit: significant at the design's floor
+  (*p* = 0.0156).
+
+So the headline conclusion — **H1 is not supported** — is robust; no estimator
+rescues it. What is *not* robust is the article's implicit claim that the null is
+merely an absence of evidence. Under a correctly scale-free dispersion measure
+this data set significantly favours the **opposite** of H1. That stronger
+statement is not claimed, because it was not pre-registered and is reachable only
+post-hoc, but suppressing it would be the same sin in the other direction.
+
+The estimator defect is a defect in the **pre-registration**, not in the analysis
+script, which implemented §4 faithfully. Future cases should require the primary
+estimator to be checked for invariance under the transformations its own units
+admit, before the schedule starts.
