@@ -1,0 +1,28 @@
+exact p  (frozen impl)      : 0.1094
+exact p  (independent impl) : 0.1094
+agree                       : True
+
+observed median difference (A-B): -0.0408
+bootstrap 95% CI (B=100000, seed 20260807): [-0.0955, +0.0054]
+CI spans zero: True
+
+--- secondary (§5): cost level, not dispersion ---
+  bug01  meanA=$  20.98  meanB=$  59.48  B/A=2.84x
+  bug02  meanA=$  13.84  meanB=$  24.39  B/A=1.76x
+  bug03  meanA=$  14.92  meanB=$  33.77  B/A=2.26x
+  bug04  meanA=$  14.77  meanB=$  38.96  B/A=2.64x
+  bug05  meanA=$  12.29  meanB=$  27.36  B/A=2.23x
+  bug06  meanA=$  14.92  meanB=$  27.24  B/A=1.83x
+  bug07  meanA=$  12.76  meanB=$  29.99  B/A=2.35x
+  median B/A ratio: 2.26x   sign test: 7/7 defects cost more under B, two-sided p = 0.0156
+
+--- POST-HOC sensitivity (NOT a pre-registered analysis) ---
+A7 recorded, before this ran, that bug05 armB holds one resumed-completion
+cost and that this would inflate its CV. Leave-one-defect-out:
+  drop bug01 -> mean diff -0.0647, exact p = 0.0938
+  drop bug02 -> mean diff -0.0652, exact p = 0.0938
+  drop bug03 -> mean diff -0.0542, exact p = 0.2188
+  drop bug04 -> mean diff -0.0570, exact p = 0.2188
+  drop bug05 -> mean diff -0.0300, exact p = 0.2188
+  drop bug06 -> mean diff -0.0637, exact p = 0.1250
+  drop bug07 -> mean diff -0.0479, exact p = 0.2188

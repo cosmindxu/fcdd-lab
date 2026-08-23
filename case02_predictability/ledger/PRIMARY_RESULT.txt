@@ -1,0 +1,12 @@
+defect   nA  nB  CV_log A  CV_log B
+bug01     4   4    0.1049    0.0995
+bug02     4   4    0.0506    0.0418
+bug03     4   4    0.0174    0.0745
+bug04     4   4    0.0422    0.0830
+bug05     4   4    0.0172    0.2199
+bug06     4   4    0.0200    0.0206
+bug07     4   4    0.0484    0.1439
+
+paired defects: 7   mean CV difference (A-B): -0.0547
+exact two-sided permutation p = 0.1094   (floor at n=7 is 0.0156)
+verdict: H1 NOT SUPPORTED at alpha=0.05
