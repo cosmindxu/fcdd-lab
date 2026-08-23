@@ -1,6 +1,8 @@
-exact p  (frozen impl)      : 0.1094
-exact p  (independent impl) : 0.1094
-agree                       : True
+exact p  (frozen impl)              : 0.1094
+exact p  (enumeration re-derived)   : 0.1094
+agree                               : True
+NB: shares cost extraction + estimator with the frozen script; this checks
+    the permutation enumeration only, not the upstream pipeline.
 
 observed median difference (A-B): -0.0408
 bootstrap 95% CI (B=100000, seed 20260807): [-0.0955, +0.0054]

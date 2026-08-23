@@ -742,3 +742,100 @@ property of a formula printed in the pre-registration. Freezing an analysis plan
 protects against choosing a statistic to fit the data. It does not protect
 against choosing a *wrong* statistic before the data exists, and it does not read
 your own ledger for you.
+
+---
+
+## A16 — round two of adversarial review: 47 findings, three of them against v2's own corrections
+**2026-08-23, before submission.**
+
+Draft v2 — itself the product of A15's corrections — was put through a second
+adversarial review with seven lenses, including two that round one lacked (a
+hostile referee arguing for rejection, and a proponent arguing the paper is
+unfair to FCDD) and a completeness critic asked what the other lenses missed.
+Sixty-six findings raised, **47 verified: 13 blocking, 24 major, 10 minor**.
+
+**Three of v2's own corrections were wrong.**
+
+1. **The §5.6 baseline was the wrong file.** `run_resilient.sh` scrubs absolute
+   paths out of every workspace at build time, so all 28 copies of
+   `Contract.lean` differ from the repository file in one line *before any agent
+   runs*. Comparing against the repository baseline scored all 28 as modified.
+   Correct: **22 of 28 modified it; six left it byte-identical to the file they
+   were handed**, having judged the frozen contract adequate — which is the
+   method working as designed, and evidence against the claim it replaced.
+2. **"Twenty-five distinct specifications" double-counted.** That figure summed
+   per-defect distinct counts, charging the single untouched file once under each
+   of three defects. Counted globally over the 28 files it is **23**. The
+   comparison against "one distinct binary" was also unit-inconsistent: per-defect
+   summed, the binary figure is 7, not 1.
+3. **"FCDD's own artefact was the least reproducible thing in the study" is
+   false.** It compared the treated arm's artefact against the *binary* and never
+   against the control arm's artefact, sitting in the same workspaces. Measured:
+   Arm A produced **28 distinct test artefacts across 28 runs**, Arm B 23 across
+   28. **On this measure the control arm diverged more.** The superlative is
+   withdrawn; what survives is that neither arm converged on its supporting
+   artefact while both converged on the program.
+
+**A14 overstated its own replacement.** `sd(ln c)` is invariant under *scaling* —
+which is what the dollars-to-cents demonstration shows — but that is not
+invariance under a change of *measure*. Dollars and tokens are not proportional
+(two models at different prices; cached input near-free), and the statistic gives
+*p* = 0.0156 in dollars against **0.0625 in tokens**. A14's "in any unit" is
+withdrawn.
+
+**A second schedule discontinuity, never disclosed.** `drive.log` records cell 14
+(`bug05/armB/r1`) running **88.6 hours wall clock** between 2026-08-08 and 08-12,
+against roughly 55 minutes of agent time across its two result files: the
+schedule stalled on a weekly usage limit. A6 reasons about one gap; there are
+two, so more cells straddle an era boundary than A6 assumes. Removing both the
+post-gap runs and the suspended cell: mean −0.0628, *p* = 0.1094 — verdict
+unchanged, direction marginally stronger against H1.
+
+**Two claims that were wrong in FCDD's favour, now corrected against it.**
+
+* The model-mix contribution **can** be bounded, from the same field that
+  revealed it; v2 said it could not. On primary-model spend alone the cost
+  premium is **2.75×** (not 2.26×) and the primary estimator moves to −0.0718
+  (*p* = 0.0625 from 0.1094). The contamination was flattering FCDD on both.
+* The Bonferroni claim was wrong in the other direction: v2 said no result could
+  survive correction over four outcomes. At 0.05/4 = 0.0125 the cost result at
+  0.0156 indeed does not clear it, but the floor is a property of the seven-pair
+  sign test rather than of the design, and the narrower statement is now given.
+
+**The comment-volume withdrawal was measured against the wrong denominator.** v1
+said the minimality deficit was comment volume; v2 withdrew that on whole-file
+comment characters (+40, 0.10%, *p* = 0.2344). A grader never saw whole files. On
+the **diff** — the object actually read — FCDD added **+26.4% more comment text**
+(212 characters against 168), *p* = 0.1875. Not significant at seven defects, but
+directionally what v1 guessed. Both the assertion and the confident withdrawal
+were unwarranted; the measurement is now deposited
+(`tools/comment_volume_case02.py`) and the text says what it supports.
+
+**Blinding failed on three packets, by the mechanism the audit was built to
+catch.** The audit's term list was written *before* the scrubber's replacement
+vocabulary was chosen, so it never tested for the scrubber's own output. Adding
+those phrases: **0 for Arm A against 3 for Arm B, leaking in 3 of 28 packets** —
+the substituted phrase "the design note" appears only where an FCDD comment cited
+its contract. The first scrubber introduced the tell it removed; so did the
+second, less. Blinding held on 25 of 28.
+
+**Smaller corrections.** `IQR(ln c)` was not an interquartile range — on n = 4 it
+is the mid-two spread, now named accurately. `addendum_case02.py`'s "independent
+implementation" imports the script it checks and shares its cost extractor and
+estimator, so it verifies the permutation *enumeration* only; the claim is
+narrowed. The `h2_strategy_case02.py` docstring still described the pre-A12
+classifier. The two restarted cells' partial costs were never captured at all —
+excluded but not recorded, contrary to §6 — so the reported total understates
+spend. A1's magnitude (63% under budget) and two of A4's residuals about the
+control arm's oracle were suppressed in the paper and are now in §2. A3 bears on
+the cost result and not only on dispersion; §7 now says so.
+
+**What we conclude from our own error rate.** Round one found 43 defects in a
+paper its authors believed finished; round two found 47 more in the corrected
+version, three of them *in the corrections*. The core result — a 2.26×–2.75× cost
+premium, no support for H1, and byte-identical programs — survived both rounds
+untouched, which is the strongest thing that can be said for it. Everything
+sharper than that core has now been wrong at least once. That is worth stating
+plainly in a paper about whether formal machinery makes work more reliable: what
+caught these was adversarial review, repeatedly, and each round found errors the
+previous round's fixes introduced.

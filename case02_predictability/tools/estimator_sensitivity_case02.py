@@ -21,6 +21,20 @@ RAW = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
 BUGS = ["bug%02d" % i for i in range(1, 8)]
 POST_GAP = {("bug04","B","1"),("bug03","B","4"),("bug07","A","2"),("bug03","B","2"),("bug01","A","3")}
 
+KEYS_T = ("inputTokens","cacheCreationInputTokens","cacheReadInputTokens","outputTokens")
+
+def cells_tok():
+    C = {}
+    for f in glob.glob(os.path.join(RAW, "arm*_c2r*_a*_result.json")):
+        m = re.search(r"arm([AB])_(bug\d+)_c2r(\d)_a(\d)_result\.json$", f)
+        if not m: continue
+        d = json.load(open(f))
+        if d.get("is_error"): continue
+        mu = d.get("modelUsage") or {}
+        C.setdefault((m.group(2), m.group(1)), []).append(
+            float(sum(sum(v.get(k) or 0 for k in KEYS_T) for v in mu.values())))
+    return C
+
 def load():
     C, pre = {}, {}
     for f in glob.glob(os.path.join(RAW, "arm*_c2r*_a*_result.json")):
@@ -36,7 +50,9 @@ def load():
 
 cv_log = lambda c: st.stdev([math.log(x) for x in c]) / abs(st.mean([math.log(x) for x in c]))
 sd_log = lambda c: st.stdev([math.log(x) for x in c])
-iqr_log = lambda c: (lambda s: s[2] - s[1])(sorted(math.log(x) for x in c))
+# NOT an interquartile range: on n=4 this is the spread of the middle two values.
+# Named accurately after review pointed out the mislabel.
+midspread_log = lambda c: (lambda s: s[2] - s[1])(sorted(math.log(x) for x in c))
 
 def ep(d):
     n = len(d); o = st.mean(d)
@@ -49,7 +65,7 @@ if __name__ == "__main__":
     print("%-34s %22s %22s" % ("estimator", "in dollars", "in cents (x100)"))
     for name, f in (("CV_log  (PRE-REGISTERED)", cv_log),
                     ("sd(ln c)  scale-free", sd_log),
-                    ("IQR(ln c)  scale-free", iqr_log)):
+                    ("mid-spread(ln c)  scale-free", midspread_log)):
         d1 = [f(C[(b,"A")]) - f(C[(b,"B")]) for b in BUGS]
         d2 = [f([100*x for x in C[(b,"A")]]) - f([100*x for x in C[(b,"B")]]) for b in BUGS]
         tag = "" if abs(st.mean(d1) - st.mean(d2)) < 1e-9 else "   <-- MOVES WITH THE UNIT"
@@ -57,6 +73,14 @@ if __name__ == "__main__":
               % (name, st.mean(d1), ep(d1), st.mean(d2), ep(d2), tag))
     print("\n  All variants agree on DIRECTION (negative = the ordinary arm is less")
     print("  dispersed). They differ only on whether it reaches alpha = 0.05.")
+    print("\n  SCALE-invariance is not MEASURE-invariance. Dollars and tokens are not")
+    print("  proportional (two models at different prices; cached input near-free), so")
+    print("  a scale-free statistic still moves between them:")
+    T = cells_tok()
+    for name, f in (("sd(ln c)", sd_log), ("mid-spread(ln c)", midspread_log)):
+        du = [f(C[(b,"A")]) - f(C[(b,"B")]) for b in BUGS]
+        dt = [f(T[(b,"A")]) - f(T[(b,"B")]) for b in BUGS]
+        print("    %-20s dollars p=%.4f    tokens p=%.4f" % (name, ep(du), ep(dt)))
     print("\n  Why CV_log is also biased toward H1: |mean(ln c)| sits in the")
     print("  denominator and arm B costs ~2.26x more, so B's dispersion is divided")
     print("  by a larger number in every defect:")
@@ -73,3 +97,16 @@ if __name__ == "__main__":
           % ("STRONGER" if st.mean(pre) < st.mean(full) else "WEAKER"))
     print("     A6 claimed the gap biased conservatively (against H1). The observed")
     print("     sign is the opposite: the post-gap runs pulled TOWARD H1.")
+    print("\n=== a SECOND discontinuity the paper's threats did not count ===")
+    print("  drive.log records cell 14 (bug05/armB/r1) running 88.6 h wall clock,")
+    print("  2026-08-08 -> 2026-08-12, against ~55 min of agent time in its two")
+    print("  result files: the schedule was suspended on a weekly usage limit. A6")
+    print("  reasons about ONE gap; there are two, so more cells straddle an era")
+    print("  boundary than A6's analysis assumes. Sensitivity, dropping BOTH the")
+    print("  five post-gap runs and the suspended cell:")
+    both = {k: [c for c in v] for k, v in PRE.items()}
+    both[("bug05","B")] = [c for c in both[("bug05","B")]][:3] if len(both[("bug05","B")]) > 3 else both[("bug05","B")]
+    d3 = [cv_log(both[(b,"A")]) - cv_log(both[(b,"B")]) for b in BUGS]
+    print("    both removed    : mean %+.4f  p=%.4f" % (st.mean(d3), ep(d3)))
+    print("  (the cell is dropped by count, not by identity, since the suspension")
+    print("   is a property of when it ran rather than of the run itself)")

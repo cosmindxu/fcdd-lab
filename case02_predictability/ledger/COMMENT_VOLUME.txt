@@ -1,0 +1,8 @@
+whole-file comment characters:
+   arm A mean  41606.1   arm B mean  41645.9   diff +39.8 (+0.1%)
+   paired by defect: mean +39.8 chars, exact p = 0.2344
+
+comment characters ADDED in the diff (what graders saw):
+   arm A mean    167.7   arm B mean    212.0   diff +44.3 (+26.4%)
+   paired by defect: mean +44.3 chars, exact p = 0.1875
+

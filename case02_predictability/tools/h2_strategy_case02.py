@@ -12,8 +12,10 @@ here: that is the point of "no judgement".
 
   PRIMARY (literal)  minimal  <=> all seven program source files are
                                   byte-identical to pristine.
-  S1 (comment-blind) minimal  <=> identical after dropping blank lines and
-                                  whole-line ';' assembly comments.
+  S1 (instruction    minimal  <=> identical after stripping ALL ';' comments,
+      stream)                       whole-line AND trailing, and normalising
+                                    whitespace -- i.e. the emitted instructions.
+                                    (A12 corrected this from whole-line-only.)
   S2 (seeded-line)   minimal  <=> the only non-comment lines differing from
                                   pristine are the seeded fault's own line
                                   (from the sealed answer key).

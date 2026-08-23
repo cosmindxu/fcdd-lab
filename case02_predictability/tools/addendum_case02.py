@@ -4,8 +4,12 @@
 PREREGISTRATION §4 requires, regardless of outcome: the seven per-defect CV
 pairs, the observed difference, the exact p, AND a bootstrap CI on the median
 difference. The frozen script printed the first three. This adds the fourth,
-plus an INDEPENDENT recomputation of the exact p (different implementation,
-same definition) as a check on the primary, and the §5 cost-level sign test.
+plus a recomputation of the exact p from the definition. NOTE, after review: this
+is NOT an independent implementation. It imports analyse_case02.py by path and
+reuses its cost extractor and its cv_log, so it re-derives only the PERMUTATION
+ENUMERATION independently. A defect in the cost selection or in the estimator
+would be reproduced identically by both. The agreement it reports is therefore a
+check on the enumeration alone, and the §5 cost-level sign test.
 
 Nothing here alters the primary analysis. Run after analyse_case02.py.
 """
@@ -33,9 +37,11 @@ def exact_p_independent(d):
 
 p_ind = exact_p_independent(diffs)
 p_frozen = A.exact_paired_permutation(diffs)
-print("exact p  (frozen impl)      : %.4f" % p_frozen)
-print("exact p  (independent impl) : %.4f" % p_ind)
-print("agree                       :", abs(p_ind - p_frozen) < 1e-12)
+print("exact p  (frozen impl)              : %.4f" % p_frozen)
+print("exact p  (enumeration re-derived)   : %.4f" % p_ind)
+print("agree                               :", abs(p_ind - p_frozen) < 1e-12)
+print("NB: shares cost extraction + estimator with the frozen script; this checks")
+print("    the permutation enumeration only, not the upstream pipeline.")
 
 # --- bootstrap CI on the MEDIAN difference (§4) ---------------------------
 rng = random.Random(20260807)          # the pre-registration's seed

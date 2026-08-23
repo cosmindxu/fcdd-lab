@@ -15,9 +15,16 @@ from collections import Counter
 C2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 G  = os.path.join(C2, "grading")
 # case01 §4.5's own list, plus terms this study's scrubber can itself introduce.
+# case01 §4.5's list, PLUS every phrase this study's own scrubber substitutes IN.
+# The first version omitted the latter, which is how it certified 0-vs-0 while
+# "design note" -- the replacement chosen AFTER this list was written -- leaked in
+# three packets. A scrubber's output vocabulary is part of its attack surface.
 TERMS = ["theorem", "specification", "clause", "solver", "witness", "mutant",
          "invariant", "proof", "lemma", "formal", "verif", "z3", "smt",
-         "conformance", "reference implementation", "machine-checked"]
+         "conformance", "reference implementation", "machine-checked",
+         # substituted in by make_packets_case02.py's SCRUB/COLLAPSE tables:
+         "design note", "reference build", "the check suite", "check script",
+         "review round", "the method", "the development method", "reviewed"]
 
 def submissions(text):
     """Split a packet into the X and Y source-change blocks."""

@@ -19,3 +19,11 @@ distinct repaired binaries, counted globally    : 1 over 56 runs
 
 Every specification above is kernel-accepted: Lean certifies that a spec is
 WELL-FORMED, not that it is the right one, and not that two of them agree.
+
+=== comparator: each arm's OWN authored artefact ===
+  arm A (test scripts added to variants/ ): 28 runs, 28 distinct, 0 authored nothing
+  arm B (contract/spec/Contract.lean     ): 28 runs, 23 distinct, 0 authored nothing
+
+  Neither arm converged on its supporting artefact. On this measure the
+  CONTROL arm diverged more, which is the opposite of what a one-sided
+  reading of the treated arm alone would suggest.

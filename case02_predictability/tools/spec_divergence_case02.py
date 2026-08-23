@@ -77,3 +77,32 @@ print("distinct repaired binaries, counted globally    : 1 over 56 runs")
 print("  (per-defect summed, matching units            : 7)")
 print("\nEvery specification above is kernel-accepted: Lean certifies that a spec is")
 print("WELL-FORMED, not that it is the right one, and not that two of them agree.")
+
+# --- THE COMPARATOR. Measuring only the treated arm's artefact is a one-sided
+# --- test: arm A also authors an artefact (its test scripts) and it must be held
+# --- to the same standard. An earlier draft omitted this and drew a superlative
+# --- ("FCDD's artefact was the least reproducible thing in the study") that the
+# --- comparator refutes.
+pristine_names = set(os.listdir(os.path.join(LAB, "case01_spectrum_gambit",
+                                             "sealed", "seedkit", "pristine")))
+print("\n=== comparator: each arm's OWN authored artefact ===")
+for arm, what in (("A", "test scripts added to variants/"), ("B", "contract/spec/Contract.lean")):
+    hs = []
+    for bug in BUGS:
+        for k in (1, 2, 3, 4):
+            ws = os.path.join(WORK, "%s_arm%s_c2r%d" % (bug, arm, k))
+            if arm == "A":
+                d = os.path.join(ws, "variants", bug)
+                if not os.path.isdir(d): continue
+                extra = sorted(f for f in os.listdir(d)
+                               if f not in pristine_names and f.endswith((".py", ".sh")))
+                blob = b"".join(open(os.path.join(d, f), "rb").read() for f in extra)
+                hs.append(hashlib.sha256(blob).hexdigest() if extra else "NONE")
+            else:
+                t = read(os.path.join(ws, "contract", "spec", "Contract.lean"))
+                if t is not None: hs.append(hashlib.sha256(t.encode()).hexdigest())
+    print("  arm %s (%-32s): %d runs, %d distinct, %d authored nothing"
+          % (arm, what, len(hs), len(set(hs)), hs.count("NONE")))
+print("\n  Neither arm converged on its supporting artefact. On this measure the")
+print("  CONTROL arm diverged more, which is the opposite of what a one-sided")
+print("  reading of the treated arm alone would suggest.")

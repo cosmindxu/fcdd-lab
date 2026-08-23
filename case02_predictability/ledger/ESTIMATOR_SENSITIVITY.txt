@@ -2,10 +2,16 @@
 estimator                                      in dollars        in cents (x100)
 CV_log  (PRE-REGISTERED)            mean -0.0547 p=0.1094   mean -0.0254 p=0.0469   <-- MOVES WITH THE UNIT
 sd(ln c)  scale-free                mean -0.2152 p=0.0156   mean -0.2152 p=0.0156
-IQR(ln c)  scale-free               mean -0.1729 p=0.0156   mean -0.1729 p=0.0156
+mid-spread(ln c)  scale-free        mean -0.1729 p=0.0156   mean -0.1729 p=0.0156
 
   All variants agree on DIRECTION (negative = the ordinary arm is less
   dispersed). They differ only on whether it reaches alpha = 0.05.
+
+  SCALE-invariance is not MEASURE-invariance. Dollars and tokens are not
+  proportional (two models at different prices; cached input near-free), so
+  a scale-free statistic still moves between them:
+    sd(ln c)             dollars p=0.0156    tokens p=0.0625
+    mid-spread(ln c)     dollars p=0.0156    tokens p=0.0469
 
   Why CV_log is also biased toward H1: |mean(ln c)| sits in the
   denominator and arm B costs ~2.26x more, so B's dispersion is divided
@@ -24,3 +30,14 @@ IQR(ln c)  scale-free               mean -0.1729 p=0.0156   mean -0.1729 p=0.015
   => removing the post-gap runs makes the anti-H1 mean STRONGER.
      A6 claimed the gap biased conservatively (against H1). The observed
      sign is the opposite: the post-gap runs pulled TOWARD H1.
+
+=== a SECOND discontinuity the paper's threats did not count ===
+  drive.log records cell 14 (bug05/armB/r1) running 88.6 h wall clock,
+  2026-08-08 -> 2026-08-12, against ~55 min of agent time in its two
+  result files: the schedule was suspended on a weekly usage limit. A6
+  reasons about ONE gap; there are two, so more cells straddle an era
+  boundary than A6's analysis assumes. Sensitivity, dropping BOTH the
+  five post-gap runs and the suspended cell:
+    both removed    : mean -0.0628  p=0.1094
+  (the cell is dropped by count, not by identity, since the suspension
+   is a property of when it ran rather than of the run itself)

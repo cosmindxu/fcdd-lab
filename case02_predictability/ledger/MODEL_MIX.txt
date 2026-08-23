@@ -12,4 +12,9 @@ per-arm mix (the pre-registration required these to match):
      claude-opus-5          $  716.96   74.3%
      claude-fable-5         $  247.85   25.7%
 
+BOUNDING the mix: headline cost ratio with the subagent model removed
+  all spend (as reported)  median B/A = 2.26x   7/7 defects dearer   sign p = 0.0156
+  primary model only       median B/A = 2.75x   7/7 defects dearer   sign p = 0.0156
+  primary-model-only PRIMARY estimator: mean -0.0718  exact p = 0.0625
+
 imbalance in claude-fable-5 share: arm A 35.5% vs arm B 25.7%  (9.8 points)
