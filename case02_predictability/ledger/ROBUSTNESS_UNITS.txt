@@ -1,0 +1,3 @@
+dollars (PRIMARY, pre-registered)               mean CV diff -0.0547   perm p = 0.1094 | median ratio 2.26x  7/7  sign p = 0.0156
+raw tokens, all four kinds (D3's preferred unit)  mean CV diff -0.0169   perm p = 0.0625 | median ratio 3.39x  7/7  sign p = 0.0156
+output tokens only                              mean CV diff -0.0220   perm p = 0.0625 | median ratio 1.83x  7/7  sign p = 0.0156
