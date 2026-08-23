@@ -1,5 +1,5 @@
 ---
-title: "FCDD — the process encoded in the formal-contract-dev skill"
+title: "FCDD — the process encoded in the formal-contract-dev skill (Beat 4 bounded, 2026-08-23)"
 ---
 flowchart TB
     classDef beat fill:#1f3a5f,stroke:#4a90d9,stroke-width:2px,color:#ffffff
@@ -31,7 +31,7 @@ flowchart TB
 
     subgraph ADVERSARY["③ confront it — independence is the point"]
         direction LR
-        B4["<b>BEAT 4 · ATTACK</b><br/>parallel reviewers, <b>distinct lenses</b><br/>(a) spec adequacy (b) twin fidelity<br/>(c) can the shell lie? (d) integration<br/>findings proved by execution"]:::beat
+        B4["<b>BEAT 4 · ATTACK</b> — <b>against a DECLARED BUDGET</b><br/>declare the surface set S <i>first</i>; cost = |S| × 4, known up front<br/>mandatory pass: every lens × every surface, <b>ONE round, parallel</b><br/>(a) spec adequacy (b) twin fidelity<br/>(c) can the shell lie? (d) integration<br/>findings proved by execution<br/><b>stop on COVERAGE, not on convergence</b>"]:::beat
         SHIP["<b>SHIP</b><br/>verify where it RUNS<br/>extract + execute payload<br/>rollback = config revert"]:::beat
         OPS["<b>OPERATE</b><br/>conformance ledger nightly<br/>liveness line every run<br/>independent watchdog"]:::beat
         B4 --> SHIP --> OPS
@@ -41,11 +41,15 @@ flowchart TB
     A3 --> B35
     B375 --> B4
 
-    B4 -. "findings ⇒ fix at the offending LAYER,<br/>then re-review the fix" .-> B1
+    B4 -. "CONFIRMED blocking ⇒ fix at the offending LAYER,<br/>then <b>ONE</b> remediation round, that finding only —<br/><b>hard stop at 2 rounds</b>; residuals are named and ship" .-> B1
     B4 -.-> B35
     B375 -. "a false finding on a real case is a defect in<br/>spec, twin or shell — never patch the test" .-> B1
     OPS == "REAL INCIDENT ⇒ NEW THEOREM (law 6): the lifecycle closes" ==> B1
 
-    LAWS["<b>CROSS-CUTTING LAWS</b> (apply to every beat)<br/>1 degraded input ⇒ conservative verdict · 2 local proofs die at stateful seams<br/>3 the badge must match the detector · 4 verify claims where they run<br/>5 two independent verifiers · 6 real incidents become theorems<br/>7 spec coherence before code conformance · 8 ship assumptions, rejected<br/>alternatives and residuals · 9 silence never encodes a posture<br/>10 a partial FCDD labelled beats a full FCDD pretended"]:::law
+    LAWS["<b>CROSS-CUTTING LAWS</b> (apply to every beat)<br/>1 degraded input ⇒ conservative verdict · 2 local proofs die at stateful seams<br/>3 the badge must match the detector · 4 verify claims where they run<br/>5 two independent verifiers · 6 real incidents become theorems<br/>7 spec coherence before code conformance · 8 ship assumptions, rejected<br/>alternatives and residuals · 9 silence never encodes a posture<br/>10 a partial FCDD labelled beats a full FCDD pretended<br/>11 operational constraints are deduced, not given<br/><b>12 no unbounded loop in the method — every iterative beat<br/>declares its budget before it starts</b>"]:::law
+
+    WHY["<b>WHY BEAT 4 IS BOUNDED</b> (case02, 56 runs)<br/>under iterate-to-convergence the beat ran <b>1–18 rounds</b> on repeats of the<br/>SAME defect; round count correlated <b>r = 0.72</b> with run cost and explained<br/>~half its variance; runs with ≥6 rounds cost $48.33 vs $28.42 for ≤2 — and<br/><b>all 56 runs produced a byte-identical artefact</b>, so the extra rounds changed<br/>nothing. The bounded control arm varied 3× and correlated −0.21.<br/><i>Diagnosis measured; the fix's benefit is predicted, not yet demonstrated.</i>"]:::law
+
+    B4 -.- WHY
 
     RES["<b>WHAT FCDD DOES NOT ESTABLISH</b><br/>proves COHERENCE, never correctness-of-intent — garbage clauses,<br/>kernel-checked, are still garbage · the bridge cannot catch COMMON-MODE<br/>error: one author writing spec AND twin makes both agree and every layer<br/>pass, yielding maximal false confidence — only an independent reviewer<br/>and reality can · it CAUGHT the hollow monitor, it did not PREVENT it"]:::res

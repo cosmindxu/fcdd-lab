@@ -24,7 +24,9 @@ exceptions that come from elsewhere in the record: the $21.75 artefact budget
 the withdrawn −0.0628 quoted from A18, and the Bonferroni threshold
 0.05/4 = 0.0125, which is arithmetic shown in place.
 Where a draft claimed a provenance it did not have, the script was fixed rather
-than the claim softened. A **third** round then found the study's most serious defect — the treated arm
+than the claim softened. Draft v4 adds §5.7, which locates the dispersion §5.1 measures in a specific beat
+of the method, and four figures. A **third** review round found the study's most
+serious defect — the treated arm
 was shipped the pristine binary, bit-identical to the sealed answer key, while
 the control was deliberately denied it (A17) — plus 71 further verified findings,
 including a sensitivity analysis of ours that dropped the wrong run (A18). Round
@@ -330,6 +332,9 @@ script *and* dry-run it against one completed cell before the schedule starts.
 | bug06 | 4 | 4 | 0.0200 | 0.0206 | −0.0006 |
 | bug07 | 4 | 4 | 0.0484 | 0.1439 | −0.0955 |
 
+![Figure 2 — Per-defect dispersion, paired. FCDD sits right of the control on
+five of seven defects; lower is more predictable.](figures/fig3_dispersion.png)
+
 **Mean CV difference (A − B) = −0.0547. Exact two-sided permutation
 *p* = 0.1094.** Median difference −0.0408, bootstrap interval (B = 100 000, seed
 20260807) **[−0.0955, +0.0054]**, spanning zero.
@@ -542,6 +547,9 @@ some property of prose we have not identified, and no claim rests on it.
 † per-run means within each four-run cell, not cell totals — the same basis as
 the dollar columns.
 
+![Figure 3 — Mean cost per run by defect, with the ratio. FCDD is dearer on
+every pair.](figures/fig2_cost_per_defect.png)
+
 **FCDD was dearer on 7 of 7 faults. Exact two-sided sign test *p* = 0.0156 —
 the attainable floor at seven pairs.** Median ratio 2.26× in the
 pre-registered dollar measure, 3.39× in raw tokens, 1.83× in output tokens; the
@@ -592,6 +600,9 @@ it, the results do not agree with one another:
 | bug06 | 4 | +159 .. +242 | none |
 | bug07 | 2 | +32 .. +209 | none |
 
+![Figure 4 — The repaired program converged to a single artefact; neither arm's
+own supporting artefact did.](figures/fig4_artefact_convergence.png)
+
 **Twenty-three distinct specification files across the 28 treated runs — the 22
 edits, no two alike, plus the one untouched baseline — against a single distinct
 binary across all 56 runs.** The units are stated explicitly because the
@@ -625,6 +636,60 @@ Note what this does *not* show. No specification here was demonstrated wrong;
 none was even checked against another for semantic agreement. Variance is not
 error, and establishing that these 22 formalisations actually disagree would take
 a pairwise semantic comparison this study did not perform.
+
+### 5.7 Where the unpredictability lives (exploratory)
+
+Not pre-registered. §5.1 establishes that FCDD's cost dispersion was not lower
+than the control's and, if anything, higher. This asks *which part of the method*
+produces it, because that is the only version of the question a practitioner can
+act on.
+
+Every run records its adversarial rounds in `FIX_NOTES.md`. Counting them
+lexically — the same regular expression applied to both arms, so the arm contrast
+is fair even where absolute counts are noisy:
+
+| arm | rounds per run | spread | *r*(rounds, cost) | median within-cell cost spread |
+|---|---|---|---|---|
+| A — ordinary dev + review | 1–3, median 2 | 3× | **−0.21** | 1.30× |
+| B — FCDD | 1–**18**, median 3 | **18×** | **+0.72** | 1.75× |
+
+![Figure 1 — Adversarial rounds against run cost. The control arm's review is
+bounded by construction and its round count carries no cost signal; FCDD's is
+not, and round count explains roughly half its cost
+variance.](figures/fig1_rounds_vs_cost.png)
+
+**And the extra rounds bought nothing measurable.**
+
+| | mean cost | artefact |
+|---|---|---|
+| runs with ≥ 6 rounds (n = 9) | **$48.33** | identical to pristine |
+| runs with ≤ 2 rounds (n = 12) | **$28.42** | identical to pristine |
+
+Since all 56 runs produced a byte-identical correct binary (§5.2), every
+additional round in every long run changed nothing about what shipped — at 1.7×
+the price and with the round count itself varying eighteen-fold.
+
+**The mechanism is in the method's own text, and it is deliberate.** FCDD's
+ATTACK beat terminates on convergence: *"within an unchanged surface, severity
+trends down and a round yields only accepted residuals; when you WIDEN the
+surface … reset and expect reachable finds again. A late-round reachable find is
+not a failure of convergence — it is evidence the surface grew."* That reasoning
+is sound about surfaces and is exactly the variance generator, because it
+conflates two properties and stops on the unbounded one: **coverage** (have all
+four lenses been applied? bounded, checkable, priceable in advance) and
+**convergence** (has iteration stopped producing findings? judgement-based,
+priced only in arrears). Case01 §4.2 had already named the consequence — *"Unbounded
+review has no fixed point"* — without pricing it.
+
+**What this licenses, and what it does not.** It locates the dispersion rather
+than explaining it away: round count is an *association* with cost, not a
+demonstrated cause, and a run that needed more rounds may have been a harder run.
+What resists that reading is the artefact evidence — the long runs did not
+produce better output, they produced the same output. It also cannot show what
+bounding the beat would *lose*, because on this benchmark nothing failed. The
+method change this motivates is recorded separately
+(`fcdd_lab/method/ATTACK_BUDGET_DIAGNOSIS.md`) with its status stated as a
+measured diagnosis and a predicted, not demonstrated, benefit.
 
 ## 6. Blinding: audited, not asserted
 
@@ -832,6 +897,17 @@ and by this measure it is the *control* arm whose artefact is less reproducible.
 What survives is the symmetric statement: the code converged completely and
 neither method's authored artefact did (§5.6).
 
+**The one actionable finding.** §5.7 locates FCDD's dispersion in the ATTACK
+beat: round count varies eighteen-fold across repeats of the same defect,
+correlates *r* = +0.72 with cost, and the extra rounds changed no artefact. The
+control arm's bounded review varies threefold and correlates −0.21. The beat
+stops on *convergence* — an unbounded judgement — where it could stop on
+*coverage*, which is bounded and priceable in advance. That is a defect in the
+method rather than a property of the work, it is the one result here a
+practitioner can act on without waiting for a better study, and the corresponding
+change to the method is recorded with its evidence and its honest status
+(measured diagnosis, predicted benefit).
+
 **What this does not license.** It is not a verdict on FCDD, for two reasons, and
 the first is disqualifying on its own. **The treated arm held the answer key**
 (A17): every Arm B workspace shipped the pristine binary, the control was
@@ -902,6 +978,7 @@ tools/make_packets_case02.py          # 28 blinded counterbalanced packets
 tools/blinding_audit_case02.py        # blinding audit (needs the packets + keys)
 tools/comment_volume_case02.py        # §5.4 comment volume, both normalisations
 tools/spec_divergence_case02.py       # §5.6 spec convergence + arm A comparator
+tools/make_figures_case02.py          # figures 1-4 (PDF for LaTeX, PNG for review)
 tools/analyse_quality_case02.py       # unblind + quality analysis (needs the keys)
 tools/drive_case02.sh                 # executes the schedule (needs the runner + API)
 ```
