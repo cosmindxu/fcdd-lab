@@ -1,0 +1,15 @@
+sealed pristine chess.tap sha256 : 33ed86b2cdec18ab3147376903739882210581f303321882141770dd6ba978b4
+
+arm A: shipped the pristine binary as an INPUT in  0/28 workspaces
+        FIX_NOTES referencing the shipped artefacts :  0/28
+        FIX_NOTES recording a byte-level comparison : 20/28
+arm B: shipped the pristine binary as an INPUT in 28/28 workspaces
+        FIX_NOTES referencing the shipped artefacts : 28/28
+        FIX_NOTES recording a byte-level comparison : 20/28
+
+What Arm B's package contains beyond spec/twin/bridge/smt:
+  boot.sna              49179 bytes
+  chess.tap             13596 bytes  <-- BIT-IDENTICAL TO SEALED PRISTINE
+  e4.sna                49179 bytes
+  perft_full.sna        49179 bytes
+  perft_full.txt          819 bytes

@@ -38,6 +38,7 @@ mid-spread(ln c)  scale-free        mean -0.1729 p=0.0156   mean -0.1729 p=0.015
   reasons about ONE gap; there are two, so more cells straddle an era
   boundary than A6's analysis assumes. Sensitivity, dropping BOTH the
   five post-gap runs and the suspended cell:
-    both removed    : mean -0.0628  p=0.1094
-  (the cell is dropped by count, not by identity, since the suspension
-   is a property of when it ran rather than of the run itself)
+    both removed    : mean -0.0345  p=0.1094
+  The direction is WEAKER against H1 than post-gap removal alone, not
+  stronger: the suspended run is bug05/armB/r1, the cheap resumed run A7
+  flagged, and removing it shrinks that cell's dispersion.

@@ -35,8 +35,10 @@ def cells_tok():
             float(sum(sum(v.get(k) or 0 for k in KEYS_T) for v in mu.values())))
     return C
 
+SUSPENDED = ("bug05", "B", "1")     # 88.6 h wall clock on a weekly usage limit
+
 def load():
-    C, pre = {}, {}
+    C, pre, pre_id = {}, {}, {}
     for f in glob.glob(os.path.join(RAW, "arm*_c2r*_a*_result.json")):
         m = re.search(r"arm([AB])_(bug\d+)_c2r(\d)_a(\d)_result\.json$", f)
         if not m: continue
@@ -46,7 +48,9 @@ def load():
         C.setdefault((bug, arm), []).append(float(d["total_cost_usd"]))
         if (bug, arm, k) not in POST_GAP:
             pre.setdefault((bug, arm), []).append(float(d["total_cost_usd"]))
-    return C, pre
+            if (bug, arm, k) != SUSPENDED:
+                pre_id.setdefault((bug, arm), []).append(float(d["total_cost_usd"]))
+    return C, pre, pre_id
 
 cv_log = lambda c: st.stdev([math.log(x) for x in c]) / abs(st.mean([math.log(x) for x in c]))
 sd_log = lambda c: st.stdev([math.log(x) for x in c])
@@ -60,7 +64,7 @@ def ep(d):
                if abs(st.mean([x * y for x, y in zip(s, d)])) >= abs(o) - 1e-12) / 2 ** n
 
 if __name__ == "__main__":
-    C, PRE = load()
+    C, PRE, PRE_ID = load()
     print("=== scale-invariance: identical data, different currency unit ===")
     print("%-34s %22s %22s" % ("estimator", "in dollars", "in cents (x100)"))
     for name, f in (("CV_log  (PRE-REGISTERED)", cv_log),
@@ -104,9 +108,11 @@ if __name__ == "__main__":
     print("  reasons about ONE gap; there are two, so more cells straddle an era")
     print("  boundary than A6's analysis assumes. Sensitivity, dropping BOTH the")
     print("  five post-gap runs and the suspended cell:")
-    both = {k: [c for c in v] for k, v in PRE.items()}
-    both[("bug05","B")] = [c for c in both[("bug05","B")]][:3] if len(both[("bug05","B")]) > 3 else both[("bug05","B")]
-    d3 = [cv_log(both[(b,"A")]) - cv_log(both[(b,"B")]) for b in BUGS]
+    # Drop the suspended run BY IDENTITY. An earlier version sliced [:3] over an
+    # unsorted glob, which kept the suspended run and discarded an unrelated one,
+    # and reported -0.0628 -- an artefact of directory order, not a sensitivity.
+    d3 = [cv_log(PRE_ID[(b,"A")]) - cv_log(PRE_ID[(b,"B")]) for b in BUGS]
     print("    both removed    : mean %+.4f  p=%.4f" % (st.mean(d3), ep(d3)))
-    print("  (the cell is dropped by count, not by identity, since the suspension")
-    print("   is a property of when it ran rather than of the run itself)")
+    print("  The direction is WEAKER against H1 than post-gap removal alone, not")
+    print("  stronger: the suspended run is bug05/armB/r1, the cheap resumed run A7")
+    print("  flagged, and removing it shrinks that cell's dispersion.")

@@ -1,3 +1,14 @@
+=== per-defect CV_log difference (A - B), the §5.1 table's last column ===
+  bug01   +0.0054
+  bug02   +0.0087
+  bug03   -0.0571
+  bug04   -0.0408
+  bug05   -0.2027
+  bug06   -0.0006
+  bug07   -0.0955
+
+study totals: $1382.74  (arm A $417.94, arm B $964.80)  over 56 runs
+
 exact p  (frozen impl)              : 0.1094
 exact p  (enumeration re-derived)   : 0.1094
 agree                               : True

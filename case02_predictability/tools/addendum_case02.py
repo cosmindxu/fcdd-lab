@@ -35,6 +35,17 @@ def exact_p_independent(d):
         if abs(m) >= abs(obs) - 1e-12: ge += 1
     return ge / 2 ** n
 
+# Deposit the per-defect difference column and the study totals. The article's
+# §5.1 table and §3 totals had no deposited source until review pointed it out;
+# the frozen script emits CV_log per arm but not their difference.
+print("=== per-defect CV_log difference (A - B), the §5.1 table's last column ===")
+for b, d in zip(A.BUGS, [A.cv_log(cells[(x,"A")]) - A.cv_log(cells[(x,"B")]) for x in A.BUGS]):
+    print("  %-7s %+0.4f" % (b, d))
+_tot = sum(sum(v) for v in cells.values())
+_a = sum(sum(cells[(b,"A")]) for b in A.BUGS); _b = sum(sum(cells[(b,"B")]) for b in A.BUGS)
+print("\nstudy totals: $%.2f  (arm A $%.2f, arm B $%.2f)  over %d runs\n"
+      % (_tot, _a, _b, sum(len(v) for v in cells.values())))
+
 p_ind = exact_p_independent(diffs)
 p_frozen = A.exact_paired_permutation(diffs)
 print("exact p  (frozen impl)              : %.4f" % p_frozen)

@@ -839,3 +839,102 @@ sharper than that core has now been wrong at least once. That is worth stating
 plainly in a paper about whether formal machinery makes work more reliable: what
 caught these was adversarial review, repeatedly, and each round found errors the
 previous round's fixes introduced.
+
+---
+
+## A17 — the oracle confound was not spent symmetrically; it was inverted. Arm B was shipped the answer.
+**2026-08-23, found by the third adversarial review round, before submission.**
+
+This is the most serious defect found in the study, and it goes to the design's
+central control rather than to its analysis.
+
+**What was shipped.** `run_resilient.sh` builds an Arm B workspace with
+`cp -r "$CASE/step1_contract" "$WS/contract"` — the whole tree. That tree contains
+an `artifacts/` directory holding `chess.tap` with sha256
+`33ed86b2cdec18ab3147376903739882210581f303321882141770dd6ba978b4`, **bit-identical
+to the sealed answer key's pristine tape**, together with pristine memory
+snapshots. Measured: the pristine binary was present as an *input* in **28 of 28
+Arm B workspaces and 0 of 28 Arm A workspaces**. All 28 Arm B `FIX_NOTES.md`
+reference the shipped artefacts.
+
+**What Arm B could therefore do, and did.** Each seeded variant differs from
+pristine in one byte plus the tape checksum. A single `cmp -l` localises the
+fault exactly. From `bug06_armB_c2r2/FIX_NOTES.md`:
+
+    $ cmp -l contract/artifacts/chess.tap variants/bug06/chess.tap
+    11497  70  50        # octal: 0x38 (JR C) pristine vs 0x28 (JR Z) variant
+    13596 210 230        # the tape checksum byte
+
+**Arm A was denied that object deliberately, for a reason that was false.** From
+`armA_characterisation_v1_PROVENANCE.md`:
+
+> The pristine `.tap` itself is deliberately **not** shipped with the suite. Only
+> observable values are recorded. Shipping the binary would let an Arm A run diff
+> it against the variant and localise the fault instantly, **which would be a
+> strictly stronger oracle than the contract Arm B holds.**
+
+Arm B held exactly that binary, in every run. The stated justification for
+withholding it from the control is a precise description of the advantage the
+treatment actually had.
+
+**What this does to the study.** Case01's disclosed confound was that Arm B's
+contract had been *derived from* the pristine engine. Case02 exists to spend that
+confound symmetrically. It did not: it **inverted and amplified** it. Arm B did
+not merely hold a pristine-derived artefact, it held the pristine artefact.
+
+Three consequences, stated in order of severity.
+
+1. **§5.2's convergence result is not arm-comparable.** "Every run in both arms
+   found the seeded fault and reverted it exactly" is true, but the two arms
+   reached it by different routes: Arm A by reasoning from reported symptoms
+   through a characterisation suite, Arm B by a byte comparison against the
+   answer. The 56/56 convergence is still a fact; it is no longer evidence that
+   the two *methods* are equally capable of localising a fault.
+2. **The cost and dispersion comparisons are biased toward the treatment.**
+   Localising a fault by `cmp -l` is faster and far less variable than deducing
+   it. This should depress both Arm B's cost and its within-cell dispersion —
+   which is to say it biases *toward* H1 and *toward* a smaller measured premium.
+3. **The headline conclusions survive, as conservative.** H1 failed anyway, and
+   the premium was 2.26× (2.75× on primary-model spend) anyway. Both results were
+   obtained against a design tilted in FCDD's favour, so removing the tilt could
+   only strengthen them. That is the only reason this amendment is a disclosure
+   rather than a retraction.
+
+**Why it went unseen for three review rounds.** Nothing in the paper, the
+pre-registration or amendments A1–A16 mentions `artifacts/`. §6's enumeration of
+the Arm B package — "Lean specification, twin, bridge suite, z3 scripts" — omits
+it. A4 reasoned carefully about suite-versus-contract expressiveness without
+noticing that the contract package also contained the answer. The directory was
+inherited from case01's step 1, where it was a legitimate build artefact, and it
+was copied wholesale into every treated workspace by a line of shell nobody
+re-read.
+
+No re-run is attempted, for the reasons in A6 and A13: it would cost the study
+again, in a changed environment, and could not restore the pre-registered
+condition retroactively. The defect is disclosed, quantified and carried into the
+threats section. A case03 must ship the treated arm a package whose contents have
+been enumerated and diffed against the sealed material, and the check belongs in
+the runner, not in a reviewer's diligence.
+
+---
+
+## A18 — the second-gap sensitivity dropped the wrong run
+**2026-08-23, same review round.**
+
+A16 reported that removing both the post-gap runs and the suspended cell gives
+mean −0.0628, "direction slightly stronger against H1". Both halves are wrong.
+
+`estimator_sensitivity_case02.py` removed the suspended observation **by count**,
+slicing `[:3]` over an unsorted `glob.glob`. On this filesystem that kept the
+suspended run (`bug05/armB/r1`, $8.59) and discarded an unrelated one
+(`bug05/armB/r3`, $36.26). The reported figure was an artefact of directory order.
+
+Dropping the suspended run **by identity**: mean **−0.0345**, *p* = 0.1094. The
+verdict is unchanged, but the direction is **weaker** against H1 than post-gap
+removal alone (−0.0575) and weaker than the headline (−0.0547) — which is what
+threat 5 predicts, since that run is the cheap resumed observation A7 flagged as
+the largest single contributor to the anti-H1 direction. Removing it shrinks that
+cell's dispersion and softens the reversal.
+
+The script now selects by identity and the constant is named. A16's sentence is
+superseded here rather than rewritten, per this log's append-only rule.
