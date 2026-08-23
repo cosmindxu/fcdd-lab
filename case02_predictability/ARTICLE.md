@@ -17,14 +17,23 @@ scale-invariant** (A14). Both are new sections below and new threats. Three
 claims v1 asserted without measuring are withdrawn: the "15,295 bytes" figure
 (the binary is 13,516), the attribution of the minimality result to comment
 volume (measured: +40 characters, *p* = 0.2344), and the direction of the
-nine-day gap's bias (measured: the opposite of what A6 predicted). Every number
-here re-derives from the scripts named in §10 against the deposited artefacts;
-where v1 claimed a provenance it did not have, the script was fixed rather than
-the claim softened. Round two overturned three of v2's own corrections — the specification-divergence
+nine-day gap's bias (measured: the opposite of what A6 predicted). Every number here re-derives from the
+scripts named in §10 against the deposited artefacts, with three stated
+exceptions that come from elsewhere in the record: the $21.75 artefact budget
+(pre-registration §3), the withdrawn *p* = 0.0543 quoted historically from A9,
+and the Bonferroni threshold 0.05/4 = 0.0125, which is arithmetic shown in place.
+Where a draft claimed a provenance it did not have, the script was fixed rather
+than the claim softened. A **third** round then found the study's most serious defect — the treated arm
+was shipped the pristine binary, bit-identical to the sealed answer key, while
+the control was deliberately denied it (A17) — plus 71 further verified findings,
+including a sensitivity analysis of ours that dropped the wrong run (A18). Round
+three raised 83 and verified **72: 9 blocking, 37 major, 26 minor**.
+
+Round two overturned three of v2's own corrections — the specification-divergence
 baseline and count, the superlative drawn from them, and A14's claim that the
 scale-free result held "in any unit" — and surfaced a second, previously
 undisclosed schedule suspension. All are in A16. Departures from the frozen
-pre-registration are in `AMENDMENTS.md` (**A1–A16**).
+pre-registration are in `AMENDMENTS.md` (**A1–A18**).
 
 ---
 
@@ -91,10 +100,20 @@ difficulty, FCDD's overhead bought no detectable improvement in cost
 predictability or repair strategy, and no graded quality improvement, while
 producing an **identical program** — though not an identical work product — for
 roughly 2.3× the price, rising to 2.75× once the model contamination of A13 is
-removed. We report this as a null on the method's
-central claim, with two limitations that cut hardest against the study itself: 56/56 perfect convergence means this
-benchmark can discriminate methods on cost and on nothing else, and the model
-contamination in A13 means the arms were not, in the end, model-matched.
+removed. One limitation dominates all others and was found only in the third review
+round: **the treated arm was shipped the answer.** Every Arm B workspace
+contained the pristine binary, bit-identical to the sealed key; no Arm A
+workspace did, and the control was denied it deliberately on the stated grounds
+that it would confer "a strictly stronger oracle than the contract Arm B holds".
+The confound this study existed to neutralise was inverted (A17). The direction
+is knowable — localising a fault by byte-diff is faster and less variable than
+deducing it — so the tilt runs toward FCDD, and both headline results were
+obtained against it and are therefore conservative.
+
+We report this as a null on the method's central claim, with two further
+limitations that cut hard: 56/56 perfect convergence means this benchmark can
+discriminate methods on cost and on nothing else, and the model contamination in
+A13 means the arms were not, in the end, model-matched.
 
 ---
 
@@ -155,8 +174,31 @@ imbalance. The study therefore ran on a *mixture* in proportions the design
 neither controlled nor measured. A13 records this in full and §8 carries it as a
 threat; the consequences are stated where they bite, in §5.1 and §5.5.
 
-**The oracle confound, spent asymmetrically in practice.** Arm A receives a
-pristine-derived artefact of its own — a characterisation suite built by an agent
+**The oracle confound was inverted, not spent.** This is the study's most
+serious defect and it was found only in the third review round; §8 threat 1 and
+A17 carry it in full. `run_resilient.sh` builds each Arm B workspace by copying
+the whole contract tree, and that tree contains an `artifacts/` directory holding
+`chess.tap` **bit-identical to the sealed answer key's pristine tape**. Measured:
+the pristine binary was present as an input in **28 of 28 Arm B workspaces and 0
+of 28 Arm A workspaces**, and all 28 Arm B `FIX_NOTES.md` reference it. Since
+each variant differs from pristine in one byte plus a checksum, a single `cmp -l`
+localises the fault exactly, and the runs did precisely that.
+
+Arm A was denied that object on purpose. The control artefact's own provenance
+note records the reason: shipping the binary "would let an Arm A run diff it
+against the variant and localise the fault instantly, which would be a strictly
+stronger oracle than the contract Arm B holds". Arm B held that binary in every
+run. The stated justification for withholding it from the control describes the
+advantage the treatment actually had.
+
+The design intended to spend case01's confound symmetrically. It amplified it:
+Arm B did not merely hold a pristine-*derived* artefact, it held the pristine
+artefact. Everything below must be read against that, and §8 states the
+direction — the tilt runs toward FCDD, so the null and the premium are both
+conservative.
+
+With that said, the design as written: Arm A receives a pristine-derived artefact
+of its own — a characterisation suite built by an agent
 with the same access to the pristine engine FCDD's contract author had. The
 heading in earlier drafts said "symmetrically"; the log does not support that
 word. The design specified a cost-matched artefact at $21.75; the delivered suite
@@ -280,7 +322,7 @@ script *and* dry-run it against one completed cell before the schedule starts.
 | defect | nA | nB | CV_log A | CV_log B | A − B |
 |---|---|---|---|---|---|
 | bug01 | 4 | 4 | 0.1049 | 0.0995 | +0.0054 |
-| bug02 | 4 | 4 | 0.0506 | 0.0418 | +0.0088 |
+| bug02 | 4 | 4 | 0.0506 | 0.0418 | +0.0087 |
 | bug03 | 4 | 4 | 0.0174 | 0.0745 | −0.0571 |
 | bug04 | 4 | 4 | 0.0422 | 0.0830 | −0.0408 |
 | bug05 | 4 | 4 | 0.0172 | 0.2199 | −0.2027 |
@@ -397,8 +439,17 @@ comments stripped and whitespace normalised (28/28 identical), raw source
 (0/28 identical — the entire difference is commentary).
 
 Every run in both arms found the seeded fault and reverted it exactly. This is
-the central empirical fact of the study, and it governs how §5.3 and §5.4 must
-be read.
+the central empirical fact of the study, and it governs how §5.3 and §5.4 must be
+read.
+
+**It is not, however, an arm-comparable achievement.** Per A17, Arm B's workspace
+contained the pristine binary and 28 of 28 runs referenced it; a `cmp -l` against
+it localises the seeded byte exactly. Arm A had no such object and reached the
+same repair by reasoning from reported symptoms through its characterisation
+suite. Both arms converged on the identical program — but the convergence is
+evidence that the *fault was recoverable*, not that the two *methods* localise
+faults equally well. A design that withheld the answer from both arms might have
+produced a different picture, and this one cannot say.
 
 ### 5.3 Strategy (H2): degenerate, not merely unsupported
 
@@ -678,7 +729,17 @@ any run.
 
 ## 8. Threats to validity
 
-1. **The benchmark cannot discriminate on outcome.** 56/56 perfect convergence
+1. **The treated arm was shipped the answer (A17).** Every Arm B workspace
+   contained `contract/artifacts/chess.tap`, bit-identical to the sealed pristine
+   tape; no Arm A workspace did. A one-line `cmp -l` localises the seeded byte,
+   and the run notes show it being used. This inverts the confound the study was
+   built to neutralise and is the most serious defect in the design. Direction:
+   localising by byte-diff is faster and less variable than deducing, so it
+   depresses both Arm B's cost and its within-cell dispersion — biasing toward H1
+   and toward a smaller premium. Both headline results were obtained against that
+   tilt and are therefore conservative, which is why this is a disclosure rather
+   than a retraction. It also means §5.2's convergence is not arm-comparable.
+2. **The benchmark cannot discriminate on outcome.** 56/56 perfect convergence
    means these seven faults were, for this model at this effort, easy: single
    byte changes, unambiguous reports, reachable ground truth. A benchmark where
    every run of both arms succeeds perfectly can separate methods on cost and on
@@ -686,7 +747,7 @@ any run.
    enough to produce failures is a question this design is structurally unable
    to answer**, and it should not be read as having answered it. This is the
    single most important limitation of the study.
-2. **The arms were not model-matched (A13).** `claude-fable-5` executed inside
+3. **The arms were not model-matched (A13).** `claude-fable-5` executed inside
    51 of 56 runs and took 28.6% of total spend, in unequal proportions by arm
    (35.5% of Arm A against 25.7% of Arm B), undetected until adversarial review.
    It injects into the primary estimator a source of within-cell dispersion that
@@ -694,13 +755,13 @@ any run.
    that revealed it: on primary-model spend alone the cost premium rises to 2.75×
    and the primary estimator moves to −0.0718 (*p* = 0.0625). Both corrections run
    against FCDD, so the reported figures are the conservative ones.
-3. **The pre-registered estimator is defective (A14).** `CV_log` is not
+4. **The pre-registered estimator is defective (A14).** `CV_log` is not
    scale-invariant — its verdict crosses α between dollars and cents — and it is
    biased toward H1 because the dearer arm is divided by a larger denominator.
    The pre-registered value is retained as primary and the sensitivity is
    disclosed in §5.1; a reader who prefers a scale-free statistic reaches a
    *stronger* anti-H1 conclusion than the one we headline.
-4. **Two schedule discontinuities, not one.** A host reboot split the last five
+5. **Two schedule discontinuities, not one.** A host reboot split the last five
    cells from the first 51 by nine days (A6); the tail holds three Arm B and two
    Arm A cells, so drift lands unevenly. A6 predicted its bias would be
    conservative and measurement showed the opposite sign, small (§3). Review of
@@ -708,23 +769,26 @@ any run.
    `drive.log` records cell 14 running 88.6 hours wall clock against roughly 55
    minutes of agent time, the schedule having stalled on a weekly usage limit
    between 2026-08-08 and 08-12. More cells straddle an era boundary than A6
-   assumed. Removing both the post-gap runs and the suspended cell gives
-   mean −0.0628, *p* = 0.1094 — verdict unchanged, direction slightly stronger
-   against H1 (A16).
-5. **One non-exchangeable observation.** `bug05/armB/r1` was resumed rather than
+   assumed. Removing both the post-gap runs and the suspended run
+   `bug05/armB/r1` gives mean −0.0345, *p* = 0.1094 — verdict unchanged, but the
+   direction is *weaker* against H1 than post-gap removal alone (−0.0575),
+   consistent with threat 6. An earlier draft reported −0.0628 and "stronger";
+   that figure came from slicing an unsorted glob, which kept the suspended run
+   and dropped an unrelated one (A18).
+6. **One non-exchangeable observation.** `bug05/armB/r1` was resumed rather than
    re-run after a usage limit, so its recorded cost is that of *finishing* an
    already-advanced repair (A7). It is the largest single contributor to the
    anti-H1 direction; removing it does not rescue H1.
-6. **Artefacts are scope-matched, not cost-matched** (A1), and the arms are not
+7. **Artefacts are scope-matched, not cost-matched** (A1), and the arms are not
    nested — each covers ground the other does not (A4).
-7. **The grader is the model under study** (A11), and blinding held at the level
+8. **The grader is the model under study** (A11), and blinding held at the level
    of vocabulary but not rhetorical style (§6).
-8. **Single system, single language.** Seven faults in one Z80 assembly program
+9. **Single system, single language.** Seven faults in one Z80 assembly program
    at one effort setting — and, per A13, not one model.
-9. **No correction for multiplicity.** Four pre-registered outcomes, uncorrected
+10. **No correction for multiplicity.** Four pre-registered outcomes, uncorrected
    *p* values, and a cost result sitting exactly at the design's attainable floor
    (§5.5).
-10. **Authors evaluate their own method.** Stated plainly; the pre-registration,
+11. **Authors evaluate their own method.** Stated plainly; the pre-registration,
    the append-only amendment log, the deposited scripts and the committed
    falsification condition are the mitigations, and they are procedural, not
    structural.
@@ -767,8 +831,17 @@ and by this measure it is the *control* arm whose artefact is less reproducible.
 What survives is the symmetric statement: the code converged completely and
 neither method's authored artefact did (§5.6).
 
-**What this does not license.** It is not a verdict on FCDD. The benchmark is too
-easy: seven single-byte faults with reproducible symptoms, and both arms scored
+**What this does not license.** It is not a verdict on FCDD, for two reasons, and
+the first is disqualifying on its own. **The treated arm held the answer key**
+(A17): every Arm B workspace shipped the pristine binary, the control was
+deliberately denied it, and a one-line byte comparison localises the seeded
+fault. Whatever this study measured, it did not measure two methods working from
+comparable information. The saving grace is only that the asymmetry runs toward
+FCDD, so a failed predictability claim and a 2.26×–2.75× premium are both
+conservative — a fair contest could move them further from the method, not
+toward it.
+
+Second, the benchmark is too easy: seven single-byte faults with reproducible symptoms, and both arms scored
 100%. A method designed to prevent failures cannot be evaluated on a benchmark
 that produces none — such a benchmark can only measure what the method costs.
 Whether the specification, twin and conformance suite earn their premium on
@@ -788,11 +861,15 @@ load-bearing, and the method's proponents are entitled to every escape route it
 leaves open.
 
 **A closing observation, offered as an anecdote and not as evidence.** This
-study's own two blocking defects — a second model running inside 51 of 56 cells,
-and a primary estimator whose verdict moves with the currency unit — were caught
-by an adversarial review panel, not by any formal check. Both had been sitting in
-plain sight: one in a JSON field present in every result file from day one, the
-other a one-line algebraic property of a formula printed in the pre-registration.
+study's blocking defects — a second model running inside 51 of 56 cells, a
+primary estimator whose verdict moves with the currency unit, and a treated arm
+shipped the pristine binary — were caught
+by adversarial review panels, not by any formal check — and the worst of them,
+the treated arm holding the answer key, survived two prior rounds before the
+third found it. All had been sitting in plain sight: one in a JSON field present
+in every result file from day one, one a one-line algebraic property of a formula
+printed in the pre-registration, and one a directory copied by a line of shell
+that nobody re-read.
 Pre-registration protects against choosing a statistic to fit the data. It does
 not protect against choosing a wrong statistic before the data exists. On work of
 this difficulty, careful adversarial review found what formality did not, and
@@ -839,6 +916,6 @@ Results are deposited under `ledger/`. The *raw* result files live in
 the driver log.
 
 The pre-registration is frozen at commit `16b95fe` and every departure is in
-`AMENDMENTS.md` (A1–A16). The 28 unblinding keys are excluded by an explicit
+`AMENDMENTS.md` (A1–A18). The 28 unblinding keys are excluded by an explicit
 `.gitignore` rule — note they are deterministically regenerable from
 `make_packets_case02.py`, so the seal is a convention, not a guarantee.
