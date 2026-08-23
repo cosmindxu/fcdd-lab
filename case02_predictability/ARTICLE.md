@@ -18,10 +18,11 @@ claims v1 asserted without measuring are withdrawn: the "15,295 bytes" figure
 (the binary is 13,516), the attribution of the minimality result to comment
 volume (measured: +40 characters, *p* = 0.2344), and the direction of the
 nine-day gap's bias (measured: the opposite of what A6 predicted). Every number here re-derives from the
-scripts named in §10 against the deposited artefacts, with three stated
+scripts named in §10 against the deposited artefacts, with four stated
 exceptions that come from elsewhere in the record: the $21.75 artefact budget
 (pre-registration §3), the withdrawn *p* = 0.0543 quoted historically from A9,
-and the Bonferroni threshold 0.05/4 = 0.0125, which is arithmetic shown in place.
+the withdrawn −0.0628 quoted from A18, and the Bonferroni threshold
+0.05/4 = 0.0125, which is arithmetic shown in place.
 Where a draft claimed a provenance it did not have, the script was fixed rather
 than the claim softened. A **third** round then found the study's most serious defect — the treated arm
 was shipped the pristine binary, bit-identical to the sealed answer key, while
