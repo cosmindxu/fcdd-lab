@@ -1,0 +1,16 @@
+baseline contract: 1271 lines, 257 declarations
+
+defect  distinct  kernel-built added lines    union     shared by all 4
+bug01   4 of 4    4/4         +171..+236     116       ['qsearch']
+bug02   3 of 4    4/4         +0..+151       47        (none)
+bug03   4 of 4    4/4         +90..+157      79        ['bPromoPos']
+bug04   4 of 4    4/4         +140..+277     135       ['twoQueensPos']
+bug05   3 of 4    4/4         +0..+187       54        (none)
+bug06   4 of 4    4/4         +159..+242     106       (none)
+bug07   3 of 4    4/4         +0..+209       36        (none)
+
+distinct specifications across the 28 arm B runs : 25
+distinct repaired binaries across all 56 runs    : 1  (all equal to pristine)
+
+Every specification above is kernel-accepted: Lean certifies that a spec is
+WELL-FORMED, not that it is the right one, and not that two of them agree.
