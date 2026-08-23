@@ -667,3 +667,78 @@ The estimator defect is a defect in the **pre-registration**, not in the analysi
 script, which implemented §4 faithfully. Future cases should require the primary
 estimator to be checked for invariance under the transformations its own units
 admit, before the schedule starts.
+
+---
+
+## A15 — v1 of the article was adversarially reviewed before publication; what it got wrong
+**2026-08-23, after draft v1, before any submission.**
+
+Draft v1 was put through a five-lens adversarial review (numerical fidelity,
+overclaiming, statistical validity, internal consistency, reproducibility), with
+every finding independently verified before it was accepted. Sixty-seven findings
+were raised and **43 survived verification**: 11 blocking, 17 major, 15 minor.
+Two of the blocking ones are large enough to have their own amendments (A13,
+A14). This entry records the rest, because a paper that reports a null on someone
+else's method should be at least as exact about its own errors.
+
+**Numbers v1 asserted that were wrong.**
+
+* **"15,295 bytes"** for the repaired program. Invented; it appears in no
+  deposited artefact. The binary is **13,516 bytes** (`chess.tap`, a different
+  artefact, is 13,596). The figure also appears in A12 above, which is left
+  standing as written per this log's append-only rule and corrected here.
+* **"three matched pairs"** for case01's predictability data. Case01 replicated
+  one defect at three runs per arm; its attainable floor was *p* = 0.10, not what
+  v1 implied.
+* **"single-byte change to one instruction operand"** for all seven faults. Five
+  are operand changes; two (`bug04`, `bug06`) change the condition code in the
+  opcode byte itself.
+* **case01's 7/7 cost premium** was cited without its own published caveat: one
+  pair's cost is imputed, and on deposited values alone it is 6/7 at *p* = 0.125.
+
+**Claims v1 made without measuring, now measured.**
+
+* **The minimality result is not comment volume.** v1 asserted that graders
+  scored FCDD lower on minimality because it wrote more commentary. Measured:
+  comment characters differ by **+40 across the whole engine source — 0.10% —
+  paired *p* = 0.2344**. The explanation is withdrawn, and no replacement is
+  offered, because we do not have one.
+* **The nine-day gap's bias runs the other way.** A6 predicted it was
+  conservative with respect to H1. Measured: dropping the five post-gap runs
+  moves the mean difference from −0.0547 to −0.0575, so those runs pulled *toward*
+  H1. Small, verdict-neutral, and the opposite of the prediction.
+* **"Enough power"** was asserted three times and never computed. Replaced
+  throughout with the accurate statement — the design could in principle *reach*
+  significance, which is not the same as being powered for a given effect.
+* **"Neither arm ever forked"** claimed a fact about strategy from evidence about
+  final source. Narrowed to what the measurement supports: no fork survived into
+  the emitted code.
+
+**Provenance gaps, fixed by repairing the tooling rather than softening the
+prose.** v1's header promised every number re-derived from the named scripts.
+That was false in three places, all now true: `h2_strategy_case02.py` still
+emitted the numbers A12 withdrew (the A12 fix had only ever been applied
+inline, never written back); the per-defect token table had no deposited source;
+and `code_identity_case02.py` compared the arms to each other without ever
+opening the sealed key whose hash §5.2 cites. Two new deposited scripts,
+`estimator_sensitivity_case02.py` and `model_mix_case02.py`, carry A14 and A13.
+The quality tier now reports the interval §5 always required. The unblinding keys
+are now protected by an explicit `.gitignore` rule instead of by omission.
+
+**Under-reported disclosures now restored.** A3 — the alternative explanation
+recorded on 2026-08-07, before any run, predicting that Arm A's golden-heavy
+artefact would be "less decision-forcing than the contract" and would be "the
+first place to look" if the artefacts failed to equalise dispersion — appeared
+nowhere in v1 despite describing exactly the outcome that occurred. It is now in
+§7. Multiplicity across the four pre-registered outcomes is now stated, including
+the uncomfortable consequence that the surviving cost result sits exactly at the
+design's attainable floor and would not survive a correction over four tests.
+
+**The general lesson.** Every one of these was found by review, not by the
+authors, and the two blocking ones had been sitting in plain sight — the model
+contamination was recorded in the `modelUsage` field of all 56 result files from
+the first day, and the estimator's non-invariance is a one-line algebraic
+property of a formula printed in the pre-registration. Freezing an analysis plan
+protects against choosing a statistic to fit the data. It does not protect
+against choosing a *wrong* statistic before the data exists, and it does not read
+your own ledger for you.

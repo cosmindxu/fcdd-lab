@@ -40,6 +40,16 @@ def exact_p(d):
 def sign_p(k,n):
     return sum(math.comb(n,i) for i in range(n+1) if abs(i-n/2)>=abs(k-n/2))/2**n
 
+# Per-defect rows for BOTH units, so every cell of the article's cost table has a
+# deposited source (the first version printed only the three aggregate lines).
+U,T=cells("usd"),cells("tok")
+print("%-7s %10s %10s %8s   %11s %11s %8s"%("defect","meanA $","meanB $","B/A","A tokens","B tokens","tok B/A"))
+for b in BUGS:
+    ma,mb=st.mean(U[(b,"A")]),st.mean(U[(b,"B")])
+    ta,tb=st.mean(T[(b,"A")]),st.mean(T[(b,"B")])
+    print("%-7s %10.2f %10.2f %7.2fx   %10.1fM %10.1fM %7.2fx"%(b,ma,mb,mb/ma,ta/1e6,tb/1e6,tb/ta))
+print("(per-run means within each 4-run cell, not cell totals)\n")
+
 for measure,name in (("usd","dollars (PRIMARY, pre-registered)"),
                      ("tok","raw tokens, all four kinds (D3's preferred unit)"),
                      ("out","output tokens only")):

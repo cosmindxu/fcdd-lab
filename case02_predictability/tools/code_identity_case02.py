@@ -68,6 +68,28 @@ for r in rows:
 
 nb=sum(1 for r in rows if r["have_bins"]); nbs=sum(1 for r in rows if r["bin_same"])
 ni=sum(1 for r in rows if r["ins_same"]); nr=sum(1 for r in rows if r["raw_same"])
+# The article's decisive claim is identity with the SEALED ANSWER KEY's pristine
+# hash, not merely identity between arms. Check that explicitly (finding: the
+# earlier version compared arms to each other and never opened the key).
+import json
+KEY=json.load(open(os.path.join(LAB,"case01_spectrum_gambit","sealed","answer_key.json")))
+PRIS_SHA=KEY["target"]["pristine_chess_bin_sha256"]
+pfile=os.path.join(LAB,"case01_spectrum_gambit","sealed","seedkit","pristine","chess.bin")
+pbytes=open(pfile,"rb").read()
+print("\nsealed answer key pristine sha256 : %s"%PRIS_SHA)
+print("recomputed from the deposited file: %s  (%s)"%(hashlib.sha256(pbytes).hexdigest(),
+      "match" if hashlib.sha256(pbytes).hexdigest()==PRIS_SHA else "MISMATCH"))
+print("pristine binary size              : %d bytes"%len(pbytes))
+ok=0; tot=0
+for bug in BUGS:
+    for arm in "AB":
+        for k in (1,2,3,4):
+            q=os.path.join(WORK,"%s_arm%s_c2r%d"%(bug,arm,k),"variants",bug,"chess.bin")
+            if not os.path.exists(q): continue
+            tot+=1
+            if hashlib.sha256(open(q,"rb").read()).hexdigest()==PRIS_SHA: ok+=1
+print("repaired binaries matching the KEY: %d/%d"%(ok,tot))
+
 print("\npairs where BOTH binaries exist      : %d/28" % nb)
 print("  of those, byte-identical binaries  : %d/%d" % (nbs,nb))
 print("pairs with identical INSTRUCTION text: %d/28" % ni)

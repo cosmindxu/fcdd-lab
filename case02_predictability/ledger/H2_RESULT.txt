@@ -1,29 +1,29 @@
 runs classified: 56 / 56
 
-PRIMARY (literal byte-identity)
+PRIMARY (literal byte-identity, incl. comments)
             minimal  redesign
   arm A           1        27
   arm B           0        28
   Fisher exact two-sided p = 1.0000
 
-S1 (comment/whitespace-blind)
+S1 (INSTRUCTION STREAM: all comments stripped) <- A12
             minimal  redesign
-  arm A           4        24
-  arm B           7        21
-  Fisher exact two-sided p = 0.5027
+  arm A          28         0
+  arm B          28         0
+  Fisher exact two-sided p = 1.0000
 
 S2 (seeded line only)
             minimal  redesign
-  arm A           7        21
-  arm B          15        13
-  Fisher exact two-sided p = 0.0543
+  arm A          28         0
+  arm B          28         0
+  Fisher exact two-sided p = 1.0000
 
 --- per-defect breakdown (S2), for the record ---
 defect  armA (r1..r4)                armB (r1..r4)
-bug01   m r r r                      r m r m
-bug02   r r r r                      m r m m
-bug03   r r r r                      r r r m
-bug04   r r r r                      r r r r
-bug05   r r r r                      r m r r
-bug06   m r r m                      m m m m
+bug01   m m m m                      m m m m
+bug02   m m m m                      m m m m
+bug03   m m m m                      m m m m
+bug04   m m m m                      m m m m
+bug05   m m m m                      m m m m
+bug06   m m m m                      m m m m
 bug07   m m m m                      m m m m

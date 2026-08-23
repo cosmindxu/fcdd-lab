@@ -21,3 +21,6 @@ case*/paper_springer/*.log
 case*/paper_springer/*.out
 case*/paper_springer/*.bbl
 case*/paper_springer/*.blg
+
+# case02 grading: unblinding keys must never be committed
+case*/grading/KEY_*.json

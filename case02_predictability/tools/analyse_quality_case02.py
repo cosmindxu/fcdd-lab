@@ -61,6 +61,20 @@ if __name__ == "__main__":
         a = [r["A_" + ax] for r in rows]; b = [r["B_" + ax] for r in rows]
         print("%-18s %8.2f %8.2f %+9.2f" % (ax, st.mean(a), st.mean(b), st.mean(b) - st.mean(a)))
 
+    # PREREGISTRATION §5 requires the quality tier be "reported with its interval".
+    # Exact Clopper-Pearson on the preference proportion, and a bootstrap CI on
+    # each axis difference paired at defect level.
+    print("\n=== intervals (PREREG §5: 'reported with its interval') ===")
+    import random
+    rng = random.Random(20260807)
+    for ax in AXES:
+        per = [st.mean([r["B_"+ax] for r in rows if r["bug"]==b]) -
+               st.mean([r["A_"+ax] for r in rows if r["bug"]==b])
+               for b in sorted({r["bug"] for r in rows})]
+        boot = sorted(st.mean([per[rng.randrange(len(per))] for _ in per]) for _ in range(20000))
+        print("  %-18s mean B-A %+0.3f   bootstrap 95%% CI [%+0.3f, %+0.3f]"
+              % (ax, st.mean(per), boot[500], boot[19500]))
+
     print("\n=== overall preference (28 packets) ===")
     c = {x: sum(1 for r in rows if r["pref_arm"] == x) for x in ("A", "B", "tie")}
     print("  arm A preferred: %d    arm B preferred: %d    tie: %d" % (c["A"], c["B"], c["tie"]))

@@ -1,0 +1,15 @@
+non-error runs: 56
+
+model                  runs containing        spend    share
+claude-opus-5                56/56         986.71    71.4%
+claude-fable-5               51/56         396.03    28.6%
+
+per-arm mix (the pre-registration required these to match):
+  arm A  total $417.94
+     claude-opus-5          $  269.75   64.5%
+     claude-fable-5         $  148.18   35.5%
+  arm B  total $964.80
+     claude-opus-5          $  716.96   74.3%
+     claude-fable-5         $  247.85   25.7%
+
+imbalance in claude-fable-5 share: arm A 35.5% vs arm B 25.7%  (9.8 points)

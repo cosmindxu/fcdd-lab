@@ -21,7 +21,7 @@ here: that is the point of "no judgement".
 Fisher's exact test is computed exactly from hypergeometric point
 probabilities; runs are the unit, as §5 specifies.
 """
-import json, math, os, sys
+import json, math, os, re, sys
 from difflib import SequenceMatcher
 from collections import Counter
 
@@ -38,12 +38,27 @@ def lines(p):
     except FileNotFoundError: return None
 
 def strip_comments(ls):
-    """Drop blank lines and whole-line ';' comments. Purely lexical."""
+    """Strip ALL ';' comments -- whole-line AND trailing -- then normalise space.
+
+    The first version dropped only whole-line comments, so a changed TRAILING
+    comment on an unchanged instruction counted as changed code and the 2x2
+    measured comment edits rather than repair strategy. That defect and its
+    withdrawal are AMENDMENTS A9 (the wrong reading) and A12 (the correction).
+    Quote-awareness matters: ';' inside a character literal is not a comment.
+    """
     out = []
     for l in ls:
-        s = l.strip()
-        if not s or s.startswith(";"): continue
-        out.append(s)
+        res = []; q = None
+        for ch in l:
+            if q:
+                res.append(ch)
+                if ch == q: q = None
+                continue
+            if ch in "'\"": q = ch; res.append(ch); continue
+            if ch == ";": break
+            res.append(ch)
+        t = re.sub(r"\s+", " ", "".join(res)).strip()
+        if t: out.append(t)
     return out
 
 def classify(ws, bug):
@@ -107,8 +122,8 @@ if __name__ == "__main__":
                 rows.append((bug, arm, k, p, s1, s2, det))
     print("runs classified: %d / 56\n" % len(rows))
 
-    for label, idx in (("PRIMARY (literal byte-identity)", 3),
-                       ("S1 (comment/whitespace-blind)", 4),
+    for label, idx in (("PRIMARY (literal byte-identity, incl. comments)", 3),
+                       ("S1 (INSTRUCTION STREAM: all comments stripped) <- A12", 4),
                        ("S2 (seeded line only)", 5)):
         A = Counter(r[idx] for r in rows if r[1] == "A")
         B = Counter(r[idx] for r in rows if r[1] == "B")

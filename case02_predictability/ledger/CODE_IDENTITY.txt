@@ -28,6 +28,11 @@ bug07   r2  c107dfaf5b12 c107dfaf5b12 YES        YES
 bug07   r3  c107dfaf5b12 c107dfaf5b12 YES        YES       
 bug07   r4  c107dfaf5b12 c107dfaf5b12 YES        YES       
 
+sealed answer key pristine sha256 : c107dfaf5b124f1d68770dc0937312933e55d4e21ed0e3b458ebc3a8c168dc0f
+recomputed from the deposited file: c107dfaf5b124f1d68770dc0937312933e55d4e21ed0e3b458ebc3a8c168dc0f  (match)
+pristine binary size              : 13516 bytes
+repaired binaries matching the KEY: 56/56
+
 pairs where BOTH binaries exist      : 28/28
   of those, byte-identical binaries  : 28/28
 pairs with identical INSTRUCTION text: 28/28

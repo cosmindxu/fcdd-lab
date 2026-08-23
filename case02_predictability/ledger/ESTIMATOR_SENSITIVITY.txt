@@ -1,0 +1,26 @@
+=== scale-invariance: identical data, different currency unit ===
+estimator                                      in dollars        in cents (x100)
+CV_log  (PRE-REGISTERED)            mean -0.0547 p=0.1094   mean -0.0254 p=0.0469   <-- MOVES WITH THE UNIT
+sd(ln c)  scale-free                mean -0.2152 p=0.0156   mean -0.2152 p=0.0156
+IQR(ln c)  scale-free               mean -0.1729 p=0.0156   mean -0.1729 p=0.0156
+
+  All variants agree on DIRECTION (negative = the ordinary arm is less
+  dispersed). They differ only on whether it reaches alpha = 0.05.
+
+  Why CV_log is also biased toward H1: |mean(ln c)| sits in the
+  denominator and arm B costs ~2.26x more, so B's dispersion is divided
+  by a larger number in every defect:
+    bug01  |mean ln c|  A=3.01  B=4.03
+    bug02  |mean ln c|  A=2.62  B=3.19
+    bug03  |mean ln c|  A=2.70  B=3.49
+    bug04  |mean ln c|  A=2.69  B=3.63
+    bug05  |mean ln c|  A=2.51  B=3.16
+    bug06  |mean ln c|  A=2.70  B=3.30
+    bug07  |mean ln c|  A=2.54  B=3.31
+
+=== A6 nine-day-gap sensitivity (A6 predicted this direction; it was wrong) ===
+  all 56 runs       : mean -0.0547  p=0.1094
+  pre-gap runs only : mean -0.0575  p=0.1094
+  => removing the post-gap runs makes the anti-H1 mean STRONGER.
+     A6 claimed the gap biased conservatively (against H1). The observed
+     sign is the opposite: the post-gap runs pulled TOWARD H1.

@@ -6,6 +6,11 @@ correctness_risk       4.64     4.61     -0.04
 minimality             4.71     4.32     -0.39
 clarity                4.25     4.46     +0.21
 
+=== intervals (PREREG §5: 'reported with its interval') ===
+  correctness_risk   mean B-A -0.036   bootstrap 95% CI [-0.143, +0.071]
+  minimality         mean B-A -0.393   bootstrap 95% CI [-0.643, -0.179]
+  clarity            mean B-A +0.214   bootstrap 95% CI [-0.179, +0.571]
+
 === overall preference (28 packets) ===
   arm A preferred: 12    arm B preferred: 13    tie: 3
   sign test over decided packets: two-sided p = 1.0000
