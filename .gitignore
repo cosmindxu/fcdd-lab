@@ -24,3 +24,12 @@ case*/paper_springer/*.blg
 
 # case02 grading: unblinding keys must never be committed
 case*/grading/KEY_*.json
+# case04: agent session transcripts are large and transcript-bearing; the
+# seal hash + derived outputs are committed instead
+case04_coq_rust/ledger/raw/
+case04_coq_rust/ledger/sealing_partial.jsonl*
+case04_coq_rust/figures/*.pdf
+case04_coq_rust/figures/*.png
+case04_coq_rust/figures/*.aux
+case04_coq_rust/figures/*.log
+case04_coq_rust/ledger/sealed/answers.json

@@ -1,0 +1,1048 @@
+Debug: Quoting executed in: 0.002225s
+Debug: Extraction executed in: 0.018325s
+#![allow(dead_code)]
+#![allow(non_camel_case_types)]
+#![allow(unused_imports)]
+#![allow(non_snake_case)]
+#![allow(unused_variables)]
+
+use std::marker::PhantomData;
+
+fn __nat_succ(x: u64) -> u64 {
+  x.checked_add(1).unwrap()
+}
+
+macro_rules! __nat_elim {
+    ($zcase:expr, $pred:ident, $scase:expr, $val:expr) => {
+        { let v = $val;
+        if v == 0 { $zcase } else { let $pred = v - 1; $scase } }
+    }
+}
+
+macro_rules! __andb { ($b1:expr, $b2:expr) => { $b1 && $b2 } }
+macro_rules! __orb { ($b1:expr, $b2:expr) => { $b1 || $b2 } }
+
+fn __pos_onebit(x: u64) -> u64 {
+  x.checked_mul(2).unwrap() + 1
+}
+
+fn __pos_zerobit(x: u64) -> u64 {
+  x.checked_mul(2).unwrap()
+}
+
+macro_rules! __pos_elim {
+    ($p:ident, $onebcase:expr, $p2:ident, $zerobcase:expr, $onecase:expr, $val:expr) => {
+        {
+            let n = $val;
+            if n == 1 {
+                $onecase
+            } else if (n & 1) == 0 {
+                let $p2 = n >> 1;
+                $zerobcase
+            } else {
+                let $p = n >> 1;
+                $onebcase
+            }
+        }
+    }
+}
+
+fn __Z_frompos(z: u64) -> i64 {
+  use std::convert::TryFrom;
+
+  i64::try_from(z).unwrap()
+}
+
+fn __Z_fromneg(z : u64) -> i64 {
+  use std::convert::TryFrom;
+
+  i64::try_from(z).unwrap().checked_neg().unwrap()
+}
+
+macro_rules! __Z_elim {
+    ($zero_case:expr, $p:ident, $pos_case:expr, $p2:ident, $neg_case:expr, $val:expr) => {
+        {
+            let n = $val;
+            if n == 0 {
+                $zero_case
+            } else if n < 0 {
+                let $p2 = n.unsigned_abs();
+                $neg_case
+            } else {
+                let $p = n as u64;
+                $pos_case
+            }
+        }
+    }
+}
+
+fn __N_frompos(z: u64) -> u64 {
+  z
+}
+
+macro_rules! __N_elim {
+    ($zero_case:expr, $p:ident, $pos_case:expr, $val:expr) => {
+        { let $p = $val; if $p == 0 { $zero_case } else { $pos_case } }
+    }
+}
+
+type __pair<A, B> = (A, B);
+
+macro_rules! __pair_elim {
+    ($fst:ident, $snd:ident, $body:expr, $p:expr) => {
+        { let ($fst, $snd) = $p; $body }
+    }
+}
+
+fn __mk_pair<A: Copy, B: Copy>(a: A, b: B) -> __pair<A, B> { (a, b) }
+
+fn hint_app<TArg, TRet>(f: &dyn Fn(TArg) -> TRet) -> &dyn Fn(TArg) -> TRet {
+  f
+}
+
+#[derive(Debug, Clone)]
+pub enum Corelib_Init_Datatypes_list<'a, A> {
+  nil(PhantomData<&'a A>),
+  cons(PhantomData<&'a A>, A, &'a Corelib_Init_Datatypes_list<'a, A>)
+}
+
+type Spike_sq<'a> = i64;
+
+#[derive(Debug, Clone)]
+pub enum Spike_color<'a> {
+  White(PhantomData<&'a ()>),
+  Black(PhantomData<&'a ()>)
+}
+
+#[derive(Debug, Clone)]
+pub enum Spike_piece<'a> {
+  Knight(PhantomData<&'a ()>),
+  King(PhantomData<&'a ()>)
+}
+
+#[derive(Debug, Clone)]
+pub enum Spike_At<'a> {
+  mkAt(PhantomData<&'a ()>, Spike_sq<'a>, &'a Spike_color<'a>, &'a Spike_piece<'a>)
+}
+
+struct Program {
+  __alloc: bumpalo::Bump,
+}
+
+impl<'a> Program {
+fn new() -> Self {
+  Program {
+    __alloc: bumpalo::Bump::new(),
+  }
+}
+
+fn alloc<T>(&'a self, t: T) -> &'a T {
+  self.__alloc.alloc(t)
+}
+
+fn closure<TArg, TRet>(&'a self, F: impl Fn(TArg) -> TRet + 'a) -> &'a dyn Fn(TArg) -> TRet {
+  self.__alloc.alloc(F)
+}
+
+fn spike_color_eqb(&'a self, a: &'a Spike_color<'a>, b: &'a Spike_color<'a>) -> bool {
+  match a {
+    &Spike_color::White(_) => {
+      match b {
+        &Spike_color::White(_) => {
+          true
+        },
+        &Spike_color::Black(_) => {
+          false
+        },
+      }
+    },
+    &Spike_color::Black(_) => {
+      match b {
+        &Spike_color::White(_) => {
+          false
+        },
+        &Spike_color::Black(_) => {
+          true
+        },
+      }
+    },
+  }
+}
+fn spike_color_eqb__curried(&'a self) -> &'a dyn Fn(&'a Spike_color<'a>) -> &'a dyn Fn(&'a Spike_color<'a>) -> bool {
+  self.closure(move |a| {
+    self.closure(move |b| {
+      self.spike_color_eqb(
+        a,
+        b)
+    })
+  })
+}
+
+fn spike_at_color(&'a self, a: &'a Spike_At<'a>) -> &'a Spike_color<'a> {
+  match a {
+    &Spike_At::mkAt(_, at_sq, at_color, at_piece) => {
+      at_color
+    },
+  }
+}
+fn spike_at_color__curried(&'a self) -> &'a dyn Fn(&'a Spike_At<'a>) -> &'a Spike_color<'a> {
+  self.closure(move |a| {
+    self.spike_at_color(
+      a)
+  })
+}
+
+fn spike_at_piece(&'a self, a: &'a Spike_At<'a>) -> &'a Spike_piece<'a> {
+  match a {
+    &Spike_At::mkAt(_, at_sq, at_color, at_piece) => {
+      at_piece
+    },
+  }
+}
+fn spike_at_piece__curried(&'a self) -> &'a dyn Fn(&'a Spike_At<'a>) -> &'a Spike_piece<'a> {
+  self.closure(move |a| {
+    self.spike_at_piece(
+      a)
+  })
+}
+
+fn Corelib_Init_Datatypes_app<A: Copy>(&'a self, l: &'a Corelib_Init_Datatypes_list<'a, A>, m: &'a Corelib_Init_Datatypes_list<'a, A>) -> &'a Corelib_Init_Datatypes_list<'a, A> {
+  match l {
+    &Corelib_Init_Datatypes_list::nil(_) => {
+      m
+    },
+    &Corelib_Init_Datatypes_list::cons(_, a, l1) => {
+      self.alloc(
+        Corelib_Init_Datatypes_list::cons(
+          PhantomData,
+          a,
+          self.Corelib_Init_Datatypes_app(
+            l1,
+            m)))
+    },
+  }
+}
+fn Corelib_Init_Datatypes_app__curried<A: Copy>(&'a self) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, A>) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, A>) -> &'a Corelib_Init_Datatypes_list<'a, A> {
+  self.closure(move |l| {
+    self.closure(move |m| {
+      self.Corelib_Init_Datatypes_app(
+        l,
+        m)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_add(&'a self, a: i64, b: i64) -> i64 { a + b }
+fn Corelib_BinNums_IntDef_Z_add__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> i64 {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_add(
+        x,
+        y)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_mul(&'a self, a: i64, b: i64) -> i64 { a * b }
+fn Corelib_BinNums_IntDef_Z_mul__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> i64 {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_mul(
+        x,
+        y)
+    })
+  })
+}
+
+
+fn Corelib_Init_Datatypes_andb__curried(&'a self) -> &'a dyn Fn(bool) -> &'a dyn Fn(bool) -> bool {
+  self.closure(move |b1| {
+    self.closure(move |b2| {
+      __andb!(
+        b1,
+        b2)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_compare(&'a self, a: i64, b: i64) -> std::cmp::Ordering { a.cmp(&b) }
+fn Corelib_BinNums_IntDef_Z_compare__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> std::cmp::Ordering {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_compare(
+        x,
+        y)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_leb(&'a self, x: i64, y: i64) -> bool {
+  match self.Corelib_BinNums_IntDef_Z_compare(
+          x,
+          y) {
+    std::cmp::Ordering::Equal => {
+      true
+    },
+    std::cmp::Ordering::Less => {
+      true
+    },
+    std::cmp::Ordering::Greater => {
+      false
+    },
+  }
+}
+fn Corelib_BinNums_IntDef_Z_leb__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> bool {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_leb(
+        x,
+        y)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_ltb(&'a self, x: i64, y: i64) -> bool {
+  match self.Corelib_BinNums_IntDef_Z_compare(
+          x,
+          y) {
+    std::cmp::Ordering::Equal => {
+      false
+    },
+    std::cmp::Ordering::Less => {
+      true
+    },
+    std::cmp::Ordering::Greater => {
+      false
+    },
+  }
+}
+fn Corelib_BinNums_IntDef_Z_ltb__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> bool {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_ltb(
+        x,
+        y)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_opp(&'a self, a: i64) -> i64 { -a }
+fn Corelib_BinNums_IntDef_Z_opp__curried(&'a self) -> &'a dyn Fn(i64) -> i64 {
+  self.closure(move |x| {
+    self.Corelib_BinNums_IntDef_Z_opp(
+      x)
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_sub(&'a self, a: i64, b: i64) -> i64 { a - b }
+fn Corelib_BinNums_IntDef_Z_sub__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> i64 {
+  self.closure(move |m| {
+    self.closure(move |n| {
+      self.Corelib_BinNums_IntDef_Z_sub(
+        m,
+        n)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_pos_div_eucl(&'a self, a: u64, b: i64) -> __pair<i64, i64> {
+  __pos_elim!(
+    a2, {
+      __pair_elim!(
+        r, q, {
+          let r2 =
+            self.Corelib_BinNums_IntDef_Z_add(
+              self.Corelib_BinNums_IntDef_Z_mul(
+                __Z_frompos(
+                  __pos_zerobit(
+                    1)),
+                q),
+              __Z_frompos(
+                1));
+          match self.Corelib_BinNums_IntDef_Z_ltb(
+                  r2,
+                  b) {
+            true => {
+              __mk_pair(
+                self.Corelib_BinNums_IntDef_Z_mul(
+                  __Z_frompos(
+                    __pos_zerobit(
+                      1)),
+                  r),
+                r2)
+            },
+            false => {
+              __mk_pair(
+                self.Corelib_BinNums_IntDef_Z_add(
+                  self.Corelib_BinNums_IntDef_Z_mul(
+                    __Z_frompos(
+                      __pos_zerobit(
+                        1)),
+                    r),
+                  __Z_frompos(
+                    1)),
+                self.Corelib_BinNums_IntDef_Z_sub(
+                  r2,
+                  b))
+            },
+          }
+        },
+        self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+          a2,
+          b))
+    },
+    a2, {
+      __pair_elim!(
+        r, q, {
+          let r2 =
+            self.Corelib_BinNums_IntDef_Z_mul(
+              __Z_frompos(
+                __pos_zerobit(
+                  1)),
+              q);
+          match self.Corelib_BinNums_IntDef_Z_ltb(
+                  r2,
+                  b) {
+            true => {
+              __mk_pair(
+                self.Corelib_BinNums_IntDef_Z_mul(
+                  __Z_frompos(
+                    __pos_zerobit(
+                      1)),
+                  r),
+                r2)
+            },
+            false => {
+              __mk_pair(
+                self.Corelib_BinNums_IntDef_Z_add(
+                  self.Corelib_BinNums_IntDef_Z_mul(
+                    __Z_frompos(
+                      __pos_zerobit(
+                        1)),
+                    r),
+                  __Z_frompos(
+                    1)),
+                self.Corelib_BinNums_IntDef_Z_sub(
+                  r2,
+                  b))
+            },
+          }
+        },
+        self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+          a2,
+          b))
+    },
+    {
+      match self.Corelib_BinNums_IntDef_Z_leb(
+              __Z_frompos(
+                __pos_zerobit(
+                  1)),
+              b) {
+        true => {
+          __mk_pair(
+            0,
+            __Z_frompos(
+              1))
+        },
+        false => {
+          __mk_pair(
+            __Z_frompos(
+              1),
+            0)
+        },
+      }
+    },
+    a)
+}
+fn Corelib_BinNums_IntDef_Z_pos_div_eucl__curried(&'a self) -> &'a dyn Fn(u64) -> &'a dyn Fn(i64) -> __pair<i64, i64> {
+  self.closure(move |a| {
+    self.closure(move |b| {
+      self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+        a,
+        b)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_div_eucl(&'a self, a: i64, b: i64) -> __pair<i64, i64> {
+  __Z_elim!(
+    {
+      __mk_pair(
+        0,
+        0)
+    },
+    a2, {
+      __Z_elim!(
+        {
+          __mk_pair(
+            0,
+            a)
+        },
+        p, {
+          self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+            a2,
+            b)
+        },
+        b2, {
+          __pair_elim!(
+            r, q, {
+              __Z_elim!(
+                {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      r),
+                    0)
+                },
+                p, {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      self.Corelib_BinNums_IntDef_Z_add(
+                        r,
+                        __Z_frompos(
+                          1))),
+                    self.Corelib_BinNums_IntDef_Z_add(
+                      b,
+                      q))
+                },
+                p, {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      self.Corelib_BinNums_IntDef_Z_add(
+                        r,
+                        __Z_frompos(
+                          1))),
+                    self.Corelib_BinNums_IntDef_Z_add(
+                      b,
+                      q))
+                },
+                q)
+            },
+            self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+              a2,
+              __Z_frompos(
+                b2)))
+        },
+        b)
+    },
+    a2, {
+      __Z_elim!(
+        {
+          __mk_pair(
+            0,
+            a)
+        },
+        p, {
+          __pair_elim!(
+            r, q, {
+              __Z_elim!(
+                {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      r),
+                    0)
+                },
+                p2, {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      self.Corelib_BinNums_IntDef_Z_add(
+                        r,
+                        __Z_frompos(
+                          1))),
+                    self.Corelib_BinNums_IntDef_Z_sub(
+                      b,
+                      q))
+                },
+                p2, {
+                  __mk_pair(
+                    self.Corelib_BinNums_IntDef_Z_opp(
+                      self.Corelib_BinNums_IntDef_Z_add(
+                        r,
+                        __Z_frompos(
+                          1))),
+                    self.Corelib_BinNums_IntDef_Z_sub(
+                      b,
+                      q))
+                },
+                q)
+            },
+            self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+              a2,
+              b))
+        },
+        b2, {
+          __pair_elim!(
+            r, q, {
+              __mk_pair(
+                r,
+                self.Corelib_BinNums_IntDef_Z_opp(
+                  q))
+            },
+            self.Corelib_BinNums_IntDef_Z_pos_div_eucl(
+              a2,
+              __Z_frompos(
+                b2)))
+        },
+        b)
+    },
+    a)
+}
+fn Corelib_BinNums_IntDef_Z_div_eucl__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> __pair<i64, i64> {
+  self.closure(move |a| {
+    self.closure(move |b| {
+      self.Corelib_BinNums_IntDef_Z_div_eucl(
+        a,
+        b)
+    })
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_modulo(&'a self, a: i64, b: i64) -> i64 {
+  __pair_elim!(
+    r, x, {
+      x
+    },
+    self.Corelib_BinNums_IntDef_Z_div_eucl(
+      a,
+      b))
+}
+fn Corelib_BinNums_IntDef_Z_modulo__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> i64 {
+  self.closure(move |a| {
+    self.closure(move |b| {
+      self.Corelib_BinNums_IntDef_Z_modulo(
+        a,
+        b)
+    })
+  })
+}
+
+fn spike_validSq(&'a self, s: Spike_sq<'a>) -> bool {
+  __andb!(
+    __andb!(
+      self.Corelib_BinNums_IntDef_Z_leb(
+        0,
+        s),
+      self.Corelib_BinNums_IntDef_Z_ltb(
+        s,
+        __Z_frompos(
+          __pos_zerobit(
+            __pos_zerobit(
+              __pos_zerobit(
+                __pos_zerobit(
+                  __pos_zerobit(
+                    __pos_zerobit(
+                      __pos_zerobit(
+                        1)))))))))),
+    self.Corelib_BinNums_IntDef_Z_ltb(
+      self.Corelib_BinNums_IntDef_Z_modulo(
+        s,
+        __Z_frompos(
+          __pos_zerobit(
+            __pos_zerobit(
+              __pos_zerobit(
+                __pos_zerobit(
+                  1)))))),
+      __Z_frompos(
+        __pos_zerobit(
+          __pos_zerobit(
+            __pos_zerobit(
+              1))))))
+}
+fn spike_validSq__curried(&'a self) -> &'a dyn Fn(Spike_sq<'a>) -> bool {
+  self.closure(move |s| {
+    self.spike_validSq(
+      s)
+  })
+}
+
+fn Corelib_BinNums_IntDef_Z_eqb(&'a self, a: i64, b: i64) -> bool { a == b }
+fn Corelib_BinNums_IntDef_Z_eqb__curried(&'a self) -> &'a dyn Fn(i64) -> &'a dyn Fn(i64) -> bool {
+  self.closure(move |x| {
+    self.closure(move |y| {
+      self.Corelib_BinNums_IntDef_Z_eqb(
+        x,
+        y)
+    })
+  })
+}
+
+fn spike_at_sq(&'a self, a: &'a Spike_At<'a>) -> Spike_sq<'a> {
+  match a {
+    &Spike_At::mkAt(_, at_sq, at_color, at_piece) => {
+      at_sq
+    },
+  }
+}
+fn spike_at_sq__curried(&'a self) -> &'a dyn Fn(&'a Spike_At<'a>) -> Spike_sq<'a> {
+  self.closure(move |a| {
+    self.spike_at_sq(
+      a)
+  })
+}
+
+fn spike_lookup(&'a self, s: Spike_sq<'a>, b: &'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> Option<__pair<&'a Spike_color<'a>, &'a Spike_piece<'a>>> {
+  match b {
+    &Corelib_Init_Datatypes_list::nil(_) => {
+      None
+    },
+    &Corelib_Init_Datatypes_list::cons(_, a, rest) => {
+      match self.Corelib_BinNums_IntDef_Z_eqb(
+              s,
+              self.spike_at_sq(
+                a)) {
+        true => {
+          Some(
+            __mk_pair(
+              self.spike_at_color(
+                a),
+              self.spike_at_piece(
+                a)))
+        },
+        false => {
+          self.spike_lookup(
+            s,
+            rest)
+        },
+      }
+    },
+  }
+}
+fn spike_lookup__curried(&'a self) -> &'a dyn Fn(Spike_sq<'a>) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> Option<__pair<&'a Spike_color<'a>, &'a Spike_piece<'a>>> {
+  self.closure(move |s| {
+    self.closure(move |b| {
+      self.spike_lookup(
+        s,
+        b)
+    })
+  })
+}
+
+fn Corelib_Init_Datatypes_negb(&'a self, b: bool) -> bool {
+  match b {
+    true => {
+      false
+    },
+    false => {
+      true
+    },
+  }
+}
+fn Corelib_Init_Datatypes_negb__curried(&'a self) -> &'a dyn Fn(bool) -> bool {
+  self.closure(move |b| {
+    self.Corelib_Init_Datatypes_negb(
+      b)
+  })
+}
+
+fn spike_moves_for(&'a self, s: Spike_sq<'a>, offs: &'a Corelib_Init_Datatypes_list<'a, __pair<i64, i64>>, b: &'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>, col: &'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  match offs {
+    &Corelib_Init_Datatypes_list::nil(_) => {
+      self.alloc(
+        Corelib_Init_Datatypes_list::nil(
+          PhantomData))
+    },
+    &Corelib_Init_Datatypes_list::cons(_, p, rest) => {
+      __pair_elim!(
+        dr, df, {
+          let t =
+            self.Corelib_BinNums_IntDef_Z_add(
+              self.Corelib_BinNums_IntDef_Z_add(
+                s,
+                self.Corelib_BinNums_IntDef_Z_mul(
+                  __Z_frompos(
+                    __pos_zerobit(
+                      __pos_zerobit(
+                        __pos_zerobit(
+                          __pos_zerobit(
+                            1))))),
+                  dr)),
+              df);
+          let keep =
+            __andb!(
+              self.spike_validSq(
+                t),
+              match self.spike_lookup(
+                      t,
+                      b) {
+                Some(p2) => {
+                  __pair_elim!(
+                    p0, c, {
+                      self.Corelib_Init_Datatypes_negb(
+                        self.spike_color_eqb(
+                          p0,
+                          col))
+                    },
+                    p2)
+                },
+                None => {
+                  true
+                },
+              });
+          match keep {
+            true => {
+              self.alloc(
+                Corelib_Init_Datatypes_list::cons(
+                  PhantomData,
+                  __mk_pair(
+                    s,
+                    t),
+                  self.spike_moves_for(
+                    s,
+                    rest,
+                    b,
+                    col)))
+            },
+            false => {
+              self.spike_moves_for(
+                s,
+                rest,
+                b,
+                col)
+            },
+          }
+        },
+        p)
+    },
+  }
+}
+fn spike_moves_for__curried(&'a self) -> &'a dyn Fn(Spike_sq<'a>) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, __pair<i64, i64>>) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> &'a dyn Fn(&'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  self.closure(move |s| {
+    self.closure(move |offs| {
+      self.closure(move |b| {
+        self.closure(move |col| {
+          self.spike_moves_for(
+            s,
+            offs,
+            b,
+            col)
+        })
+      })
+    })
+  })
+}
+
+fn spike_knight_offsets(&'a self) -> &'a Corelib_Init_Datatypes_list<'a, __pair<i64, i64>> {
+  self.alloc(
+    Corelib_Init_Datatypes_list::cons(
+      PhantomData,
+      __mk_pair(
+        __Z_frompos(
+          1),
+        __Z_frompos(
+          __pos_zerobit(
+            1))),
+      self.alloc(
+        Corelib_Init_Datatypes_list::cons(
+          PhantomData,
+          __mk_pair(
+            __Z_frompos(
+              __pos_zerobit(
+                1)),
+            __Z_frompos(
+              1)),
+          self.alloc(
+            Corelib_Init_Datatypes_list::cons(
+              PhantomData,
+              __mk_pair(
+                __Z_frompos(
+                  __pos_zerobit(
+                    1)),
+                __Z_fromneg(
+                  1)),
+              self.alloc(
+                Corelib_Init_Datatypes_list::cons(
+                  PhantomData,
+                  __mk_pair(
+                    __Z_frompos(
+                      1),
+                    __Z_fromneg(
+                      __pos_zerobit(
+                        1))),
+                  self.alloc(
+                    Corelib_Init_Datatypes_list::cons(
+                      PhantomData,
+                      __mk_pair(
+                        __Z_fromneg(
+                          1),
+                        __Z_fromneg(
+                          __pos_zerobit(
+                            1))),
+                      self.alloc(
+                        Corelib_Init_Datatypes_list::cons(
+                          PhantomData,
+                          __mk_pair(
+                            __Z_fromneg(
+                              __pos_zerobit(
+                                1)),
+                            __Z_fromneg(
+                              1)),
+                          self.alloc(
+                            Corelib_Init_Datatypes_list::cons(
+                              PhantomData,
+                              __mk_pair(
+                                __Z_fromneg(
+                                  __pos_zerobit(
+                                    1)),
+                                __Z_frompos(
+                                  1)),
+                              self.alloc(
+                                Corelib_Init_Datatypes_list::cons(
+                                  PhantomData,
+                                  __mk_pair(
+                                    __Z_fromneg(
+                                      1),
+                                    __Z_frompos(
+                                      __pos_zerobit(
+                                        1))),
+                                  self.alloc(
+                                    Corelib_Init_Datatypes_list::nil(
+                                      PhantomData))))))))))))))))))
+}
+
+fn spike_king_offsets(&'a self) -> &'a Corelib_Init_Datatypes_list<'a, __pair<i64, i64>> {
+  self.alloc(
+    Corelib_Init_Datatypes_list::cons(
+      PhantomData,
+      __mk_pair(
+        __Z_frompos(
+          1),
+        0),
+      self.alloc(
+        Corelib_Init_Datatypes_list::cons(
+          PhantomData,
+          __mk_pair(
+            __Z_frompos(
+              1),
+            __Z_frompos(
+              1)),
+          self.alloc(
+            Corelib_Init_Datatypes_list::cons(
+              PhantomData,
+              __mk_pair(
+                0,
+                __Z_frompos(
+                  1)),
+              self.alloc(
+                Corelib_Init_Datatypes_list::cons(
+                  PhantomData,
+                  __mk_pair(
+                    __Z_fromneg(
+                      1),
+                    __Z_frompos(
+                      1)),
+                  self.alloc(
+                    Corelib_Init_Datatypes_list::cons(
+                      PhantomData,
+                      __mk_pair(
+                        __Z_fromneg(
+                          1),
+                        0),
+                      self.alloc(
+                        Corelib_Init_Datatypes_list::cons(
+                          PhantomData,
+                          __mk_pair(
+                            __Z_fromneg(
+                              1),
+                            __Z_fromneg(
+                              1)),
+                          self.alloc(
+                            Corelib_Init_Datatypes_list::cons(
+                              PhantomData,
+                              __mk_pair(
+                                0,
+                                __Z_fromneg(
+                                  1)),
+                              self.alloc(
+                                Corelib_Init_Datatypes_list::cons(
+                                  PhantomData,
+                                  __mk_pair(
+                                    __Z_frompos(
+                                      1),
+                                    __Z_fromneg(
+                                      1)),
+                                  self.alloc(
+                                    Corelib_Init_Datatypes_list::nil(
+                                      PhantomData))))))))))))))))))
+}
+
+fn spike_genMoves_(&'a self, full: &'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>, b: &'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>, col: &'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  match b {
+    &Corelib_Init_Datatypes_list::nil(_) => {
+      self.alloc(
+        Corelib_Init_Datatypes_list::nil(
+          PhantomData))
+    },
+    &Corelib_Init_Datatypes_list::cons(_, a, rest) => {
+      let own =
+        self.spike_genMoves_(
+          full,
+          rest,
+          col);
+      match self.spike_color_eqb(
+              self.spike_at_color(
+                a),
+              col) {
+        true => {
+          match self.spike_at_piece(
+                  a) {
+            &Spike_piece::Knight(_) => {
+              self.Corelib_Init_Datatypes_app(
+                self.spike_moves_for(
+                  self.spike_at_sq(
+                    a),
+                  self.spike_knight_offsets(),
+                  full,
+                  col),
+                own)
+            },
+            &Spike_piece::King(_) => {
+              self.Corelib_Init_Datatypes_app(
+                self.spike_moves_for(
+                  self.spike_at_sq(
+                    a),
+                  self.spike_king_offsets(),
+                  full,
+                  col),
+                own)
+            },
+          }
+        },
+        false => {
+          own
+        },
+      }
+    },
+  }
+}
+fn spike_genMoves___curried(&'a self) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> &'a dyn Fn(&'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  self.closure(move |full| {
+    self.closure(move |b| {
+      self.closure(move |col| {
+        self.spike_genMoves_(
+          full,
+          b,
+          col)
+      })
+    })
+  })
+}
+
+fn spike_genMoves(&'a self, b: &'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>, col: &'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  self.spike_genMoves_(
+    b,
+    b,
+    col)
+}
+fn spike_genMoves__curried(&'a self) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> &'a dyn Fn(&'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  self.closure(move |b| {
+    self.closure(move |col| {
+      self.spike_genMoves(
+        b,
+        col)
+    })
+  })
+}
+
+fn spike_spikeGen(&'a self) -> &'a dyn Fn(&'a Corelib_Init_Datatypes_list<'a, &'a Spike_At<'a>>) -> &'a dyn Fn(&'a Spike_color<'a>) -> &'a Corelib_Init_Datatypes_list<'a, __pair<Spike_sq<'a>, Spike_sq<'a>>> {
+  self.spike_genMoves__curried()
+}
+}

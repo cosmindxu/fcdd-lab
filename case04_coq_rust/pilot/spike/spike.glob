@@ -1,0 +1,279 @@
+DIGEST 65c702f077ceafc07caa5a6a8ff5b57b
+Fspike
+R522:525 Stdlib.Lists.List <> <> lib
+R527:532 Stdlib.ZArith.ZArith <> <> lib
+R534:537 Stdlib.Bool.Bool <> <> lib
+R547:559 Stdlib.Lists.List ListNotations <> mod
+R626:631 TypedExtraction.Plugin.Loader <> <> lib
+R677:689 TypedExtraction.Plugin.ExtrRustBasic <> <> lib
+R735:756 TypedExtraction.Plugin.ExtrRustUncheckedArith <> <> lib
+def 771:772 <> sq
+R777:777 Corelib.Numbers.BinNums <> Z ind
+ind 791:795 <> color
+constr 800:804 <> White
+constr 808:812 <> Black
+scheme 791:795 <> color_rect
+scheme 791:795 <> color_ind
+scheme 791:795 <> color_rec
+scheme 791:795 <> color_sind
+ind 825:829 <> piece
+constr 834:839 <> Knight
+constr 843:846 <> King
+scheme 825:829 <> piece_rect
+scheme 825:829 <> piece_ind
+scheme 825:829 <> piece_rec
+scheme 825:829 <> piece_sind
+rec 1140:1141 <> At
+proj 1153:1157 <> at_sq
+proj 1165:1172 <> at_color
+proj 1183:1190 <> at_piece
+R1161:1162 spike <> sq def
+R1176:1180 spike <> color ind
+R1194:1198 spike <> piece ind
+def 1215:1223 <> color_eqb
+R1232:1236 spike <> color ind
+binder 1226:1226 <> a:9
+binder 1228:1228 <> b:10
+R1241:1244 Corelib.Init.Datatypes <> bool ind
+R1260:1260 spike <> b:10 var
+R1257:1257 spike <> a:9 var
+R1271:1275 spike <> White constr
+R1278:1282 spike <> White constr
+R1287:1290 Corelib.Init.Datatypes <> true constr
+R1296:1300 spike <> Black constr
+R1303:1307 spike <> Black constr
+R1312:1315 Corelib.Init.Datatypes <> true constr
+R1329:1333 Corelib.Init.Datatypes <> false constr
+def 1354:1360 <> validSq
+R1367:1368 spike <> sq def
+binder 1363:1363 <> s:13
+R1373:1376 Corelib.Init.Datatypes <> bool ind
+R1410:1413 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1394:1397 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R1385:1389 Stdlib.ZArith.BinInt <> ::Z_scope:x_'<=?'_x not
+R1390:1390 spike <> s:13 var
+R1400:1403 Stdlib.ZArith.BinInt <> ::Z_scope:x_'<?'_x not
+R1399:1399 spike <> s:13 var
+R1428:1431 Stdlib.ZArith.BinInt <> ::Z_scope:x_'<?'_x not
+R1415:1422 Stdlib.ZArith.BinInt Z modulo def
+R1424:1424 spike <> s:13 var
+def 1448:1453 <> lookup
+R1460:1461 spike <> sq def
+binder 1456:1456 <> s:14
+R1469:1472 Corelib.Init.Datatypes <> list ind
+R1474:1475 spike <> At rec
+binder 1465:1465 <> b:15
+R1480:1485 Corelib.Init.Datatypes <> option ind
+R1493:1495 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1488:1492 spike <> color ind
+R1496:1500 spike <> piece ind
+R1514:1514 spike <> b:15 var
+R1525:1527 Corelib.Init.Datatypes <> nil constr
+R1532:1535 Corelib.Init.Datatypes <> None constr
+R1542:1545 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1559:1562 Stdlib.ZArith.BinInt <> ::Z_scope:x_'=?'_x not
+R1558:1558 spike <> s:14 var
+R1563:1567 spike <> at_sq proj
+R1631:1636 spike <> lookup:16 def
+R1638:1638 spike <> s:14 var
+R1579:1582 Corelib.Init.Datatypes <> Some constr
+R1584:1584 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1595:1596 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1607:1607 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1585:1592 spike <> at_color proj
+R1597:1604 spike <> at_piece proj
+def 1664:1677 <> knight_offsets
+R1681:1684 Corelib.Init.Datatypes <> list ind
+R1688:1690 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1687:1687 Corelib.Numbers.BinNums <> Z ind
+R1691:1691 Corelib.Numbers.BinNums <> Z ind
+R1699:1699 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1705:1705 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1711:1711 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1718:1718 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1725:1725 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1733:1733 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1741:1741 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1748:1748 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1755:1755 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1700:1700 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1702:1702 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1704:1704 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1706:1706 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1708:1708 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1710:1710 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1712:1712 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1714:1714 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1717:1717 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1719:1719 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1721:1721 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1724:1724 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1726:1726 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1729:1729 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1732:1732 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1734:1734 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1737:1737 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1740:1740 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1742:1742 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1745:1745 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1747:1747 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1749:1749 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1752:1752 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1754:1754 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+def 1770:1781 <> king_offsets
+R1785:1788 Corelib.Init.Datatypes <> list ind
+R1792:1794 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1791:1791 Corelib.Numbers.BinNums <> Z ind
+R1795:1795 Corelib.Numbers.BinNums <> Z ind
+R1803:1803 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1809:1809 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1815:1815 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1821:1821 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1828:1828 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1835:1835 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1843:1843 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1850:1850 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1857:1857 Stdlib.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1804:1804 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1806:1806 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1808:1808 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1810:1810 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1812:1812 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1814:1814 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1816:1816 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1818:1818 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1820:1820 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1822:1822 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1825:1825 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1827:1827 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1829:1829 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1832:1832 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1834:1834 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1836:1836 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1839:1839 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1842:1842 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1844:1844 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1846:1846 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1849:1849 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1851:1851 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1853:1853 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1856:1856 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+def 1942:1950 <> moves_for
+R1957:1958 spike <> sq def
+binder 1953:1953 <> s:18
+R1969:1972 Corelib.Init.Datatypes <> list ind
+R1976:1978 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1975:1975 Corelib.Numbers.BinNums <> Z ind
+R1979:1979 Corelib.Numbers.BinNums <> Z ind
+binder 1962:1965 <> offs:19
+R1988:1991 Corelib.Init.Datatypes <> list ind
+R1993:1994 spike <> At rec
+binder 1984:1984 <> b:20
+R2023:2027 spike <> color ind
+binder 2017:2019 <> col:21
+R2032:2035 Corelib.Init.Datatypes <> list ind
+R2040:2042 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2038:2039 spike <> sq def
+R2043:2044 spike <> sq def
+R2058:2061 spike <> offs:19 var
+R2072:2074 Corelib.Init.Datatypes <> nil constr
+R2079:2081 Corelib.Init.Datatypes <> nil constr
+R2095:2098 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2087:2087 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2090:2091 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2094:2094 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2134:2136 Stdlib.ZArith.BinInt <> ::Z_scope:x_'+'_x not
+R2124:2126 Stdlib.ZArith.BinInt <> ::Z_scope:x_'+'_x not
+R2123:2123 spike <> s:18 var
+R2129:2131 Stdlib.ZArith.BinInt <> ::Z_scope:x_'*'_x not
+binder 2117:2117 <> t:24
+R2181:2192 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R2172:2178 spike <> validSq def
+R2180:2180 spike <> t:24 var
+R2199:2204 spike <> lookup def
+R2206:2206 spike <> t:24 var
+R2208:2208 spike <> b:20 var
+R2225:2228 Corelib.Init.Datatypes <> Some constr
+R2230:2230 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2232:2233 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2235:2235 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2240:2243 Corelib.Init.Datatypes <> negb def
+R2246:2254 spike <> color_eqb def
+R2258:2260 spike <> col:21 var
+R2273:2276 Corelib.Init.Datatypes <> None constr
+R2281:2284 Corelib.Init.Datatypes <> true constr
+binder 2156:2159 <> keep:25
+R2310:2313 spike <> keep:25 var
+R2364:2372 spike <> moves_for:22 def
+R2383:2385 spike <> col:21 var
+R2381:2381 spike <> b:20 var
+R2374:2374 spike <> s:18 var
+R2326:2329 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2320:2320 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2322:2323 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2325:2325 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2321:2321 spike <> s:18 var
+R2324:2324 spike <> t:24 var
+R2330:2338 spike <> moves_for:22 def
+R2349:2351 spike <> col:21 var
+R2347:2347 spike <> b:20 var
+R2340:2340 spike <> s:18 var
+def 2404:2412 <> genMoves'
+R2422:2425 Corelib.Init.Datatypes <> list ind
+R2427:2428 spike <> At rec
+binder 2415:2418 <> full:26
+R2436:2439 Corelib.Init.Datatypes <> list ind
+R2441:2442 spike <> At rec
+binder 2432:2432 <> b:27
+R2452:2456 spike <> color ind
+binder 2446:2448 <> col:28
+R2461:2464 Corelib.Init.Datatypes <> list ind
+R2469:2471 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2467:2468 spike <> sq def
+R2472:2473 spike <> sq def
+R2487:2487 spike <> b:27 var
+R2498:2500 Corelib.Init.Datatypes <> nil constr
+R2505:2507 Corelib.Init.Datatypes <> nil constr
+R2514:2517 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2543:2551 spike <> genMoves':29 def
+R2563:2565 spike <> col:28 var
+R2553:2556 spike <> full:26 var
+binder 2536:2538 <> own:31
+R2579:2587 spike <> color_eqb def
+R2590:2597 spike <> at_color proj
+R2602:2604 spike <> col:28 var
+R2811:2813 spike <> own:31 var
+R2623:2630 spike <> at_piece proj
+R2652:2657 spike <> Knight constr
+R2705:2708 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2662:2670 spike <> moves_for def
+R2673:2677 spike <> at_sq proj
+R2682:2695 spike <> knight_offsets def
+R2697:2700 spike <> full:26 var
+R2702:2704 spike <> col:28 var
+R2709:2711 spike <> own:31 var
+R2726:2729 spike <> King constr
+R2777:2780 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2736:2744 spike <> moves_for def
+R2747:2751 spike <> at_sq proj
+R2756:2767 spike <> king_offsets def
+R2769:2772 spike <> full:26 var
+R2774:2776 spike <> col:28 var
+R2781:2783 spike <> own:31 var
+def 2834:2841 <> genMoves
+R2848:2851 Corelib.Init.Datatypes <> list ind
+R2853:2854 spike <> At rec
+binder 2844:2844 <> b:32
+R2864:2868 spike <> color ind
+binder 2858:2860 <> col:33
+R2873:2876 Corelib.Init.Datatypes <> list ind
+R2881:2883 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2879:2880 spike <> sq def
+R2884:2885 spike <> sq def
+R2893:2901 spike <> genMoves' def
+R2903:2903 spike <> b:32 var
+R2905:2905 spike <> b:32 var
+R2907:2909 spike <> col:33 var
+def 2924:2931 <> spikeGen
+R2936:2943 spike <> genMoves def
+R2980:2987 spike <> spikeGen def

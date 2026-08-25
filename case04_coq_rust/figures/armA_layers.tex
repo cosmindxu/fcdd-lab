@@ -1,0 +1,63 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{tikz}
+\usepackage[sfdefault]{FiraSans}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  box/.style={draw,rounded corners=2pt,fill=#1,text width=4.9cm,
+    inner sep=4pt,font=\small},
+  rustbox/.style={draw,rounded corners=2pt,fill=blue!12,
+    text width=4.2cm,inner sep=4pt,font=\small},
+  thmbox/.style={draw,dashed,rounded corners=2pt,fill=gray!8,
+    text width=3.6cm,inner sep=3pt,font=\tiny}]
+
+\node[box=green!15] (L5859) at (2.8,-0.00) {
+  \textbf{byte/bit ops} — 17 defs, 15 extracted \\
+  \texttt{addB}, \texttt{andAux}, \texttt{andB}, \texttt{bitn}\, (+13)};
+\node[thmbox,right=0.35cm of L5859] (T5859) {Theorems: \texttt{T0a\_onBoard\_is\_mask}\& \texttt{T0b\_type\_is\_mask}\& \texttt{T0c\_col\_is\_mask}\& \texttt{T0d\_file\_is\_mask}\& \texttt{T0e\_rank\_is\_mask}\, (+1)};
+\node[box=green!15] (L5770) at (2.8,-1.32) {
+  \textbf{squares \& pieces} — 38 defs, 35 extracted \\
+  \texttt{BB}, \texttt{BK}, \texttt{BLACK}, \texttt{BN}\, (+34)};
+\node[thmbox,right=0.35cm of L5770] (T5770) {Theorems: \texttt{T0a\_onBoard\_is\_mask}\& \texttt{T0b\_type\_is\_mask}\& \texttt{T0c\_col\_is\_mask}\& \texttt{T0d\_file\_is\_mask}\& \texttt{T0e\_rank\_is\_mask}\, (+3)};
+\node[box=green!15] (L3238) at (2.8,-2.64) {
+  \textbf{moves \& direction tables} — 19 defs, 16 extracted \\
+  \texttt{Move}, \texttt{SP\_DPUSH}, \texttt{SP\_EP}, \texttt{SP\_NONE}\, (+15)};
+\node[thmbox,right=0.35cm of L3238] (T3238) {Theorems: \texttt{T9\_castle\_OO}\& \texttt{T9a\_castle\_OOO}\& \texttt{T9b\_no\_rights\_no\_castle}\& \texttt{T10\_ep\_generated}\& \texttt{T10a\_ep\_needs\_target}\, (+2)};
+\node[box=green!15] (L7860) at (2.8,-3.96) {
+  \textbf{attacks} — 8 defs, 8 extracted \\
+  \texttt{inCheckSide}, \texttt{isAttacked}, \texttt{pawnAt}, \texttt{posMc}\, (+4)};
+\node[thmbox,right=0.35cm of L7860] (T7860) {Theorems: \texttt{T0f\_mirrorIdx\_is\_xor}};
+\node[box=green!15] (L7108) at (2.8,-5.28) {
+  \textbf{move generation} — 9 defs, 9 extracted \\
+  \texttt{addPromos}, \texttt{genCastling}, \texttt{genForSquare}, \texttt{genHops}\, (+5)};
+\node[thmbox,right=0.35cm of L7108] (T7108) {Theorems: \texttt{T16a\_pin\_pseudo}};
+\node[box=green!15] (L9808) at (2.8,-6.60) {
+  \textbf{make / legality} — 5 defs, 5 extracted \\
+  \texttt{capSquare}, \texttt{clrCastleSq}, \texttt{genLegal}, \texttt{makeMove}\, (+1)};
+\node[thmbox,right=0.35cm of L9808] (T9808) {Theorems: \texttt{T2\_start\_20\_moves}\& \texttt{T4a\_mate\_no\_moves}\& \texttt{T7b\_fifty\_has\_moves}\& \texttt{T9\_castle\_OO}\& \texttt{T9a\_castle\_OOO}\, (+6)};
+\node[box=green!15] (L2384) at (2.8,-7.92) {
+  \textbf{terminal \& draw} — 9 defs, 7 extracted \\
+  \texttt{GameState}, \texttt{History}, \texttt{countN}, \texttt{countReps}\, (+5)};
+\node[thmbox,right=0.35cm of L2384] (T2384) {Theorems: \texttt{T1\_start\_is\_play}\& \texttt{T4\_mate}\& \texttt{T5\_stalemate}\& \texttt{T6\_insufficient}\& \texttt{T6a\_insufficient\_holds}\, (+3)};
+\node[box=green!15] (L3887) at (2.8,-9.24) {
+  \textbf{evaluation} — 16 defs, 16 extracted \\
+  \texttt{eval}, \texttt{evalWhite}, \texttt{gamePhase}, \texttt{kingPstSigned}\, (+12)};
+\node[box=green!15] (L6766) at (2.8,-10.56) {
+  \textbf{search \& perft} — 2 defs, 2 extracted \\
+  \texttt{chooseMove}, \texttt{negamax}};
+\node[box=green!15] (L3889) at (2.8,-11.88) {
+  \textbf{FEN / CLI} — 10 defs, 10 extracted \\
+  \texttt{dropField}, \texttt{entry}, \texttt{fieldAt}, \texttt{isDigitC}\, (+6)};
+\node[box=green!15] (L7007) at (2.8,-13.20) {
+  \textbf{other} — 28 defs, 27 extracted \\
+  \texttt{BISHOP\_PAIR}, \texttt{CHOOSE\_DEPTH}, \texttt{DOUBLED}, \texttt{INF}\, (+24)};
+\node[thmbox,right=0.35cm of L7007] (T7007) {Theorems: \texttt{T0a\_onBoard\_is\_mask}\& \texttt{T0b\_type\_is\_mask}\& \texttt{T0c\_col\_is\_mask}\& \texttt{T0d\_file\_is\_mask}\& \texttt{T0e\_rank\_is\_mask}\, (+6)};
+\node[rustbox] (R) at (12.6,-7.16) {
+  \textbf{Extracted Rust} \\
+  $150/161$ definitions generated \\
+  $257$ functions ($107$ \texttt{\_\_curried} wrappers) \\
+  hash-locked to the extractor output};
+\node[thmbox,below=0.3cm of R] (E) {Proofs ($26$ theorems) are \textbf{erased} at extraction — they constrain the definitions, they ship no code.};
+\draw[->,thick,blue!60] (6.3,-6.96) -- node[above,font=\tiny,blue!60]{mechanical extraction} (10.2,-6.96);
+
+\end{tikzpicture}
+\end{document}

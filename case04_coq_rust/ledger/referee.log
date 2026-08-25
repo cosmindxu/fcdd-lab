@@ -1,0 +1,24 @@
+referee perft gate: PASSED (standard battery)
+referee: 11103 entries, 9603 todo
+  referee: 500/9603
+  referee: 1000/9603
+  referee: 1500/9603
+  referee: 2000/9603
+  referee: 2500/9603
+  referee: 3000/9603
+  referee: 3500/9603
+  referee: 4000/9603
+  referee: 4500/9603
+  referee: 5000/9603
+  referee: 5500/9603
+  referee: 6000/9603
+  referee: 6500/9603
+  referee: 7000/9603
+  referee: 7500/9603
+  referee: 8000/9603
+  referee: 8500/9603
+  referee: 9000/9603
+  referee: 9500/9603
+referee pass done -> /tmp/opencode/referee_smoke.jsonl
+Running as unit: c04-referee.service; invocation ID: 7bb080d9e5d640e3a4d2daaa1cd18ff3
+Running as unit: c04-referee.service; invocation ID: 0ed2853bad024e7bbee0e10ccb465b0a

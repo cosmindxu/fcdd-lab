@@ -1,0 +1,14 @@
+=== H1 primary: policy disagreement mass mu2 (choose vs engine) ===
+armA mu2: ['0.0880']
+armB mu2: ['0.3662']
+mean A=0.0880  mean B=0.3662  diff(A-B)=-0.2782
+exact two-sided p = 1.0000 (floor 1.0000)   bootstrap CI [-0.2782, -0.2782]
+H1 verdict: NOT SUPPORTED
+
+=== co-primary: completion ===
+armA completion 1.00  armB completion 1.00
+
+=== H2: cost ===
+armA costs: ['1.50']
+armB costs: ['1.50']
+median ratio B/A = 1.00  exact p = 1.0000

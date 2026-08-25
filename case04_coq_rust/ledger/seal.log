@@ -1,0 +1,49 @@
+entries: 11103  todo: 10863 (resume=True)
+  phase1: 250/10863 processed
+  phase1: 500/10863 processed
+  phase1: 750/10863 processed
+  phase1: 1000/10863 processed
+  phase1: 1250/10863 processed
+  phase1: 1500/10863 processed
+  phase1: 1750/10863 processed
+  phase1: 2000/10863 processed
+  phase1: 2250/10863 processed
+  phase1: 2500/10863 processed
+  phase1: 2750/10863 processed
+  phase1: 3000/10863 processed
+  phase1: 3250/10863 processed
+  phase1: 3500/10863 processed
+  phase1: 3750/10863 processed
+  phase1: 4000/10863 processed
+  phase1: 4250/10863 processed
+  phase1: 4500/10863 processed
+  phase1: 4750/10863 processed
+  phase1: 5000/10863 processed
+  phase1: 5250/10863 processed
+  phase1: 5500/10863 processed
+  phase1: 5750/10863 processed
+  phase1: 6000/10863 processed
+  phase1: 6250/10863 processed
+  phase1: 6500/10863 processed
+  phase1: 6750/10863 processed
+  phase1: 7000/10863 processed
+  phase1: 7250/10863 processed
+  phase1: 7500/10863 processed
+  phase1: 7750/10863 processed
+  phase1: 8000/10863 processed
+  phase1: 8250/10863 processed
+  phase1: 8500/10863 processed
+  phase1: 8750/10863 processed
+  phase1: 9000/10863 processed
+  phase1: 9250/10863 processed
+  phase1: 9500/10863 processed
+  phase1: 9750/10863 processed
+  phase1: 10000/10863 processed
+  phase1: 10250/10863 processed
+  phase1: 10500/10863 processed
+  phase1: 10750/10863 processed
+phase 1 done: 10863 new results (+240 resumed)
+phase 1: answers=10957  unjudgeable=146  inconsistent=0
+policy candidates: 4937
+phase 2: policy answers=1999
+SEALED: /media/sf_Projects/fcdd_lab/case04_coq_rust/ledger/sealed/answers.json  sha256=76409a03cbbc96681fa3f184c16462dbc96748f76bebbea7c06e0992b8ac61da
