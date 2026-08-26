@@ -1,6 +1,6 @@
 ---
 name: formal-contract-dev
-description: Formal Contract-Driven Development (FCDD) — the lifecycle for building and operating a SAFETY-CRITICAL system around a machine-checked formal contract. USE WHEN building or HARDENING anything load-bearing whose SILENT failure beats its loud one: money paths, dead-man/kill switches, monitors and watchdogs, auth/authorization closure, protocol state machines, "never/always" claims, or when a soak/burn-in is being replaced by runtime verification (read the warnings first — a hollow monitor is worse than the soak). Companion for the proving sub-process: the formal-verification skill (FCDD wraps it). The four beats — PROVE the contract (kernel-checked spec of record; non-vacuous witnesses; real incidents encoded as theorems), TWIN it (a pure implementation that provably/testably agrees with the spec — transcription+bridge, or verified extraction), BRIDGE it (a conformance suite: witnesses conform, theorem-violating inputs fail the RIGHT clause, single-field mutations trip exactly their clause — it SAMPLES agreement, it is not a refinement proof), ATTACK it (multi-agent adversarial review with distinct lenses, verify-by-execution, ground-truth every finding yourself, iterate per-surface to convergence). Plus the honesty machinery: fail-direction engineering (degraded input ⇒ the CONSERVATIVE/fail-safe verdict, never a vacuous SAFE; asymmetries by recoverability), falsifiability tiering (grade every check by what the evidence can actually falsify — the badge must match the detector), observed-sample semantics for impure shells, decision/assumption ledgers, and verify-where-it-runs deployment (extract-and-execute the installed artifact, never your simulation of it). FCDD proves coherence, NOT correctness-of-intent, and catches defects late (review) as much as early (proof) — it caught, it did not prevent, the arc's hollow monitor. Default tools (Lean 4 core, z3+cvc5, Python pure/impure split, plain-script gates) are DEFAULTS — substitute Coq/Rocq, Isabelle, Rust, OCaml, or a lower claim tier (property tester, model checker, solver-trusted prover) with a recorded downgrade. Exemplar with file paths: references/case_study.md; N=1, distilled 2026-07-29 from the ikbr_tools R18 watcher + ops-monitor arc.
+description: Formal Contract-Driven Development (FCDD) — the lifecycle for building and operating a SAFETY-CRITICAL system around a machine-checked formal contract. USE WHEN building or HARDENING anything load-bearing whose SILENT failure beats its loud one: money paths, dead-man/kill switches, monitors and watchdogs, auth/authorization closure, protocol state machines, "never/always" claims, or when a soak/burn-in is being replaced by runtime verification (read the warnings first — a hollow monitor is worse than the soak). Companion for the proving sub-process: the formal-verification skill (FCDD wraps it). The four beats — PROVE the contract (kernel-checked spec of record; non-vacuous witnesses; real incidents encoded as theorems), TWIN it (a pure implementation that provably/testably agrees with the spec — transcription+bridge, or verified extraction), BRIDGE it (a conformance suite: witnesses conform, theorem-violating inputs fail the RIGHT clause, single-field mutations trip exactly their clause — it SAMPLES agreement, it is not a refinement proof), ATTACK it (multi-agent adversarial review with distinct lenses, verify-by-execution, ground-truth every finding yourself, against a DECLARED BUDGET — coverage is the stop condition, not convergence). Plus the honesty machinery: fail-direction engineering (degraded input ⇒ the CONSERVATIVE/fail-safe verdict, never a vacuous SAFE; asymmetries by recoverability), falsifiability tiering (grade every check by what the evidence can actually falsify — the badge must match the detector), observed-sample semantics for impure shells, decision/assumption ledgers, and verify-where-it-runs deployment (extract-and-execute the installed artifact, never your simulation of it). FCDD proves coherence, NOT correctness-of-intent, and catches defects late (review) as much as early (proof) — it caught, it did not prevent, the arc's hollow monitor. Default tools (Lean 4 core, z3+cvc5, Python pure/impure split, plain-script gates) are DEFAULTS — substitute Coq/Rocq, Isabelle, Rust, OCaml, or a lower claim tier (property tester, model checker, solver-trusted prover) with a recorded downgrade. Exemplar with file paths: references/case_study.md; N=1, distilled 2026-07-29 from the ikbr_tools R18 watcher + ops-monitor arc.
 ---
 
 # Formal Contract-Driven Development (FCDD)
@@ -101,6 +101,12 @@ target; do not inflate it into the general safety analysis it cannot replace.
 
 ### Beat 1 — PROVE: the contract of record
 
+0. **Entry obligation (law 13).** Before writing a single clause, fix where clauses may come
+   from and how coverage will be shown: each P will carry a provenance tag; every stated
+   requirement must end up mapped to ≥ 1 clause and every clause to ≥ 1 requirement, with
+   orphans recorded as named residuals; the completeness scope is declared in writing as a
+   declaration (not a proof); and the clause set will be mutation-tested against itself at the
+   end of the beat. A clause set that no self-mutation can break is not pinning anything.
 1. Write the safety properties in prose first (numbered: P1…Pn), each with its **fail direction**:
    for every input that can degrade (missing, stale, NaN, corrupt, ambiguous), name the verdict it
    must map to — and pick asymmetries by **recoverability** (a false halt you can `rm` beats a
@@ -254,7 +260,7 @@ target; do not inflate it into the general safety analysis it cannot replace.
     finding on a real case is a defect in spec, twin, or shell — decide which and fix at that
     layer, never by special-casing the test.
 
-### Beat 4 — ATTACK: adversarial review to convergence
+### Beat 4 — ATTACK: adversarial review against a declared budget
 
 14. Fan out **independent reviewers with distinct lenses** (never one generalist):
     (a) spec adequacy — bad-cases-that-CONFORM (under-spec, the dangerous direction) and
@@ -270,8 +276,45 @@ target; do not inflate it into the general safety analysis it cannot replace.
     is a review defect. Route adversarial work to your strongest/most-independent reviewer
     (operator rule here: the Fable model; generalize: a different model or person than the
     author).
+15.5 **DECLARE THE ATTACK BUDGET BEFORE THE BEAT STARTS — coverage is the stop
+    condition, not convergence.** Bought by case02 (56 runs, `fcdd_lab/method/ATTACK_BUDGET_DIAGNOSIS.md`):
+    under the old iterate-to-convergence rule the ATTACK beat ran **1 to 18 rounds**
+    across runs of the *same* defect, round count correlated **r = 0.72** with run
+    cost and explained about half its variance, and runs with >= 6 rounds cost
+    **$48.33** against **$28.42** for runs with <= 2 — while **all 56 runs, both
+    arms, produced a byte-identical artefact**. Every extra round bought nothing
+    measurable, at 1.7x the price and an 18x spread. The control arm's bounded
+    review varied 3x and correlated **-0.21**. Unbounded review is where FCDD's
+    unpredictability lives, and predictability is the property the method is sold
+    on.
+    The rule conflates two things and stops on the wrong one:
+    - **coverage** — have all four lenses been applied to the declared surface?
+      Bounded, checkable, priceable in advance.
+    - **convergence** — has iteration stopped producing findings? Unbounded,
+      judgement-based, priced only in arrears.
+    So: **stop on coverage; budget convergence.**
+    - Declare the surface set **S** before the beat begins.
+    - **Mandatory pass:** every lens against every surface, **one round, in
+      parallel**. Cost = |S| x 4 agents, known before you start.
+    - **Remediation:** if a finding is CONFIRMED blocking, exactly **one** further
+      round, scoped to the affected surface, re-verifying that finding only.
+    - **Hard stop at two rounds.** Remaining findings become named residuals and
+      ship — which #16 already requires.
+    - **Widening the surface starts a NEW attack with its own declared budget.**
+      It is not a continuation and its price is quoted separately.
+    The mandatory pass keeps the property that actually catches defects — four
+    independent lenses — and removes the iteration, which on the measured benchmark
+    caught nothing. The budget is **operator-set, not small**: if you believe your
+    surface needs six rounds, declare six and pay a known price. What is removed is
+    the *agent's* discretion to keep going, which is where the variance came from.
+    **Honest status:** the diagnosis is strongly evidenced; the fix's benefit is
+    predicted, not demonstrated. The evidence comes from a benchmark on which
+    nothing failed, so it cannot show what bounding would lose on harder work. If
+    you are working where a late round plausibly earns its cost, declare a larger
+    budget — do not reopen the loop.
 16. **Ground-truth every load-bearing finding yourself by execution before accepting it** — and
-    equally before *rejecting* it. Then fix, then **re-review the fixes** (a focused pass).
+    equally before *rejecting* it. Then fix, then **re-review the fixes** (a focused pass,
+    inside the declared budget of #15.5).
     Convergence is **per review-surface, not global**: reachability decreases within a FIXED scope,
     but *widening the scope legitimately re-opens reachable findings* — in the arc, a narrow "GO" was
     followed by a full-code review that found new reachable arming blockers, and one deployment bug
@@ -299,14 +342,24 @@ target; do not inflate it into the general safety analysis it cannot replace.
       uncommitted work is work no commit records, so the reviewer would be measuring ghosts);
       **the first act of the next solver turn is `claim`**, naming the review just assessed.
     - **It cannot force an external reviewer to wait — and does not pretend to.** What it buys is
-      DETECTION that is deterministic instead of archaeological: a review reporting a sha other
-      than the frozen one was racing, and one command says so rather than three findings later.
+      DETECTION that is deterministic instead of archaeological: a review whose reported sha
+      names different CODE than the freeze was racing, and one command says so rather than three
+      findings later. (Reported *sha*, not code, is the wrong test — an honest reviewer runs at
+      HEAD, which is the flip commit itself. Same off-by-one as below; it bit both branches.)
     - **The honest handoff must be SILENT.** The flip is itself a commit, so `release` reads HEAD
       *before* that commit exists and the correct handoff always leaves HEAD one ahead of the
       frozen sha — a raw sha comparison cries RACE every single time. Found on the protocol's
       FIRST execution. Compare what the reviewer actually measures (the code: diff the trees with
       the token's own path excluded), because an alarm that fires on the honest path trains the
       operator to ignore the one that matters.
+    - **"Dirty" means TRACKED edits, not untracked files.** A `git status --porcelain` that
+      counts untracked files made the guard cry RACE over the operator's own tooling dropped in
+      the tree, though no committed code had moved -- the THIRD honest-path false-positive, after
+      the two flip-commit ones. An untracked file is in no commit and alters no sha; a review of a
+      named ref never reads it. Count only `--untracked-files=no`. Each of the three was the same
+      root error: the guard answered a question (did the reviewed code move?) with a cheaper proxy
+      (did the sha / working tree change at all?) that fires on the honest path. Test the guard
+      against its OWN honest handoff before trusting it.
     - **Fail direction: a missing or garbled token is NOT permission.** It refuses (the same rule
       as every other guard: degraded input yields refusal, never a free pass).
     - Reference implementation + its regression suite: `scripts/review_turnstile.py`,
@@ -390,7 +443,7 @@ skill's L1/L2a/L2g/L2b claim levels are the vocabulary for this. A shop with onl
 tester, or a model checker (TLA+/TLC) that explores a bounded state space, or a solver-trusted verifier,
 is doing FCDD at a lower claim tier — which is fine, *labeled*.
 
-## 4. The laws (cross-cutting; laws 1–7 and 9 were each bought by a named defect in the arc; 8, 10 and 11 are governing principles, not defect-derived — 11 added after the R2 incident)
+## 4. The laws (cross-cutting; laws 1–7 and 9 were each bought by a named defect in the arc; 8, 10 and 11 are governing principles, not defect-derived — 11 added after the R2 incident; **12 was bought by measurement, not incident** — case02, 56 runs)
 
 1. Degraded input ⇒ the **conservative (fail-safe) verdict**, never the convenient one — for a 3-valued
    source that is UNKNOWN (never a vacuous SAFE), and the safe verdict is whatever forces protection to
@@ -414,6 +467,43 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
     cannot self-diagnose. (Earned by R2, 2026-08-03: a correctly-deciding dead-man false-latched 3×
     because nobody modeled watcher-start × gateway-not-yet-up; caught by Beat 4 review, not by the
     per-tick kernel — the gap Beat 0.5 now partially closes.)
+12. **No unbounded loop in the method. Every iterative beat declares its budget before it
+    starts, and stops on coverage rather than on a judgement that iteration is done.**
+    Predictability is what this method is sold on, so a step whose cost the operator cannot
+    quote in advance is a defect in the method, not a property of the work. Measured: under
+    iterate-to-convergence the ATTACK beat ran 1–18 rounds on repeats of the *same* defect,
+    round count correlated r = 0.72 with cost, and the extra rounds changed no artefact
+    (`fcdd_lab/method/ATTACK_BUDGET_DIAGNOSIS.md`). The bounded control arm varied 3× and
+    correlated −0.21. Budgets may be large — set by the operator, declared in writing — but
+    they are set *before*, and the agent does not get to extend them.
+13. **Every clause declares where it came from, and the clause set must survive
+    mutation of itself.** The kernel proves coherence; it cannot prove the spec is
+    the right spec (§5). But three things it *can* prove are currently left
+    unowned, and "where P1…Pn come from is on you" is not an interface — every
+    other seam in this method carries an obligation with a mechanical exit.
+    On entry to Beat 1, therefore:
+    (a) **provenance** — every clause tags its source (a stated requirement, a real
+    incident per law 6, or a named generator such as Beat 0.5's mission products);
+    (b) **bidirectional traceability** — every stated requirement maps to ≥ 1 clause
+    and every clause to ≥ 1 requirement, with orphans in either direction written
+    down as named residuals rather than passed over in silence;
+    (c) **a declared completeness scope** — "these hazards, by this technique, and
+    here is what we did not consider": a declaration, never a proof, and labelled
+    as one (law 3);
+    (d) **pinning, measured by SPEC-side mutation** — mutate the clause set, not
+    the implementation; a mutant no clause rejects is a coverage gap.
+    (d) is the one that earns its place by execution: in `pipeline_proto` the
+    mutation `M4_boundary` survived the reachability witnesses, the theorem
+    mirrors and a 1,200-case exhaustive sweep, because P1–P5 constrained the
+    *shape* of the verdict and never pinned *where* fresh becomes stale. P6 closed
+    it. Reading the spec would not have found that.
+    This does NOT make the method cover intent — it covers *stated* intent, and a
+    need nobody wrote down stays unreachable. What it buys is that the residue is
+    **named** instead of invisible. Do not add a hazard-analysis *beat*: its exit
+    condition is unbounded judgement, which laws 3 and 12 both forbid.
+    Derivation and honest tier: `fcdd_lab/method/INTENT_COVERAGE.md` (derived
+    diagnosis, predicted benefit, N = 1 supporting execution — weaker evidence
+    than law 12's 56 runs, and it should be cited that way).
 
 ## 5. What FCDD does NOT do (read before trusting it)
 
@@ -427,6 +517,13 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
   bought that caveat: the per-tick dead-man spec was coherent and the dead-man decided correctly,
   yet a deployment-ordering hole nobody had modeled false-latched it 3×. The hole was deducible
   from the deployed missions; it just had no beat to deduce it until Beat 0.5.
+  **What IS owned (law 13, added 2026-08-26):** coverage of *stated* intent —
+  clause provenance, bidirectional requirement↔clause traceability, a declared
+  completeness scope, and pinning measured by spec-side mutation. So the precise
+  claim is: FCDD cannot prove the spec is right; it can prove the spec is complete
+  against what was **stated**, traceable to why each clause exists, and strong
+  enough to reject a mutation of itself. A need nobody wrote down stays
+  unreachable, and that residue is what this bullet is still right about.
 - **The bridge cannot catch common-mode error** (spec and twin sharing the author's mistake) — only
   an independent Lens-A reviewer and reality (Beat 3.75) can. So the author grading their own
   homework is the standing residual: FCDD reduces it (independent reviewers, execution-proof,

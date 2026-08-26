@@ -24,3 +24,28 @@ Change for the next revision:
   it will not always be. Name the principle, parameterize the model.
 - When the skill runs inside a measured/protocolized context, the choice
   must be visible in the run's own output so downstream ledgers catch it.
+
+## DONE — folded in 2026-08-26
+
+- **Attack-reviewer model as an explicit choice** (the item above): superseded in
+  practice by **law 12** (declared attack budget), which landed in the installed
+  skill from `fcdd_lab/method/ATTACK_BUDGET_DIAGNOSIS.md`. The model-choice
+  parameterisation is still owed; the unbounded-iteration half is closed.
+- **Law 13 — intent coverage** (`fcdd_lab/method/INTENT_COVERAGE.md`): clause
+  provenance, bidirectional traceability, declared completeness scope, and
+  spec-side mutation, plus a Beat 1 entry obligation and a restated §5 that now
+  says what IS owned rather than only what is not. Tier: derived diagnosis,
+  predicted benefit, N = 1 supporting execution (`pipeline_proto`'s `M4_boundary`).
+
+## Version hygiene — a defect this repo is supposed to catch
+
+The vendored copy under `skills/formal-contract-dev-current/` had **drifted from
+the installed skill**: law 12 and the Beat 4 rewrite were live in
+`~/.claude/skills/` and absent here. That is exactly the silent divergence
+`skills/README.md` was written to detect, and it went undetected until someone
+diffed it on 2026-08-26. Refresh the vendored copy in the same commit as any
+installed-skill change.
+
+**The frozen copy under `skills/formal-contract-dev/` was NOT touched** and must
+never be: it is the text case01 measured, and every Arm B number in the paper is
+bound to it.
