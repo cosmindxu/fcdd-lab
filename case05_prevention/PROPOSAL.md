@@ -1,6 +1,16 @@
 # CASE 05 — proposal: testing the prevention claim under isolation that holds
 
-**STATUS: DRAFT r5 — not frozen, nothing scheduled, nothing built.** **r5 applies review round 3** — run as two reviewers with separate lenses (3A
+**STATUS: DRAFT r6 — NOT CONVERGING; SEE §11 BEFORE READING FURTHER.**
+
+r6 applies review round 4's coherence fixes and records its findings, but **does
+not claim to repair the design.** Four rounds have returned 4, 4, 9 and 14
+blocking-or-mismatch findings, every round's inside the previous round's repairs.
+Round 4 refuted r5's central anti-circularity fix **by kernel execution**, and a
+disposition audit found six places where a recorded fix was absent, stale, or
+invalidated — including one applied everywhere except the line the finding cited.
+**The recommendation r6 carries forward is to stop patching this subject** (§11).
+
+Superseded status line: DRAFT r5 — not frozen, nothing scheduled, nothing built.** **r5 applies review round 3** — run as two reviewers with separate lenses (3A
 science, 3B plan). They returned **nine blocking findings between them, every one
 inside r4's own new material**, converging independently on two: the checksum
 argument that justified retiring L3, and the replication mechanism orphaned when
@@ -11,15 +21,15 @@ dispositions in §14. **r4 resolved D1** — the subject is now FIDE-legal move 
 perft (§5), retiring both the Z80-clone and PORTGUARD options — adds the
 mutation-calibration gate and the capability-window rule (C24, C25), makes model
 tier an experimental factor (§6), and sets out the six-phase plan with its four
-stop points (§10). A **third review round is owed on r4's own changes**, on the
-evidence of what round 2 did to round 1's. r3 applied review round 2
-(§13), which found four further blocking defects — all of them in the *repairs*
+stop points (§10). r3 applied review round 2
+(§14), which found four further blocking defects — all of them in the *repairs*
 round 1 produced, exactly as this lab's history predicted. r2 applied round 1's
-four blocking findings and thirteen others (§12). Two of them changed the design rather than its wording: the co-primary
+four blocking findings and thirteen others (§13). Two of them changed the design rather than its wording: the co-primary
 gate was unpowerable at any scale this lab has run (B2, independently
 re-simulated), and Option B is retired (B3). Freezing is
-the operator's act, and it should not happen until the D1 fork in §6 is decided
-and the §9 kill criteria are checked against reality. This document exists
+the operator's act. **D1 is resolved (§5); the §8 kill criteria — including the
+new criterion 6, which §11's own conclusion implies — must be checked against
+reality before any freeze.** This document exists
 because case 04 answered nothing and named why; it is the design that would
 have to be true for a re-run to be worth its cost.
 
@@ -246,7 +256,6 @@ scoring, and blind to outcome**:
 |---|---|---|
 | G-ISO closure hash | any file in the cell's reachable closure not in `image manifest ∪ /work ∪ {/proc,/dev,/tmp}` — symlinks resolved, mounts enumerated, **sibling trees proved absent**; the `/work` delta is deposited as the submission's provenance record (M2) | material the cell never wrote down |
 | G-NET no-egress probe | a network path out of the sandbox | an out-of-band channel through the socket |
-| G-CAP server log | queries beyond cap, cross-cell token reuse | whether the answers bought were *enough* |
 | G-XSCRIPT constant match | submissions containing byte-equal runs of engine constants (case04 F3's check, promoted from a review finding to an automatic gate) | a paraphrased transcription |
 | G-CLUSTER cross-arm identity | submissions whose behaviour is mutually identical across arms (case04 F4) | genuine convergence on an easy target |
 | G-DEPOSIT manifest hash | sealed content deposited anywhere in the repository, by any path (A11/A19) | content leaked outside git |
@@ -286,7 +295,8 @@ checkable form:
   workspace does not live where the lab lives.** No `external_directory: allow`.
 - **C19 — the guard scans the reachable closure, not a subtree**: symlinks
   resolved, mount table enumerated, at cell start *and* at cell exit.
-- **C20 — the query cap is enforced where the engine runs.**
+- **C20 — STRUCK (r5, applied r6).** The query cap belonged to the retired L2
+  oracle daemon; under this subject there is no per-cell query oracle to meter.
 - **C21 — the scored corpus is generated after the last cell closes**, from a
   seed committed by hash in the pre-registration and held off-host.
 - **C23 — cells share no writable mount and no host path (A-2026-08-26b).**
@@ -359,11 +369,16 @@ Against a specification target, all three invert:
   arm can prove them and thereby retire rules-layer testing — which is precisely
   the differential this experiment exists to measure and which case 04 made
   unmeasurable by construction.
-- **The oracle cannot be transcribed into a solution.** A perft count is a
-  *checksum* of correct behaviour. Learning that startpos depth 5 is 4,865,609
-  tells an agent it is wrong; it says nothing about how to be right. **An oracle
-  whose leak is useless demotes the isolation stack from load-bearing wall to
-  belt** — the reward gradient no longer points at the filesystem at all.
+- **The oracle is harder to transcribe than an engine — but NOT useless if
+  leaked, and r4's claim that it was has been withdrawn (round 3; see the §3 r5
+  note).** A perft *count* cannot be inverted into an implementation. That is
+  where the property stops: a leaked *suite* is still actionable, because an agent
+  can compute divide-perft itself and bisect to the offending move — convergence
+  by iteration, without understanding — and §5.3's adjudication set leaks as
+  labelled `(fen, history) → verdict` pairs, which **are** answers. So the subject
+  removes the *transcribe-the-artefact* strategy that dominated case 04, and it
+  does **not** remove the need for isolation. **L1 remains load-bearing and a suite
+  leak remains fatal under fail-direction.**
 - **No circularity.** FIDE is canonical, public, and **not authored by us**.
   Case 03 named this risk against its own PORTGUARD design — a grammar
   manufactures exactly the clause-interaction difficulty formalisation is best
@@ -576,7 +591,13 @@ vector, and it is the half of case 04 that could not have been won by any method
   ceiling and a delivery criterion. The pre-registration names the primary and
   takes case02 §5.5's disclose-and-discount position on the rest, before the
   outcomes multiply further.
-- **Power.** Exact simulation over the n_defects × k grid before the schedule is
+- **Power — r6: this section named two incompatible methods.** "Exact simulation
+  over the n_defects × k grid" is the retired seeded-defect design's method; the
+  live source is **Phase-2 sampler-noise variance** (see Replication above), and
+  that is what the pre-registration uses. The `power_case03.py` reference below
+  remains **uncommitted three revisions after its disposition claimed otherwise**,
+  so under C10 it cannot be cited until deposited. Superseded text: exact
+  simulation over the n_defects × k grid before the schedule is
   committed, by the method prototyped in `case03_silent_repair/prototype/
   power_case03.py` (currently untracked — commit it or restate the method
   in-line before citing it). Case02's floor lesson stands: a design whose best
@@ -597,12 +618,25 @@ vector, and it is the half of case 04 that could not have been won by any method
   `reflexivity`: universally quantified, machine-checked, witness-bearing,
   clause-vocabulary-covering — **every criterion below passes while nothing is
   proved.** Deciding by inspection whether a declarative spec is independent of
-  the generator is a judgement, which C1 forbids as a control. **Mechanised
-  instead:** the cell's declarative spec is committed and frozen **before** any
-  generator code is written, and **G0-style mutation is applied to the spec
-  side** — injected spec mutations must break the proofs. A specification the
-  proofs cannot lose against is circular by construction, and that test is a
-  program, not an opinion.
+  the generator is a judgement, which C1 forbids as a control. **r5's fix is REFUTED BY EXECUTION (round 4A, B1) and does not stand.** A
+  reviewer compiled the counterexample in Rocq: for `legal p m := In m (genLegal
+  p)`, soundness and completeness both discharge by `exact H`, and *every*
+  semantic spec mutant breaks at least one proof — so the predicate "injected spec
+  mutants must break the proofs" is **maximally satisfied by the circular spec**,
+  a spec identical to its generator being the most mutation-sensitive spec
+  possible. r5's sentence "a specification the proofs cannot lose against is
+  circular by construction" asserted a **false converse**. The freeze-ordering half
+  fails too: it names no verifying mechanism and cannot order cognition, since a
+  cell may design the generator in context and transcribe it as the spec. The
+  consequence is worse than a missed gate — a circular cell reads as *treatment
+  delivered*, so G2 would call a tier admissible where the treatment is in fact
+  undeliverable, which is the wrong-kill-verdict class.
+
+  **The only candidate fix that is a program rather than an opinion** is
+  **lab-frozen theorem statements**: cells prove against statements the lab
+  authors and freezes, which also gives the interpretation addendum the author,
+  freeze point and amendment rule it currently lacks. It renames the treatment,
+  and §11 already half-concedes that rename.
 - **Treatment delivery is verified, not assumed (B4) — the gate this programme
   most obviously lacked.** Case04's treated arm wrote **zero quantified
   properties across ~4,500 lines of Rocq**, and its "zero `Admitted`" conformance
@@ -665,7 +699,15 @@ the bwrap cell harness, the oracle daemon and its socket protocol, the
 commit-reveal corpus machinery, the six gates, and — for Option A — a grammar,
 a reference semantics and an enumerator that do not yet exist.
 
-**Corrected for the chosen option (M1).** Review round 1 caught a real
+> **r6 — this section priced a retired design for three revisions.** Round 1's
+> M1 disposition claimed §7 was "re-costed"; it was not. What follows was written
+> for Option A (a grammar, a reference semantics, an enumerator), quotes the
+> COMPLETING per-cell figure that §6 itself later ruled against ($0.35 rather than
+> $0.69 CONSUMED), and states that commit-reveal is "not built" — which r5
+> reinstated and Phase 0 now builds. **The live cost estimate is §10's "What this
+> costs"; the text below is retained only as the record of what was claimed.**
+
+**Superseded (r1-M1 disposition, never executed).** Review round 1 caught a real
 inconsistency in r1: L2 (oracle daemon, socket protocol, server-side cap) and L3
 (commit-reveal) exist to serve the *hidden-function* shape, which only the
 retired Option B has. PORTGUARD scores by post-hoc exhaustive enumeration with no
@@ -699,10 +741,23 @@ Checked before freezing, not after:
 4. **No model tier clears both gates (C25).** If every tier is either too strong
    to fail or too weak to deliver the treatment, stop and report the empty
    capability window. It is a real result about where the method can apply.
-5. **The circularity reading cannot be defended.** If, for Option A, we cannot
-   state in advance what result would *not* be explained by "the grammar
-   manufactures formalisation-shaped difficulty", the claim is unfalsifiable and
-   should not be dressed as a test.
+5. **The circularity reading cannot be defended.** Restated in r6 for the live
+   subject: the grammar this criterion used to name was retired in r4. The live
+   circularity threat is the **circular-spec bypass** — a treated cell defining
+   `legal p m := m ∈ genLegal p` and proving it by `reflexivity` — and the design
+   must be able to state in advance what result would *not* be explained by
+   "the treated arm proved its generator against itself". §6's spec-freeze and
+   spec-side mutation are the mechanism; if they cannot be made to work, stop.
+6. **The domain cannot exhibit the failure mode the claim is about (r6).** §11
+   concludes that the prevention claim turns on **mis-specification** and that
+   chess movegen is a domain where that is least likely to occur and least likely
+   to matter. Round 4 was right that stating this as an essay while omitting it
+   from the kill list is the shape of a hedge: a criterion that would fire *now,
+   at design time, at zero cost* was the one criterion not written. **It is now
+   written.** Before freeze, the design must demonstrate — not assert — that a
+   plausible mis-formalisation of the shared spec is (a) reachable by a competent
+   arm and (b) detectable by the instrument. If it cannot, the subject fails and
+   must be re-derived from the mis-specification requirement.
 
 ---
 
@@ -774,7 +829,10 @@ use cell 1's relay socket and token (C23, A-2026-08-26b). Transcript and closure
 hash deposited. A failure distinguishes *fix the bind and re-probe* from *stop*.
 
 ### Phase 2 — capability calibration  ≈ 1 day + cheap runs
-k = 3 per arm per tier, across 2–3 tiers (a frontier tier, a mid tier such as
+k per arm per tier — **r5 stated "k = 3" here and "likely 10–20" ten lines below,
+and r6 does not paper over it: the binomial rule sets k, the schedule must absorb
+it (10–20 × 2 arms × 2–3 tiers = 40–120 cells, treated serial at >6 h each), and
+Phase 2's "≈ 1 day" is therefore false by an order of magnitude** — across 2–3 tiers (a frontier tier, a mid tier such as
 Sonnet, a small tier such as deepseek-flash). Excluded from inference, as case
 04's calibration was.
 **Gate G2 — the dual rule (C25), now with a decision rule (r5 — 3B B4, 3A M6).**
@@ -808,7 +866,8 @@ introduced while fixing earlier ones.
 
 ### Phase 4 — run  ≈ cheap in tokens, days–weeks in wall-clock
 Randomised schedule under a committed seed. Integrity gates (G-ISO, G-NET,
-G-CAP, G-RELAY) computed **before** any score is joined; failures excluded
+G-RELAY — **G-CAP struck in r5, and this line is where r5 failed to strike it;
+corrected in r6**) computed **before** any score is joined; failures excluded
 mechanically and reported. Schedule discontinuities logged automatically (C6).
 
 **Scoring runs untrusted code, and is sandboxed too (r5 — 3B M2).** A submitted
@@ -874,18 +933,37 @@ Two consequences r5 accepts rather than argues away:
    review finding, and dropping any of them would overstate what the study could
    support.
 
-If the operator's question is "does the contract prevent silent failure in code
-that matters", the honest answer from three rounds is that **this subject can test
-the mechanism but not the motivating case**, and a fourth case on a domain with a
-genuinely contested specification would test the motivating case better — at a
-cost this programme has not yet estimated.
+**r6 — round 4 called this section a hedge, and it was right.** A section titled
+*"Is this still worth building?"* that diagnoses the fatal problem and then
+declines to draw the conclusion, deferring on unestimated cost, is the shape the
+programme's own report diagnoses in its experimenters: gaps in one's own protocol
+filling themselves in the flattering direction. The tell was structural — §8 held
+five kill criteria, none encoding §11's own conclusion, and the missing one would
+have fired *now, at design time, at zero cost*. **It is now §8's criterion 6.**
+
+**The conclusion, drawn:** this subject can test the mechanism but **not the
+motivating case**, and four review rounds could not make it freezable. The
+recommendation carried forward is therefore:
+
+1. **Do not build case 05 as drafted.**
+2. **Run the ATTACK-budget experiment instead** — the programme's one actionable
+   finding, cheap, decidable, needing no hidden oracle, and the first *improvement*
+   to the method rather than a fifth price tag.
+3. **If the prevention claim is to be tested, re-derive the subject from the
+   mis-specification requirement** — a genuinely contested or ambiguous
+   specification — through a case03-style multi-design scored selection. That is
+   the step case 04 skipped and paid for with a voided study.
+
+Nothing in that discards the four rounds' yield: the bwrap isolation (verified on
+this host), the gate discipline, the ordinal outcome, the dual cost accounting and
+the calibration machinery all transfer to whatever subject that process selects.
 
 ## 12. Review rounds
 
 - **Round 1 (Fable, adversarial, 2026-08-26):** 4 blocking, 5 major, 5 minor.
   All 14 accepted; 2 changed the design, 1 retired an option, 1 was corrected on
   a point of fact. Record in §11. C11's "≥ 2 rounds" applies to the frozen
-  pre-registration, not to this draft — a second round is owed before freeze.
+  pre-registration, not to this draft. **Four rounds have now run (§13–§16).**
 
 ## 13. Review round 1 — findings and disposition
 
@@ -1007,3 +1085,61 @@ classifier, the per-arm informativeness gate, and the ordinal outcome itself.
 **Verdict:** not freezable at r5 either. A round 4 is owed on r5's repairs, on the
 evidence of what rounds 2 and 3 did to their predecessors' — and §11 records the
 risk that survives every fix.
+
+---
+
+## 16. Review round 4 — the repairs refuted, and a disposition audit
+
+Round 4 ran two lenses: **4A** attacking r5's repairs, **4B** auditing whether
+recorded dispositions match the body and assessing whether the design is
+converging. Both were told the pattern they were continuing. Both found it held.
+
+### 4A — six blocking findings, one settled by kernel execution
+
+| # | Finding | Status |
+|---|---|---|
+| **B1** | **r5's anti-circularity fix is refuted by execution.** For `legal p m := In m (genLegal p)`, soundness and completeness discharge by `exact H`, and *every* semantic spec mutant breaks a proof — so "spec mutants must break the proofs" is **maximally satisfied by the circular spec**. r5 asserted a false converse | **Accepted; the fix does not stand.** Only candidate: lab-frozen theorem statements, which renames the treatment |
+| **B2** | C24's dual-reference predicate is **uncomputable on the adjudication half** — stockfish answers `go perft` but exposes no game-status query and implements no claim model, dead-position or insufficient-material adjudication (verified by running it) | Accepted — needs a second real adjudication implementation, scored on the two references' agreement set |
+| **B3** | The pinned addendum **enumerates interpretive points while the hazard is the whole underdetermination space** — §1's own thesis recurring in the spec layer. No phase authors or freezes it; no named author; no amendment rule | Accepted |
+| **B4** | Disjoint per-cell suites are **inert for independence under reinstated L3** (no cell sees any instance) and harmful — cells scored on different instruments | Accepted — a grammar-era fix transplanted where it does nothing |
+| **B5** | r5 says "k = 3" and "likely 10–20" **ten lines apart**, and the schedule consequence is unpriced: 40–120 cells, treated serial, makes Phase 2's "≈ 1 day" false by an order of magnitude | Accepted, marked at both sites |
+| **B6** | L3's reinstatement was applied to §3 only; §7 and §9 still say commit-reveal is not built. And **no rule exists for G0's re-run failing on the revealed instance** — the seed is spent, and re-drawing is seed-shopping | Accepted |
+| M1–M5 | The control's new obligation **changes what the control is** (H1 becomes FCDD vs mutation-tested development) and has no place in the ordinal partition; the image-content check is a blocklist or a judgement — *the two things this design refuses elsewhere*; sampler inference is narrower than claimed and its degenerate case blinds G-CLUSTER; binomial error rates are ill-posed without an indifference zone; §7/§8.5 still price and gate the retired design | All accepted |
+
+### 4B — the disposition audit: six recorded fixes that were not what they claimed
+
+Verified independently against the body before acceptance:
+
+| # | Claimed | Actual |
+|---|---|---|
+| D1 | "L3 reinstated; wall-to-belt demotion withdrawn" | §3 withdrew it; **§5.1 still asserted the refuted premise verbatim** as live rationale |
+| D2 | "G-CAP and C20 struck" | Struck in §3 prose — **not at Phase 4, the one location the finding cited**; C20 still stood in §4 |
+| D3 | "§7 re-costed" (round 1) | **Never done.** §7 still priced Option A, quoted the COMPLETING figure §6 later ruled against, and said commit-reveal was not built — while r5 reinstates it |
+| D4 | — | §8's circularity kill criterion still gated "the grammar", retired two revisions earlier |
+| D5 | "demoted to descriptive detectors" | Demotion present; its justification ("no hidden artefact to transcribe") **contradicted by r5's own L3 reinstatement** |
+| D6 | "deposit the power script" (round 1) | **Still untracked three revisions later**, while §6 cites it and names two incompatible power methods |
+| D8 | — | Cross-reference rot: the header said a third round was owed *in the revision that applied it*; section pointers off by one; a fixed fork described as open |
+
+All are corrected in r6. **The mechanism matters more than the list**: an
+off-by-one pointer and a stale sentence are exactly how round 2's orphaned
+replication fix stayed hidden for a whole revision.
+
+### The convergence assessment, accepted
+
+4B's argument, from content rather than counts: **the same defect classes recur
+under new names.** The unpowerable-gate class fired in rounds 1, 2 and 3 — three
+consecutive rounds installing a gate without checking it could decide. The
+vacuous-pass class ran case 04's zero-properties arm → round 2's delivery gate →
+round 3's `reflexivity` bypass → round 4's refutation of the fix for that bypass,
+each repair creating the next bypass one level up. **The deepest findings arrived
+last**, which is the signature of divergence, not convergence. And repairs inject
+defects about as fast as rounds remove them: r5 applied nine findings and shipped
+six coherence failures.
+
+**What is converging is the instrumentation** — C23, the ordinal outcome, the dual
+cost accounting, the death classifier, the per-arm gate have all held across
+rounds. What is not converging is the thing the instrument would be pointed at.
+
+**Round 4's verdict, adopted as this document's own: see §11.** Do not build case
+05 as drafted; run the ATTACK-budget experiment; re-derive the subject from the
+mis-specification requirement through a scored multi-design selection.
