@@ -25,6 +25,7 @@ place), a `ledger/` holding the run accounting and the analysis output, and
 | [`case02_predictability/`](case02_predictability) | Does FCDD make repair cost **predictable**? (pre-registered) | Same 7 faults, k = 4 per arm per fault, randomised order under a committed seed | 56 runs | **Pre-registered null.** H1 not supported (*p* = 0.1094), point estimate *against* the hypothesis. Cost premium replicates: 7/7, median 2.26×. Fatal caveat found in review round 3: the treated arm held the answer key |
 | [`case03/`](case03) | Does the premium buy fewer **silent** failures? | Design study only — five designs generated, judged, one (PORTGUARD) selected | none | Superseded by case 04; its constraint list and parity guard were inherited |
 | [`case04_coq_rust/`](case04_coq_rust) | Does formal expression **prevent** defects (forward synthesis, not repair)? | Reimplement the Z80 engine in Rust twice — Rocq → mechanical Rust extraction vs direct Rust — scored against a sealed 11,103-position corpus | 13 scored cells | **Constraint-violation study.** The sealed oracle leaked to every cell; the computed numbers are inadmissible. The prevention claim remains **untested** |
+| [`case05_prevention/`](case05_prevention) | Does the contract prevent **silent** failure? *(in preparation — nothing run)* | Forward synthesis of FIDE-legal move generation, scored by **perft**; sandboxed cells, model tier as a factor | **none yet** — design at r5, three adversarial review rounds, not frozen | **Not freezable yet.** Rounds 1–3 returned 4, 4 and 9 blocking findings; every round's blockers sat inside the previous round's repairs |
 | [`method/`](method) | Where does FCDD's cost variance live, and where do the gates belong? | Secondary analysis of case 02's 56 runs + a worked end-to-end pipeline prototype | — | ATTACK-beat round count varies 18× and explains ~half of FCDD's cost variance while changing no artefact → a bounded-budget replacement is proposed |
 
 Running total: the programme has priced the method twice and has not yet
@@ -239,6 +240,59 @@ carries a post-verdict descriptive reading that is explicitly **not** evidence.
 As in case 01, the manuscript (`REPORT.md`) is kept local by policy.
 
 ---
+
+## Case 05 — the prevention claim, in preparation
+
+**Status: design only. Nothing has been run, no schedule exists, and the
+pre-registration is not frozen.** `case05_prevention/PROPOSAL.md` is at revision
+**r5** after three adversarial review rounds. It is published in this state
+deliberately: the review record is the most useful thing the programme currently
+has to offer about designing this kind of study.
+
+**The question** is the one two prior cases failed to reach: does a
+machine-checked contract prevent the *silent* failure — the implementation that
+looks right, passes the obvious checks, and is wrong?
+
+**The design, in its current form.**
+
+- **Target: FIDE-legal move generation and adjudication. Oracle: perft.** Case 04
+  asked arms to clone *"whatever this particular Z80 engine plays"* — a target
+  defined by an artefact, so nothing was statable, the reward pointed at the
+  filesystem, and the best score in the study was obtained by transcribing leaked
+  constants. Against a *specification*, correctness becomes provable, so proof can
+  displace testing — which is the differential the experiment exists to measure.
+- **Isolation by absence, not by prohibition.** Cells run under `bwrap` with no
+  network and no view of the lab tree — verified on the host: a sandboxed cell
+  reached an orchestrator-held oracle over a bound UNIX socket while a public API
+  call failed and `/home` was absent. Case 04's leak becomes unrepresentable
+  rather than guarded against.
+- **Difficulty is calibrated, not assumed.** The instrument must catch every
+  injected fault class before the study runs (C24), and both the benchmark's
+  failure rate *and* each model tier's ability to deliver the treatment are
+  pilot-measured (C25).
+- **Model tier is an experimental factor**, so "the task may be too easy" becomes
+  a measured dimension rather than a threat.
+- **Six phases, four stop points**, three of them before any scored run.
+
+**What the reviews did to it, which is the part worth reading.** Round 1 found 4
+blocking defects; round 2 found 4 more, **all inside round 1's repairs**, and
+overturned three of its dispositions; round 3 — two reviewers, separate lenses,
+no shared context — found 9, again all inside r4's repairs, converging
+independently on the two worst. Among them: an oracle-leak argument that was
+false, a delivery gate satisfiable by writing `legal p m := m ∈ genLegal p` and
+proving it by `reflexivity`, a co-primary gate that could not have fired at any
+sample size the programme can afford, and a sentence in the proposal contradicted
+by the table printed directly above it.
+
+**The risk that survives every fix**, recorded in §11 of the proposal rather than
+buried in a threats list: the prevention claim turns on **mis-specification** — a
+sound and complete proof against a *wrong* formalisation ships a
+provably-conformant wrong program with maximal confidence — and chess movegen is
+the domain where that is least likely to happen and least likely to matter. The
+subject chosen to fix case 04's leak may have optimised away the failure the study
+exists to observe.
+
+A fourth review round is owed on r5's own repairs before anything is frozen.
 
 ## Method notes
 
