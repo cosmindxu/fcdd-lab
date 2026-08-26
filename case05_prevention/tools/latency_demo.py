@@ -47,10 +47,13 @@ def main():
             else:
                 row += f"{('%s  %+d' % (format(got, ','), got - good)):>24}"
         print(row)
-    print("\nDepth is not the lever; position selection is: startpos at depth 5")
-    print("(4.8M nodes) detects neither fault, Kiwipete at depth 1 (48 nodes)")
-    print("detects one. The scored suite must make every rule immediately")
-    print("reachable in some position.")
+    print("\nCORRECTED 2026-08-26 (review round 3A, M1): an earlier version of")
+    print("this conclusion said startpos d5 'detects neither fault'. That is FALSE")
+    print("-- d5 catches the en-passant omission (-258). What the table actually")
+    print("shows: startpos d4 detects NEITHER; d5 detects ep but still misses")
+    print("castling at ANY reachable depth, while Kiwipete d1 (48 nodes) catches")
+    print("castling outright. So depth helps for some faults and cannot help for")
+    print("others; position selection is what makes a rule reachable at all.")
 
 
 if __name__ == "__main__":

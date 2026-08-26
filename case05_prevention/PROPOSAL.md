@@ -1,6 +1,13 @@
 # CASE 05 — proposal: testing the prevention claim under isolation that holds
 
-**STATUS: DRAFT r4 — not frozen, nothing scheduled, nothing built.** **r4 resolves D1** — the subject is now FIDE-legal move generation scored by
+**STATUS: DRAFT r5 — not frozen, nothing scheduled, nothing built.** **r5 applies review round 3** — run as two reviewers with separate lenses (3A
+science, 3B plan). They returned **nine blocking findings between them, every one
+inside r4's own new material**, converging independently on two: the checksum
+argument that justified retiring L3, and the replication mechanism orphaned when
+the grammar was retired. One correction is to this document's own deposited
+evidence: an r4 sentence claiming startpos depth 5 "detects neither fault" was
+**false**, refuted by the table printed directly above it. Full record and
+dispositions in §14. **r4 resolved D1** — the subject is now FIDE-legal move generation scored by
 perft (§5), retiring both the Z80-clone and PORTGUARD options — adds the
 mutation-calibration gate and the capability-window rule (C24, C25), makes model
 tier an experimental factor (§6), and sets out the six-phase plan with its four
@@ -130,6 +137,25 @@ closure hash is re-checked **per cell at start** against the frozen manifest,
 with mismatch aborting as infrastructure. (`/etc/alternatives` without `/etc`
 also breaks common toolchain lookups; the pilot must confirm the bind set.)
 
+**No chess reference inside the cell (r5 — 3A M3, 3B M1).** This host carries
+python-chess at `~/.local/lib/python3.14/site-packages/chess` and stockfish at
+`~/bin/stockfish` — in the very home directory §3-L1 vendors toolchains from. If
+either reaches the image, **G-ISO blesses it** (it is in the manifest), both arms
+self-test against the scoring oracle, silent failures vanish, and G2 reports a
+false *empty capability window* — a wrong **kill verdict**, which is worse than a
+wrong run. A freeze-time **image-content check** — no chess movegen library,
+engine, perft tool or vendored chess crate in the manifest — is deposited as part
+of G1's evidence.
+
+**Memorisation is a named, unclosable threat.** Chess movegen is
+training-saturated: mature Rust movegen crates are the in-weights answer for the
+control's deliverable, and **ChessRocq — a public Rocq chess development this
+programme's own report cites — is a treatment-side channel no gate detects.**
+Round 1's B3 retired the Z80 subject for exactly this reason and the principle
+applies here with more force, not less. The scope statement goes in the abstract:
+*FCDD on a formalisation-friendly, training-saturated domain*, with a
+pre-registered memorisation reading.
+
 **Toolchain (m1, m4).** cargo and opam resolve dependencies over the network at
 build time, which `--unshare-net` forbids: every dependency is **vendored into
 the cell image** and the image itself is a hashed input to G-ISO, not merely the
@@ -145,9 +171,19 @@ paths, and last time's leak is the one channel a new design is least likely to
 repeat. The probe's transcript and closure hash are deposited as the isolation
 evidence.
 
-> **r4 note — L2 and L3 are largely retired by the D1 resolution (§5).** With a
-> *checksum* oracle whose leak conveys no solution, there is no per-cell query
-> oracle to meter and no corpus whose existence must be deferred: the arms are
+> **r5 note — L2 stays retired; L3 IS REINSTATED.** r4 retired both on the claim
+> that a checksum oracle's leak conveys no solution. **Round 3 refuted that on two
+> counts and r5 accepts both.** First, a leaked *suite* is actionable without
+> inverting any count: knowing which positions you diverge on, an agent computes
+> divide-perft itself and bisects to the offending move — the standard
+> perft-debugging loop, which converges by iteration rather than understanding.
+> Second, §5.3's adjudication set leaks as labelled `(fen, history) → verdict`
+> pairs, which **are** answers, transcribable exactly as `engine.inc`'s tables
+> were in case 04. **The "load-bearing wall to belt" demotion of L1 is withdrawn**,
+> and a suite leak remains fatal under fail-direction. L2's retirement stands:
+> there is genuinely no per-cell query oracle to meter.
+>
+> Superseded r4 reasoning, kept for the record: the arms are
 > given the FIDE rules and a small public smoke set, and the scored suite is
 > simply withheld. L1 (namespace absence) and the relay remain load-bearing, for
 > the ordinary reason that cells must not read each other (C23). The two
@@ -215,8 +251,14 @@ scoring, and blind to outcome**:
 | G-CLUSTER cross-arm identity | submissions whose behaviour is mutually identical across arms (case04 F4) | genuine convergence on an easy target |
 | G-DEPOSIT manifest hash | sealed content deposited anywhere in the repository, by any path (A11/A19) | content leaked outside git |
 
-**A cell failing G-ISO, G-NET, G-CAP or G-RELAY is excluded before scoring and
-reported as excluded** — mechanically, no judgement. **G-XSCRIPT and G-CLUSTER
+**A cell failing G-ISO, G-NET or G-RELAY is excluded before scoring and
+reported as excluded** — **G-CAP is struck in r5 (3B B5)**: it read the retired
+L2 daemon's query-cap log, which does not exist under this subject, and an
+uncomputable gate on the operative checklist either excludes every cell under the
+inherited rule or gets silently skipped, which is worse. **C20** (cap enforced
+where the engine runs) is struck with it, and **C22**'s manifest is restated as
+*the withheld suite and its references* rather than a sealed corpus that no longer
+exists — mechanically, no judgement. **G-XSCRIPT and G-CLUSTER
 are NOT controls (M4)**, and r2 stops calling them gates in all but name: both
 end in a human adjudication, which is exactly what C1 forbids ("the check is
 code, not a person's diligence"), and G-XSCRIPT's own row concedes it cannot
@@ -256,8 +298,23 @@ checkable form:
   infrastructure re-run rebuilds the workspace from the image; it never reuses
   the dead cell's tree.
 - **C24 — the scoring instrument is mutation-calibrated before freeze, and this
-  is a hard gate.** Inject each known fault class into a correct reference and
-  require the chosen position suite and depth to catch **every one**. If the
+  is a hard gate.** Inject each fault class into a correct reference and require
+  the chosen position suite and depth to catch **every one**. **r5 widens the
+  mutant set on both reviewers' insistence, because r4's evidence base could not
+  reach the classes that matter.** The deposited demo injects faults by filtering
+  a reference's *legal-move list*, which structurally cannot express **inclusion**
+  faults — castling through check permitted, pinned pieces moved, en passant into
+  check — the very classes §5.2 calls the hard ones; a **mutable** reference is
+  required. It also cannot express **mis-specification** faults, and those are the
+  delivered-treatment arm's characteristic silent failure: *a sound and complete
+  proof against a mis-formalised `legal` ships a provably-conformant wrong
+  program.* **That is the failure mode the whole prevention claim turns on**, so
+  the mutant set must include spec-side mutants (see the delivery gate, §6) and
+  the fault taxonomy is derived from an external FIDE clause list — at least one
+  mutant per clause, movegen **and** adjudication — pre-registered before the
+  suite is built, with a named author, and evaluated by a deposited script whose
+  predicate is *all mutants caught* **and** *two independent references agree on
+  every value* (python-chess × stockfish, both present on this host). If the
   instrument cannot detect an injected silent failure, the study cannot detect a
   real one and **must not run**. This is the method's own bridge/mutation layer
   turned on the experiment's own instrument — the same move that found a real
@@ -311,12 +368,25 @@ Against a specification target, all three invert:
   Case 03 named this risk against its own PORTGUARD design — a grammar
   manufactures exactly the clause-interaction difficulty formalisation is best
   at. An external standard cannot be accused of it.
-- **The spec-form dilemma dissolves.** Round 1's B4 asked whether the shared spec
-  should be prose (withholding a disambiguation) or formal (leaking the treatment
-  into the control). Neither: both arms get the *same public prose rules*, no
-  disambiguation is withheld because FIDE is complete for this purpose, and the
-  control receives no formal spec. The treatment is **formalising a shared
-  external specification**, which is what the method actually claims to do.
+- **The spec-form dilemma is NARROWED, not dissolved (r5, round 3A B2).** r4
+  claimed FIDE is "complete for this purpose". **It is not, at the adjudication
+  layer.** A pure `status(fen, history)` does not exist in the rules: threefold
+  and fifty-move are **claim-based** while fivefold and 75-move are automatic
+  (with a mate-precedence exception), so the function needs a stipulated claims
+  model; "insufficient material" as every implementation ships it is the material
+  shortcut, not FIDE's dead-position rule — the installed reference's own
+  docstring concedes "the converse does not necessarily hold"; and whether the
+  en-passant square enters the repetition key is an interpretive choice the
+  reference makes one particular way. Scoring against an implementation would
+  therefore make correctness *operationally an artefact's behaviour again* —
+  the very defect this subject was chosen to escape.
+
+  **Fix adopted:** a **pinned interpretation addendum** ships as part of the
+  shared spec — claims model, the material-shortcut-or-drop decision for dead
+  positions, the repetition key, and the input domain — published identically to
+  both arms. The honest consequence, and it goes in the abstract: the treatment
+  is *formalising FIDE **plus a lab-authored disambiguation***, so round 2's
+  narrowed-claim language is reopened rather than retired.
 
 ### 5.2 Silent failure is native to this domain, and we measured it
 
@@ -335,9 +405,15 @@ depth 4 from the start position, and a missing castling rule is invisible there
 at any depth reachable in reasonable time. This is the fault class whose symptom
 and cause separate — C2 satisfied by the domain rather than by construction.
 
-**The finding that sets the design: depth is not the lever, position selection
-is.** Startpos at depth 5 — five million nodes — detects neither fault. Kiwipete
-at depth 1, forty-eight nodes, detects one. The scored suite must therefore be
+**The finding that sets the design — corrected in r5 (round 3A, M1).** An r4
+version of this sentence claimed startpos at depth 5 "detects neither fault".
+**That is false and the table above refutes it**: d5 catches the en-passant
+omission (−258). What the evidence actually supports is narrower and still
+decisive: **startpos d4 detects neither fault; depth flips en passant from
+invisible to visible; and no reachable depth from startpos ever reveals the
+castling omission, which Kiwipete exposes at depth 1 in forty-eight nodes.**
+Depth helps for some fault classes and cannot help for others; position
+selection is what makes a rule reachable at all. The scored suite must therefore be
 stratified so that every rule is *immediately reachable* in some position:
 castling both sides, castling through check, en passant, **en passant where the
 capture exposes a horizontal pin**, promotion and underpromotion, pinned-piece
@@ -361,8 +437,14 @@ vector, and it is the half of case 04 that could not have been won by any method
 
 ## 6. Outcome design
 
-- **Primary (concrete under D1).** **Silent failure** = a submission that passes
-  the shared public smoke set *and* the arm's own tests, yet diverges from
+- **Primary (concrete under D1; categories corrected in r5, round 3A M5).**
+  Classification uses **orchestrator-observable facts only** — ships, compiles,
+  passes the shared public smoke set, agrees with the withheld suite. "Passes the
+  arm's own tests" is demoted to a deposited descriptive field, because it was
+  arm-controlled and left a hole in the partition: a cell shipping no tests passes
+  vacuously, and one shipping a deliberately failing test made its own divergent
+  submission unclassifiable. **Silent failure** = a submission that passes
+  the shared public smoke set, yet diverges from
   reference perft at depth ≥ 4 on the withheld suite, or returns a wrong
   adjudication verdict on a withheld game history. Scoring is exact-match on
   counts with divide-perft for localisation — a 258-node divergence in 4,865,609
@@ -428,6 +510,17 @@ vector, and it is the half of case 04 that could not have been won by any method
 - **Estimator.** A proportion, unit-free by construction (C4); dispersion, where
   reported, uses scale-free `sd(ln ·)`, never case02's `CV_log`. **Invariance
   tested under every transformation the units admit, before freezing.**
+- **The obligation asymmetry is named, and balanced (r5 — round 3A M7).** r4's
+  mandated-proof treatment is a *third* variant: cases 01/02 measured arms
+  stopping at the **same** gate, whereas here the treated arm must produce
+  machine-checked correctness evidence while the control owes nothing beyond the
+  public smoke set. A treated win would then measure the *obligation* as much as
+  the method, and continuity with the 2–5× cost figures does not carry, since no
+  prior arm ever delivered non-vacuous quantified proofs. **The control receives
+  a registered comparable obligation** — a mutation-scored test suite meeting a
+  declared kill rate — so both arms owe evidence of comparable weight; if the
+  operator prefers the unbalanced design, the contrast is pre-registered in the
+  abstract as *machine-checked obligation vs none*.
 - **Model tier is an experimental FACTOR, not a setting.** The same two-arm
   experiment runs at 2–3 tiers (arms model-matched *within* tier, C3 intact).
   This is what converts the "the task may be too easy" risk from a threat into a
@@ -458,14 +551,27 @@ vector, and it is the half of case 04 that could not have been won by any method
   finding**, and a publishable one: the method's prevention benefit would be
   unmeasurable at this task because it demands more capability than the regime
   where it would help.
-- **Replication is made real, not assumed (M4).** Identical workspace +
-  identical prompt + pinned model means between-cell variance is sampler noise,
-  which is not the variance the power simulation assumes. Under Option A the
-  grammar generates a **distinct spec instance per cell**, paired across arms —
-  which restores genuine replication *and* widens the claim beyond one
-  machine-generated specification. The sampling policy (temperature, seed,
-  prompt variation) and the unit of replication are stated in the
-  pre-registration, and the power simulation matches them.
+- **Replication (r5 — round 2's fix was ORPHANED by r4 and is rebuilt).** Round 2
+  made replicates independent by having a grammar emit a distinct spec instance
+  per cell. **r4 retired the grammar with Option A and left that sentence
+  standing**, so under a fixed FIDE spec every cell in an arm×tier received an
+  identical workspace, prompt and pinned model — precisely the sampler-noise
+  degeneracy round 2 named, and the condition that produced case 04's
+  byte-identical submissions. Both round-3 reviewers caught it independently.
+
+  **r5's replacement, stated honestly rather than papered over:** with one fixed
+  specification there is no spec-instance dimension, so the unit of replication
+  is the **sampler** — a registered variation dimension (seed and prompt frame),
+  with the claim explicitly narrowed to *this one specification*. **Power is
+  computed from sampler-noise variance measured in Phase 2**, never assumed iid,
+  and the per-cell scored-suite instances are drawn from disjoint generator seeds
+  so cells do not share a test set.
+- **Tier multiplicity (r5 — round 3A M4).** With 2–3 admissible tiers the primary
+  is either run per tier (2–3 primary tests, needing an α allocation) or pooled;
+  and the question the factor is sold on — *does the benefit grow as capability
+  falls?* — is an **interaction**, which nothing currently powers. The
+  pre-registration picks exactly one: a named primary tier, a declared α-split, or
+  the interaction as primary with its own power computation.
 - **Multiplicity (m4).** r3 now carries a primary, cost (two totals), resource
   ceiling and a delivery criterion. The pre-registration names the primary and
   takes case02 §5.5's disclose-and-discount position on the rest, before the
@@ -485,6 +591,18 @@ vector, and it is the half of case 04 that could not have been won by any method
 - **Fail direction.** Any load-bearing control found broken after the fact
   yields the conservative verdict, as case04 §6 did. This must stay written
   down *before* there is a result to be reluctant about.
+- **The delivery gate must resist CIRCULARITY (r5 — round 3A B4), or it is
+  case 04's vacuous pass one level up.** A treated cell that defines
+  `legal p m := m ∈ genLegal p` earns soundness *and* completeness by
+  `reflexivity`: universally quantified, machine-checked, witness-bearing,
+  clause-vocabulary-covering — **every criterion below passes while nothing is
+  proved.** Deciding by inspection whether a declarative spec is independent of
+  the generator is a judgement, which C1 forbids as a control. **Mechanised
+  instead:** the cell's declarative spec is committed and frozen **before** any
+  generator code is written, and **G0-style mutation is applied to the spec
+  side** — injected spec mutations must break the proofs. A specification the
+  proofs cannot lose against is circular by construction, and that test is a
+  program, not an opinion.
 - **Treatment delivery is verified, not assumed (B4) — the gate this programme
   most obviously lacked.** Case04's treated arm wrote **zero quantified
   properties across ~4,500 lines of Rocq**, and its "zero `Admitted`" conformance
@@ -628,6 +746,14 @@ and underpromotion, pinned-piece pseudo-legality; plus generated game histories
 for repetition / fifty-move / insufficient material. Published positions
 (Kiwipete, CPW 3–6) go in the **public smoke set only**; the scored suite is
 generated with computed references, to defeat memorisation.
+**Custody, reconciled (r5 — 3B B1).** r4's Phase 0 generated the scored suite up
+front, which breached C21 ("generated after the last cell closes") on day one,
+while G0 structurally needs *a* suite to calibrate against. The resolution keeps
+both: **Phase 0 calibrates the generator on a throwaway instance**; the scored
+instance is generated **after the last cell closes** from a committed seed held
+off-host (C21 intact), and G0's calibration is **re-run on the generated
+instance** before scoring. Nothing sealed sits on the cells' host during Phase 4.
+
 **Gate G0 — C24 mutation calibration.** Inject every known fault class into a
 correct reference; the suite must catch **all** of them. A miss means the
 instrument is blind: fix it or stop.
@@ -638,15 +764,32 @@ network blocked, lab tree and `$HOME` absent, `/proc` sandbox-local), the model
 relay with per-cell sockets and byte accounting (B3), **disjoint per-cell
 workspaces (C23)**, the positive-closure probe (M2), immutable image or per-cell
 start-time closure re-check (M3), vendored toolchain (m1).
-**Gate G1 — the escape probe finds nothing and reaches nothing**, including
-sibling cells. Its transcript and closure hash are deposited.
+**Gate G1 — stated as a predicate, not as absence of evidence (r5 — 3B).** Pass
+requires: the positive-closure walk diffs **empty** against
+`manifest ∪ /work ∪ {/proc,/dev,/tmp}`; the egress probe fails to reach the
+network; the **image-content check** finds no chess library, engine or perft tool;
+and — the channel that actually fired last time — a **two-cell concurrent probe**:
+cell 1 writes a nonce, cell 2's closure walk must not reach it and must fail to
+use cell 1's relay socket and token (C23, A-2026-08-26b). Transcript and closure
+hash deposited. A failure distinguishes *fix the bind and re-probe* from *stop*.
 
 ### Phase 2 — capability calibration  ≈ 1 day + cheap runs
 k = 3 per arm per tier, across 2–3 tiers (a frontier tier, a mid tier such as
 Sonnet, a small tier such as deepseek-flash). Excluded from inference, as case
 04's calibration was.
-**Gate G2 — the dual rule (C25).** A tier is admissible only if (a) its
-silent-failure rate lands inside the per-arm informativeness band, **and** (b) the
+**Gate G2 — the dual rule (C25), now with a decision rule (r5 — 3B B4, 3A M6).**
+r4 stated an admissibility condition and no way to evaluate it, and **k = 3 could
+not have supported one**: under the literal reading a genuinely centred tier
+(true rate 0.5) is falsely excluded 25% of the time and a near-ceiling tier (0.92)
+admitted ~22%, while "n from each tier's observed variance" is arithmetic on two
+degrees of freedom. This lab treated an unpowerable gate as blocking in round 1;
+the same standard applies here. **r5 states G2 as an exact binomial rule with
+declared false-exclusion and false-admission rates, and sets k to whatever that
+implies — likely 10–20 per arm per tier — pricing the schedule consequence, or
+runs G2 sequentially under a pre-registered escalation rule.** The **delivery
+criterion's numbers are fixed in Phase 0/1**, before any Phase-2 cell runs, since
+G2(b) cannot evaluate a criterion frozen a phase later (3B M7). A tier is
+admissible only if (a) its rate clears the band under that rule, **and** (b) the
 treated arm ships non-vacuous soundness and completeness proofs. Tiers failing
 (b) are recorded as *treatment not deliverable at this capability* — an outcome,
 not an exclusion. **If no tier clears both, stop** (§8.4).
@@ -668,6 +811,25 @@ Randomised schedule under a committed seed. Integrity gates (G-ISO, G-NET,
 G-CAP, G-RELAY) computed **before** any score is joined; failures excluded
 mechanically and reported. Schedule discontinuities logged automatically (C6).
 
+**Scoring runs untrusted code, and is sandboxed too (r5 — 3B M2).** A submitted
+crate's `build.rs` executes arbitrary code **at compile time in the
+orchestrator's namespace**, where the withheld suite and its references live; a
+submission can also hang perft or exhaust host memory. Case 04 scored 13 binaries;
+case 05 scores hundreds. **Every submission is built and scored under the same
+bwrap profile as a cell**, with a per-position timeout, a memory cap, and a
+declared verdict for hung or crashed scoring runs.
+
+**Declared before Phase 4 (r5 — 3B M5, M6, M8, m5).** Per-cell **timeout and
+attempt cap** (case 04 used 6 h × 3, and the treated arm still averaged 3.0
+restarts) and a **hung-cell policy** — without them "does not ship" has no
+meaning. A **wall-clock ceiling** computed from Phase 2's measured per-cell time ×
+the Phase-3 n, as a **freeze-blocking criterion**: case 04's 13 *no-proof* cells
+took ~16 h with the treated arm capped at one concurrent cell at 32 GB peak, and
+r5 demands strictly more per cell. The **concurrency-aware scheduling rule**, with
+its confound stated: serialised treated cells make schedule position correlate
+with arm. Plus who runs the arms, what the operator is blind to, and the retention
+and deposit rule for relay traffic logs.
+
 ### Phase 5 — analyse and review  ≈ 2–3 agent-days
 Pre-registered analysis only; exploratory work labelled as such. **At least two
 adversarial review rounds before believing any result** (C11), the second aimed
@@ -682,14 +844,50 @@ Engineering ≈ 7–9 agent-days to G3. Token spend is minor — case 04's cells
 hundred dollars. **Wall-clock and memory are the real budget**, and Phase 2 is
 what measures them rather than assuming.
 
-## 11. Review rounds
+## 11. Is this still worth building? — r5's honest position
+
+Round 3 did not merely find defects; it located a risk that survives all of its
+own fixes, and it deserves to sit here rather than in a findings table.
+
+**The prevention claim turns on mis-specification, and this subject makes
+mis-specification hard to see.** The treated arm's characteristic silent failure
+is not a coding slip — it is *a sound and complete proof against a wrong
+formalisation*, which ships a provably-conformant wrong program with maximal
+confidence. Chess movegen is the domain where that is least likely to happen and
+least likely to matter: the rules are famously well specified, saturated in
+training data, and any error is caught by a reference the world already agrees on.
+So the subject that fixed case 04's leak may have optimised away the very failure
+the study exists to observe.
+
+**And the capability window is plausibly empty or inverted here**, because writing
+correct movegen is much easier for a model than *proving* it correct — the
+opposite of the ordering the design needs.
+
+Two consequences r5 accepts rather than argues away:
+
+1. **G2 should run as early and as cheaply as possible**, because it is the phase
+   most likely to end the programme, and ending early is the cheapest good
+   outcome available.
+2. **The claim must be scoped in the abstract, not the threats section**: *FCDD on
+   a formalisation-friendly, training-saturated domain, against a lab-authored
+   disambiguation of an external standard.* Every qualifier there was earned by a
+   review finding, and dropping any of them would overstate what the study could
+   support.
+
+If the operator's question is "does the contract prevent silent failure in code
+that matters", the honest answer from three rounds is that **this subject can test
+the mechanism but not the motivating case**, and a fourth case on a domain with a
+genuinely contested specification would test the motivating case better — at a
+cost this programme has not yet estimated.
+
+## 12. Review rounds
 
 - **Round 1 (Fable, adversarial, 2026-08-26):** 4 blocking, 5 major, 5 minor.
   All 14 accepted; 2 changed the design, 1 retired an option, 1 was corrected on
   a point of fact. Record in §11. C11's "≥ 2 rounds" applies to the frozen
   pre-registration, not to this draft — a second round is owed before freeze.
 
-## 12. Review round 1 — findings and disposition
+## 13. Review round 1 — findings and disposition
 
 Reviewer: Fable, adversarial charter, reading this proposal against case04's
 REPORT/review ledger, both CONSTRAINTS files and case02's A17/A19.
@@ -716,7 +914,7 @@ B1–B4 in writing first. Recorded here rather than paraphrased, because the
 lab's convention is that a review's verdict is deposited whether or not the
 authors like it.
 
-## 13. Review round 2 — the repairs, attacked
+## 14. Review round 2 — the repairs, attacked
 
 Round 2's charter was this lab's own history: case02's round two overturned three
 of round one's corrections, so the fixes are the least-reviewed part of any
@@ -760,3 +958,52 @@ The largest remaining risk it names is the outcome design: a study that runs to
 completion and still cannot support or refute its hypothesis by construction is
 this programme's most expensive failure mode, and the only one that spends the
 budget before revealing itself.
+
+---
+
+## 15. Review round 3 — two lenses, nine blocking findings, all in r4's repairs
+
+Round 3 ran as two independent reviewers: **3A** on the science (the D1 target,
+outcomes, statistics) and **3B** on the plan (gates, feasibility, operations).
+They shared no context. **Every blocking finding they returned lies inside r4's
+own new material** — the third consecutive round for which that is true.
+
+**The two they found independently, which is the strongest signal in the record:**
+
+| Converged finding | 3A | 3B | Disposition |
+|---|---|---|---|
+| The "checksum oracle's leak is useless" premise is false, so retiring L3 was wrong | B1 | B2 | **L3 reinstated**; the "wall to belt" demotion of L1 withdrawn. A leaked suite is actionable by divide-perft bisection without inverting a single count, and §5.3's adjudication pairs *are* answers |
+| Round 2's replication fix was orphaned when the grammar retired with Option A | B3 | B3 | **Rebuilt honestly**: with one fixed spec the replication unit is the sampler; power from Phase-2 sampler-noise variance; per-cell suite instances from disjoint seeds |
+
+**3A — science:**
+
+| # | Finding | Disposition |
+|---|---|---|
+| B2 | "FIDE is complete for this purpose" is **false** at the adjudication layer — threefold and fifty-move are claim-based, fivefold and 75-move automatic, insufficient-material is a shortcut not the dead-position rule (the reference's own docstring concedes it), and the ep-in-repetition key is an interpretive choice. Scoring against an implementation makes correctness an artefact's behaviour again | Accepted. A **pinned interpretation addendum** ships with the shared spec; the claim is renarrowed to *FIDE plus a lab-authored disambiguation*, in the abstract |
+| B4 | The delivery gate is satisfiable by **circularity**: `legal p m := m ∈ genLegal p` earns soundness and completeness by `reflexivity`, passing every criterion while proving nothing — case 04's vacuous zero-`Admitted` one level up | Accepted. Declarative spec **frozen before generator code**, and **spec-side mutation**: injected spec mutants must break the proofs. A spec the proofs cannot lose against is circular by construction |
+| M1 | §5.2's headline **contradicted its own deposited table** — startpos d5 does catch the ep omission (−258) | Accepted, corrected in the proposal **and in the script, which printed the false conclusion** |
+| M2 | The mutant set cannot reach the classes that matter: list-filtering cannot express **inclusion** faults, nor **mis-specification** faults — the treated arm's characteristic silent failure | Accepted; C24 widened, mutable reference required, spec-side mutants added |
+| M3 | Memorisation applies *more* strongly to this subject than to the one round 1 retired for it — movegen crates for the control, **ChessRocq for the treatment** | Accepted; scope statement in the abstract, image-content check, pre-registered memorisation reading |
+| M4, M5, M7 | Tier factor multiplies the primary with no α allocation; outcome categories were arm-controlled and left a hole; the mandated-proof treatment carries an **obligation asymmetry** the control does not | All accepted — one of three multiplicity options pre-registered; categories restricted to orchestrator-observable facts; the control gets a registered comparable obligation |
+
+**3B — plan:**
+
+| # | Finding | Disposition |
+|---|---|---|
+| B1 | Phase 0 **violated C21** on day one, and nothing said where the withheld suite lives during Phase 4 | Accepted — calibrate the *generator* on a throwaway instance; generate the scored instance after close; re-run calibration on it |
+| B4 | G2 had **no decision rule and could not have one at k = 3** (a true-0.5 tier falsely excluded 25% of the time; variance on 2 df) | Accepted — exact binomial rule with declared error rates, k sized to it, schedule consequence priced |
+| B5 | Phase 4 listed **G-CAP**, which reads the retired L2 daemon's log and cannot be computed | Accepted — G-CAP and C20 struck, C22's manifest restated |
+| M1 | python-chess and stockfish sit in the home directory the image vendors from; if either lands in the image, **G-ISO blesses it** and G2 returns a false *empty capability window* — a wrong kill verdict | Accepted — freeze-time image-content check in G1's evidence |
+| M2 | Scoring executes untrusted crates: `build.rs` runs **in the orchestrator's namespace**, where the withheld references live | Accepted — submissions built and scored under the cell's own bwrap profile |
+| M3, M5–M8 | G0's fault set self-selected and single-referenced; no timeout, attempt cap or hang policy though "does not ship" depends on them; no schedule ceiling; G2(b) evaluated a criterion frozen a phase later; serialised treated cells make schedule position correlate with arm | All accepted and written into Phase 0/1 deliverables and Phase-3 freeze inputs |
+| G-gates | 3B's judgement that **G0 and G2 were aspirations wearing gate badges**, and that G1's "finds nothing" is absence-of-evidence | Accepted — each restated as a predicate; G1 gains the **two-cell concurrent probe** that tests C23 directly |
+
+**Round 3's overturns of rounds 1–2:** r4's retirement of L3 (falls); round 1 B4's
+dilemma and its r4 "dissolution" (the dilemma stands, narrowed); round 2 M4's fix
+(orphaned); round 2 B4's delivery criterion (insufficient against the circular-spec
+bypass). **Checked and standing:** C23, the dual cost accounting, the death
+classifier, the per-arm informativeness gate, and the ordinal outcome itself.
+
+**Verdict:** not freezable at r5 either. A round 4 is owed on r5's repairs, on the
+evidence of what rounds 2 and 3 did to their predecessors' — and §11 records the
+risk that survives every fix.
