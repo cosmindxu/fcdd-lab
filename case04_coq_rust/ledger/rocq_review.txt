@@ -1,0 +1,58 @@
+CASE 04 — the armA Rocq submissions: quality and completeness
+Descriptive only; INADMISSIBLE as evidence (A-2026-08-26).
+
+DECLARATION CENSUS
+cell       lines  Definition    Fixpoint   Inductive      Record  Thm/Lem/Ex forall-props
+-----------------------------------------------------------------------------------------
+armA_r1      915         101          29           0           3           4            0
+armA_r2      880          97          26           3           0           0            0
+armA_r3      893          97          26           3           0           0            0
+armA_r4      911          87          35           1           2           8            0
+armA_r5      915         101          29           0           3           4            0
+
+PROOF ACTIVITY, ALL FIVE TREES COMBINED
+  reflexivity=16  vm_compute=8
+  Every tactic occurrence is closed-term evaluation; there is no
+  induction, case analysis or quantified reasoning in any tree.
+
+RULE COVERAGE (occurrences of the rule's vocabulary)
+cell            castling     en passant      promotion     fifty-move     repetition   insufficient          check mate/stalemate
+---------------------------------------------------------------------------------------------------------------------------------
+armA_r1               22              0             20              7              0              4              0              5
+armA_r2               29              0             18              1              0              2              0              3
+armA_r3               28              0             18              0              0              2              0              3
+armA_r4               18              2             12              3              0              2              0              0
+armA_r5               22              0             20              7              0              4              0              5
+
+TRUSTED GLUE — hand-written Extract Constant remaps
+  armA_r1    13 remaps   RISKY: Nat.div/Nat.modulo -> raw Rust / and %
+  armA_r2     0 remaps
+  armA_r3     0 remaps
+  armA_r4     0 remaps
+  armA_r5    13 remaps   RISKY: Nat.div/Nat.modulo -> raw Rust / and %
+  Rocq's Nat.div/Nat.modulo are TOTAL (kernel-checked: 7/0 = 0, 7 mod 0 = 7);
+  Rust's / and % PANIC on a zero divisor. The remap therefore drops a
+  spec-level guarantee outside the kernel's view. In these submissions every
+  divisor is a literal (256/16/8/2), so the trapdoor is LATENT, not live.
+
+INDEPENDENCE OF THE FIVE 'REPLICATES'
+  armA_r1   67418e69c1071384  armA_r1_build/armA/theories/Chess.v
+  armA_r2   5f8f8343c6ab3c93  armA_r2_build/armA/rocq/Chess.v
+  armA_r3   b7959cd36e9a79c3  armA_r3_build/armA/theory/Chess.v
+  armA_r4   ce6227b4a2e022b2  armA_r4_build/armA/coq/Chess.v
+  armA_r5   67418e69c1071384  armA_r5_build/armA/theories/Chess.v
+
+  armA_r1 vs armA_r5: Jaccard 1.00 BYTE-IDENTICAL
+  armA_r2 vs armA_r3: Jaccard 0.98
+  => five cells, three distinct submissions.
+
+CROSS-CELL WORKSPACE ACCESS (new finding; not in review round 1)
+  armA_r1   referenced other cells' build trees: armA_r5x45, armB_r1x14, armB_r2x12, armB_s2x12, armA_r2x5
+  armA_r2   referenced other cells' build trees: armA_r5x2, armB_r4x2, armB_r5x2
+  armA_r3   referenced other cells' build trees: armA_r2x139, armA_r4x58, armB_r4x40, armA_r5x33, armB_r5x14
+  armA_r4   referenced other cells' build trees: armA_r5x77, armA_r2x59, armA_r3x33, armB_s2x26, armB_r2x24
+  armA_r5   referenced other cells' build trees: armA_r2x70, armA_r1x57, armB_r4x33, armB_r1x25, armB_s2x25
+  armA_r5 read armA_r1's theories/Chess.v, its extracted.rs and its compiled
+  target/release/chess_clone; armA_r3 referenced armA_r2's tree 212 times.
+  This explains the byte-identity above directly, and it means the arm's
+  replicate cells are NOT independent observations.

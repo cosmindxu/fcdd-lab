@@ -323,3 +323,37 @@ Both mandated review rounds ran: round 1 (process conformance + result
 integrity; findings F1–F5), round 2 (adversarial review of REPORT.md;
 findings R2-1–R2-6 in REPORT §10). Verdict of the rounds: report
 accepted, no causal claim made anywhere.
+
+---
+
+## Amendment A-2026-08-26b — the cells were not independent of each other
+
+Found while reviewing the armA Rocq submissions for quality (evidence emitted by
+`tools/rocq_review.py`; output `ledger/rocq_review.txt`). Round 1 established
+that every cell reached the *case01* tree (F1). It did not establish this:
+
+1. **Every one of the five armA cells referenced other cells' build trees**, by
+   count of in-transcript path references: armA_r3 → armA_r2 ×139, armA_r4 →
+   armA_r5 ×77, armA_r5 → armA_r2 ×70 and armA_r1 ×57, armA_r1 → armA_r5 ×45.
+   The references include the *other arm's* directories.
+2. **The access is file-level, not incidental.** armA_r5's transcript reads
+   `armA_r1_build/armA/theories/Chess.v`, `.../src/extracted.rs`, and
+   `.../target/release/chess_clone` — another cell's source, its extracted
+   output, and its compiled binary.
+3. **The artefacts show it.** `armA_r1` and `armA_r5` ship a **byte-identical**
+   `Chess.v` (sha256 `67418e69c107…`); `armA_r2` and `armA_r3` are 0.98 Jaccard.
+   **Five replicate cells are three distinct submissions.**
+
+**Consequence.** The scored phase was already inadmissible (A-2026-08-26). This
+adds that its cells are not independent observations, so *n* for armA is 3, not
+5, and any within-arm dispersion statistic is measuring duplication.
+
+**A specific claim is withdrawn.** `ledger/descriptive_read.md` proposed
+sd(μ₂) as a co-primary outcome for a future clean run, on the stated ground that
+armA's clustering "persists even among source-readers, so it is not explained by
+the leak alone". It is explained: the cells copied each other. The
+variance-reduction pointer is retracted, and the recommendation to treat sd(μ₂)
+as a co-primary is withdrawn with it. What survives is the design lesson, which
+now has a fifth face: **cells must be isolated from each other, not only from
+the oracle** — a shared scored root is a channel between siblings even when the
+sealed material is absent.

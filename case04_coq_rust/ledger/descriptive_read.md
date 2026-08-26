@@ -1,3 +1,9 @@
+> **WITHDRAWN 2026-08-26 (A-2026-08-26b).** The variance-reduction reading below,
+> and the recommendation to treat sd(mu2) as a co-primary, are retracted: the
+> armA cells copied one another (armA_r1 and armA_r5 ship a byte-identical
+> Chess.v; armA_r2/r3 are 0.98 similar), so the clustering it rests on is
+> duplication, not an effect. See tools/rocq_review.py.
+
 # Case 04 — descriptive reading (NOT a verdict)
 
 Status: descriptive observations from the scored data, after the
