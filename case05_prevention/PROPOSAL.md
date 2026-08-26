@@ -1,6 +1,11 @@
 # CASE 05 — proposal: testing the prevention claim under isolation that holds
 
-**STATUS: DRAFT r6 — NOT CONVERGING; SEE §11 BEFORE READING FURTHER.**
+**STATUS: SUPERSEDED 2026-08-27 by `case06_narrowing/PROPOSAL.md`.** Retained as
+the record of four adversarial review rounds on a design that had to be
+abandoned — the constraints, gates and isolation stack it developed all carry
+forward, and its failure to converge is why case 06 measures a different thing.
+
+Prior status line: DRAFT r6 — NOT CONVERGING; SEE §11 BEFORE READING FURTHER.**
 
 r6 applies review round 4's coherence fixes and records its findings, but **does
 not claim to repair the design.** Four rounds have returned 4, 4, 9 and 14
