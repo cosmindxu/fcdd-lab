@@ -1042,14 +1042,25 @@ we failed each of these at least once, and each failure produced a
 publishable-looking result that was false.
 
 \paragraph{Data availability.} Deposited: the protocol with all amendments
-(A1--A10), the per-cell ledger, the raw session records, the prompt packs,
+(A1--A11), the per-cell ledger, the raw session records, the prompt packs,
 the grading packets and verdicts, the contract, and the analysis and figure
-scripts. Not deposited: the sealed answer key, the acceptance scripts, the
-seeded variants, the subject engine and the emulator harness (a SHA-256
-manifest of 206 files is deposited). The per-cell workspaces on which
-reviewer counts, binary comparisons, gate verdicts and per-cell theorem
-counts depend sit outside the repository, so those specific claims are not
-independently checkable from the artefact.
+scripts. \emph{Correction (A11).} Earlier versions of this statement said the
+subject engine was not deposited. That was false. An audit of the repository
+before publication found that the step-1 contract package deposited a copy of
+the engine tape byte-identical to the sealed original, that an earlier commit
+retains the engine binary in history, that three deposited memory snapshots
+embed the engine's code, and that the seeded faults' locations are recoverable
+in prose from 39 deposited result files and from every grading packet's diff.
+The engine, the fault locations and the repairs are therefore \emph{public},
+and the seven-fault set is retired as a blind benchmark. Genuinely not
+deposited: the sealed answer-key file itself, the acceptance scripts and the
+seeded variant trees (a SHA-256 manifest of 206 files is deposited). No result
+in this paper is affected --- every arm ran offline against a tarball and could
+not reach the repository --- but a reader who assumed the benchmark was blind
+should not. The per-cell workspaces on which reviewer counts, binary
+comparisons, gate verdicts and per-cell theorem counts depend sit outside the
+repository, so those specific claims are not independently checkable from the
+artefact.
 
 \paragraph{AI usage.} This study measures AI agents and was conducted by
 them: all sessions, both arms, all reviewers and all graders were LLM

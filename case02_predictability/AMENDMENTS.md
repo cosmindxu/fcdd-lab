@@ -938,3 +938,46 @@ cell's dispersion and softens the reversal.
 
 The script now selects by identity and the constant is named. A16's sentence is
 superseded here rather than rewritten, per this log's append-only rule.
+
+---
+
+## A19 — the repository deposits the engine, and the fault locations with it
+**2026-08-26, after the study closed; found by a pre-publication audit of the
+repository, not by a review round.**
+
+A17 established that the treated arm was shipped the pristine binary. This
+amendment records that **the repository itself deposits it**, and has since
+2026-07-29:
+
+1. `case01_spectrum_gambit/step1_contract/artifacts/chess.tap` is tracked and is
+   byte-identical to the sealed `sealed/seedkit/pristine/chess.tap` — sha256
+   `33ed86b2cdec18ab3147376903739882210581f303321882141770dd6ba978b4`. The
+   `.gitignore` rule `case*/sealed/` never applied to it, because the step-1
+   contract package wrote its own copy under `artifacts/`.
+2. `case01_spectrum_gambit/work/pristine/chess.bin` (`c107dfaf…dc0f`, the hash
+   case04 records as *the sealed oracle*) was added and deleted in commit
+   `590b5d1`; the blob is still reachable in history.
+3. The three tracked `.sna` artefacts embed the engine's code verbatim.
+4. Case 02's own **28 grading packets carry the fix diffs against
+   `engine.inc`**, and 39 raw result files state fault locations, byte offsets
+   and before/after values in prose. §10's note that "the 28 unblinding keys are
+   excluded by an explicit `.gitignore` rule — the seal is a convention, not a
+   guarantee" was righter than it knew: the keys are excluded and the answers
+   are deposited anyway, by a different route.
+
+**Consequence for this paper: none of the numbers move.** The runs executed
+offline against tarballs and could not read the repository; the deposit is an
+artefact-integrity defect, not a contamination path into the data. What it does
+retire is the **reuse** of these seven faults as a blind benchmark, by us or by
+anyone else. §10 is corrected accordingly, per the operator's *accept and
+declare* ruling of 2026-08-26.
+
+**Why it matters beyond bookkeeping.** This is A17's failure mode a second time,
+one level out: the control enumerated *paths* while the hazard was *content*, so
+a second copy under an uncovered path was invisible to it, and nobody re-read
+the tracked file list. Three adversarial review rounds, an amendment log
+eighteen entries long, and a constraint document written specifically to prevent
+this class (`case03/CONSTRAINTS.md` C1) all missed it, because every one of them
+was pointed at the *runs* and none at the *deposit*. The check C1 already
+specifies — hash every file against the sealed manifest — is owed to the
+repository, not only to a workspace.

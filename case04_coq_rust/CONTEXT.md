@@ -42,7 +42,11 @@ oracle CLI with the same hard query cap (D2), same definition of done.
 
 - **Oracle (sealed, orchestrator-side only):**
   `case01_spectrum_gambit/sealed/seedkit/pristine/chess.tap`
-  (binary sha256 `c107dfaf…dc0f`). NEVER shipped to any arm workspace (C1).
+  (tape sha256 `33ed86b2…78b4`; the `c107dfaf…dc0f` recorded here until
+  2026-08-26 is the sibling `chess.bin`, not the tape — a mislabel that would
+  have made C1's hash check miss the file it names). NEVER shipped to any arm
+  workspace (C1) — but see the audit note in `case03/CONSTRAINTS.md` C1: a
+  byte-identical copy of the tape is tracked in the repository itself.
 - **Harness:** `case01_spectrum_gambit/arms/harness/` — `build/hc91emu`,
   `roms/48.rom`, `tools/chesspos.py` (FEN→save-block encoding, .sna decode).
 - **FEN injection + fixed frame schedule:** case02's

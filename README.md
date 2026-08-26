@@ -87,12 +87,13 @@ verdicts, the analysis and figure scripts (`tools/analyse.py`,
 `tools/analyse_predictability.py`, `tools/make_figures.py`), the figures, and
 the manuscript in Springer LNCS format (`paper_springer/paper.pdf`).
 
-**Not deposited:** the sealed answer key, the acceptance scripts, the seeded
-variants, the subject engine and the emulator harness — excluded by the
-repository's ignore rules; the ledger carries their SHA-256 manifest (206
-files). The per-cell workspaces also sit outside the repository, so the
-reviewer counts, binary comparisons and per-cell theorem counts are **not
-independently checkable from the artefact**. Working notes (`ARTICLE.md`,
+**Not deposited:** the sealed answer-key file, the acceptance scripts and the
+seeded variant trees — excluded by the repository's ignore rules; the ledger
+carries their SHA-256 manifest (206 files). The per-cell workspaces also sit
+outside the repository, so the reviewer counts, binary comparisons and per-cell
+theorem counts are **not independently checkable from the artefact**. The
+subject engine *is* deposited, contrary to what earlier versions of this
+statement said — see **The benchmark is not blind** below. Working notes (`ARTICLE.md`,
 `REPORT.md`) are kept local by deliberate policy; `REPORT.md`'s interim
 conclusions are superseded by the manuscript.
 
@@ -293,6 +294,43 @@ model inside 51 of 56 cells, an estimator whose verdict moves with the currency
 unit, a treated arm shipped the answer key, an oracle CLI that forced every
 cell to breach its own sandbox — and formality found none of them. All had been
 sitting in plain sight.
+
+---
+
+## The benchmark is not blind
+
+An audit of this repository before it went public (case01 `PROTOCOL.md` A11,
+case02 `AMENDMENTS.md` A19) found that **the deposit contains the subject
+engine and the answers**:
+
+- `case01_spectrum_gambit/step1_contract/artifacts/chess.tap` is tracked and
+  byte-identical to the sealed pristine tape (sha256 `33ed86b2…78b4`). The
+  step-1 contract package wrote its own copy under a path the `case*/sealed/`
+  ignore rule never covered.
+- `case01_spectrum_gambit/work/pristine/chess.bin` (`c107dfaf…dc0f`) was added
+  and deleted in commit `590b5d1`; the blob is still reachable in history.
+- The three tracked `.sna` artefacts are 48K RAM images that embed the engine's
+  code verbatim.
+- The seven seeded faults' **locations are recoverable in prose** — 39 tracked
+  raw result files give file, line, byte offset and before/after value, and
+  every bug has six tracked grading packets carrying the fix diff against
+  `engine.inc`.
+
+**Ruling: accept and declare.** The engine is the authors' own work, so nothing
+is withdrawn and no measurement changes — every arm ran offline against a
+tarball and could never reach this repository. What it costs is reuse: **the
+seven-fault set is retired as a blind benchmark**, for us and for anyone else.
+Treat it as an open one.
+
+It is worth naming the failure mode, because it is the same one the programme
+keeps reporting about other people's work. Case 02's A17 was a sealed artefact
+reaching a workspace; case 04's F1 was a guard that did not follow symlinks;
+this is a second copy under a path the ignore rules did not enumerate. Every
+version of the control has enumerated **paths** while the hazard is **content**,
+and each was aimed at the runs rather than at the deposit. The check
+`case03/CONSTRAINTS.md` C1 already specifies — hash every file against the
+sealed manifest — is owed to the repository too, and was not run against it
+until now.
 
 ---
 

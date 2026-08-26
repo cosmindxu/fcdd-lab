@@ -994,6 +994,16 @@ Results are deposited under `ledger/`. The *raw* result files live in
 the driver log.
 
 The pre-registration is frozen at commit `16b95fe` and every departure is in
-`AMENDMENTS.md` (A1–A18). The 28 unblinding keys are excluded by an explicit
+`AMENDMENTS.md` (A1–A19). The 28 unblinding keys are excluded by an explicit
 `.gitignore` rule — note they are deterministically regenerable from
 `make_packets_case02.py`, so the seal is a convention, not a guarantee.
+
+**A19 — the benchmark is not blind, and the deposit is why.** A pre-publication
+audit found that the repository deposits the subject engine (a tracked copy of
+the pristine tape, byte-identical to the sealed original; the binary itself
+still reachable in history; three memory snapshots embedding its code) and that
+the seeded faults' locations are recoverable in prose from 39 raw result files
+and from the fix diff in every grading packet, this study's 28 included. No
+number in this paper moves — the runs were offline and could not read the
+repository — but the seven-fault set is **retired as a blind benchmark**, and a
+replicator must treat it as an open one. See `AMENDMENTS.md` A19.

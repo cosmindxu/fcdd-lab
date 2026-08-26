@@ -23,6 +23,24 @@ no file sits within 64 bytes of a sealed binary. Retro-tested against the real
 case02 workspaces: it flags `contract/artifacts/chess.tap` in the treated arm and
 passes the control arm clean. **A run that fails the guard does not launch.**
 
+**Audit note, 2026-08-26 — C1 recurred in the repository, not in a workspace.**
+A pre-publication audit found that `case01_spectrum_gambit/step1_contract/
+artifacts/chess.tap` is tracked and byte-identical to the sealed pristine tape
+(`33ed86b2…78b4`), that `work/pristine/chess.bin` remains reachable in history
+from commit `590b5d1`, that three tracked `.sna` snapshots embed the engine's
+code, and that the seeded fault locations are recoverable in prose from 39
+tracked result files and every grading packet's diff. The guard above scans an
+**arm workspace**; nothing scanned the **deposit**. Case04 then showed the third
+face of the same failure (the guard was symlink-blind, so the workspace's
+reachable closure was never scanned either).
+
+Restated so a successor can meet it: *hash every file that leaves the
+orchestrator's control — into a workspace, through a symlink, or into a commit —
+against the sealed manifest.* The hazard is content, and every version of this
+control that enumerated paths has failed. Operator ruling for the existing
+deposit (2026-08-26): accept and declare — the engine is ours, so nothing is
+withdrawn, and the seven-fault set is retired as a blind benchmark instead.
+
 ## The one that made case02 unable to answer anything
 
 **C2 — the benchmark must be able to produce failures.** All 56 case02 runs, in

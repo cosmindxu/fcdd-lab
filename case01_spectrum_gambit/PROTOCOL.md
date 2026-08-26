@@ -269,6 +269,46 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
   re-run. Retained as a first-class result: the unbounded-review pathology is
   itself a finding about generalist review as a stopping criterion.
 
+- **2026-08-26 A11 (disclosure defect found in a pre-publication audit of the
+  repository itself):** the case's own deposit **contains the subject engine**,
+  contradicting the data-availability statement published in `paper_springer/`
+  and in the manuscript. Audit findings, each verified by hash or by reading the
+  tracked file:
+  1. `step1_contract/artifacts/chess.tap` (tracked) is **byte-identical** to the
+     sealed `sealed/seedkit/pristine/chess.tap` — sha256
+     `33ed86b2cdec18ab3147376903739882210581f303321882141770dd6ba978b4`. The
+     step-1 contract package deposited its own copy of the tape into
+     `artifacts/`, a path no `.gitignore` rule covers. This is the same shape as
+     case02's A17: the contract package is the vehicle.
+  2. `case01_spectrum_gambit/work/pristine/chess.bin` (sha256
+     `c107dfaf…dc0f`) was added and deleted in commit `590b5d1`; **the blob
+     remains reachable in history**, so deleting files today would not withdraw
+     it.
+  3. The three tracked `.sna` artefacts are 48K RAM images of the loaded engine
+     and embed its code verbatim (4,096-byte runs of the tape payload found
+     inside `boot.sna`).
+  4. The seeded faults' **locations are recoverable in prose**: 39 tracked raw
+     result JSONs give file, line, byte offset and before/after value (e.g.
+     bug01 — `engine.inc:1438`, `cp 3` → `cp MAXPLY`, offset 7500, 0x03→0x0F),
+     and every one of the seven bugs has six tracked grading packets carrying
+     the fix diff against `engine.inc`.
+
+  **Ruling (operator, 2026-08-26): accept and declare.** The engine is the
+  authors' own work, so this is not a disclosure harm; the cost is that the
+  seven-fault set is **retired as a blind benchmark** and must not be reused as
+  one by us or anyone else. The data-availability statements are corrected to
+  say what is actually deposited, here and in both manuscripts, rather than
+  withdrawing the files. Nothing measured changes: every arm ran offline against
+  a tarball, and the repository's contents were never reachable from a run.
+
+  **What the controls did and did not do.** The ignore rules worked exactly as
+  written — no `answer_key.json`, no `KEY_*.json`, no `sealed/` tree, no
+  credentials are tracked. They failed because they enumerate *paths* while the
+  hazard is *content*, and a second copy under a new path is invisible to them.
+  The check that would have caught it is the one case03 C1 already specifies:
+  hash every tracked file against the sealed manifest. That check is now owed to
+  this repository, not only to a run's workspace.
+
 ## Report skeleton (end state)
 
 Upfront cost (step 1) · per-bug tokens per arm (table + medians) ·
