@@ -110,8 +110,17 @@ per-run (C3).
 - [ ] P5 freeze: seal the corpus (overnight parallel double-probe + choose
       answers), analysis script dry-run against a real cell, schedule with
       committed seed, replace all `(pilot)` marks in PREREGISTRATION.md.
-- [ ] 10 scored runs (k=5/arm, adjusted by pilot), analysis, ≥2 adversarial
-      review rounds of the manuscript (C11).
+- [x] 13 scored runs completed (13/13 binaries), scoring done
+      (`ledger/scored/*.json`), analysis computed (`ledger/analysis_result.txt`:
+      H1 p=0.1181 NOT SUPPORTED, gate informative).
+- [x] ≥2 adversarial review rounds (C11): round 1 (ledger/review_round1.md)
+      found the sealed engine LEAKED to every cell (symlink bridge to
+      case01 tree; 7/13 cells read engine source; 2 best runs are
+      transcriptions). Round 2 (REPORT.md §10) reviewed the report.
+- [x] **OUTCOME: constraint-violation study.** Scored phase invalid as
+      evidence (PREREG Amendment A-2026-08-26); REPORT.md is the study's
+      output; prevention claim remains untested. Decision: Option A
+      (report, no re-run) chosen by operator 2026-08-26.
 
 ## Session log
 
@@ -121,3 +130,15 @@ per-run (C3).
   answered (D1–D5). Assets audited: pristine tap (sealed), harness, charlib
   FEN-injection, bridge memory map, python-chess, Rocq+extraction plugin —
   all present. Docs + pilot tooling in progress.
+- **2026-08-26** — Scored schedule finished 13/13 (after a deepseek 402
+  outage, OOM kills of Rocq cells, a 16 GB swapfile added by operator, and
+  a driver rewrite for silent-death relaunch + armA concurrency cap).
+  Scoring sharded for the slow armA binaries. Analysis: H1 p=0.1181 (NOT
+  SUPPORTED), gate informative. Round-1 adversarial review then found the
+  fatal leak: every cell bridged to the real case01 tree (oracle CLI
+  depended on paths the builder never ships; external_directory allowed);
+  sealed engine source + emulator readable by all cells; 7/13 read it, 6
+  ran the emulator uncapped; armB_s2's 1999/1999 is a byte-exact
+  transcription of engine.inc tables. Operator chose Option A: report as
+  a constraint-violation study (REPORT.md, PREREG amendment). Conformance
+  otherwise passes (F5). Round 2 reviewed REPORT.md (R2-1..R2-6).

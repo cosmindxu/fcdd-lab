@@ -1,0 +1,121 @@
+# review_evidence — emitted Wed Aug 26 16:06:58 2026
+
+## F1 symlink creation
+- armA_r1: ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armA_r1_build/case01_spectrum_gambit && ls -la /home/x
+- armA_r3: cd /home/xcos/fcdd_c04_scored/armA_r3_build && ln -sfn /home/xcos/fcdd_c04_scored/case01_spectrum_gambit case01_spectrum_gambit && ls -la ca
+- armA_r4: cd /home/xcos/fcdd_c04_scored/armA_r4_build && ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la c
+- armA_r5: set -e
+mkdir -p /home/xcos/fcdd_c04_scored/case01_spectrum_gambit/arms /home/xcos/fcdd_c04_scored/case01_spectrum_gambit/sealed/seedkit/pris
+- armB_r1: cd /home/xcos/fcdd_c04_scored/armB_r1_build && ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la cas
+- armB_r2: ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armB_r2_build/case01_spectrum_gambit && ls -la /home/xco
+- armB_r3: cd /home/xcos/fcdd_c04_scored/armB_r3_build && ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit 2>&1; ls -la 
+- armB_r4: ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/case01_spectrum_gambit && ls -la /home/xcos/fcdd_c04_s
+- armB_r5: cd /home/xcos/fcdd_c04_scored/armB_r5_build && ln -sfn /home/xcos/case01_spectrum_gambit case01_spectrum_gambit && ls -la; echo "=== test or
+- armB_s1: ln -s /home/xcos/fcdd_c04_scored/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armB_s1_build/case01_spectrum_gambit && ls -la /home/xcos
+- armB_s2: cd /home/xcos/fcdd_c04_scored/armB_s2_build && ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la |
+- armB_s3: cd /home/xcos/fcdd_c04_scored/armB_s3_build && ln -sfn /home/xcos/fcdd_c04_scored/case01_spectrum_gambit case01_spectrum_gambit && ls -la
+
+## F2 per-cell source content-reads / direct emulator runs
+- armA_r1  content-reads=32  direct-hc91emu=16
+- armA_r2  content-reads= 4  direct-hc91emu= 1
+- armA_r3  content-reads=14  direct-hc91emu= 2
+- armA_r4  content-reads=12  direct-hc91emu= 2
+- armA_r5  content-reads= 8  direct-hc91emu= 2
+- armB_r1  content-reads= 0  direct-hc91emu= 0
+- armB_r2  content-reads=10  direct-hc91emu= 6
+- armB_r3  content-reads= 0  direct-hc91emu= 1
+- armB_r4  content-reads=67  direct-hc91emu=12
+- armB_r5  content-reads= 1  direct-hc91emu= 1
+- armB_s1  content-reads= 0  direct-hc91emu= 1
+- armB_s2  content-reads= 4  direct-hc91emu= 0
+- armB_s3  content-reads= 0  direct-hc91emu= 1
+
+## F3 engine.inc vs armB_s2 eval.rs
+- '0,100,320,330,500,900,0': in engine.inc=True, in s2 eval.rs=True
+- '5, 10, 10,-20,-20, 10, 10,  5': in engine.inc=True, in s2 eval.rs=True
+
+## F4 pairwise choose identity (60 positions, seed 20260807)
+- armA_r1==armA_r2: 60/60
+- armA_r1==armA_r3: 60/60
+- armA_r1==armA_r5: 60/60
+- armA_r1==armB_r4: 60/60
+- armA_r1==armB_s3: 60/60
+- armA_r2==armA_r3: 60/60
+- armA_r2==armA_r5: 60/60
+- armA_r2==armB_r4: 60/60
+- armA_r2==armB_s3: 60/60
+- armA_r3==armA_r5: 60/60
+- armA_r3==armB_r4: 60/60
+- armA_r3==armB_s3: 60/60
+- armA_r4==armB_s2: 60/60
+- armA_r5==armB_r4: 60/60
+- armA_r5==armB_s3: 60/60
+- armB_r4==armB_s3: 60/60
+# review_evidence — emitted Wed Aug 26 16:10:37 2026
+
+## F1 symlink creation
+- armA_r1: ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armA_r1_build/case01_spectrum_gambit && ls -la /home/x
+- armA_r3: cd /home/xcos/fcdd_c04_scored/armA_r3_build && ln -sfn /home/xcos/fcdd_c04_scored/case01_spectrum_gambit case01_spectrum_gambit && ls -la ca
+- armA_r4: cd /home/xcos/fcdd_c04_scored/armA_r4_build && ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la c
+- armA_r5: set -e
+mkdir -p /home/xcos/fcdd_c04_scored/case01_spectrum_gambit/arms /home/xcos/fcdd_c04_scored/case01_spectrum_gambit/sealed/seedkit/pris
+- armB_r1: cd /home/xcos/fcdd_c04_scored/armB_r1_build && ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la cas
+- armB_r2: ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armB_r2_build/case01_spectrum_gambit && ls -la /home/xco
+- armB_r3: cd /home/xcos/fcdd_c04_scored/armB_r3_build && ln -s /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit 2>&1; ls -la 
+- armB_r4: ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/case01_spectrum_gambit && ls -la /home/xcos/fcdd_c04_s
+- armB_r5: cd /home/xcos/fcdd_c04_scored/armB_r5_build && ln -sfn /home/xcos/case01_spectrum_gambit case01_spectrum_gambit && ls -la; echo "=== test or
+- armB_s1: ln -s /home/xcos/fcdd_c04_scored/case01_spectrum_gambit /home/xcos/fcdd_c04_scored/armB_s1_build/case01_spectrum_gambit && ls -la /home/xcos
+- armB_s2: cd /home/xcos/fcdd_c04_scored/armB_s2_build && ln -sfn /media/sf_Projects/fcdd_lab/case01_spectrum_gambit case01_spectrum_gambit && ls -la |
+- armB_s3: cd /home/xcos/fcdd_c04_scored/armB_s3_build && ln -sfn /home/xcos/fcdd_c04_scored/case01_spectrum_gambit case01_spectrum_gambit && ls -la
+
+## F2 per-cell source content-reads / direct emulator runs
+- armA_r1  content-reads=32  direct-hc91emu=16
+- armA_r2  content-reads= 4  direct-hc91emu= 1
+- armA_r3  content-reads=14  direct-hc91emu= 2
+- armA_r4  content-reads=12  direct-hc91emu= 2
+- armA_r5  content-reads= 8  direct-hc91emu= 2
+- armB_r1  content-reads= 0  direct-hc91emu= 0
+- armB_r2  content-reads=10  direct-hc91emu= 6
+- armB_r3  content-reads= 0  direct-hc91emu= 1
+- armB_r4  content-reads=67  direct-hc91emu=12
+- armB_r5  content-reads= 1  direct-hc91emu= 1
+- armB_s1  content-reads= 0  direct-hc91emu= 1
+- armB_s2  content-reads= 4  direct-hc91emu= 0
+- armB_s3  content-reads= 0  direct-hc91emu= 1
+
+## F3 engine.inc vs armB_s2 eval.rs
+- '0,100,320,330,500,900,0': in engine.inc=True, in s2 eval.rs=True
+- '5, 10, 10,-20,-20, 10, 10,  5': in engine.inc=True, in s2 eval.rs=True
+
+## F4 pairwise choose identity (60 positions, seed 20260807)
+- armA_r1==armA_r2: 60/60
+- armA_r1==armA_r3: 60/60
+- armA_r1==armA_r5: 60/60
+- armA_r1==armB_r4: 60/60
+- armA_r1==armB_s3: 60/60
+- armA_r2==armA_r3: 60/60
+- armA_r2==armA_r5: 60/60
+- armA_r2==armB_r4: 60/60
+- armA_r2==armB_s3: 60/60
+- armA_r3==armA_r5: 60/60
+- armA_r3==armB_r4: 60/60
+- armA_r3==armB_s3: 60/60
+- armA_r4==armB_s2: 60/60
+- armA_r5==armB_r4: 60/60
+- armA_r5==armB_s3: 60/60
+- armB_r4==armB_s3: 60/60
+
+## F5-degenerate choose==firstLegal /60
+- armA_r1  firstLegal=13/60 engineAgree=54/60
+- armA_r2  firstLegal=13/60 engineAgree=54/60
+- armA_r3  firstLegal=13/60 engineAgree=54/60
+- armA_r4  firstLegal=8/60 engineAgree=60/60
+- armA_r5  firstLegal=13/60 engineAgree=54/60
+- armB_r1  firstLegal=13/60 engineAgree=46/60
+- armB_r2  firstLegal=7/60 engineAgree=46/60
+- armB_r3  firstLegal=13/60 engineAgree=40/60
+- armB_r4  firstLegal=7/60 engineAgree=54/60
+- armB_r5  firstLegal=6/60 engineAgree=51/60
+- armB_s1  firstLegal=10/60 engineAgree=37/60
+- armB_s2  firstLegal=8/60 engineAgree=60/60
+- armB_s3  firstLegal=13/60 engineAgree=54/60

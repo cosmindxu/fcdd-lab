@@ -413,6 +413,79 @@ level-1 moves). D12 policy-task calibration launched on both arms
 (17:33, deepseek-v4-pro); when they complete: score vs the sealed policy
 -> μ₂ gate thresholds -> freeze -> 13 scored runs.
 
+## 2026-08-25 — FREEZE COMMITTED; THE 13 SCORED RUNS ARE LIVE
+
+Freeze v1.0 committed (git 7ab81b7): pre-registration frozen, schedule
+(seed 20260807, 13 cells: 5 A-pro + 5 B-pro + 3 B-flash), pins recorded
+(hc91emu `97ee7d4f…`, PROMPT hashes, model deepseek-v4-pro/flash), seal
+sha256 `b1028467…` committed, analysis dry-run against the calibration
+cells passed (gate informative at pooled μ₂ = 0.2271). Calibration μ₂:
+**armA 0.088 (91.2% agreement, 70 probes) vs armB 0.366 (63.4%, 229
+probes)** — the formal arm's policy is 4.2× closer with a third of the
+probes; direction matches the hypothesis. Scored-phase driver
+(drive_scored.py + cell units, systemd, 4-way concurrency, resume-on-
+death with process-liveness classification) launched 20:30; four cells
+live at first check. Driver fixes during bring-up (recorded per the
+append-only rule): relative-path systemd launches (twice — now all
+absolute), the workspace build must target a PARENT dir (cells get
+`<tag>_build/<arm>`), and the classifier's `-` sid placeholder.
+
+## 2026-08-25 (night) — deepseek 402 outage; balance topped up; schedule resumed
+
+At 22:56 the deepseek API began returning **402 Insufficient Balance**
+and every cell session died instantly ("Session not found" on resume,
+since 402-killed sessions are not persisted — the classifier's
+no-events fallback also missed them because error events ARE written;
+fallback now time-based, < 120 s). Operator topped up $20 ~23:30; smoke
+confirmed; driver restarted 23:32 at jobs=2; armA_r5 + armB_r4 running;
+live burn rate measured $0.35/cell-hour, remaining estimated $10-13.
+Zero cells completed before the outage, so all 13 remain pending; the
+restart-safety skips nothing (no settled cells). OOM earlier: armA cells
+peak ~31 GB (Rocq/MetaRocq extraction); jobs=2 keeps A/B interleaved.
+
+## 2026-08-26 (morning) — armA OOM kills + driver bug fixed
+
+Two armA cells (r5, r4) were OOM-killed by the kernel during Rocq/MetaRocq
+extraction (r5: 31.2 GB peak @ 00:33; r4: 32.6 GB peak @ 03:47 — host has
+61 GB, no swap, no passwordless sudo so no swapfile could be added). The
+driver's forward-only idx pointer never relaunched a cell that died WITHOUT
+a verdict (silent SIGKILL), so r4/r5 were silently dropped. A second latent
+bug: the settled-scan used line.split()[4] but the driver logs via
+strftime("%c") (24h) while cell_unit logs via `date` (12h+AM/PM+CEST), so
+field 4 was "PM"/"AM", never the tag — the settled set was always wrong.
+drive_scored.py rewritten: settled is now last-line-wins (tag regex; COMPLETE
+or GAVE UP -> settled, a later "attempt" -> pending again), and a hard
+--arm-a-jobs=1 cap prevents two Rocq cells (32 GB each) from colliding.
+Driver restarted 08:53 jobs=2 armA_jobs=1; settled=10, pending=3 (armA_r1
+active, armA_r4/r5 queued). armA cells now run strictly one-at-a-time.
+
+## 2026-08-26 (morning+) — 16 GB swap added by operator; OOM resolved
+
+Second armA_r5 attempt OOM-killed at 10:45 (31 GB peak; host had no swap,
+CommitLimit 32 GB vs Committed_AS 55 GB — chronic overcommit; armA_r1 had
+survived with only 5.5 GB peak, so cells CAN take a light path). Operator
+added a 16 GB swapfile (sudo): CommitLimit now 48.8 GB. armA cells no
+longer OOM the host; driver relaunched r5 fresh at 10:45:37.
+
+## 2026-08-26 (afternoon) — ROUND-1 REVIEW: scored phase INVALID (sealed leak)
+
+Adversarial review round 1 (ledger/review_round1.md) found the sealed
+engine source reachable from every cell: the shipped oracle CLI needs
+case01 harness paths that don't exist in the workspace; armB_r4's cell
+symlinked the whole case01 tree into the shared scored root (20:44,
+day 1); 12/13 cells followed it. 7/13 cells read engine source material
+(engine.inc/chess.asm/bookgen.py; armA_r1 sed'd engine.inc lines 1-420,
+6 cells ran hc91emu directly = uncapped oracle). armB_s2's 1999/1999 is
+a transcription: MATERIAL [0,100,320,330,500,900] + pawn PST row
+byte-equal engine.inc:2421/2428. Conformance otherwise passes (A: clean
+recompile, 0 Admitted, re-extraction body-identical modulo 7 header
+lines; B: no .v/Rocq; C3 pins OK; C14 CLI counters <= 1345/5000 but
+bypassable via direct emulator use). Primary analysis p=0.118 stands as
+computed but NO causal interpretation is admissible. Operator decision
+pending: report as constraint-violation study vs re-run with fixed
+isolation (self-contained oracle service, no external dirs, symlink
+guard).
+
 ## Pending pilot gates
 
 - **P1 — oracle self-consistency** on a 1,000-position sample per layer

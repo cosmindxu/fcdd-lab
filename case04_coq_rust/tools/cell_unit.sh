@@ -25,9 +25,12 @@ for attempt in $(seq 1 $MAX_ATTEMPTS); do
     SET=()
     MSG="$(cat "$WS/PROMPT.md")"
   fi
+  T0=$(date +%s)
   ( cd "$WS" && ORACLE_RUN_ID="$TAG" timeout $TIMEOUT \
       "$RUNNER" run -m "$MODEL" --format json "${SET[@]}" "$MSG" \
       >> "$OUT" 2>> "$RAW/${TAG}_stderr.log" )
+  T1=$(date +%s)
+  DUR=$((T1 - T0))
   read -r STATUS SID LASTTEXT <<<"$(python3 - "$OUT" <<'PYEOF'
 import json, sys
 try:
@@ -41,17 +44,27 @@ finishes = [p.get("part", {}).get("reason") for p in lines
             if p.get("type") == "step_finish" and p.get("part", {}).get("reason")]
 last = texts[-1][:160] if texts else ""
 if finishes and finishes[-1] in ("stop", "end_turn") and texts:
-    print("COMPLETE %s %s" % (sids[-1] if sids else "", last.replace("'", "")))
+    print("COMPLETE %s %s" % (sids[-1] if sids else "NONE", last.replace("'", "")))
 else:
-    print("DEAD %s ''" % (sids[-1] if sids else ""))
+    print("DEAD %s ''" % (sids[-1] if sids else "NONE"))
 PYEOF
 )"
+  [ "$SID" = "NONE" ] && SID=""
   if [ "$STATUS" = "COMPLETE" ]; then
     log "COMPLETE attempt $attempt: $LASTTEXT"
     exit 0
   fi
+  # A resume that died within 2 minutes did not actually continue the
+  # session (unpersisted sid / API 402 / etc.). Fall back to a FRESH
+  # session on the dirty workspace (state persists) instead of burning
+  # attempts on a dead sid.
+  if [ -n "$SID" ] && [ "$DUR" -lt 120 ]; then
+    log "resume ineffective (${DUR}s, sid=$SID) - next attempt fresh"
+    SID=""
+  fi
   PREV_SID="$SID"
   log "dead (attempt $attempt), resume=$PREV_SID"
+  [ "$attempt" -lt $MAX_ATTEMPTS ] && sleep 45
 done
 log "GAVE UP after $MAX_ATTEMPTS attempts"
 exit 1

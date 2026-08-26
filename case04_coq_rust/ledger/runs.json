@@ -1,0 +1,119 @@
+[
+ {
+  "tag": "armA_r5",
+  "arm": "A",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.08804402201100547,
+  "mu1": 0.0002701972439881113,
+  "cost_usd": 0.1123,
+  "completion": true
+ },
+ {
+  "tag": "armB_r4",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.08804402201100547,
+  "mu1": 0.0,
+  "cost_usd": 0.64,
+  "completion": true
+ },
+ {
+  "tag": "armA_r2",
+  "arm": "A",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.07803901950975489,
+  "mu1": 0.0,
+  "cost_usd": 0.5622,
+  "completion": true
+ },
+ {
+  "tag": "armB_r5",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.11905952976488243,
+  "mu1": 0.0,
+  "cost_usd": 0.3711,
+  "completion": true
+ },
+ {
+  "tag": "armA_r3",
+  "arm": "A",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.07803901950975489,
+  "mu1": 0.0,
+  "cost_usd": 0.2471,
+  "completion": true
+ },
+ {
+  "tag": "armB_r2",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.23061530765382687,
+  "mu1": 0.0,
+  "cost_usd": 0.3279,
+  "completion": true
+ },
+ {
+  "tag": "armA_r4",
+  "arm": "A",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.010005002501250582,
+  "mu1": 0.0,
+  "cost_usd": 0.3178,
+  "completion": true
+ },
+ {
+  "tag": "armB_s1",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-flash",
+  "mu2": 0.5032516258129065,
+  "mu1": 0.0,
+  "cost_usd": 0.6209,
+  "completion": true
+ },
+ {
+  "tag": "armB_s3",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-flash",
+  "mu2": 0.08804402201100547,
+  "mu1": 0.0,
+  "cost_usd": 0.1925,
+  "completion": true
+ },
+ {
+  "tag": "armB_r3",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.3016508254127064,
+  "mu1": 0.11096100153111772,
+  "cost_usd": 0.4192,
+  "completion": true
+ },
+ {
+  "tag": "armB_s2",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-flash",
+  "mu2": 0.0,
+  "mu1": 0.0,
+  "cost_usd": 0.1617,
+  "completion": true
+ },
+ {
+  "tag": "armB_r1",
+  "arm": "B",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.18309154577288644,
+  "mu1": 0.0,
+  "cost_usd": 0.2472,
+  "completion": true
+ },
+ {
+  "tag": "armA_r1",
+  "arm": "A",
+  "model": "deepseek/deepseek-v4-pro",
+  "mu2": 0.08804402201100547,
+  "mu1": 0.0002701972439881113,
+  "cost_usd": 0.6753,
+  "completion": true
+ }
+]

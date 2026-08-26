@@ -290,3 +290,36 @@ Append-only, dated amendments. The manuscript gets **≥ 2 adversarial review
 rounds** before any claim is believed (C11), with the review lenses and
 verified-finding counts recorded as case02 did. Every reported number is
 emitted by a deposited script (C10).
+
+---
+
+## Amendment A-2026-08-26 — the sealed oracle leaked to every arm; scored phase invalid
+
+Adversarial review round 1 (ledger/review_round1.md; evidence emitted by
+tools/review_evidence.py) established:
+
+1. The shipped oracle CLI depended on case01 harness paths that the
+   workspace builder never creates; every cell bridged to the real
+   case01 tree itself (12/13 via in-transcript `ln -s`, 1 via /tmp
+   copy), and armB_r4's bridge landed in the shared scored root for
+   later cells to reuse.
+2. The whole case01 tree — including the sealed engine source
+   (chess.asm, engine.inc, …), the tap, and the emulator — was readable
+   from every cell; 7/13 cells demonstrably read sealed source material
+   and 6 ran hc91emu directly (bypassing the C14 CLI counter).
+3. The two best policy scores are transcriptions of leaked constants
+   (armB_s2 MATERIAL/PST byte-equal engine.inc:2421/2428).
+4. Otherwise conformance passes (F5: clean recompile, zero Admitted,
+   re-extraction body-identical, model pins, CLI counters within cap).
+
+**Consequence:** per §11's spirit, the scored phase is a constraint
+violation. The computed analysis (H1 p=0.1181; H2 p=0.93; gate
+informative) is inadmissible as evidence about either arm. The study's
+output is this amendment plus ledger/review_round1.md (committed; the
+local-only manuscript REPORT.md carries the same verdict with the design
+lessons in its §8). The prevention claim remains UNTESTED by this case.
+
+Both mandated review rounds ran: round 1 (process conformance + result
+integrity; findings F1–F5), round 2 (adversarial review of REPORT.md;
+findings R2-1–R2-6 in REPORT §10). Verdict of the rounds: report
+accepted, no causal claim made anywhere.

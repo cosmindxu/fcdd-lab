@@ -1,0 +1,24 @@
+=== H1 primary: policy disagreement mass mu2 (choose vs engine) ===
+armA mu2: ['0.0880', '0.0780', '0.0780', '0.0100', '0.0880']
+armB mu2: ['0.0880', '0.1191', '0.2306', '0.5033', '0.0880', '0.3017', '0.0000', '0.1831']
+mean A=0.0684  mean B=0.1892  diff(A-B)=-0.1208
+exact two-sided p = 0.1181 (floor 0.0016)   bootstrap CI [-0.2329, -0.0244]
+H1 verdict: NOT SUPPORTED
+
+=== co-primary: completion ===
+armA completion 1.00  armB completion 1.00
+
+=== H2: cost ===
+armA costs: ['0.11', '0.56', '0.25', '0.32', '0.68']
+armB costs: ['0.64', '0.37', '0.33', '0.62', '0.19', '0.42', '0.16', '0.25']
+median ratio B/A = 1.10  exact p = 0.9308
+dispersion sd(ln cost): A=0.714 B=0.506
+
+=== H3: policy layer mu2 (secondary) ===
+armA mu2: ['0.0880', '0.0780', '0.0780', '0.0100', '0.0880']
+armB mu2: ['0.0880', '0.1191', '0.2306', '0.5033', '0.0880', '0.3017', '0.0000', '0.1831']
+exact p = 0.1181
+
+=== uninformativeness gate (D12: on mu2) ===
+pooled mu2 mean = 0.1428
+gate: informative

@@ -1,0 +1,17 @@
+{
+ "primary": {
+  "mu2": 0.08804402201100547,
+  "n": 1999,
+  "agree": 1823
+ },
+ "rules": {
+  "n": 11103,
+  "mu1": 0.0002701972439881113,
+  "legalDiv": 3,
+  "statusDiv": 0,
+  "timeouts": 3,
+  "statusParseFail": 0,
+  "moveMass": null,
+  "moveMassSym": null
+ }
+}
