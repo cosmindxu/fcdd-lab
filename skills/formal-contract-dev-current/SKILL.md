@@ -22,6 +22,19 @@ claims, replacing a soak or burn-in with runtime verification, or any component 
 failure is worse than its loud one. **Do not use** for prototypes, cosmetics, or code you can
 cheaply re-run and eyeball — FCDD's cost is real; proportionality is part of the method.
 
+**What formalising is FOR (objective, added 2026-08-27).** Prose underdetermines.
+Two competent engineers reading the same requirement will resolve its silences
+differently, silently, and both will believe they implemented it. **The spec's job
+is to spend that interpretive freedom explicitly and once, upstream, instead of
+leaving it to be spent implicitly and differently in every implementation.** That
+is the mechanism by which a contract is supposed to pay: not "proofs are good",
+but *the space of behaviours consistent with the artefact is narrower than the
+space consistent with the prose*. The method already carries the devices —
+fail directions per degradable input, 3-valued logic with safe-OR composition,
+Beat 0.5's elicitation of user-KNOWN-but-UNSPOKEN constraints, law 13's
+traceability — but until now it never named the objective they serve, so nothing
+checked whether the narrowing happened. **Law 14 is the check.**
+
 **How much to apply (beat dependencies + sizing).** The beats have a dependency order — Bridge
 presupposes Prove+Twin; the falsifiability tiering and the shell honesty rules presuppose a runtime
 shell; the four review lenses collapse to fewer when a layer is absent (no shell ⇒ no Lens C). Pick
@@ -509,6 +522,32 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
     Derivation and honest tier: `fcdd_lab/method/INTENT_COVERAGE.md` (derived
     diagnosis, predicted benefit, N = 1 supporting execution — weaker evidence
     than law 12's 56 runs, and it should be cited that way).
+14. **No silent residue: every input class is decided, and every interpretive
+    choice is recorded.** This is the checkable form of §0's objective, and it is
+    the missing DUAL of an existing rule. `spec_total` requires that every *verdict
+    class* be reachable — no vacuous classes. It says nothing about the other
+    direction, and that is where prose leaks through: an input class the spec
+    does not determine has not been narrowed at all, merely deferred to whoever
+    writes the code, who will decide it silently and differently each time.
+    So, at the close of Beat 1:
+    (a) **Input totality** — every input class maps to a declared verdict, and
+    "we do not decide this" is a legitimate answer only when written down: mapped
+    by fail direction to the conservative verdict, or declared out of scope. A
+    spec with silent residue has moved the ambiguity downstream, not removed it.
+    (b) **Interpretation ledger** — wherever the prose admitted more than one
+    reading, record which reading was taken and why. Same family as law 8's
+    decision and assumption ledgers, and it is the artefact that makes narrowing
+    auditable rather than asserted.
+    Falsifiability tier (law 3): this falsifies *an input nobody decided* and *a
+    reading taken without record*. It cannot falsify *the reading is the right
+    one* — that residue is §5's, and stays §5's.
+    Motivating defects: R2 (nobody modelled watcher-start × gateway-not-yet-up —
+    an undecided input class that cost three false latches), and the measured
+    scale of the residue in `fcdd_lab` case02, where **23 distinct specification
+    files came out of 28 runs of the same task**. Honest tier: governing principle
+    with defect motivation, NOT a measured benefit — whether narrowing actually
+    occurs is the open question, and the study designed to answer it is
+    `case06`.
 
 ## 5. What FCDD does NOT do (read before trusting it)
 

@@ -118,3 +118,46 @@ the outcome is how many *stated requirements* each arm's artefact actually
 enforces. That is the study `case05_prevention/PROPOSAL.md` §11 concludes it
 should have been all along, and it puts mis-specification inside the measurement
 instead of leaving it an untestable confound.
+
+---
+
+## 8. The objective the method never stated (2026-08-27)
+
+Law 13 closes the *coverage* half of the spec↔intent seam. Operator observation,
+and it is the more fundamental half: **the method carries narrowing devices
+without ever declaring narrowing as an objective.**
+
+Prose underdetermines. Two competent engineers reading one requirement resolve
+its silences differently, silently, and both believe they implemented it. The
+value a contract is supposed to deliver is that **the interpretive freedom gets
+spent explicitly and once, upstream**, instead of implicitly and differently in
+every implementation. Not "proofs are good" — *the space of behaviours consistent
+with the artefact is narrower than the space consistent with the prose*.
+
+The devices are all present and none of them says so: fail directions per
+degradable input, 3-valued logic with safe-OR composition, Beat 0.5's elicitation
+of user-known-but-unspoken constraints, law 13's traceability. Because the
+objective was never named, nothing checked whether the narrowing occurred — **and
+this programme spent two studies measuring dispersion of _cost_ when the claim
+was about dispersion of _interpretation_.** That is the sharpest single
+consequence of leaving an objective implicit.
+
+**The checkable form is the missing dual of an existing rule.** `spec_total`
+requires every *verdict class* to be reachable. Nothing required every *input
+class* to be decided — and that direction is exactly where prose leaks through.
+An undecided input class has not been narrowed; it has been deferred to whoever
+writes the code. Hence **law 14**: input totality (every input class mapped to a
+declared verdict, with "we do not decide this" legitimate only when written down
+and mapped conservatively) plus an **interpretation ledger** recording every
+place the prose admitted more than one reading.
+
+**Motivating defects, both real:** R2 — nobody modelled watcher-start ×
+gateway-not-yet-up, an undecided input class that cost three false latches; and
+case02's measured residue, **23 distinct specification files from 28 runs of the
+same task**, which is what an unnarrowed space looks like when you count it.
+
+**Honest tier: governing principle with defect motivation, not a measured
+benefit.** Whether formalising actually narrows the behaviour space is an open
+empirical question — and it is the one `case06` is designed to answer, by
+measuring inter-run agreement on *underspecified* inputs, where there is no right
+answer and therefore nothing to leak.
