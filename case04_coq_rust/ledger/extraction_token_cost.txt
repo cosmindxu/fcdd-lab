@@ -1,0 +1,41 @@
+CASE 04 — token cost of Rocq extraction vs direct Rust
+INADMISSIBLE as evidence (A-2026-08-26 constraint violation); descriptive only.
+
+cell      sess  completing tok  consumed tok  disc%  compl$   cons$
+-------------------------------------------------------------------
+armA_r1      2         569,156       569,156     0%    0.68    0.68
+armA_r2      3         493,663       901,116    45%    0.56    0.93
+armA_r3      2         307,816       655,899    53%    0.25    0.52
+armA_r4      3         353,283     1,160,451    70%    0.32    1.04
+armA_r5      5         145,601     1,644,126    91%    0.11    1.37
+armB_r1      2         260,932       260,932     0%    0.25    0.25
+armB_r2      2         329,217       695,961    53%    0.33    0.66
+armB_r3      2         411,543       411,543     0%    0.42    0.42
+armB_r4      3         775,667     1,551,945    50%    0.64    1.39
+armB_r5      2         349,217       773,364    55%    0.37    0.75
+armB_s1      2         620,173       620,173     0%    0.62    0.62
+armB_s2      2         341,252       341,252     0%    0.16    0.16
+armB_s3      2         377,109       377,109     0%    0.19    0.19
+
+ARM TOTALS
+arm                        cells  sess    completing      consumed   compl$   cons$
+-----------------------------------------------------------------------------------
+A  Rocq->Rust extraction       5    15     1,869,519     4,930,748     1.91    4.53
+B  direct Rust                 5    11     2,126,576     3,693,745     2.01    3.46
+B' flash sweep (exploratory)     3     6     1,338,534     1,338,534     0.98    0.98
+
+RATIO A/B (formal-extraction over direct)
+  COMPLETING tokens : 0.88x        (pre-registered metric)
+  CONSUMED   tokens : 1.33x        (all attempts)
+  COMPLETING dollars: 0.95x
+  CONSUMED   dollars: 1.31x
+  restarts per cell : A 3.0   B 2.2
+  discarded token share: A 62%   B 42%
+
+MEDIAN-OF-CELLS (totals above are outlier-sensitive at n=5)
+  COMPLETING median A 353,283  B 349,217  -> 1.01x
+  CONSUMED   median A 901,116  B 695,961  -> 1.29x
+
+COMPOSITION (completing sessions, share of billed non-cache tokens)
+  A extraction  input 48.5%  output 12.8%  reasoning 38.8%   cache-read 188,262,656
+  B direct      input 38.0%  output 12.0%  reasoning 50.0%   cache-read 139,897,472
