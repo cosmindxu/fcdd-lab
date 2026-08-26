@@ -1,8 +1,9 @@
 # CASE 05 — proposal: testing the prevention claim under isolation that holds
 
-**STATUS: DRAFT r2 — not frozen, nothing scheduled, nothing built.** r2 applies
-the four blocking findings and thirteen others from adversarial review round 1
-(§11). Two of them changed the design rather than its wording: the co-primary
+**STATUS: DRAFT r3 — not frozen, nothing scheduled, nothing built.** r3 applies review round 2
+(§12), which found four further blocking defects — all of them in the *repairs*
+round 1 produced, exactly as this lab's history predicted. r2 applied round 1's
+four blocking findings and thirteen others (§11). Two of them changed the design rather than its wording: the co-primary
 gate was unpowerable at any scale this lab has run (B2, independently
 re-simulated), and Option B is retired (B3). Freezing is
 the operator's act, and it should not happen until the D1 fork in §6 is decided
@@ -44,6 +45,10 @@ scored objective. Assume, with no malice attributed:
 - it will create symlinks, copy trees to `/tmp`, and run any executable on the
   box, including the emulator that the query cap was meant to meter;
 - it will read any file it can open, including another case's sealed material;
+- **it will read its sibling cells' workspaces** — their sources, their
+  extracted output, even their compiled binaries — if any path reaches them.
+  This is not hypothetical: case04's A-2026-08-26b proved every armA cell did
+  it, and two submissions came out byte-identical as a result;
 - it will not be stopped by a prompt saying not to. **Case02's own conclusion —
   "instructions leak" — is a finding of this lab, not a hypothetical.**
 
@@ -70,7 +75,8 @@ bwrap --unshare-all --die-with-parent \
       --ro-bind /bin /bin  --ro-bind /etc/alternatives /etc/alternatives \
       --tmpfs /tmp --proc /proc --dev /dev \
       --bind  $CELL_WS /work \
-      --bind  $ORACLE_SOCK /work/.oracle.sock \
+      --bind  $ORACLE_SOCK /work/.oracle.sock \   # Option B only (m2)
+      --bind  $RELAY_SOCK  /work/.model.sock  \   # per-cell, always (B3)
       --chdir /work  --setenv HOME /work \
       -- <runner>
 ```
@@ -95,8 +101,13 @@ the sandbox — moves the trust boundary onto the harness's own context assembly
 enough filesystem reach to orchestrate cells can also see the lab tree, reviving
 F1. The relay is honest about its cost: it is a bidirectional channel and
 therefore a richer exfiltration path than the oracle socket, so it gets its own
-gate (**G-RELAY**: full traffic log, oracle-shaped-query detection, byte
-accounting per cell) and §3-L2's "only through a UNIX socket" is stated as *two*
+gate — **but only the half of it that is mechanical (B3)**. **G-RELAY** is a
+full traffic log plus **per-cell byte accounting against a pre-registered
+threshold**, which is countable and therefore a gate; **per-cell relay sockets
+and tokens** make that accounting attributable. *Oracle-shaped-query detection
+is demoted to a deposited descriptive detector*: deciding whether free text
+paraphrases a query is a judgement or a blocklist, which are the two things this
+design has already refused elsewhere and §3-L2's "only through a UNIX socket" is stated as *two*
 sockets, both orchestrator-held and both logged.
 
 *Verified on this host, 2026-08-26:* a cell under `--unshare-all` reached an
@@ -105,6 +116,14 @@ startpos', served-by-orchestrator)`) while `urllib` to a public API raised
 `URLError`, `/media/sf_Projects` and `/home` were absent, and `/proc` showed only
 sandbox-local processes. Practical constraint found in the same test: `AF_UNIX`
 caps socket paths at 108 bytes, so cell roots must be short.
+
+**Image immutability (M3).** `/usr`, `/lib` and `/bin` are bound from the live
+host, so the "hashed image" is whatever the host is at probe time; a system
+update during a long schedule would silently change the toolchain mid-run and
+stop cells being exchangeable. Either an immutable snapshot is bound, or the
+closure hash is re-checked **per cell at start** against the frozen manifest,
+with mismatch aborting as infrastructure. (`/etc/alternatives` without `/etc`
+also breaks common toolchain lookups; the pilot must confirm the bind set.)
 
 **Toolchain (m1, m4).** cargo and opam resolve dependencies over the network at
 build time, which `--unshare-net` forbids: every dependency is **vendored into
@@ -174,7 +193,7 @@ scoring, and blind to outcome**:
 
 | Gate | Falsifies | Cannot falsify |
 |---|---|---|
-| G-ISO closure hash | any file in the cell's reachable closure not in the image manifest — symlinks resolved, mounts enumerated | material the cell never wrote down |
+| G-ISO closure hash | any file in the cell's reachable closure not in `image manifest ∪ /work ∪ {/proc,/dev,/tmp}` — symlinks resolved, mounts enumerated, **sibling trees proved absent**; the `/work` delta is deposited as the submission's provenance record (M2) | material the cell never wrote down |
 | G-NET no-egress probe | a network path out of the sandbox | an out-of-band channel through the socket |
 | G-CAP server log | queries beyond cap, cross-cell token reuse | whether the answers bought were *enough* |
 | G-XSCRIPT constant match | submissions containing byte-equal runs of engine constants (case04 F3's check, promoted from a review finding to an automatic gate) | a paraphrased transcription |
@@ -213,6 +232,14 @@ checkable form:
 - **C20 — the query cap is enforced where the engine runs.**
 - **C21 — the scored corpus is generated after the last cell closes**, from a
   seed committed by hash in the pre-registration and held off-host.
+- **C23 — cells share no writable mount and no host path (A-2026-08-26b).**
+  Each `$CELL_WS` is freshly created, disjoint and non-nested; no scored root,
+  ledger directory or raw-output directory is mounted into more than one cell;
+  the orchestrator collects results *after* the namespace closes, never through
+  a path the cell can also see. Sibling absence is one of the properties the
+  G-ISO closure walk exists to prove, and is asserted as such. An
+  infrastructure re-run rebuilds the workspace from the image; it never reuses
+  the dead cell's tree.
 - **C22 — the deposit is audited like a workspace**: every tracked file hashed
   against the sealed manifest before publication, and on every subsequent
   push. The check case03 C1 already specified, pointed at the repository.
@@ -253,9 +280,23 @@ comes from **combinatorial interaction volume** rather than from ambiguity — m
 fully-specified clauses whose composition is easy to get wrong and hard to check.
 This is a real narrowing of the claim and must be stated as one: case 05 would
 test whether formal expression helps on *specified-but-intricate* requirements,
-not on *under-specified* ones. If a pilot shows that removing ambiguity also
-removes the difficulty, the subject fails kill-criterion §8.3 and the design
-stops.
+not on *under-specified* ones. **Round 2 (M1) holds that this takes the second horn rather than
+escaping it**: an exhaustively stated precedence order over interacting clauses
+*is* the formal disambiguation, in prose clothing, so the control now holds much
+of what the treatment would produce. We accept the characterisation and narrow
+the claim in the abstract accordingly — case05 would test **formal re-expression
+of an already-disambiguated specification**, which is a smaller and more
+defensible question than "does formalisation help". The §8.3 pilot rule is
+stated numerically before freeze (the pilot CORRECT rate, at a stated n, below
+which difficulty counts as surviving), because "if difficulty disappears, stop"
+is not a decision rule.
+
+**Where the reference semantics lives (M6).** The enumerator and reference
+implementation are the answer-key-shaped artefact of this design, and r2 did not
+say where they sit during the runs. **They are built after the last cell closes**,
+under the same commit-reveal custody as the corpus (C21), or they live off-host.
+A reference implementation sitting on the cell host while cells run is precisely
+the A17/F1 artefact class, with L1 absence as the only wall.
 
 *Carried forward honestly, from case03's own file:* a spec assembled by a
 grammar from randomised clauses manufactures precisely the pedantic
@@ -328,11 +369,44 @@ question needs its own subject before it can be asked again.
     520 submissions in about 9 core-hours. This is the first design in the
     programme where the honest answer to "underpowered" is *run more cells*.
 
-  **Recommendation: D2b if the harness survives a pilot at n ≈ 30, D2a if it
-  does not** — and whichever is chosen is frozen before the first scored cell.
+  **Round 2 found neither horn sound as written (B2), and r3 replaces both.**
+  *D2a* does not bind: silent-failure rate is silent/N, so a non-shipping cell
+  still lowers the primary even with M5's denominator fix — the co-primary gate
+  was the actual control on the refuse-to-ship strategy, and inverting the
+  burden defangs it. At n = 30/arm an *observed* 30-point correctness harm still
+  yields an interval containing the −10-point margin, so the block essentially
+  cannot fire below n ≈ 130. *D2b*'s arithmetic used the COMPLETING average
+  ($0.35/cell) — the accounting this same section rules against; on CONSUMED it
+  is $0.69/cell, about **$360** at 520 cells, still trivial. The binding cost is
+  wall-clock: case04's 13 cells took **~16 hours** with the treated arm capped at
+  one concurrent cell, so 260 serial treated cells is plausibly **weeks**, against
+  a programme record that already contains a nine-day host reboot and an 88.6-hour
+  usage suspension (C6).
+
+  **Adopted instead: one ordinal outcome, tested once.** Each submission is
+  scored CORRECT ≻ LOUD-FAILURE ≻ SILENT-FAILURE, and the arms are compared on
+  that ordering with a single pre-registered test. A method that converts silent
+  failures into loud ones moves *up* the order; one that converts working
+  programs into broken ones moves *down*; refusing to ship is a LOUD failure and
+  cannot win. One powered test then carries both directions, and the
+  unpowerable two-proportion gate disappears rather than being weakened.
+  **The n and the schedule are pilot-measured freeze inputs** — per-cell
+  wall-clock, peak RSS and CONSUMED cost — not assumed.
 - **Estimator.** A proportion, unit-free by construction (C4); dispersion, where
   reported, uses scale-free `sd(ln ·)`, never case02's `CV_log`. **Invariance
   tested under every transformation the units admit, before freezing.**
+- **Replication is made real, not assumed (M4).** Identical workspace +
+  identical prompt + pinned model means between-cell variance is sampler noise,
+  which is not the variance the power simulation assumes. Under Option A the
+  grammar generates a **distinct spec instance per cell**, paired across arms —
+  which restores genuine replication *and* widens the claim beyond one
+  machine-generated specification. The sampling policy (temperature, seed,
+  prompt variation) and the unit of replication are stated in the
+  pre-registration, and the power simulation matches them.
+- **Multiplicity (m4).** r3 now carries a primary, cost (two totals), resource
+  ceiling and a delivery criterion. The pre-registration names the primary and
+  takes case02 §5.5's disclose-and-discount position on the rest, before the
+  outcomes multiply further.
 - **Power.** Exact simulation over the n_defects × k grid before the schedule is
   committed, by the method prototyped in `case03_silent_repair/prototype/
   power_case03.py` (currently untracked — commit it or restate the method
@@ -348,6 +422,19 @@ question needs its own subject before it can be asked again.
 - **Fail direction.** Any load-bearing control found broken after the fact
   yields the conservative verdict, as case04 §6 did. This must stay written
   down *before* there is a result to be reluctant about.
+- **Treatment delivery is verified, not assumed (B4) — the gate this programme
+  most obviously lacked.** Case04's treated arm wrote **zero quantified
+  properties across ~4,500 lines of Rocq**, and its "zero `Admitted`" conformance
+  check passed *vacuously* because there was nothing to admit: the treatment had
+  degenerated into "write a functional program in a prover's syntax", and the
+  design would have scored that as FCDD. Case05 pre-registers a **mechanical
+  delivery criterion** — at least *k* universally quantified, machine-checked,
+  **non-vacuous** properties (each with a witness), covering a stated fraction of
+  the spec's clause vocabulary — and pre-registers the analysis of
+  non-delivery **before the first cell**: an intention-to-treat comparison plus a
+  declared per-protocol one, with *treatment-not-delivered* as a named outcome
+  category. It is never a post-hoc exclusion, because excluding cells
+  differentially by arm is a selection confound.
 - **Cost accounting, fixed before the first cell (case04 finding).** Two totals
   are recorded per cell and both are reported: **COMPLETING** (the last, clean,
   from-scratch session — the cost of one successful run) and **CONSUMED** (every
@@ -358,8 +445,26 @@ question needs its own subject before it can be asked again.
   infrastructure deaths silently prices away a method's failure rate**, which
   case01's A5 already ruled is method-inherent, not a config error. Neither
   total is the headline by default; the pre-registration must name which one is,
-  and why, before any cell runs.
-- **Resource ceiling is a first-class outcome (case04 finding).** Peak RSS and
+  and why, before any cell runs. **"Infrastructure death" gets a mechanical
+  classifier (M5)**, because whoever classifies deaths post-hoc chooses which
+  tokens count: OOM-killer log, API 5xx, host reboot ⇒ infrastructure; agent
+  gave-up, budget exhausted, non-compiling exit ⇒ method-attributed; anything
+  unclassifiable ⇒ **method-attributed by default**, per fail-direction. And
+  COMPLETING is defined for resume-completed cells or resumes are forbidden —
+  case04's runner could resume a dead session in place, and though 0 of its 13
+  completing sessions turned out to be resumed, the metric was undefined for a
+  case that nearly occurred.
+- **Cache contamination caveat (m5).** The relay proxy and the model provider
+  are cross-cell shared state: provider-side prompt caching (case04 logged 188M
+  cache-read tokens) means one cell's context can change another's cost and
+  latency. No content crosses, so this threatens the *cost* outcome only; the
+  pre-registration either pins cache behaviour or states the caveat on every
+  per-cell cost figure.
+- **Resource ceiling is a first-class outcome (case04 finding).** Peak RSS is
+  read from the cell unit's cgroup `memory.peak`, not by polling `/proc`, which
+  misses spikes; "achievable concurrency" is defined as a host-schedule property
+  measured in the pilot, and RSS compared across arms run at different
+  concurrency is flagged as contention-confounded (m3). Peak RSS and
   achievable concurrency are recorded per cell. Case04's driver carried a hard
   cap of one concurrent treated cell because Rocq/MetaRocq extraction peaks
   ~32 GB — the treated arm was **unparallelisable on a 61 GB host** while the
@@ -431,8 +536,10 @@ whose failure costs little.
 
 **Corrected claim (review round 1).** r1 oversold this as a "harness shakedown".
 It is not one: by its own description the ATTACK-budget study needs no hidden
-oracle, so it exercises L1, the runner, the ledger and the mechanical gates but
-**not** the relay under load, **not** L2, and **not** L3 — it validates the
+oracle, so it exercises L1, the runner, the ledger, the mechanical gates **and — contrary
+to what r2 said here (m1) — the relay under load, since with the agent inside the
+sandbox every model call of every cell traverses it**; it does not exercise
+**L2** or **L3** — it validates the
 layers that held last time and skips the ones that failed. Run it because it is
 the lab's one actionable finding and it is cheap and decidable, **not** as
 evidence that case 05's isolation works. That evidence only a case-05 pilot can
@@ -473,3 +580,48 @@ REPORT/review ledger, both CONSTRAINTS files and case02's A17/A19.
 B1–B4 in writing first. Recorded here rather than paraphrased, because the
 lab's convention is that a review's verdict is deposited whether or not the
 authors like it.
+
+## 12. Review round 2 — the repairs, attacked
+
+Round 2's charter was this lab's own history: case02's round two overturned three
+of round one's corrections, so the fixes are the least-reviewed part of any
+revision. It found **four blocking defects, all of them in round 1's repairs.**
+
+| # | Finding | Disposition |
+|---|---|---|
+| **B1** | Sibling-to-sibling isolation is nowhere in the design; A-2026-08-26b's proven channel (cells reading each other's trees) has no constraint, no gate and no threat-model line | **Accepted, design changed.** New **C23**; threat model gains the sibling line; G-ISO now explicitly proves sibling absence |
+| **B2** | Neither horn of round 1's D2 replacement is sound: D2a cannot bind below n ≈ 130 and reopens the refuse-to-ship path; D2b priced itself with the COMPLETING accounting §6 forbids ($0.35 vs $0.69/cell) and ignored wall-clock (case04: 13 cells ≈ 16 h, treated arm serial → 260 cells ≈ weeks) | **Accepted, both horns dropped.** Replaced by a single **ordinal outcome** CORRECT ≻ LOUD ≻ SILENT tested once, so one powered test carries both directions; n and schedule become pilot-measured freeze inputs |
+| **B3** | G-RELAY's "oracle-shaped-query detection" is a judgement or a blocklist — the two things this design refuses elsewhere — and round 1 recorded it as a mechanical gate | **Accepted.** Byte accounting (countable) stays a gate; query-shape detection demoted to a descriptive detector; per-cell relay sockets and tokens added |
+| **B4** | Nothing verifies the treatment was *delivered*; case04's arm wrote zero quantified properties and its zero-`Admitted` check passed vacuously | **Accepted, gate added.** Mechanical delivery criterion (k non-vacuous quantified properties with witnesses, clause coverage) plus a pre-declared ITT/per-protocol pair, with *treatment-not-delivered* as a named outcome |
+| **M1** | B4's precedence fix takes the second horn rather than escaping it; §8.3's pilot rule is unoperationalised | Accepted — the claim is narrowed *in the abstract* to formal re-expression of an already-disambiguated spec, and the pilot rule becomes numeric |
+| **M2** | The G-ISO exit scan fails every productive cell, since cells legitimately write to `/work` | Accepted — writable-set rule stated mechanically; the `/work` delta is deposited as provenance |
+| **M3** | The image is the live host; a system update mid-schedule changes the toolchain invisibly | Accepted — immutable snapshot, or per-cell start-time closure re-check |
+| **M4** | The power grid assumes iid cells while nothing makes replicates independent | Accepted — the grammar emits a distinct spec instance per cell, paired across arms; sampling policy stated |
+| **M5** | "Infrastructure death" is undefined and gameable, and COMPLETING is undefined for a resume-completed cell | Accepted — mechanical classifier with method-attribution as the default. *Point of fact:* we verified 0 of case04's 13 completing sessions were resume targets, so the defect was latent there, not realised |
+| **M6** | The reference semantics is the answer-shaped artefact and the draft never says where it lives during runs | Accepted — built after the last cell closes, under commit-reveal custody, or off-host |
+| m1 | r2 wrongly claimed the ATTACK-budget study would not exercise the relay | Accepted, corrected — with the agent inside, every model call traverses it |
+| m2, m3, m5 | Oracle socket should be Option-B-conditional; RSS needs cgroup `memory.peak`; provider-side caching contaminates per-cell cost | All accepted |
+| m4 | Multiplicity unstated as outcomes multiply | Accepted — disclose-and-discount, primary named |
+
+**Round 2's overturns of round 1**, recorded because they are the point of a
+second round:
+
+1. **M5's disposition was incomplete.** Keeping non-shipment in the denominator
+   does not close the trivial win — a non-shipping cell still *lowers* the
+   silent-failure rate. The finding was right; its fix was not. This is what
+   forced the ordinal outcome.
+2. **M4's demotion of G-CLUSTER was conditionally wrong.** Round 1 demoted the
+   only duplication detector days before A-2026-08-26b proved duplication is a
+   *realised* failure. The demotion is affordable only because C23 now legislates
+   structural sibling isolation; without C23 it would have to be reversed.
+3. **B1's disposition passed on topology and failed on gating.** Agent-inside
+   with a relay is the right horn, but recording G-RELAY as mechanical held the
+   fix to a laxer standard than the same review had just applied to G-XSCRIPT.
+
+**Round 2's verdict:** not freezable as r2; all four blockers fixable in writing;
+an **r3 followed by a round-3 pass targeted at r3's fixes** is the honest path,
+since fixes made under review pressure are the least-reviewed text in any study.
+The largest remaining risk it names is the outcome design: a study that runs to
+completion and still cannot support or refute its hypothesis by construction is
+this programme's most expensive failure mode, and the only one that spends the
+budget before revealing itself.

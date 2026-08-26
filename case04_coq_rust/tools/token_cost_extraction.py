@@ -6,7 +6,13 @@ per-cell opencode transcripts under ledger/raw/ and ledger/runs.json.
 
 Two accountings are reported deliberately:
   COMPLETING  — the pre-registered metric (PREREG §7): the last session only,
-                i.e. infrastructure-dying attempts excluded.
+                i.e. infrastructure-dying attempts excluded. NOTE: cell_unit.sh
+                can RESUME a dead session in place (no workspace rebuild), so
+                "completing" is not from-scratch by construction. Verified for
+                these data: 0 of 13 completing session ids appear as a resume
+                target in ledger/raw/drive.log, so every completing session here
+                is in fact a clean run. A future study must define COMPLETING
+                for resume-completed cells or forbid resumes (case05 M5).
   CONSUMED    — every session in the cell, i.e. what the work actually cost,
                 including attempts killed by OOM and relaunched.
 The gap between them is the question: arm A's deaths were a property of its
