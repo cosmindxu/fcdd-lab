@@ -553,6 +553,31 @@ vector, and it is the half of case 04 that could not have been won by any method
   it is the only evidence there is.) **Power is therefore computed from each
   tier's own observed variance**, never from the strongest tier's.
 
+  **D3 — no specialist prover model. Operator ruling, 2026-08-26: excluded.**
+  A dedicated theorem-proving model (Kimina-class) would dissolve the window
+  tension below by pairing a weak coding model with a strong prover. **It is
+  ruled out of this design and any successor**, for three reasons worth recording
+  because they are not all obvious:
+
+  1. **It breaks arm model-matching (C3)** — the constraint case 02 violated by
+     accident (A13, a second model inside 51 of 56 cells) and paid for in the
+     contamination of its own premium.
+  2. **It changes the treatment** away from what cases 01/02 measured — the
+     method as the skill defines it, not the method plus a specialist toolchain —
+     and it would import an unvalidated capability, since strength on competition
+     mathematics is not evidence of strength on inductive proofs about
+     list-returning move generators.
+  3. **It would engineer away the measurement.** The capability window is a
+     *finding*, not an obstacle: whether a given tier can deliver the treatment is
+     precisely what a practitioner needs to know before spending 2–5× on it.
+     Bringing in a prover to make the treated arm able to deliver would hide the
+     answer rather than produce it.
+
+  **Consequence, stated rather than hidden:** with this lever removed there is no
+  way to open the window if it turns out to be empty, so **G2 becomes more likely
+  to stop the programme** — which is consistent with §11's standing
+  recommendation, and cheap, since G2 is early by design.
+
   **The binding constraint is a capability window, and it may be empty.** The
   benchmark needs a model weak enough to fail; the treatment needs one strong
   enough to write Rocq *and prove soundness and completeness non-vacuously*. The
