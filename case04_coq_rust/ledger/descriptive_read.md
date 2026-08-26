@@ -41,7 +41,7 @@ numbers are emitted by deposited scripts (C10): `ledger/runs.json`,
    consistent with the spread being a property of direct development
    rather than of the primary model.
 
-5. **The rules layer says nothing.** μ₁ = 0 for 12 of 13 runs (0.111
+5. **The rules layer says nothing.** μ₁ = 0 for 10 of 13 [corrected 2026-08-26: was "12 of 13"; runs.json has three non-zero — armA_r1/r5 at 0.00027, armB_r3 at 0.111] runs (0.111
    for armB_r3) — the layer the calibration already declared
    uninformative at this budget, including for the cells with zero
    detectable source access.

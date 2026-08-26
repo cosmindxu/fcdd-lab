@@ -3,7 +3,13 @@
 **What a machine-checked contract costs an AI coding agent — and why, after four
 studies, we still cannot say what it buys.**
 
-Draft v1 — 2026-08-26. Programme-level report covering cases 01–04, the method
+Draft v2 — 2026-08-26. v2 applies an adversarial review that returned five
+blocking findings, three of which changed a claim: the cost evidence base was
+**double-counted** (seven defects measured twice, not fourteen), voided case-04
+numbers had migrated **unlabelled into a numbered conclusion** against this
+document's own rule, and the method's own contract was described in exactly the
+over-crediting idiom the document condemns elsewhere. A fourth corrected a
+factual error about which model wrote the Rocq. Draft v1 — Programme-level report covering cases 01–04, the method
 notes, and the design proposal for a fifth. Every number is emitted by a
 deposited script or quoted from a deposited ledger; where a number comes from a
 study we have since declared inadmissible, it is labelled as such in the same
@@ -20,17 +26,28 @@ implementation that looks right, passes the obvious checks, and is wrong. We ran
 four studies against those claims on a 7,343-line Z80 assembly chess engine and
 its reimplementation.
 
-**One finding replicated and is not in doubt: the method costs more.** Case 01
-found FCDD dearer on 7 of 7 matched repairs (sign test *p* = 0.016, median
-4.74× on raw tokens); case 02, pre-registered and four times replicated, found
-it dearer on 7 of 7 defects again (median 2.26×, *p* = 0.0156). No study found a
-defect on which it was cheaper, so its upfront contract never amortised.
+**One finding replicated and is the programme's most solid: the method costs
+more.** Case 01 found FCDD dearer on 7 of 7 matched repairs (sign test
+*p* = 0.016, median 4.74× on raw tokens); case 02 — pre-registered, with k = 4
+replicates per cell — found it dearer on the **same seven defects** again (median
+2.26×, *p* = 0.0156). That is seven defects measured twice, not fourteen. Neither
+study found a defect on which FCDD was cheaper, so its upfront contract never
+amortised — though case 01's 7/7 depends on one author-computed imputation
+(6/7, *p* = 0.125, on deposited values alone), case 02's *p* = 0.0156 does not
+survive Bonferroni correction across its four outcomes (0.0125), and both studies
+disclose confounds that plausibly carry part of the gap.
 
-**The predictability claim was tested once, properly, and was not supported.**
-Case 02's pre-registered estimator returned *p* = 0.1094 with the point estimate
-running *against* the hypothesis; every alternative unit and statistic we tried
-agreed on direction, one reaching the design's attainable floor of *p* = 0.0156
-against the claim. Its proposed mechanism was worse than unsupported: all 56
+**The predictability claim was tested once and was not supported.** Not
+*properly* tested: the study that tested it also shipped the treated arm the
+answer key (A17), ran a second model inside 51 of 56 cells (A13), and used a
+pre-registered estimator later shown to be defective (A14). Its estimator
+returned *p* = 0.1094 with the point estimate running *against* the hypothesis;
+every alternative unit and statistic agreed on **direction**, and a scale-free
+statistic reaches *p* = 0.0156 against the claim **in dollars** — but *p* = 0.0625
+in tokens, so "reaches the floor" is unit-dependent, as case 02's own A16
+established when it overturned an earlier "in any unit" claim. No power analysis
+was performed, so this is evidence against a **large** effect, not against any
+effect. Its proposed mechanism was worse than unsupported: all 56
 repairs, both arms, compiled to a **byte-identical program**.
 
 **The prevention claim has never been tested.** Case 02's benchmark could not
@@ -88,9 +105,17 @@ no location or cause hint, and sealed the answer key. Arm A did ordinary
 development plus review; Arm B worked from a pre-built contract. Both stopped at
 the same sealed acceptance gate.
 
-**The contract, built once, cost $21.75**: `Contract.lean`, 1,271 lines, **95
-kernel-proved theorems, zero `sorry`, empty axiom profile**, plus twin, bridge
-and an SMT tier — and **10 findings in the pristine engine** before any seeded
+**The contract, built once, cost $21.75**: `Contract.lean`, 1,271 lines, 95
+theorems, zero `sorry`, empty axiom profile, plus twin, bridge and an SMT tier.
+**Its verification tier must be stated, because this report criticises case 04
+for the same shape (§5.1):** all 95 theorems are discharged by `rfl` — kernel
+evaluation of a closed decidable Boolean on a concrete witness. There is **no
+universally-quantified theorem, no induction and no invariant proof** in the
+contract. The honest label is *kernel-evaluated finite-scope checking* — the Lean
+kernel used as a trustworthy test runner — and "95 machine-checked theorems",
+which earlier drafts of this report used unqualified, invites precisely the
+over-reading it condemns elsewhere. The step-1 package's own summary was
+scrupulous about this; this document was not — and **10 findings in the pristine engine** before any seeded
 fault was touched, two of them HIGH (ROM-sysvar corruption from ply 128; 16-bit
 Zobrist collisions at ~18%).
 
@@ -194,8 +219,10 @@ three independent judges. **PORTGUARD** won at 22.0/25 — nothing seeded, so no
 answer key exists to leak; difficulty generated by a frozen grammar; cross-arm
 byte parity asserted per cell. It scored 5.0/5 on oracle safety.
 
-**It was then superseded by case 04, which scored lower on exactly that axis and
-failed on exactly that axis.** The recurring pattern among the losing designs is
+**It was then replaced in practice by case 04 — which was never scored against
+the oracle-safety axis at all, and failed on it.** Case 04 was not among the five
+designs the judges rated; the comparison an earlier draft asserted does not exist
+in the record. The recurring pattern among the losing designs is
 recorded in the same file and is worth more than the winner: three of five
 shipped the treated arm a runnable twin of the semantics the sealed oracle
 implements — the same leak, one level up.
@@ -276,8 +303,11 @@ the answer:
 The gap is failure rate: the formal arm averaged **3.0 sessions per cell against
 2.2** and **discarded 62% of its tokens against 42%**. Relaunch wipes the
 workspace, so both totals are coherent; the question is whether a method's
-fragility is part of its price. Case 01 already ruled that the analogous cost was
-method-inherent.
+fragility is part of its price. Case 01's A5 ruled an analogous cost method-inherent, but that ruling
+was about **reviewer model routing**; its A8/A9 called *resumption* cost
+"environment-inherent, symmetric across arms". Case 04's discarded tokens mix
+armA-specific OOM kills with a provider outage that hit both arms, so the
+attribution is genuinely contested rather than settled.
 
 **A cost no ledger in four cases could see:** the driver capped the formal arm at
 one concurrent cell because Rocq/MetaRocq extraction peaks at ~32 GB. **The
@@ -287,19 +317,33 @@ token or dollar metric we used could express it.
 
 ### 5.3 An independent convergence
 
-A separate agentic effort — ChessRocq (Acher, February 2026), also Claude/Opus,
-Rocq extracted to OCaml — reports the same shape and says so in its README:
+A separate agentic effort — ChessRocq (Acher, February 2026), Claude/Opus, Rocq
+extracted to OCaml — reports the same shape and says so in its README. (Case 04's
+Rocq was **not** written by a Claude model but by `deepseek-v4-pro`; an earlier
+draft's "also Claude/Opus" was simply wrong, and it contradicted this report's own
+§8.) Its README:
 ~150 declarations and *"zero `Theorem`, `Lemma`, or `Proof` commands … an
 experiment in using a proof assistant as a **programming language**, not (yet) as
 a verification tool."* Its validation is empirical (perft, 200 games against
 Stockfish, ~1500 Elo).
 
-Two independent efforts, different harnesses, different extraction targets, both
-producing complete functional programs and zero properties, is evidence about
-**agentic formalisation itself**: left to its own judgement, the agent expresses
-rather than verifies. If that generalises, FCDD's first beat is where the method
-silently degrades, and property-writing has to be a gate rather than an
-aspiration.
+It is tempting to read two independent efforts, different harnesses, different
+models, different extraction targets, both producing complete functional programs
+and zero properties, as evidence about **agentic formalisation itself**. That
+reading does not survive its own record, and an earlier draft made it anyway.
+Case 04's arm was **told proofs were not required**, so writing none is
+instruction-following, not disposition — §5.1 concedes this and the inference then
+re-inflated it. The sample is two, one of which is three copied submissions rather
+than five, and ChessRocq was selected *because* it resembles the case. Nothing on
+disk here supports its figures; they are quoted from its README and were not
+independently verified.
+
+What survives is an anecdote worth one design decision: **two efforts that were
+permitted to skip properties both skipped them.** If property-writing is optional
+it may not happen, so a study of FCDD should make it a **gate** rather than an
+aspiration — which is exactly the treatment-fidelity gate case 05's second review
+round independently demanded, and the reason to make it is that demand, not this
+pair.
 
 ---
 
@@ -308,9 +352,9 @@ aspiration.
 **Where the unpredictability lives.** A secondary analysis of case 02's 56 runs
 locates it in the ATTACK beat: ordinary review runs 1–3 rounds (3× spread,
 *r* = −0.21 with cost); FCDD's runs 1–**18** (18× spread, *r* = **+0.72**,
-*r*² ≈ 0.52). Runs with ≥6 rounds cost $48.33 against $28.42 for runs with ≤2 —
-and since all 56 produced a byte-identical binary, **no extra round changed any
-artefact**. The beat stops on *convergence*, which is unbounded and
+*r*² ≈ 0.52). Among **Arm B's 28 runs**, those with ≥6 lexical round-mentions cost
+$48.33 (n = 9) against $28.42 for those with ≤2 (n = 12) — and since all 56 runs
+produced a byte-identical binary, **no extra round changed any artefact**. The beat stops on *convergence*, which is unbounded and
 judgement-based, where it could stop on *coverage*, which is bounded and
 priceable in advance. This is the programme's one actionable finding.
 
@@ -337,10 +381,18 @@ they are the same failure.
 | 2 | case 04 (F1) | The whole lab tree, via symlinks cells wrote themselves | Manifest guard over the arm workspace | Subtree-scoped and symlink-blind |
 | 3 | case 04 (F2) | The emulator, run directly | Query cap in the client | Enforced where the client counted, not where the engine ran |
 | 4 | case 04 (A-2026-08-26b) | Sibling cells' sources and binaries | — | Nobody modelled cell-to-cell as a channel |
-| 5 | **this repository** (A11/A19) | The engine tape and every fault location, deposited publicly | `.gitignore` path rules | The contract package wrote a second copy under an uncovered path |
+| 5 | **this repository** (A11/A19) | The engine tape and every fault location, deposited (this repo is private today; the live exposure is the public upstream) | `.gitignore` path rules | The contract package wrote a second copy under an uncovered path |
 
-**Every control enumerated paths; the hazard was always content.** Four of the
-five were aimed at runs while one of them was in the deposit. The fifth was found
+**Three of the five are one flaw: a control that enumerated paths against a
+hazard that was content** (faces 1, 2 and 5). The other two are different failures
+and an earlier draft flattened them into the slogan. Face 3 is an
+**enforcement-point** error — the cap was real and counted honestly, in the wrong
+place. Face 4 had **no control at all**: its row's control column is empty because
+nobody modelled cell-to-cell as a channel, which is a threat-model omission rather
+than a control failure. The common thread that does hold across all five is
+weaker and still worth stating: **each control was aimed where the last failure
+happened**, and four of the five were aimed at runs while one of them was in the
+deposit. The fifth was found
 only when someone finally hashed the tracked files against the sealed manifest —
 the check the constraint list had specified for two cases without anyone pointing
 it at the repository.
@@ -356,29 +408,51 @@ it at the repository.
    Case 02's arms both scored 100%; a method designed to prevent failures cannot
    be evaluated where none occur. Case 04 made failures possible and lost its
    controls.
-3. **Model heterogeneity.** Case 01 and 02 ran Opus-family models; case 04 ran
-   deepseek. Case 02 additionally had a second model executing inside 51 of 56
-   cells (A13). No cross-case ratio is licensed.
+3. **Model heterogeneity, in every case.** Case 04 ran deepseek. Case 02 had a
+   second model executing inside 51 of 56 cells at different rates per arm (A13).
+   **Case 01 was not single-model either**: Arm B's attack reviewers routed to
+   `claude-fable-5` as method-inherent, at roughly twice the Opus-class price, and
+   its graders ran on fable too — a bias running *against* the treated arm on
+   cost, disclosed in A5 and omitted by an earlier draft of this report in a way
+   that flattered the pooled cost claim. **No cross-case ratio is licensed.**
 4. **The treated arm held an advantage twice** — the pristine binary in case 02,
    the readable engine in case 04. Both asymmetries run toward FCDD, so the
    negative results are conservative and the positive ones are worthless.
 5. **Grading was never treatment-blind.** A Lean file cannot be disguised as a
-   pytest script; case 02's manipulation check had graders naming the formal arm
-   correctly 3 of 4 times when they committed.
+   pytest script; case 02's blinding probe had **seven agents separate from the graders**
+   naming the formal arm correctly 3 of 4 times when they committed — and case 02
+   declines to convert that into a finding. An earlier draft attributed it to the
+   graders and hardened it.
 6. **The authors are the instrument.** All arms, reviewers, graders and analysts
    were LLM agents, orchestrated by one, and the engine under test was written by
    the same model family. Symmetric, but not neutral.
 7. **The programme's own artefact is not fully checkable.** Per-cell workspaces
    sit outside the repository; several claims depend on them.
+8. **Our discretionary choices were not neutral, and we did not choose to say so
+   until asked.** An external audit of case 01 found **eight discretionary
+   methodological choices, seven of which favoured the authors' own method**. Case
+   01 also carries an interruption asymmetry — 6 of 7 treated cells resumed after
+   infrastructure death against 2 of 7 controls — and its Appendix B logs
+   **17 claims withdrawn or corrected across drafts**, including a published
+   regression that could not be reconstructed and a figure that was simply
+   invented. A programme-level report that omitted all of this while cataloguing
+   the method's failures would be performing integrity rather than practising it;
+   an earlier draft of this document did omit it.
 
 ---
 
 ## 9. Conclusions
 
 1. **FCDD costs 2–5× more than ordinary development-plus-review** on repair
-   tasks of this kind, on 14 of 14 matched defects across two studies, and its
-   upfront contract never amortised because it was cheaper on none of them. This
-   is the only claim here we would defend without qualification.
+   tasks of this kind — dearer on **7 of 7 defects, measured twice** (the same
+   seven, reused; not fourteen independent defects) — and its upfront contract
+   never amortised because it was cheaper on none of them. This is the
+   programme's most solid claim, and it is not unqualified: case 01's 7/7 rests
+   on one imputation (6/7 without it), case 02's *p* = 0.0156 fails Bonferroni
+   across its four outcomes, roughly 40% of case 01's arm gap is attributable to
+   the treated arm invoking 1.8× as many reviewers under an asymmetric review
+   budget, and its reviewers were priced at ~2× the control's. **The direction is
+   what survives; the multiplier is apparatus-dependent.**
 2. **The predictability claim, which is the reason the method exists, was tested
    once under pre-registration and was not supported** — with the point estimate
    against it in every unit and statistic examined. It is not "we could not
@@ -392,12 +466,22 @@ it at the repository.
    02 (+0.21, not significant), so the two disagree and neither is decisive; and
    better on test quality and evidence — which is close to a restatement of what
    the treatment is rather than a finding about what it achieves.
-5. **On the extraction variant, almost nothing transfers.** It is a different
-   method — proofs optional, twin generated, bridge moot — with a different cost
-   profile (0.88–1.33× rather than 2–5×), a different audit surface (a small
-   readable spec plus an unreadable 12×-expanded implementation), a hard ~32 GB
+5. **On the extraction variant, almost nothing transfers — and what we know
+   comes from a voided study.** Every figure in this conclusion is from case 04,
+   whose data are **inadmissible as evidence about either method** (A-2026-08-26);
+   they describe the artefacts, they do not compare the methods, and §8 forbids
+   the cross-case ratio an earlier draft drew here. It is a different method —
+   proofs optional, twin generated, bridge moot — whose *observed* cost in that
+   voided study was 0.88–1.33× rather than case 01/02's 2–5×, though the two
+   numbers are not comparable (different model, different task), a different
+   audit surface (a small
+   readable spec plus an unreadable implementation **~96× its size** — 915 lines of
+   `Chess.v` against 87,758 lines of `extracted.rs`; an earlier draft's "12×" came
+   from the 87-line pilot spike, a different artefact), a hard ~32 GB
    memory ceiling, and, as executed, **no verification content at all**.
-6. **Measurement discipline dominated every substantive question.** Each of the
+6. **Measurement discipline dominated every substantive question.** The
+   accounting rule that moves an answer from 0.88× to 1.33× is a finding about
+   *metrics*, and survives its study's voiding; the ratio it moves does not. Each of the
    programme's headline numbers moved, sometimes reversed, under a change of
    estimator, accounting rule, or unit that we chose without noticing we were
    choosing. Report the rule before the result.
@@ -436,6 +520,42 @@ no one's practice while a positive result would change ours. The cheaper move
 first is the ATTACK-budget experiment — it tests a change the programme derived
 from its own data, needs no hidden oracle, and would be the first improvement to
 the method rather than another price tag.
+
+---
+
+## 11. Adversarial review of this report
+
+Reviewed against the deposited sources with a charter to check every
+quantitative claim, attack the conclusions for overclaim, hunt self-serving
+omissions, and test whether voided data was being laundered. **Five blocking
+findings, six major, six minor. All accepted.**
+
+| # | Finding | Change |
+|---|---|---|
+| **B1** | "14 of 14 matched defects" double-counts: case 02 reused case 01's *same seven* defects. "Without qualification" contradicted four disclosed confounds and the report's own imputation footnote | Abstract and conclusion 1 rewritten: seven defects measured twice; qualifications restored; **the direction survives, the multiplier is apparatus-dependent** |
+| **B2** | Inadmissible case-04 numbers migrated unlabelled into conclusion 5, against this report's own stated rule *and* its §8 threat forbidding cross-case ratios | Every §5-derived figure labelled in-sentence; conclusion 5 recast as observations from a voided study |
+| **B3** | The contract's "95 kernel-proved theorems" was left untiered while §5.1 attacks case 04's Rocq for the identical shape — the method's artefact flattered, the voided study's deflated | §2 now states the tier: all 95 discharged by `rfl`, no quantified theorem, no induction — *kernel-evaluated finite-scope checking* |
+| **B4** | "Tested once, **properly**" is false by the sources: A17, A13 and A14 each disqualify it; and the large-effect bound and the unit-dependence of *p* = 0.0156 were dropped | "Properly" deleted; both caveats restored |
+| **B5** | The ChessRocq inference does not survive its record: zero properties was *compliance* (proofs were not required), n = 2, and "also Claude/Opus" was factually wrong — case 04 ran deepseek | Downgraded to an anecdote supporting one design decision; model attribution corrected |
+| M1 | Case 04 was never scored against case 03's oracle-safety axis; the comparison asserted did not exist | Rewritten |
+| M2 | The "12×" expansion came from the pilot spike; the real cells are **~96×** (915 → 87,758 lines) | Corrected with provenance |
+| M3 | The breach counts were taken from a summary its own evidence table contradicts (9 source-readers, 11 emulator-runners, not 7 and 6) | Table's counts reported; the discrepancy named |
+| M4 | "One flaw, five faces" flattens two genuinely different failures — an enforcement-point error, and one with no control at all | Taxonomy narrowed to three, the other two named for what they are |
+| M5 | Case 01 was not single-model either: fable-routed reviewers at ~2× price, fable graders | §8 threat 3 corrected |
+| M6 | Omitted from the record: an external audit's finding of **eight discretionary choices, seven favouring the authors' method**; a 6/7-vs-2/7 interruption asymmetry; 17 withdrawn claims including an invented figure | Added as threat 8 |
+| m1–m6 | Blinding probes misattributed to graders; the ATTACK cost contrast is Arm B only; "four times replicated"; repo privacy status; the resumption-cost attribution is contested; the abstract's cheapness claim is imputation-contingent | All applied |
+
+**The review also corrected a source rather than this report.** It found that
+case 04's REPORT and descriptive read both state "μ₁ = 0 for 12 of 13 runs" where
+`runs.json` gives **10** — this report's §5.1 was right and its sources were
+wrong. Both case-04 files are corrected in place.
+
+**What the review could not fix.** Its closing judgement is the one this report
+should end on rather than bury: the conclusion the programme stakes everything on
+rests on seven recycled single-byte defects in one Z80 program, measured by the
+method's own authors, with LLM agents as both instrument and subject. The text
+can be made honest about that; no revision makes the evidence base wider than it
+is.
 
 ---
 
