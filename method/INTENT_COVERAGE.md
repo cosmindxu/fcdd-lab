@@ -63,11 +63,18 @@ dependency.
 | 1 | **Provenance.** Every clause P1…Pn carries a tag naming its source: a stated requirement, a real incident (law 6), or a named generator (e.g. Beat 0.5's mission products) | a clause with no stated source | that the source was the right source |
 | 2 | **Bidirectional traceability.** Every stated requirement maps to ≥ 1 clause; every clause maps to ≥ 1 requirement. Orphans in either direction are named residuals, not silence | an uncovered requirement; an unmotivated clause | a requirement nobody wrote down |
 | 3 | **Declared completeness scope.** "These hazards, by this technique, and here is what we did not consider" — a declaration, never a proof | that the scope was never written down | that the scope is adequate |
-| 4 | **Pinning, measured by spec-side mutation.** Mutate the *clause set*, not the implementation: a mutant that no clause rejects is a coverage gap | a property set that constrains shape without pinning value | common-mode error between requirement and clause |
+| 4 | **Pinning, measured by clause-naming mutation.** Mutate the *twin*; require a **named clause** to reject each mutant. The mutation lands on the implementation, the inference is about P1…Pn: a mutant no clause rejects is a coverage gap, not a code bug | a property set that constrains shape without pinning value | common-mode error between requirement and clause |
 
 Obligations 1, 2 and 4 are programs. Obligation 3 is explicitly a declaration,
 and **saying so is the point** — it is the same move the method already makes
 when it says the bridge *samples* agreement and is not a refinement proof.
+
+> **Correction, same day.** An earlier wording of obligation 4 said "mutate the
+> clause set, not the implementation". That misdescribes the mechanism its own
+> evidence uses: `twin.py` carries the six mutation hooks and `StaleQuote.lean`
+> carries none. The mutation is applied to the **twin**; what makes it a
+> *coverage* test rather than a conformance test is the requirement that a
+> **named clause** reject it.
 
 ## 5. The worked precedent: obligation 4 has already caught a real gap
 

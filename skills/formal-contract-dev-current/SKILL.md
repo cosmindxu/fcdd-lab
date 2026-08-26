@@ -490,8 +490,13 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
     (c) **a declared completeness scope** — "these hazards, by this technique, and
     here is what we did not consider": a declaration, never a proof, and labelled
     as one (law 3);
-    (d) **pinning, measured by SPEC-side mutation** — mutate the clause set, not
-    the implementation; a mutant no clause rejects is a coverage gap.
+    (d) **pinning, measured by mutation that names its clause** — mutate the TWIN
+    and require a *named clause* to reject each mutant. The mutation is applied to
+    the implementation; **the inference is about the clause set**: a mutant that no
+    clause rejects is not an implementation bug, it is a COVERAGE GAP in P1…Pn.
+    (A complementary check, mutating the spec's own definitions and asking whether
+    the theorems still prove, is weaker than it looks — a definition that IS its
+    own specification is maximally mutation-sensitive while proving nothing.)
     (d) is the one that earns its place by execution: in `pipeline_proto` the
     mutation `M4_boundary` survived the reachability witnesses, the theorem
     mirrors and a 1,200-case exhaustive sweep, because P1–P5 constrained the
