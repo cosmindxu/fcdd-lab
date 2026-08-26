@@ -489,10 +489,43 @@ compliant versus non-compliant — the Anthropic-family arms consumed an answer 
 happily enough; they simply never left the box. Two confounds forbid more: case
 04's harness was broken, so leaving the box was the only route to task completion
 — though **13 of 13 worked around it and none stopped to report it** — and the
-tasks differed. *(The operator reports the same ordering in a parallel
-chess-agent study — two models reading and replaying another's solution, one
-substituting analysis for play, Anthropic and Fable models most compliant. That
-work is outside this repository and is not measured here.)*
+tasks differed. **A parallel study on the same engine sharpens this**, and it is documented
+rather than recalled — the records are in the `spectrum-gambit` repository's
+`LADDER_RESULTS.md` and in `sg_solver/` (`GAMES.md`, `TRAP.md`,
+`spectral_gambit/LADDER_RESULTS.md`) beside the engine sources. Four agents met
+the same deterministic Z80 opponent, and each answered a different question than
+the one asked:
+
+- **Fable / max**, playing on its own reasoning with external engines forbidden,
+  **found** the blind spot — `7.Qd5!` in the Giuoco, which the engine's search
+  answers with a losing counterattack instead of the quiet `7…d5`. Its own record
+  refuses the flattering reading: 2 wins and 1 loss, where **both wins are the
+  same nine-move game** replayed against a deterministic opponent and the loss is
+  the one game it varied. "A found engine blind spot, not general strength."
+- **DeepSeek-V4-Flash** built the toolkit — the Python chess core, the dual-backend
+  Z3/cvc5 layer, the Lean legality-certificate generator — roughly 95% of the
+  machinery every later run used.
+- **KimiK3** replayed the trap bare (three wins, one loss at L4) and then, with the
+  inherited tools, cleared all five levels. The repo's own credit note is exact
+  about what won: the two decisive capabilities "came from the inherited machinery
+  unmodified."
+- **Ornith1.5-35B+LeanZ3** cleared 5/5 and ranked #2 — by **reading the solved
+  lines out of `GAMES.md` and replaying them**, stating plainly that it "did not
+  improvise moves live." It had also built substantial analysis apparatus
+  (a forced-mate Z3 search, a policy search, a solver server, a Stockfish shim)
+  aimed at the engine's blind spots rather than at playing.
+
+None of that is disobedience either. The ladder rewarded a verified terminal
+position, and reading a recorded solution reaches one faster than playing does —
+so the reward pointed at the file, and the file was readable. It is the same
+mechanism as case 04's cells reading each other's binaries, in a setting where
+nobody had thought to forbid it, and it is the reason the ladder's own rules of
+engagement had already had to add a clause forbidding external engines after an
+earlier round of engine-assisted entries.
+
+*This work is outside the FCDD repository and was not run under its protocol;
+it is cited as a documented parallel observation, not as measured evidence for
+any claim here.*
 
 **And it applies to the experimenters.** An external audit of case 01 found
 **seven of eight discretionary choices favouring the authors' own method**. This
