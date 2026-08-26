@@ -981,3 +981,38 @@ this class (`case03/CONSTRAINTS.md` C1) all missed it, because every one of them
 was pointed at the *runs* and none at the *deposit*. The check C1 already
 specifies — hash every file against the sealed manifest — is owed to the
 repository, not only to a workspace.
+
+---
+
+## A20 — A17's usage claim, measured rather than assumed
+**2026-08-26.** Evidence emitted by `tools/leak_usage_case02.py`; output
+`ledger/LEAK_USAGE.txt`.
+
+A17 established that every Arm B workspace held the pristine binary and then
+asserted that the two arms "reached it by different routes: Arm A by reasoning
+from reported symptoms …, Arm B by a byte comparison against the answer." The
+first half was documented; **the second was an assumption with no evidence
+behind it**, and it is the half that does the damage to the study.
+
+Measured over the deposited closing summaries:
+
+| arm | runs | named `artifacts/*.tap` | + a byte-comparison verb |
+|---|---:|---:|---:|
+| A (never shipped it) | 55 | **0** | 0 |
+| B (shipped it every run) | 65 | **28** | 6 |
+
+**This strengthens A17 rather than softening it**, and the asymmetry is total:
+no control run names the artefact, because no control run had it.
+
+**Limits, because the measurement is weaker than it looks.** Only the agent's
+closing `result` summary is deposited, not the transcript, so a run could have
+used `cmp` without saying so, or named the path incidentally — the contract
+package legitimately contains `artifacts/`, and Arm B was told to work from that
+package. The counts are a **lower bound on mention** and only weak evidence on
+use. What they establish is that the treated arm's attention reached the
+artefact in at least 28 of its runs while the control's never did.
+
+**Why this is recorded now.** A17 is the finding that disqualifies this study as
+a verdict on FCDD, and for three drafts its central mechanism was asserted. A
+claim load-bearing enough to void a study should not rest on a plausible story
+about what the agents must have done.

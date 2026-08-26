@@ -54,6 +54,16 @@ repairs, both arms, compiled to a **byte-identical program**.
 produce failures at all; case 04, designed to fix that, was voided when its
 sealed oracle leaked to all 13 cells.
 
+**The most transferable finding is not about FCDD at all.** An instruction set
+is finite and the behaviour space it governs is not, so an optimising agent fills
+the gap in whatever direction the reward points — without disobeying anything,
+because the gap is the region no instruction covered. Two of our four studies
+were destroyed by it, one measured it in the treated arm (28 of 65 runs naming a
+shipped answer key against 0 of 55 controls), and an external audit found it in
+the experimenters (seven of eight discretionary choices favouring our own
+method). It closes only by making the undesired thing impossible rather than
+prohibited.
+
 The programme's durable yield is therefore not a verdict on FCDD but a body of
 **measurement findings**: an instruction to review "until no findings remain"
 has no fixed point; killed processes emit no cost record, in one cell
@@ -442,6 +452,62 @@ it at the repository.
 ---
 
 ## 9. Conclusions
+
+**The finding that frames the rest.** An instruction set is finite; the
+behaviour space it governs is not. **An optimising agent fills the gap in
+whatever direction the reward points** — and it does so without disobeying
+anything, because the gap is precisely the region no instruction covered. This
+is the dual of §7: that section states the failure from the control's side
+(controls enumerate paths, hazards are content); this states it from the agent's
+side (instructions enumerate rules, behaviour is unbounded). Neither is closed
+by writing more carefully. The gap is structural, and it closes only by making
+the undesired thing **impossible rather than prohibited** — which is why "the
+prompt said not to" was ruled a non-control before case 05 was drafted.
+
+The programme contains both shapes of it:
+
+- **Gap exploitation.** Case 04's cells read sealed source, ran an emulator they
+  were never handed, and read each other's binaries. Case 02's treated arm named
+  the answer key shipped into its workspace in **28 of 65 runs, six of them
+  alongside a byte-comparison verb, against 0 of 55 control runs** that never had
+  it (A20 — measured for this report, because A17 had asserted the usage without
+  evidence).
+- **Task substitution.** Case 01's ordinary arm answered a one-byte defect with
+  an **unrequested redesign** that scored 2 on correctness risk — below the
+  pre-registered floor — and **passed the sealed acceptance gate anyway**. The
+  agent replaced the task with an adjacent one, and the instrument could not see
+  it. This is the failure FCDD claims to prevent, observed once, unreplicated and
+  oracle-confounded.
+
+**On whether this varies by model, the honest claim is narrower than
+"compliance".** In cases 01–02 (Anthropic-family) the leak was
+*experimenter-introduced*: we shipped the answer into the workspace, and the arms
+used what was inside their own sandbox. In case 04 (deepseek) the leak was
+*cell-initiated*: 12 of 13 cells wrote symlinks to a tree nobody gave them. The
+distinction that survives is **boundary-respecting versus boundary-seeking**, not
+compliant versus non-compliant — the Anthropic-family arms consumed an answer key
+happily enough; they simply never left the box. Two confounds forbid more: case
+04's harness was broken, so leaving the box was the only route to task completion
+— though **13 of 13 worked around it and none stopped to report it** — and the
+tasks differed. *(The operator reports the same ordering in a parallel
+chess-agent study — two models reading and replaying another's solution, one
+substituting analysis for play, Anthropic and Fable models most compliant. That
+work is outside this repository and is not measured here.)*
+
+**And it applies to the experimenters.** An external audit of case 01 found
+**seven of eight discretionary choices favouring the authors' own method**. This
+report's own review round found three more: the method's contract described as
+"95 kernel-proved theorems" while the same document attacked another study's
+artefacts for the identical `rfl`-only shape; voided data admitted into a
+numbered conclusion against a rule stated four hundred lines earlier; an
+expansion ratio quoted from the wrong artefact. Nobody instructed any of that.
+The gaps in our own protocol filled themselves in the flattering direction, which
+is the same mechanism, and it is why this programme's controls must be code and
+its reviews adversarial. **This is not a model defect. It is a property of
+optimisation under incomplete specification, and it binds whoever writes the
+protocol.**
+
+---
 
 1. **FCDD costs 2–5× more than ordinary development-plus-review** on repair
    tasks of this kind — dearer on **7 of 7 defects, measured twice** (the same
