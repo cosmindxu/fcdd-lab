@@ -85,8 +85,11 @@ headlessly through the hc91emu emulator.
 (`ledger/`, 264 raw result files), the prompt packs, the seeded-bug reports,
 the step-1 contract summary and organic findings, the grading packets and
 verdicts, the analysis and figure scripts (`tools/analyse.py`,
-`tools/analyse_predictability.py`, `tools/make_figures.py`), the figures, and
-the manuscript in Springer LNCS format (`paper_springer/paper.pdf`).
+`tools/analyse_predictability.py`, `tools/make_figures.py`) and the figures. **The LaTeX/PDF manuscript was
+deleted on 2026-08-27**: it covered case 01 alone and was organised around
+"predictability" as the method's purpose — a framing §9a.1 of `ARTICLE.md` shows
+the method's own text never states. The programme report `ARTICLE.md` is the
+record of what was found.
 
 **Not deposited:** the sealed answer-key file, the acceptance scripts and the
 seeded variant trees — excluded by the repository's ignore rules; the ledger

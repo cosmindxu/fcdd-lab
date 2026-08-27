@@ -271,8 +271,8 @@ implemented strategies as a formal contract per the FCDD skill's Beat 1
 
 - **2026-08-26 A11 (disclosure defect found in a pre-publication audit of the
   repository itself):** the case's own deposit **contains the subject engine**,
-  contradicting the data-availability statement published in `paper_springer/`
-  and in the manuscript. Audit findings, each verified by hash or by reading the
+  contradicting the data-availability statement then published in the LaTeX
+  manuscript (deleted 2026-08-27) and in the working manuscript. Audit findings, each verified by hash or by reading the
   tracked file:
   1. `step1_contract/artifacts/chess.tap` (tracked) is **byte-identical** to the
      sealed `sealed/seedkit/pristine/chess.tap` — sha256
