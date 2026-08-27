@@ -100,3 +100,35 @@ Not another 56-run study. Two steps:
    against the 4 existing unbounded runs of the same defect. Compare the spread,
    not the mean. Roughly $180 — an eighth of case02 — and it measures the
    quantity the change is supposed to move.
+
+---
+
+## Rollout note (2026-08-27): the law shipped, its dependents did not
+
+Recorded because it is a finding about the method's change process, and it was
+found only when case 07 tried to use the bounded/unbounded distinction as an
+experimental treatment — i.e. by a *study*, not by review of the change.
+
+Law 12 replaced Beat 4's stopping rule. It was applied at its definition sites
+(the law itself, #15.5, the beat title, the frontmatter) and **not propagated to
+its dependents**, which continued to teach the rule it replaced:
+
+| Site | What it still said |
+|---|---|
+| `references/lenses.md` — the pack every reviewer loads at Beat 4 | *"stop when a round yields only residuals you NAME in writing"* — no budget language anywhere in the file |
+| `SKILL.md` Beat 4 **#16**, thirty lines below #15.5 | *"the criterion is: within an unchanged surface … a round yields only accepted residuals"* |
+| `SKILL.md` §4 laws header, law 13's two cross-references | narrate law 12's evidence and forbid-clause without the reader reaching law 12 |
+
+A cell loading the full pack therefore received **both** stopping rules and could
+choose. For case 07 that was fatal to treatment integrity — the BUDGET arm's own
+prompt pack licensed iterating past its cap — and it would have been invisible in
+the results.
+
+**The general lesson, in the method's own idiom:** a law's rollout is not
+complete at its definition site. This is the same shape as the defect class the
+lab keeps finding in its own studies (a fix applied where it was written, not
+where it is used). The check is mechanical and belongs in the change process:
+**after changing a law, diff the whole skill and its references for the rule it
+replaced, and disposition every hit.** Grep alone is insufficient — the pattern
+`law 12` misses *"laws 3 and 12"* and *"12 was bought by measurement"*, both real
+sites here; diffing against the previous version is exhaustive by construction.
