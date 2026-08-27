@@ -57,7 +57,7 @@
  {
   "unit": "scripts/ops_monitor.py",
   "arm": "BUDGET",
-  "confirmed": true,
+  "confirmed": false,
   "severity": "blocking",
   "match_group": "scripts/ops_monitor.py#0",
   "absorbed_by_residual": true,

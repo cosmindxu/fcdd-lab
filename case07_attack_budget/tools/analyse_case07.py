@@ -40,26 +40,41 @@ def main():
     def eligible(f):
         return f["confirmed"] and f["in_surface"] and not f["rediscovery"]
 
+
     conv_block = defaultdict(set)   # unit -> match_groups
     bud_any = defaultdict(set)
     bud_absorbed = defaultdict(set)
+    disputed_units = {f["unit"] for f in adj if f.get("disputed")}
+    # round 3 B6: a NAMED residual is unconfirmed by definition — law 12 produces
+    # exactly these — so it is read from its own channel, not through eligible().
     for f in adj:
+        if (f["arm"] == "BUDGET" and f.get("absorbed_by_residual")
+                and f["in_surface"] and not f["rediscovery"]):
+            bud_absorbed[f["unit"]].add(f["match_group"])
+    for f in adj:
+        # round 3 B5: a null match_group cannot be reasoned about — two distinct
+        # findings would collapse into one, and cross-arm nulls would cancel.
+        if f["match_group"] is None:
+            sys.exit("REFUSED: finding with null match_group in %s — adjudicator must group it"
+                     % f["unit"])
         if not eligible(f):
             continue
         g = f["match_group"]
         if f["arm"] == "CONV" and f["severity"] == "blocking":
             conv_block[f["unit"]].add(g)
-        if f["arm"] == "BUDGET":
+        # round 3 B5: the subtrahend must be BLOCKING-only. A BUDGET finding graded
+        # non-blocking or unreachable previously cancelled a CONV blocking finding.
+        if f["arm"] == "BUDGET" and f["severity"] == "blocking":
             bud_any[f["unit"]].add(g)
-            if f.get("absorbed_by_residual"):
-                bud_absorbed[f["unit"]].add(g)
 
     out.append("\nPRIMARY — CONV confirmed-blocking, in-surface, missed by BUDGET")
     out.append(f"{'unit':<40}{'CONV blk':>9}{'missed':>8}{'found-unconf':>14}  status")
     out.append("-" * 82)
     total_b = total_missed = 0
     decidable_units = 0
-    for unit in sorted(set(list(conv_block) + list(bud_any))):
+    # round 3 M5: only a unit with >=1 CONV confirmed blocking finding can exhibit
+    # a miss; including others inflates n and falsely tightens the bound.
+    for unit in sorted(conv_block):
         if unit in censored_units:
             out.append(f"{unit:<40}{'—':>9}{'—':>8}{'—':>14}  NOT DECIDABLE (CONV censored)")
             continue
@@ -67,19 +82,33 @@ def main():
         b = conv_block[unit]
         missed = b - bud_any[unit] - bud_absorbed[unit]
         unconf = b & bud_absorbed[unit]
+        if unit in disputed_units:      # B5: never silently merged
+            out.append(f"{unit:<40}{len(b):>9}{'—':>8}{'—':>14}  NOT DECIDABLE (disputed match)")
+            decidable_units -= 1
+            continue
         total_b += len(b); total_missed += len(missed)
-        status = "SAFE" if not missed else "MISS — H1 FALSIFIED on this unit"
+        status = ("MISS — H1 FALSIFIED on this unit" if missed
+                  else "SAFE (rests on residual absorption)" if unconf else "SAFE")
         out.append(f"{unit:<40}{len(b):>9}{len(missed):>8}{len(unconf):>14}  {status}")
 
     out.append(f"\n  totals: b = {total_b} confirmed blocking (CONV), missed = {total_missed}, "
                f"over {decidable_units} decidable units")
-    if total_missed:
+    # round 3 B4: a verdict from zero evidence is a vacuous SAFE — the wrong fail
+    # direction under law 1. The §7 gate lives here, not only in prose.
+    if total_b < 1 or decidable_units < 1:
+        out.append("  VERDICT: NOT DECIDABLE — NO VERDICT. The corpus produced no confirmed")
+        out.append("           blocking finding in CONV (or no decidable unit), so H1 was")
+        out.append("           never put at risk. This is a corpus result, not a safety result.")
+    elif total_missed:
         out.append("  VERDICT: the two-round default MISSED a confirmed blocking finding — H1 falsified.")
     else:
         # rule of three over UNITS (the clustering unit), not findings — round 2 B4
-        bound = 3.0 / decidable_units if decidable_units else float("nan")
+        bound = min(1.0, 3.0 / decidable_units)
         out.append(f"  VERDICT: no miss. Rule-of-three over units: ≤ {bound:.0%} of units may harbour "
                    f"a miss (95%), n = {decidable_units} units.")
+        if bound >= 0.20:
+            out.append("  ** the bound is no tighter than the 20% ceiling round 2 rejected as an")
+            out.append("     unargued safety number — the QUANTITATIVE claim is NOT made. **")
         out.append("  NOTE: the bound is per UNIT because misses cluster by unit and round-depth;")
         out.append("        a per-finding bound would assume an independence the structure violates.")
 
@@ -103,10 +132,14 @@ def main():
         if rd:
             out.append(f"  rounds {arm:<7} min {min(rd)}  median {st.median(rd)}  max {max(rd)}  "
                        f"spread {max(rd)/max(min(rd),1):.0f}x")
-    bud_rounds = per["BUDGET"]["rounds"]
-    if bud_rounds and max(bud_rounds) > 2:
-        out.append("  ** DELIVERED-TREATMENT CHECK FAILED: a BUDGET cell exceeded its declared budget **")
-    elif bud_rounds:
+    over = [r for r in runs if r["arm"] == "BUDGET" and r["rounds"] > r.get("declared_budget", 2)]
+    under = [r for r in runs if r["arm"] == "BUDGET" and r["rounds"] < 1]
+    if not [r for r in runs if r["arm"] == "BUDGET"]:
+        out.append("  ** no BUDGET runs — delivered-treatment check cannot be computed **")
+    elif over or under:
+        out.append(f"  ** DELIVERED-TREATMENT CHECK FAILED: {len(over)} cell(s) over their declared "
+                   f"budget, {len(under)} under the mandatory pass **")
+    else:
         out.append("  delivered-treatment check: every BUDGET cell within its declared budget — OK")
 
     disputed = [f for f in adj if f.get("disputed")]

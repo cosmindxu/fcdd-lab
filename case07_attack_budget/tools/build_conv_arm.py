@@ -45,8 +45,13 @@ EDITS = [
      "### Beat 4 — ATTACK: adversarial review to convergence"),
     ("laws header: drop law-12 evidence clause",
      "; **12 was bought by measurement, not incident** — case02, 56 runs", ""),
-    ("law 13 ref: laws 3 and 12 -> law 3",
-     "which laws 3 and 12 both forbid", "which law 3 forbids"),
+    # round 3 M1: substituting "which law 3 forbids" was FALSE — law 3 is the
+    # falsifiability-tiering rule and forbids nothing of the kind. A false,
+    # arm-asymmetric sentence telling CONV its own stopping rule is illegitimate
+    # biases CONV toward fewer rounds -> fewer findings -> H1 looks safer.
+    # Delete the clause instead of substituting a citation.
+    ("law 13 ref: drop the law-12 forbid-clause rather than mis-cite law 3",
+     ", which laws 3 and 12 both forbid", ""),
     ("#16 back-reference to the removed #15.5 block",
      "**re-review the fixes** (a focused pass,\n    inside the declared budget of #15.5).",
      "**re-review the fixes** (a focused pass)."),

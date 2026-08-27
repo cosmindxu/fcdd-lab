@@ -1,4 +1,4 @@
-# CASE 07 — is the ATTACK budget safe? (pre-registration, DRAFT r4)
+# CASE 07 — is the ATTACK budget safe? (pre-registration, DRAFT r5)
 
 **r3 applies review round 2** (§9b): five blocking, six major — the eighth
 consecutive round in this lab whose blockers sat inside the previous round's
@@ -256,6 +256,61 @@ filters them to zero, so they cost review budget and cannot corrupt the primary.
 And C5's dry-run is against **fixtures, not a real pilot cell** — the real
 dry-run is still owed.
 
-Owed before freeze: **round 3 on these artefacts** (every one written under
+## Round 3 (2026-08-27, Opus) — eight blocking, and what it changed
+
+The artefacts were reviewed by execution. **The CONV delta survived** — the
+reviewer diffed it against both skills and found the frontmatter and #16
+criterion restored verbatim, no budget token surviving, `lenses_CONV.md`
+byte-identical to frozen, and the #16.5 KEEP ruling correct. Everything
+downstream of the delta failed, all in the unsafe direction:
+
+- **The analysis script returned a safety verdict from zero evidence** — and from
+  an entirely censored study. Demonstrated by execution. That is a vacuous SAFE
+  from degraded input: the wrong fail direction under the skill's own law 1, in
+  the script whose §6 censoring rule claims to have fixed exactly that. Now: no
+  verdict without ≥ 1 CONV confirmed blocking finding and ≥ 1 decidable unit.
+- **The match arithmetic hid misses three ways** — a BUDGET *non-blocking* or
+  *unreachable* finding cancelled a CONV blocking one; null match-groups collapsed
+  and cross-cancelled; a *disputed* finding cancelled silently. Every one pointed
+  at "safer". Now: blocking-only subtrahend, null groups refused at load, disputed
+  units NOT DECIDABLE.
+- **The residual channel was inverted.** A *named, unconfirmed* residual — which
+  is exactly what law 12 produces — scored as a MISS, because `eligible()`
+  required `confirmed` before the BUDGET branch. Residuals now read from their own
+  channel, and a unit whose safety rests on absorption no longer prints plain
+  `SAFE`.
+- **The scrub removed almost nothing.** `docs/REVIEW_*.md` matches **zero files**;
+  the real corpus is 64 review/audit/incident documents in `planning/`, and
+  `live_guard` alone is named in **131** files. The live account id survives in
+  **51 files** after every declared removal, and no scrub script exists. Both
+  arms would have read a dated defect list for the units under study.
+- **The treatment could not be sealed** — `arms/` was gitignored by a rule
+  inherited from earlier cases' worktrees, so `SKILL_CONV.md` had no tracked
+  version and nothing to diff against. Un-ignored.
+- **I wrote a false sentence into CONV.** Neutralising law 13's law-12 reference
+  as *"which law 3 forbids"* mis-cites law 3 (falsifiability tiering), tells a
+  CONV cell its own stopping rule is illegitimate, and biases CONV toward fewer
+  rounds — fewer findings — H1 looking safer. Replaced by deletion.
+- **Round 2's B2 was one-third repaired and reported as fixed.** `lenses.md` was
+  corrected; `SKILL.md:12` ("until findings converge") and `case_study.md:70`
+  ("per-surface-convergence law") were not. Both are live-method defects and are
+  fixed now — the **fourth and fifth** sites of law 12's incomplete rollout.
+
+### The two findings that do not yield to more code
+
+1. **The achievable bound is 20%.** With 15 units, rule-of-three gives 3/15 —
+   precisely the miss-rate ceiling round 2 rejected as an unargued safety number.
+   ≤ 10% needs 30 units, ≤ 5% needs 60. The script now says so itself and
+   withholds the quantitative claim. **The corpus cannot support a quantitative
+   safety claim**; it can support a qualitative one (a miss falsifies).
+2. **The corpus is pre-attacked.** 64 prior adversarial reviews cover these
+   units. Whatever remains is what repeated prior review missed — a much thinner
+   seam than "review this code", and it makes the pilot gate (≥ 1 CONV confirmed
+   blocking finding) genuinely uncertain rather than a formality.
+
+**Both are pilot questions, and the pilot is cheap.** That is the design working:
+the gate exists to stop this before the money, and it now might.
+
+Owed before freeze: **round 4 on round 3's repairs** (every one written under
 review pressure, which is where nine consecutive rounds found their blockers),
 then the pilot, then the derived thresholds.

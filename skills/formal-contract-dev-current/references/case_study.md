@@ -67,7 +67,7 @@ so don't tidy it. R18 was NOT three clean rounds: it was ~nine reviews of a wide
 P0/P1 (F1) → readonly-check review (D11/D12) → anchor re-review (D13) → D14 (F1/F3/F4) →
 RR-1/RR-2/RR-3 → a narrow "GO" (D18-era) → **then a full-code review that found NEW reachable
 arming blockers A1 (confirm-streak seam) and A2/A3 (anchor)** → Fable re-review GO → whole-repo C/H
-closure. That "reachable finds AFTER a GO" is the per-surface-convergence law (§16), lived: widening
+closure. That "reachable finds AFTER a GO" is the per-surface observation now priced by law 12 — a widened surface is a NEW attack with its own budget (§15.5), lived: widening
 the scope re-opened reachable findings. **Reviewer attribution (Law 5, so get it right): the R18
 F1/RR rounds were reviewed by OPUS with Fable-quota-exhausted as the documented fallback** (D14, RR
 entries) — the arc honestly recorded every fallback; do not retro-credit Fable. Fable genuinely ran

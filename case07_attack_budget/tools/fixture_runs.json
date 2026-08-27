@@ -15,7 +15,8 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  },
  {
   "unit": "ikbr_tools/live_guard.py",
@@ -33,7 +34,8 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  },
  {
   "unit": "scripts/ops_monitor.py",
@@ -51,7 +53,8 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  },
  {
   "unit": "scripts/ops_monitor.py",
@@ -69,7 +72,8 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  },
  {
   "unit": "ikbr_tools/ib_safety.py",
@@ -87,7 +91,8 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  },
  {
   "unit": "ikbr_tools/ib_safety.py",
@@ -105,6 +110,7 @@
   "rounds": 2,
   "cost_consumed": 24.0,
   "cost_completing": 20.0,
-  "censored": false
+  "censored": false,
+  "declared_budget": 2
  }
 ]
