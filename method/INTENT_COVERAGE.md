@@ -158,6 +158,7 @@ same task**, which is what an unnarrowed space looks like when you count it.
 
 **Honest tier: governing principle with defect motivation, not a measured
 benefit.** Whether formalising actually narrows the behaviour space is an open
-empirical question — and it is the one `case06` is designed to answer, by
-measuring inter-run agreement on *underspecified* inputs, where there is no right
-answer and therefore nothing to leak.
+empirical question — and the study designed to answer it is
+tracked separately. **The measurement is deliberately not described here**: this
+file is reachable from the skill, and a treated cell that learns an experiment's
+endpoint can optimise the endpoint instead of doing the work.

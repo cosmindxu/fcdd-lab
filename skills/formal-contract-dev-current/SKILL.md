@@ -544,6 +544,12 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
     reading, record which reading was taken and why. Same family as law 8's
     decision and assumption ledgers, and it is the artefact that makes narrowing
     auditable rather than asserted.
+    **Known interaction, recorded 2026-08-27:** (a) is satisfiable by a single
+    blanket rule mapping every undecided input to the conservative verdict. That
+    is legitimate engineering and it is *also* a way to look narrow without having
+    narrowed anything, so any evaluation of whether formalising narrows behaviour
+    must separate agreement-by-blanket-default from agreement on substantive
+    verdicts. The rule stays; the caveat travels with it.
     Falsifiability tier (law 3): this falsifies *an input nobody decided* and *a
     reading taken without record*. It cannot falsify *the reading is the right
     one* — that residue is §5's, and stays §5's.
@@ -552,8 +558,9 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
     scale of the residue in `fcdd_lab` case02, where **23 distinct specification
     files came out of 28 runs of the same task**. Honest tier: governing principle
     with defect motivation, NOT a measured benefit — whether narrowing actually
-    occurs is the open question, and the study designed to answer it is
-    `case06`.
+    occurs is an open empirical question, and this law is a governing principle
+    rather than a measured benefit. (No study is named here on purpose: a cell
+    that loads this text must not learn what an experiment measures.)
 
 ## 5. What FCDD does NOT do (read before trusting it)
 

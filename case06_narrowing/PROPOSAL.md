@@ -94,17 +94,24 @@ interface, and the same definition of done: *"you assert R1…Rn are enforced."*
 - **Arm B — FCDD** per the skill, including law 13 traceability and law 14 input
   totality with its interpretation ledger.
 
-**Anti-circularity, and it is a program.** Every clause must trace to a **frozen
-requirement ID**. A self-referential specification (`legal p m := m ∈ genLegal p`
-— round 4A's counterexample, refuted by kernel execution) traces to *nothing*.
-Freezing the **requirements** rather than the theorems leaves the arm doing
-FCDD's actual work while removing its ability to self-certify.
+**Anti-circularity — r1 refuted the drafted version and supplied the fix from the
+skill's own wording.** Tag-existence is not a program: a circular specification
+(`legal p m := m ∈ genLegal p`) can tag every requirement ID **honestly**, because
+`genLegal` does implement them all, and "traces to nothing" holds only under a
+semantic reading of the tag — a judgement, which C1 forbids.
+
+**The mechanical form, adopted:** Beat 3 already requires mutations to trip
+**exactly** their clause. So: **a mutant derived from requirement Rᵢ must be
+rejected by a clause tagged Rᵢ, and by no other.** A monolithic circular spec
+fails that immediately — one clause rejects everything, so selectivity is zero.
+Freezing the **requirements** rather than the theorems still leaves the arm doing
+FCDD's actual work; selectivity is what removes its ability to self-certify.
 
 ## 5. Measurements
 
 | | What | Note |
 |---|---|---|
-| **P1 primary** | pairwise behavioural agreement within arm, on underspecified inputs | no oracle; exact behavioural comparison |
+| **P1 primary** | pairwise behavioural agreement within arm, on underspecified inputs | **r1: NOT YET A MEASUREMENT.** No comparator, no equivalence relation, and C(k,2) pairs are not independent observations. Must be redefined with the *run* as the unit, a canonical per-scenario output serialisation, and a scenario-paired permutation test. **Two further defects:** it is winnable by law 14's blanket conservative default (which the treatment text itself prescribes — see the skill's recorded interaction), so agreement must be partitioned into *by-default* vs *substantive*; and it is unconditioned on coverage, so runs that all implement remembered castling despite the delta win the primary while violating the spec |
 | **P2 gate** | coverage on specified + delta requirements | both arms expected high; a floor, not a discriminator |
 | **P3 mechanism** | coverage split **inherited vs delta** | **pre-registered prediction: FCDD's advantage concentrates on delta items** — a clause you must *trace* beats a habit you *follow*. Inherited items should show little difference |
 | **P4 upstream** | do Arm B's *specs* agree with each other, and does spec agreement predict implementation agreement? | this is the funnel actually funnelling, not a correlation |
@@ -136,11 +143,25 @@ falsifiable in one study.
 
 1. **Deliberation, not formalism.** Mitigated by Arm A's decision log; if the
    effect disappears with it, that *is* the finding.
-2. **Prior evidence pointing the other way.** Case 02 produced **23 distinct
-   specification files from 28 runs** of one task. If formalising narrowed the
-   space, spec convergence is what you would expect, and it did not converge. The
-   task differed — editing an existing contract, not authoring from prose — but
-   this is a named alternative hypothesis, not a footnote.
+2. **Prior evidence — and r1 caught this citation being one-sided in the
+   direction that flattered the sceptical reading.** r1 of this document cited
+   case 02's *"23 distinct specification files from 28 runs"* as evidence against
+   narrowing, and omitted the comparator its own source file deposits:
+
+   > arm A (test scripts): 28 runs, **28 distinct**
+   > arm B (Contract.lean): 28 runs, **23 distinct**
+   > *"On this measure the CONTROL arm diverged more, which is the opposite of
+   > what a one-sided reading of the treated arm alone would suggest."*
+   > — `case02_predictability/ledger/SPEC_DIVERGENCE.txt`
+
+   So the prior evidence, read whole, is **weakly for H1**, not against it — and
+   case 02's own article had already corrected this exact error once ("an earlier
+   draft called FCDD's artefact 'the least reproducible thing in the study' …
+   that is false"). Repeating a correction the repository already contains is the
+   programme's own thesis operating on its author. The honest statement: neither
+   arm converged on its authored artefact, the treated arm converged *somewhat
+   more*, and the measure is file-level and comment-sensitive, so it is weak
+   evidence in either direction.
 3. **Underdetermination must be engineered.** Case 02's 56 runs produced a
    byte-identical binary because a single-byte fault is fully determined. Without
    deliberate underspecification there is no variance to measure — case 02 is the
@@ -167,3 +188,76 @@ cheap and the assets exist, and the scope statement belongs in the abstract.
 - Round 1: owed. Nothing here has been adversarially reviewed, and this
   programme's record is that every round finds its blocking defects inside the
   previous round's repairs.
+
+---
+
+## 10. Review round 1 — two lenses, ten blocking findings
+
+1A (science) and 1B (subject/mechanism/operations) ran independently, no shared
+context. **Ten blocking findings, three of them converged.** Status: **r1 is not
+freezable.**
+
+### Converged — found independently by both
+
+| Finding | Disposition |
+|---|---|
+| **The delta converts saturation for P2/P3 but NOT for the primary.** On underspecified inputs both arms can converge on the canonical resolution held in the weights (python-chess's choices are the de-facto standard and saturate training data). The escape — locating underspecification in delta×FIDE interactions — makes the lab the author of both the delta *and* what counts as undetermined, re-importing the artefact-target problem for the one measurement that claimed to have nothing to steal | **Accepted. This is the design's central unresolved risk** and it is not fixable by wording |
+| **Traceability is tag-existence, not a program** — a circular spec tags every requirement ID *honestly* | **Accepted; fixed** with the skill's own Beat 3 wording: a mutant from Rᵢ must trip a clause tagged Rᵢ **and no other**. Selectivity is what a monolithic circular spec cannot fake |
+| **Nothing classifies an input as "underspecified"** — by lab judgement (C1 forbids) or by a dual-reference rule already refuted as uncomputable | Accepted; needs a deposited classifier and a probe set frozen before any cell runs |
+
+### 1A — the science
+
+- **The primary is not yet a measurement**: no comparator, no equivalence
+  relation, and C(k,2) pairs are not independent observations. The
+  unpowerable-primary class that fired in case 05 rounds 1, 2 and 3, now at the
+  primary itself.
+- **The primary is winnable by law 14's blanket conservative default** — a rule
+  the treatment text *prescribes*, separable from formalisation entirely.
+- **Agreement is never conditioned on coverage**, so converging on a wrong
+  reading scores as success.
+- **"Nothing to steal" is true only of P1**; P2 and P3 need the lab-held delta
+  oracle, which is the same answer-shaped artefact whose custody consumed case 04.
+- **Treatment-side memorisation** (public formal chess artefacts) inflates
+  *within-B* agreement specifically — it points toward H1 and kill criterion 6,
+  which fires only when *both* arms converge, cannot catch it.
+- **The treatment text leaked the endpoint**: the skill named this study and the
+  method note stated its exact measure. **Closed** — both references stripped, and
+  a treated cell can no longer learn what is scored.
+
+### 1B — subject, mechanism, operations
+
+- **The delta list is itself underdetermined prose, verified by execution.** "Ep
+  after any double-step" is already FIDE unless *persistence* is meant, which
+  needs push/pop state surgery and breaks FEN encoding; "modified draw
+  precedence" is behaviourally invisible unless the interface exposes termination
+  *reasons*; the castling-removal subclass still keys repetition on castling
+  rights, embodying an undecided delta×repetition reading. One clause of evidence
+  for the thesis, and one blocking defect in the design.
+- **The decision log administers part of the treatment to the control**, so a null
+  cannot separate "formalism adds nothing over deliberation" from "the log
+  delivered the active ingredient". Needs three arms or an honestly renamed H1.
+- **Carried-over defects, dropped in transfer from case 05**: the model relay
+  topology, the per-arm informativeness band, the treatment-delivery gate,
+  timeout / attempt cap / hang policy / schedule ceiling, the death classifier,
+  G0's mutant provenance, and k — *resolved by omission, which is not a
+  resolution*.
+- **Delta-shopping is unregulated**: if the pilot fails, authoring new deltas and
+  re-piloting is seed-shopping with the seed renamed.
+
+### The citation r1 caught, which is the programme's own thesis operating on me
+
+§7.2 cited case 02's *"23 distinct specification files from 28 runs"* as evidence
+against narrowing, and omitted the comparator sitting in the same file: the
+**control arm produced 28 distinct artefacts from 28 runs**, and the file states
+in terms that a one-sided reading of the treated arm alone is *"the opposite"* of
+what the data show. Case 02's own article had already corrected this exact error
+once. Corrected in §7.2; read whole, the prior evidence is **weakly for** H1.
+
+### Verdict
+
+Both reviewers agree the structural move — an oracle-free primary — is the
+programme's best idea, and both agree it is not ready. The largest risk is
+unchanged in shape from case 05 and now precisely located: **a fully-run study
+that returns nothing**, because P1 converges through saturation and P3 ceilings
+through delta salience, with no pilot band gating either and no operational
+envelope stating what that null would cost.
