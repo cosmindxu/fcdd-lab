@@ -366,11 +366,16 @@ running, in the decision ledger and in any report:
     Convergence is **per review-surface, not global**: reachability decreases within a FIXED scope,
     but *widening the scope legitimately re-opens reachable findings* — in the arc, a narrow "GO" was
     followed by a full-code review that found new reachable arming blockers, and one deployment bug
-    recurred five times (twice against the author fixing it). So the criterion is: within an
-    unchanged surface, severity trends down and a round yields only accepted residuals; when you
+    recurred five times (twice against the author fixing it). **The criterion is #15.5's, not this paragraph's** (corrected
+    2026-08-27 — this text kept the pre-law-12 stopping rule for a revision after
+    #15.5 replaced it; same rollout gap as `references/lenses.md`): within an
+    unchanged surface you stop when the declared budget's COVERAGE is complete, not
+    when a round happens to yield only residuals. What survives below is descriptive
+    and still true — severity does trend down within a fixed surface; when you
     WIDEN the surface (a new lens, a bigger diff, the shipped-vs-staged artifact), reset and expect
-    reachable finds again. A late-round reachable find is not a failure of convergence — it is
-    evidence the surface grew. "pure-contract-only" = a defect real in the pure spec/twin but
+    reachable finds again — as a **NEW attack with its own declared budget** (law 12), never a
+    continuation of this one. A late-round reachable find is not a failure of convergence — it is
+    evidence the surface grew, and the next surface is quoted separately. "pure-contract-only" = a defect real in the pure spec/twin but
     unreachable from the live inputs (the safe residual band). Residuals get **named, in writing**,
     with their trigger conditions. (Severity map: HIGH≈reachable, MED≈pure-contract/fragility,
     LOW≈hygiene.)
