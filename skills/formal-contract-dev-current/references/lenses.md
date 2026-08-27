@@ -90,11 +90,17 @@ False-NEGATIVES first (the dangerous direction):
   reviewers are also verified by two-independent-checks (their claim + your re-run).
 - Fix at the correct layer (spec / twin / shell / wiring / docs), never by special-casing a test.
 - **Re-review the fixes** — a focused pass; material changes to a safety verdict get one more.
-- **Convergence is PER-SURFACE, not global.** Within a FIXED review surface, reachability decreases
-  round over round (reachable → pure-contract-only → hygiene) — stop when a round yields only
-  residuals you NAME in writing (trigger + why accepted + roadmap fix). But **widening the surface
-  legitimately re-opens reachable findings**: a new lens, a bigger diff, or the shipped-vs-staged
-  artifact is a new surface — reset the expectation and expect reachable finds again. (In the arc a
-  narrow "GO" was followed by a full-code review that found new reachable arming blockers, and one
-  deployment bug recurred five times — so "strictly decreasing globally" is false; per-surface is the
-  honest criterion.) Update the decision log and the falsifiability tiering after each surface closes.
+- **Stop on COVERAGE against the declared budget, not on convergence (law 12; this
+  block updated 2026-08-27 — it had shipped the pre-law-12 stopping rule for a full
+  revision after Beat 4 changed).** The surface set S is declared before the beat;
+  the mandatory pass is every lens against every surface, one round, in parallel;
+  if a finding is CONFIRMED blocking, exactly one scoped remediation round; hard
+  stop at the declared budget. Residuals are NAMED in writing (trigger + why
+  accepted + roadmap fix) and shipped. **Widening the surface starts a NEW attack
+  with its own declared budget** — it is not a continuation. (What stays true from
+  the old per-surface observation: within a fixed surface reachability decreases,
+  and a widened surface legitimately re-opens reachable findings — in the arc a
+  narrow "GO" was followed by a full-code review that found new reachable arming
+  blockers. Law 12 keeps that insight and prices it: the new surface gets a new
+  budget, quoted separately.) Update the decision log and the falsifiability
+  tiering after each surface closes.
