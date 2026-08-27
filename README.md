@@ -26,6 +26,7 @@ place), a `ledger/` holding the run accounting and the analysis output, and
 | [`case03/`](case03) | Does the premium buy fewer **silent** failures? | Design study only — five designs generated, judged, one (PORTGUARD) selected | none | Superseded by case 04; its constraint list and parity guard were inherited |
 | [`case04_coq_rust/`](case04_coq_rust) | Does formal expression **prevent** defects (forward synthesis, not repair)? | Reimplement the Z80 engine in Rust twice — Rocq → mechanical Rust extraction vs direct Rust — scored against a sealed 11,103-position corpus | 13 scored cells | **Constraint-violation study.** The sealed oracle leaked to every cell; the computed numbers are inadmissible. The prevention claim remains **untested** |
 | [`case05_prevention/`](case05_prevention) | Does the contract prevent **silent** failure? *(in preparation — nothing run)* | Forward synthesis of FIDE-legal move generation, scored by **perft**; sandboxed cells, model tier as a factor | **none yet** — design at r5, three adversarial review rounds, not frozen | **Not freezable yet.** Rounds 1–3 returned 4, 4 and 9 blocking findings; every round's blockers sat inside the previous round's repairs |
+| [`case07_attack_budget/`](case07_attack_budget) | Is the ATTACK **budget** safe — does bounded review miss what unbounded finds? | Two arms differing only in the stopping rule, on a live trading codebase — the method's own declared domain | **2 pilot cells** | **Retired at the pilot gate.** Both unbounded cells ran exactly **two rounds** — law 12's budget — so the contrast is nil and the question is moot in this regime. The pilot is the result |
 | [`method/`](method) | Where does FCDD's cost variance live, and where do the gates belong? | Secondary analysis of case 02's 56 runs + a worked end-to-end pipeline prototype | — | ATTACK-beat round count varies 18× and explains ~half of FCDD's cost variance while changing no artefact → a bounded-budget replacement is proposed |
 
 Running total: the programme has priced the method twice and has not yet
@@ -244,6 +245,42 @@ As in case 01, the manuscript (`REPORT.md`) is kept local by policy.
 
 ---
 
+## Case 07 — the ATTACK budget, retired at its own gate
+
+**The only study in this programme that tested a claim the method actually
+makes** — the skill's §5 says *"FCDD's value is **late** (adversarial review) as
+much as early (proof)"*. Law 12 had replaced the ATTACK stopping rule on a
+measured diagnosis with a *predicted* benefit; nobody had tested whether the
+bounded rule is safe.
+
+**It was retired at the pilot gate, and the pilot is the finding.** Both
+unbounded cells ran **exactly two rounds**, unprompted — and law 12's budget *is*
+two rounds. The unbounded arm did what the bounded arm is capped at, so the
+bounded arm cannot miss what it finds, H1 would pass trivially, and the study
+would have run to completion unable to support or refute anything. Two cells cost
+what a completed study would not.
+
+**What that establishes:** in *fresh adversarial review of unfamiliar code* the
+cap is **not binding** — unbounded review self-limits at it. Law 12 is not wrong
+there; it is inert. And it reframes the diagnosis that produced it: case 02's
+1–18 round spread came from **repair against an existing contract**, a loop whose
+feedback path this regime lacks. The runaway is plausibly a property of
+repair-with-a-contract rather than of the beat, so law 12's real subject is
+narrower than its text, and its safety question stays open **in the repair regime
+only**.
+
+**The secondary result is the programme's first empirical support for the
+method's own claim.** Two ATTACK cells, on two modules of a codebase that **64
+prior adversarial review documents** had already worked over, produced **six
+confirmed defects**, every one demonstrated by a runnable probe — including a
+**wrong money-path action** (a guard comparing 2-dp-rounded percentages, so
+10.001% against a 10.0% cap is allowed; re-verified against the unscrubbed
+source) and the arc's own **hollow-monitor** class at a latch site a 2026-08-03
+fix never reached. Both were filed to the subject repository.
+
+Full result, with its limits stated, in
+[`case07_attack_budget/RESULT.md`](case07_attack_budget/RESULT.md).
+
 ## Case 05 — the prevention claim, in preparation
 
 **Status: design only. Nothing has been run, no schedule exists, and the
@@ -337,6 +374,11 @@ more per defect than ordinary development-plus-review — 7/7 defects in case 01
 **Not supported:** that FCDD makes repair cost more predictable on faults of
 this difficulty. The point estimate ran against the hypothesis in every unit and
 statistic tried.
+
+**Newly supported, and it is the method's own claim:** *value is late, in
+adversarial review.* Case 07's two-cell probe found six confirmed defects in a
+money-path codebase that 64 prior adversarial reviews had worked over — the first
+empirical support in seven cases, arrived at incidentally.
 
 **Still untested:** the claim the method is actually sold on — that it prevents
 *silent* failure, the repair that looks right and is wrong. Case 02's benchmark
