@@ -64,6 +64,17 @@ the experimenters (seven of eight discretionary choices favouring our own
 method). It closes only by making the undesired thing impossible rather than
 prohibited.
 
+**Two of the four studies tested claims the method never made** — "predictability"
+appears nowhere in its frozen text and "prevent" appears twice, both times to
+disclaim it (§9a.1). The claim it does make, that its value is *late*, in
+adversarial review, remains untested while this programme produced substantial
+incidental evidence for it. **And the one positive result we can offer a
+practitioner is about when the method can help at all:** where a specification is
+silent, the model converges anyway — 100% agreement on three of four certified
+items at the cheapest tier — so **formalisation's narrowing value is a function of
+prior strength**, which explains why two studies found nothing on predictability
+in a maximally prior-saturated domain (§9a.3).
+
 The programme's durable yield is therefore not a verdict on FCDD but a body of
 **measurement findings**: an instruction to review "until no findings remain"
 has no fixed point; killed processes emit no cost record, in one cell
@@ -594,6 +605,105 @@ protocol.**
    do not think the irony is evidence of anything except how hard this is.
 
 ---
+
+## 9a. What the programme was measuring, and what it should have been
+
+Written after cases 05 and 06 were both abandoned at the design stage. Three
+findings here postdate the results above and change how they should be read.
+
+### 9a.1 Two of the four studies tested claims the method never made
+
+The frozen skill text case 01 measured is deposited in this repository precisely
+so it cannot move. Checked mechanically against it:
+
+- **"predictability" appears zero times.** Cases 01 and 02 were built around
+  *"its purpose — the reason the method exists — is predictability."* That was the
+  experimenters' framing.
+- **"prevent" appears twice, both times to disclaim it** — §5, *"What FCDD does
+  NOT do"*: *"It caught the hollow monitor; **it did not prevent it**. FCDD's value
+  is late (adversarial review) as much as early (proof)."* Cases 04 and 05 were
+  built to test prevention.
+- The mis-specification failure mode that killed case 05's design is already
+  conceded in the same section: *"It proves COHERENCE, never
+  CORRECTNESS-OF-INTENT … it cannot prove the spec is the RIGHT spec."*
+
+The skill also names its domain — money paths, dead-man switches, monitors,
+auth closure, protocol state machines — and a chess engine is not in it. **Four
+studies tested the method outside its stated scope, against claims its own
+documentation declines to make.** The one claim it does make, that its value is
+*late*, in adversarial review, has never been tested — while this programme
+produced substantial incidental evidence for it (§9, conclusion 7).
+
+### 9a.2 The programme measured the wrong dispersion
+
+Cases 01 and 02 measured dispersion of **cost**. If a contract narrows anything,
+what it narrows is the **interpretation**: prose underdetermines, and the spec's
+job is to spend that freedom explicitly and once, upstream, rather than leaving
+each implementation to spend it silently and differently. Cost dispersion is at
+best a downstream proxy for that, and the method never claimed it.
+
+This diagnosis produced two additions to the method itself, both deposited with
+their evidence and their honest tier (`method/INTENT_COVERAGE.md`): **law 13**
+(clause provenance, bidirectional requirement↔clause traceability, declared
+completeness scope, and pinning measured by mutation that names its clause) and
+**law 14** (input totality — the missing dual of `spec_total` — plus an
+interpretation ledger). Neither is a measured benefit, and both say so.
+
+### 9a.3 Narrowing value is a function of prior strength — the programme's most transferable positive result
+
+Designing a study to test narrowing required a subject where the specification's
+silences are not already resolved in the model's weights. A probe was built to
+check that mechanically: ask the model to resolve a genuinely undetermined point
+**with no specification supplied**, k times, and measure agreement
+(`method/subject_probe/`).
+
+On items certified as genuinely undetermined, at the cheapest model tier:
+
+| item | agreement |
+|---|---|
+| ISO 8601 month-end addition (the standard defines no duration arithmetic) | **100%** |
+| duration component ordering (unspecified) | **100%** |
+| pax vs GNU long-name precedence (POSIX does not cover GNU headers) | **100%** |
+| en passant in the chess repetition key | 80% |
+
+**Where a specification is silent, the model converges anyway.** Read as a finding
+rather than an obstacle:
+
+> Formalisation's narrowing value is a function of **prior strength**. Where
+> priors are strong the solution space is already narrow and a contract has
+> little left to narrow; where priors are weak — novel domains, post-cutoff
+> specifications, genuinely new requirements — narrowing is where the value must
+> live.
+
+That **explains cases 01 and 02's null on predictability**: a single-byte fault in
+a chess engine is maximally prior-saturated, so there was never room for the
+effect they went looking for. It makes prior strength a measurable design input
+rather than an assumption. And it is the first result in this programme that
+tells a practitioner something actionable about *when* to reach for the method.
+
+*Honest limits:* one model tier, four certified items, and a small model can only
+disqualify a domain — never clear it. The probe's own first run was half invalid,
+because four of its ten items asked what a standard **says** (recall of a
+determined rule) rather than how a silence gets **resolved**; those verdicts were
+withdrawn and the protocol now requires each item to be certified undetermined
+before its agreement counts (`method/subject_probe/FINDINGS.md`).
+
+### 9a.4 Two designs were abandoned before running, and that is the cheap outcome
+
+Case 05 (prevention, forward synthesis) took four adversarial review rounds
+returning 4, 4, 9 and 14 blocking findings — every round's inside the previous
+round's repairs — and was abandoned when a reviewer refuted its central
+anti-circularity fix **by kernel execution**. Case 06 (narrowing, chess plus a
+frozen rule delta) was suspended after one round, when two independent reviewers
+converged on the same defect: the delta defeats training saturation for the
+coverage endpoints but **not for the primary**.
+
+The lesson is a sequencing one, and it cost three designs to learn: **qualify the
+subject before designing the study.** Case 03 ran a scored multi-design
+selection and it was the programme's one methodologically sound step; case 04
+skipped it and paid with a voided study. The step now exists one level earlier,
+applied to subjects, with the saturation probe as its admission gate
+(`method/SUBJECT_SELECTION.md`).
 
 ## 10. What a fifth case would require
 
