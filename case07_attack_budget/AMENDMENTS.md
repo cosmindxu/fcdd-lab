@@ -41,3 +41,56 @@ cheaper way to reach the same stop decision.
 - Either way it says nothing about BUDGET, and nothing about the arms' contrast.
 
 **Recorded before the results existed**, so the framing cannot be fitted to them.
+
+---
+
+## A2 — the gate passed, and the pilot found something that may retire the study
+**2026-08-27, after both CONV cells returned.**
+
+### The gate: PASSED
+
+`live_guard.py` F2 — barrier E2 allows orders breaching `max_position_pct` /
+`max_gross_exposure_pct`, because the caps are compared against **2-dp-rounded**
+percentages. A true 10.001 % against a 10.0 % cap rounds to 10.00 and is
+ALLOWED. **Wrong money-path action, reachable from both named callers**
+(`ib_live.cmd_order` and the unattended mandate lane from cron), demonstrated by
+probe and **independently re-verified by the orchestrator against the unscrubbed
+source**. b ≥ 1: the corpus is not exhausted.
+
+`ib_risk.py` added five more, including R3's 2026-08-03 fix never reaching the
+third latch site — a lost HALT row is completely silent, so `LIVE_HALT` can exist
+with no evidence row and nothing says so. Filed to the subject repository.
+
+### The signal that matters more than the gate
+
+**Both CONV cells ran exactly two rounds.** Their stated stopping reasons:
+
+> *"Round 2 over the unchanged review surface produced no new confirmed
+> findings — only the six residuals named above."*
+> *"A third round would re-probe surfaces that returned only conformance in R2,
+> which is the stopping condition as written."*
+
+**Law 12's budget is one mandatory pass plus at most one scoped remediation —
+two rounds.** So the *unbounded* arm did, unprompted, exactly what the *bounded*
+arm is capped at. If that generalises, the treatment contrast in this study is
+**nil**: BUDGET cannot miss what CONV finds, because CONV stops where BUDGET
+stops, and H1 passes trivially without testing anything.
+
+This is round 2's named worst case — *"a study that runs to completion and cannot
+support or refute its hypothesis by construction"* — detected by a two-cell probe
+instead of by a completed study. **That is the gate doing its job**, and it is why
+§7 exists.
+
+### What it implies about case 02's 18 rounds
+
+The 1–18 round spread that motivated law 12 came from **repair against an
+existing contract**, where each round re-reads a spec the agent itself edited.
+Two cells of **fresh adversarial review of unfamiliar code** self-limited at 2.
+The runaway may be specific to the repair-with-contract loop rather than a
+property of the ATTACK beat — which would mean law 12's cap is **not binding in
+the regime tested here**, and the safety question is moot in it.
+
+**Consequence for case 07: the design must be re-decided before any scored run.**
+Either the subject moves to the regime where the runaway was observed
+(repair-against-a-contract), or the study is retired with this pilot as its
+result. Recorded before either path is chosen.
