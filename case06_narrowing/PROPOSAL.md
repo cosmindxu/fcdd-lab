@@ -1,6 +1,44 @@
 # CASE 06 — does formalising narrow the solution space?
 
-**STATUS: DRAFT r1 — SUBJECT NOT QUALIFIED. Design work suspended.**
+**STATUS: OPEN — subject search active. Design work paused, not abandoned**
+(operator, 2026-08-27: *"case 06 remains open, I don't want to give up"*).
+
+The question — **does formalising a requirement narrow the space of behaviours
+consistent with it?** — is the one the method's newly-stated objective asserts and
+nothing has tested. Nothing about it has been refuted. What was disqualified is a
+*subject*, not the hypothesis: chess is prior-saturated, so the model resolves the
+spec's silences from memory and no contract can be shown to narrow what priors
+already narrowed.
+
+### The lead case 07 opened
+
+Case 07 established something directly useful here: a **live proprietary
+money-path codebase yielded six confirmed defects despite 64 prior adversarial
+reviews**. That corpus is not exhausted — and, more to the point, its
+**specifications** are the kind case 06 needs:
+
+| C-S criterion | A real internal operating specification (trading mandate, risk policy, ops runbook) |
+|---|---|
+| **C-S1 unsaturated** | private, never in training data — the binding criterion chess fails |
+| **C-S2 underdetermined** | operational prose written to be *used*, not to be complete; its silences are real |
+| **C-S3 enumerable** | policy clauses are already numbered and referenced |
+| **C-S4 silent failure** | a misread clause allows a trade nobody sanctioned — case 07 just demonstrated this class twice |
+| **C-S5 not authored for the study** | written for operational reasons, before and independent of any experiment — a *found* specification, which is the property that matters, not "external" in the abstract |
+
+This is the strongest candidate the programme has had, and it resolves the
+C-S1/C-S5 tension that §"1" of `method/SUBJECT_SELECTION.md` names as the real
+difficulty: *found-but-private* satisfies both where *external-and-public* cannot.
+
+**Next step, when picked up:** run the saturation probe (`method/subject_probe/`)
+on **certified** underdetermined points drawn from that specification — with the
+certification step §3 now requires, and at the tier a study would pin. If it
+survives, case 06 has its subject and the design below is re-derived around it.
+The design skeleton — three scenario classes, agreement-on-underspecified as the
+oracle-free primary, the delta as mechanism probe — carries over intact; only the
+subject changes.
+
+**Superseded status line:** DRAFT r1 — SUBJECT NOT QUALIFIED, design work
+suspended.
 
 Round 1 established that the primary is exposed to training saturation on this
 subject (§10). Operator ruling 2026-08-27: **the subject comes first.** This
