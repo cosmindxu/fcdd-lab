@@ -391,6 +391,36 @@ until now.
 
 ---
 
+## If this is ever written up as a paper
+
+`ARTICLE.md` is the record. A programme-level LaTeX manuscript built from it is
+the natural eventual output — and a better paper than the case-01 one deleted on
+2026-08-27, because **its contribution is the measurement findings and the design
+failures, not a verdict on FCDD.** The honest framing is a methodology and
+negative-results contribution: five cases, one replicated cost finding, one
+pre-registered null, one voided study, two designs abandoned before running, and
+a body of instrument findings that transfer to anyone measuring agentic work.
+
+What it would need, none of which exists yet:
+
+- **A resolved abstract.** The current one opens by stating FCDD's purpose is
+  predictability and its payoff is prevention — which §9a.1 then shows the
+  method's own text never claims. That tension reproduces the programme's path of
+  discovery honestly, but a paper has to choose whether to lead with the claim or
+  with its correction.
+- **A figure set.** Nine figure PDFs survive under `case0*/figures/` (case 01's
+  five, case 02's four); case 04's are ignored, and cases 05–06 have none. A
+  programme paper needs its own.
+- **The bibliography, which is recoverable.** The deleted `refs.bib` held **46
+  entries**, verified during case 01. Recover it with
+  `git show 2cf1f00:case01_spectrum_gambit/paper_springer/refs.bib > refs.bib`.
+- **A venue decision.** Five cases plus two method changes is journal-length, not
+  a conference paper.
+
+Not scheduled. Recorded so the intent and the recovery path are not lost.
+
+---
+
 ## Conventions
 
 - **Pre-registration is a commit.** The commit that freezes a design is its
