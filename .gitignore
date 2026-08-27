@@ -33,3 +33,19 @@ case04_coq_rust/figures/*.png
 case04_coq_rust/figures/*.aux
 case04_coq_rust/figures/*.log
 case04_coq_rust/ledger/sealed/answers.json
+
+# build outputs — regenerable, and they embed absolute host paths.
+# The spike's EVIDENCE is its source and its extraction output
+# (spike.v, spike.rs.out, crate/src/extracted.rs, Cargo.toml/lock), all tracked.
+case*/pilot/**/target/
+case*/**/target/debug/
+case*/**/target/release/
+*.vo
+*.vok
+*.vos
+*.glob
+.*.aux
+
+# case07: confirmed-defect ledgers for a LIVE trading codebase — never public
+case07_attack_budget/ledger/findings/
+case07_attack_budget/arms/workspaces/
