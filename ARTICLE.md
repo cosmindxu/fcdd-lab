@@ -75,6 +75,15 @@ items at the cheapest tier — so **formalisation's narrowing value is a functio
 prior strength**, which explains why two studies found nothing on predictability
 in a maximally prior-saturated domain (§9a.3).
 
+**One positive result did eventually arrive, and it is the method's own claim
+rather than either of the two the programme spent four studies testing.** FCDD
+says its value is *late*, in adversarial review. A two-cell probe — built only to
+decide whether a fifth study should run — found **six confirmed defects, each
+demonstrated by a runnable probe, in a money-path codebase that 64 prior
+adversarial reviews had already worked over**, including a wrong money-path
+action and a silent monitor. The same probe retired its own study: both unbounded
+cells self-limited at exactly the budget the study existed to test (§5a).
+
 The programme's durable yield is therefore not a verdict on FCDD but a body of
 **measurement findings**: an instruction to review "until no findings remain"
 has no fixed point; killed processes emit no cost record, in one cell
@@ -115,6 +124,7 @@ spent most of its effort discovering why the second is hard to ask.
 | 02 | Predictability | Same faults, k = 4 per arm per fault, randomised, pre-registered | 56 | **Null.** *p* = 0.1094, direction against |
 | 03 | Silent failure | Design study only; 5 designs generated and judged | 0 | PORTGUARD selected, then superseded |
 | 04 | Prevention | Forward synthesis: Rocq→Rust extraction vs direct Rust | 13 | **Void.** Oracle leaked to every cell |
+| 07 | Is the ATTACK **budget** safe? | Two arms differing only in the stopping rule, on a live money-path codebase | 2 pilot cells | **Retired at the gate** — the unbounded arm self-limited at the budget, so the contrast is nil. The pilot is the result |
 
 ---
 
@@ -367,6 +377,51 @@ round independently demanded, and the reason to make it is that demand, not this
 pair.
 
 ---
+
+## 5a. Case 07 — the one study that tested a claim the method makes
+
+Law 12 replaced FCDD's ATTACK stopping rule — *iterate to convergence* became
+*stop on coverage against a declared budget*, capped at two rounds — on a measured
+diagnosis with a **predicted** benefit. Case 07 asked whether the bounded rule is
+**safe**: does it miss confirmed blocking findings that unbounded review finds?
+
+**It was retired at its pilot gate, and the pilot is the result.** Both unbounded
+cells ran **exactly two rounds**, unprompted, and said why: *"round 2 over the
+unchanged review surface produced no new confirmed findings"*. **Law 12's budget
+is two rounds.** The unbounded arm did what the bounded arm is capped at, so the
+bounded arm cannot miss what it finds, H1 would pass trivially, and the study
+would have run to completion unable to support or refute anything — the failure
+mode a review round had named as this programme's most expensive. Two cells cost
+what a completed study would not.
+
+**What it establishes.** In *fresh adversarial review of unfamiliar code*, the cap
+is **not binding**: unbounded review self-limits at it. Law 12 is not wrong there,
+it is **inert**. And it narrows the law's own evidence: case 02's 1–18 round
+spread came from **repair against an existing contract**, where each round
+re-reads a specification the agent has itself been editing. That loop has a
+feedback path fresh review lacks, so the runaway is plausibly a property of
+repair-with-a-contract rather than of the beat — and law 12's safety question
+stays open **in the repair regime only**.
+
+**The secondary result is this programme's first empirical support for a claim
+FCDD actually makes.** Its own §5 says *"FCDD's value is **late** (adversarial
+review) as much as early (proof)."* Two ATTACK cells, on two modules of a codebase
+that **64 prior adversarial review documents** had already worked over, produced
+**six confirmed defects**, each demonstrated by a runnable probe:
+
+| Finding | Class |
+|---|---|
+| A risk guard compares **2-dp-rounded** percentages, so 10.001 % against a 10.0 % cap is **ALLOWED** | **wrong money-path action**, reachable from both named callers, re-verified against the unscrubbed source |
+| A latch site drops the audit-append failure signal that its two sibling sites capture — a lost HALT row is **silent** | the arc's own **hollow-monitor** class, at the site a 2026-08-03 fix never reached |
+| Four further confirmed defects | forensic loss, wrong operator-facing record, a guard-level fail-open, a wrong advisory verdict |
+
+It arrived **incidentally**, from a probe built only to decide whether a study
+should run. That is a fair summary of the whole programme: the instrument kept
+producing better evidence than the experiments it was built to serve.
+
+**Limits.** Two cells, one arm, k = 1, two units, no namespace isolation, and the
+repair regime untested. A gate probe, not a study — it cannot say the budget is
+safe, only that the question is moot in the regime it probed.
 
 ## 6. The method notes
 
