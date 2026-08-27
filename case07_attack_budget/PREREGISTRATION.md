@@ -1,4 +1,12 @@
-# CASE 07 — is the ATTACK budget safe? (pre-registration, DRAFT r5)
+# CASE 07 — is the ATTACK budget safe? (pre-registration, RETIRED)
+
+> **RETIRED 2026-08-27 at the pilot gate, by operator decision. See `RESULT.md`.**
+> The gate passed (a confirmed blocking finding exists), but the pilot found the
+> study's contrast may be nil: both unbounded cells ran exactly two rounds — law
+> 12's budget — so the bounded arm cannot miss what the unbounded arm finds. The
+> pilot is the published result. Everything below is the design as it stood.
+
+## Superseded header: DRAFT r5
 
 **r3 applies review round 2** (§9b): five blocking, six major — the eighth
 consecutive round in this lab whose blockers sat inside the previous round's
