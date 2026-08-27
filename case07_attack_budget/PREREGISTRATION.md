@@ -57,6 +57,11 @@ Money paths, live guards, risk watchers, kill switches — *"anything load-beari
 whose silent failure beats its loud one"*, in the skill's own words. **The first
 time this programme has tested FCDD inside its stated scope.**
 
+**Variant pinned: FCDD-T** (transcription twin + bridge) — the variant the
+subject codebase actually uses and the one cases 01/02 measured. The ATTACK beat
+is shared by both variants, so H1's conclusion transfers to FCDD-X only to the
+extent Beat 4 is variant-independent; that limit goes in the report.
+
 Review units are whole modules, ~1,100–3,300 lines. Selection is **stratified by
 prior hardening**, pre-registered before any run, because FCDD was distilled from
 this codebase's own R18 arc: modules named in `references/case_study.md`

@@ -165,6 +165,35 @@ target; do not inflate it into the general safety analysis it cannot replace.
    two-independent-solver rule, brute-force-the-statement-first), **invoke the companion
    `formal-verification` skill** — FCDD wraps it, it does the proving.
 
+### The two variants, named (2026-08-27)
+
+The two Beat-2 strategies below are not interchangeable routes; measured, they
+are **variants of the method** with different costs, guarantees and failure
+modes, and results from one do not transfer to the other. Name which one you are
+running, in the decision ledger and in any report:
+
+- **FCDD-T (transcription twin + bridge).** Spec in a kernel prover, twin
+  hand-transcribed (e.g. Lean 4 → Python), bridge samples agreement. The variant
+  every ikbr_tools artefact uses, and the one cases 01/02 measured (cost premium
+  2–5× vs ordinary dev — that number belongs to THIS variant only). Audit
+  surface: spec + twin, both human-readable.
+- **FCDD-X (verified extraction).** Spec in Rocq/F*/…, implementation GENERATED
+  (e.g. rocq-rust-extraction). Bridge is largely moot — replaced by re-extraction
+  hash-lock + zero-admit + the adapter rule — and new obligations appear that
+  FCDD-T does not have: the extractor joins the trust base; numeric-width remaps
+  (`Extract Constant Nat.div → /`) can silently drop totality the kernel proved
+  (Rocq's `n/0 = 0` vs a native panic); the shipped artefact is unreadable
+  (measured 12–96× expansion), so human audit moves to spec + adapter, and the
+  adapter is the least-verified, most load-bearing code in the system. See the
+  `verified-extraction-hardening` skill — it exists for this variant's leaks.
+  **Observed failure mode, twice and independently: degeneration to programming
+  in a prover** — a complete functional program, zero quantified properties, the
+  zero-`Admitted` check passing vacuously. Laws 13/14 are the counterweight; in
+  FCDD-X treat property delivery as a GATE, not an aspiration. Evidence status:
+  this variant's only full run was a constraint-violation study (fcdd_lab case
+  04, inadmissible); its cost profile (≈0.9–1.3×, with a ~32 GB per-build memory
+  ceiling that serialised the arm) is descriptive only.
+
 ### Beat 2 — TWIN: the pure implementation
 
 6. Get the implementation to **provably/testably agree with the spec, clause for clause**. Two
