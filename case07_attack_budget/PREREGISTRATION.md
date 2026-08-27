@@ -1,4 +1,4 @@
-# CASE 07 — is the ATTACK budget safe? (pre-registration, DRAFT r3)
+# CASE 07 — is the ATTACK budget safe? (pre-registration, DRAFT r4)
 
 **r3 applies review round 2** (§9b): five blocking, six major — the eighth
 consecutive round in this lab whose blockers sat inside the previous round's
@@ -237,6 +237,25 @@ pressure, which is where eight consecutive rounds found their blockers.
 
 ## 10. Status
 
-**DRAFT r3.** Owed before freeze: the deposited artefacts (§9b list), then
-**round 3 on those artefacts**, then the pilot, then the derived thresholds this
-document now deliberately lacks again.
+**DRAFT r4 — the artefacts exist.** Built and deposited:
+
+| Artefact | What it is |
+|---|---|
+| `tools/build_conv_arm.py` | builds the CONV pack from the **frozen→current diff**, 11 hunks classified (5 revert, 6 keep); grep was rejected as the enumerator because `law 12` misses *"laws 3 and 12"* and *"12 was bought by measurement"* |
+| `arms/SKILL_CONV.md`, `arms/lenses_CONV.md`, `arms/DELTA.diff` | the CONV arm and the inspectable delta — **61 added / 12 removed lines**; the builder's residual check (no `declared budget`/`law 12`/`stop on coverage` survives) passes |
+| `arms/PACK_MANIFEST.md` | the enumerated cell-facing file set; `TODO.md` excluded |
+| `tools/adjudicate.md` | third party pinned (Opus, transcript-blind, arm-stripped), BLOCKING mechanical, probe-transfer matching, residual-specificity criterion |
+| `tools/scrub_manifest.md` | what is removed and redacted, and the four assertions the build must pass |
+| `tools/build_units.py`, `ledger/units.json` | **15 units, 5 hardened / 10 unhardened**, restricted to modules that DECIDE or ACT so BLOCKING is decidable |
+| `tools/analyse_case07.py` | the analysis, **dry-run green on fixtures** |
+
+**Two honest residuals in the artefacts**, recorded rather than smoothed:
+`build_architecture_pdf.py` and `build_target_architecture_pdf.py` survive the
+unit filter as false positives (they match on prose); the BLOCKING definition
+filters them to zero, so they cost review budget and cannot corrupt the primary.
+And C5's dry-run is against **fixtures, not a real pilot cell** — the real
+dry-run is still owed.
+
+Owed before freeze: **round 3 on these artefacts** (every one written under
+review pressure, which is where nine consecutive rounds found their blockers),
+then the pilot, then the derived thresholds.

@@ -1,0 +1,92 @@
+[
+ {
+  "unit": "ikbr_tools/ib_risk.py",
+  "lines": 3006,
+  "signal": "decides:6",
+  "stratum": "HARDENED"
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "lines": 1389,
+  "signal": "decides:6",
+  "stratum": "HARDENED"
+ },
+ {
+  "unit": "ikbr_tools/opsspec.py",
+  "lines": 477,
+  "signal": "decides:3",
+  "stratum": "HARDENED"
+ },
+ {
+  "unit": "scripts/r18_monitor.py",
+  "lines": 310,
+  "signal": "decides:4",
+  "stratum": "HARDENED"
+ },
+ {
+  "unit": "scripts/r18_preflight.py",
+  "lines": 252,
+  "signal": "decides:5",
+  "stratum": "HARDENED"
+ },
+ {
+  "unit": "ikbr_tools/ib_autopilot.py",
+  "lines": 3275,
+  "signal": "decides:3",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "lines": 1723,
+  "signal": "decides:5",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/ib_live.py",
+  "lines": 1340,
+  "signal": "decides:5+acts",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/autopilot_live.py",
+  "lines": 1030,
+  "signal": "decides:2+acts",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/live_guard_selftest.py",
+  "lines": 952,
+  "signal": "decides:5",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/ib_framecheck.py",
+  "lines": 786,
+  "signal": "decides:3",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "lines": 521,
+  "signal": "decides:1+acts",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "scripts/survival_eligibility.py",
+  "lines": 402,
+  "signal": "decides:3",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "scripts/build_architecture_pdf.py",
+  "lines": 394,
+  "signal": "+acts",
+  "stratum": "UNHARDENED"
+ },
+ {
+  "unit": "scripts/build_target_architecture_pdf.py",
+  "lines": 338,
+  "signal": "decides:3",
+  "stratum": "UNHARDENED"
+ }
+]

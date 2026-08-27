@@ -1,0 +1,90 @@
+[
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "CONV",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/live_guard.py#0",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "CONV",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/live_guard.py#1",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "BUDGET",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/live_guard.py#0",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "BUDGET",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/live_guard.py#1",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "CONV",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "scripts/ops_monitor.py#0",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "BUDGET",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "scripts/ops_monitor.py#0",
+  "absorbed_by_residual": true,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "CONV",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/ib_safety.py#0",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "BUDGET",
+  "confirmed": true,
+  "severity": "blocking",
+  "match_group": "ikbr_tools/ib_safety.py#0",
+  "absorbed_by_residual": false,
+  "in_surface": true,
+  "rediscovery": false,
+  "disputed": false
+ }
+]

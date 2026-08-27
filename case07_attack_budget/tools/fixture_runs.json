@@ -1,0 +1,110 @@
+[
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "CONV",
+  "repeat": 1,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "BUDGET",
+  "repeat": 1,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "CONV",
+  "repeat": 2,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/live_guard.py",
+  "arm": "BUDGET",
+  "repeat": 2,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "CONV",
+  "repeat": 1,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "BUDGET",
+  "repeat": 1,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "CONV",
+  "repeat": 2,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "scripts/ops_monitor.py",
+  "arm": "BUDGET",
+  "repeat": 2,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "CONV",
+  "repeat": 1,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "BUDGET",
+  "repeat": 1,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "CONV",
+  "repeat": 2,
+  "rounds": 7,
+  "cost_consumed": 41.0,
+  "cost_completing": 30.0,
+  "censored": false
+ },
+ {
+  "unit": "ikbr_tools/ib_safety.py",
+  "arm": "BUDGET",
+  "repeat": 2,
+  "rounds": 2,
+  "cost_consumed": 24.0,
+  "cost_completing": 20.0,
+  "censored": false
+ }
+]
