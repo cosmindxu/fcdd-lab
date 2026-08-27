@@ -1,6 +1,15 @@
 # CASE 06 — does formalising narrow the solution space?
 
-**STATUS: DRAFT r1, not frozen, nothing built.** Supersedes
+**STATUS: DRAFT r1 — SUBJECT NOT QUALIFIED. Design work suspended.**
+
+Round 1 established that the primary is exposed to training saturation on this
+subject (§10). Operator ruling 2026-08-27: **the subject comes first.** This
+document's chess+delta is now one *candidate* among several, to be scored under
+`method/SUBJECT_SELECTION.md` — and on that document's binding criterion it is the
+candidate most likely to fail. Nothing below should be built until a subject
+passes the saturation probe.
+
+Prior status line: DRAFT r1, not frozen, nothing built. Supersedes
 `case05_prevention/PROPOSAL.md`, which is retained rather than deleted: four
 adversarial review rounds on a design that had to be abandoned is the most
 instructive artefact this programme has produced about designing these studies,
