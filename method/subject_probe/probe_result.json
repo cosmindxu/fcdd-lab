@@ -1,0 +1,98 @@
+{
+ "model": "claude-haiku-4-5-20251001",
+ "k": 5,
+ "per_question": [
+  [
+   "chess (incumbent)",
+   "ep-in-repetition-key",
+   2,
+   0.8,
+   "SAME"
+  ],
+  [
+   "chess (incumbent)",
+   "same-colour-bishops",
+   1,
+   1.0,
+   "YES"
+  ],
+  [
+   "HTTP caching (RFC 9111)",
+   "expires-vs-maxage",
+   1,
+   1.0,
+   "MAXAGE"
+  ],
+  [
+   "HTTP caching (RFC 9111)",
+   "heuristic-on-404",
+   2,
+   0.6,
+   "YES"
+  ],
+  [
+   "pax/tar archive format",
+   "pax-vs-gnu-longname",
+   1,
+   1.0,
+   "PAX"
+  ],
+  [
+   "pax/tar archive format",
+   "pax-size-vs-ustar",
+   1,
+   1.0,
+   "PAX"
+  ],
+  [
+   "ISO 8601 / calendar arithmetic",
+   "month-end-add",
+   1,
+   1.0,
+   "2026-02-28"
+  ],
+  [
+   "ISO 8601 / calendar arithmetic",
+   "duration-order",
+   1,
+   1.0,
+   "MONTH-FIRST"
+  ],
+  [
+   "financial day-count (money path)",
+   "30-360-end-rule",
+   1,
+   1.0,
+   "YES"
+  ],
+  [
+   "financial day-count (money path)",
+   "act-365-leap",
+   1,
+   1.0,
+   "YES"
+  ]
+ ],
+ "per_subject": {
+  "chess (incumbent)": {
+   "mean_agreement": 0.9,
+   "verdict": "DISQUALIFIED \u2014 resolution is in the weights"
+  },
+  "HTTP caching (RFC 9111)": {
+   "mean_agreement": 0.8,
+   "verdict": "screened out \u2014 largely saturated"
+  },
+  "pax/tar archive format": {
+   "mean_agreement": 1.0,
+   "verdict": "DISQUALIFIED \u2014 resolution is in the weights"
+  },
+  "ISO 8601 / calendar arithmetic": {
+   "mean_agreement": 1.0,
+   "verdict": "DISQUALIFIED \u2014 resolution is in the weights"
+  },
+  "financial day-count (money path)": {
+   "mean_agreement": 1.0,
+   "verdict": "DISQUALIFIED \u2014 resolution is in the weights"
+  }
+ }
+}

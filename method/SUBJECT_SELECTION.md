@@ -56,7 +56,16 @@ ours. Two ways out that satisfy both:
 
 ## 3. The saturation probe — a mechanical admission test
 
-Before any design work, for each candidate subject:
+**Step 0, added 2026-08-27 after the first run failed on it: every probe item must
+be CERTIFIED genuinely undetermined before its agreement means anything.**
+Certification is by citation (the specification is demonstrably silent on the
+point) or by witness (two conforming implementations resolve it differently).
+Without this step the probe asks *"what does the standard say?"* — a knowledge
+question whose consistent answer is correct recall, not saturation of an
+ambiguity. The first run conflated the two and inflated four of five
+disqualifications; see `subject_probe/FINDINGS.md`.
+
+Then, for each candidate subject:
 
 1. Take the candidate's **underspecified inputs**.
 2. Run the pinned model **k times with no prose at all** — no requirement, no
@@ -80,7 +89,26 @@ Every candidate is scored on it before anything is built.
 4. Only then design the study, and re-derive the outcome definitions from the
    winning subject rather than transplanting them.
 
-## 5. The honest possibility
+## 5. What the first run reframed
+
+Where a specification is genuinely silent, the model converges anyway — 100%
+agreement on three of four certified items, at the cheapest model tier. That is
+not only an obstacle to benchmarking. It is a claim about **when this method can
+help at all**:
+
+> Formalisation's narrowing value is a function of **prior strength**. Where
+> priors are strong the solution space is already narrow and a contract has
+> little left to narrow; where priors are weak — novel domains, post-cutoff
+> specifications, genuinely new requirements — narrowing is where the value must
+> live.
+
+That is directly actionable, it explains why cases 01 and 02 found nothing on
+predictability (a byte-fault in a chess engine is maximally prior-saturated), and
+**prior strength is now a measurable quantity** using this same probe. Candidate
+nomination should therefore target *low-prior* domains rather than merely obscure
+ones.
+
+## 6. The honest possibility
 
 The probe may disqualify every affordable candidate. If the only unsaturated
 domains are too obscure to have enumerable requirements, or too new to have
