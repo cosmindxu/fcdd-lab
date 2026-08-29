@@ -181,3 +181,88 @@ dispersion in a weak-prior domain is the method doing its stated job (spending
 the freedom explicitly, once, upstream). Reducing it in a strong-prior domain
 is indistinguishable from the prior doing the work — which is precisely the
 null cases 01 and 02 bought, twice, before the distinction had a name.
+
+## 6. Formal sketch (2026-08-30 — notation, not theory)
+
+**Status: this section defines symbols and states one schematic identity. It
+proves nothing; every claim below is a restatement of §§1–5 in a form a future
+pre-registration can bind estimators to.**
+
+**Setup.** Let 𝒜 be the artefact space and d : 𝒜 × 𝒜 → ℝ≥0 a *semantic*
+distance: d(a, a′) = 0 iff a and a′ are observationally equivalent at the
+declared interface (byte-identical binaries are one point; so are behaviourally
+identical rewrites). For requirements R with derived acceptance gate G_R:
+
+- **A(R) = { a ∈ 𝒜 : a ⊨ G_R }** — the admissible set.
+- **U(R) = diam_d A(R)** — the *underdetermination* of R. The reward-gap
+  finding, restated: U(R) > 0 for every finite R over an infinite behaviour
+  space; completeness (U = 0) is unattainable in general.
+
+**The generator, factored.** A method m run on R induces a distribution
+μ_{R,m} over shipped artefacts. Idealisation:
+
+> **μ_{R,m}(a) ∝ π(a) · exp(λ·r_m(a)) · 1[a ⊨ G_R]**
+
+with π the model's training prior (the embers-of-autoregression pull), r_m the
+reward/optimisation tilt the method's instructions create, and the gate as an
+indicator. On the interior of A(R) the gate contributes nothing, so *everything
+that varies inside the admissible set is spent by π and r*. The factorisation
+carries §3's guarded distinction: **prior capture is the π-factor dominating on
+A(R); the reward gap is the r-factor dominating on A(R)** — same uncovered
+region, two pressures, two factors of one product. (A17 in this notation: the
+answer key entered r_m, not π.)
+
+**The two observables.**
+
+- **Solution dispersion:** D(R, m) = 𝔼_{a,a′ ∼ μ_{R,m}}[ d(a, a′) ] — mean
+  pairwise semantic distance *conditional on fixed R*; the Marx–Calmon–Ustun
+  discrepancy analogue. The corpus's three dispersions are formally distinct:
+  *cost* dispersion is the dispersion of the pushforward c∗μ for a cost
+  functional c : 𝒜 → ℝ; *artefact* dispersion is D computed without holding R
+  fixed (case02 §5.6); *solution* dispersion is D as written. Case02 shows the
+  first two identify neither concept: D = 0 exactly (one binary) while
+  disp(c∗μ) > 0 (the 2.26× premium and the 18× round spread) — §9a.2 as an
+  equation.
+- **Prior-capture strength:** C(R) = ℙ_{a,a′ ∼ π|A(R)}[ d(a, a′) = 0 ] — the
+  collision probability of two independent draws from the prior *restricted to
+  the admissible set*, i.e. agreement-without-spec. The subject probe estimates
+  exactly this: k-run agreement on a certified-undetermined item is an
+  empirical Ĉ. The probe's 100%-agreement items are Ĉ = 1 (capture at
+  ceiling); en passant's 80% is Ĉ = 0.8. §9a.3's *prior strength* is C; §1's
+  *capture* is the event that U(R) > 0 gets spent by π.
+
+**The duality, schematically.** For fixed R with U(R) > 0:
+
+> **D(R, m) ≈ (1 − C(R)) · U(R)**, modulated by what m narrows
+
+with the two limits the corpus measured:
+
+- **C(R) → 1 ⟹ D(R, m) → 0 for every m.** No method can demonstrate narrowing
+  where the prior already spent the freedom — the cases-01/02 null in one line
+  (single-byte chess repair: C ≈ 1).
+- **C(R) ≪ 1 ⟹ D tracks the method.** FCDD's claim becomes: the contract 𝒞
+  refines the gate, **A(R ∧ 𝒞) ⊊ A(R)**, so D(R ∧ 𝒞, FCDD) < D(R, ordinary).
+  Law 14 in this language: the verdict map on A(R ∧ 𝒞) is a *function* on
+  every declared input class, not a relation.
+
+**The identifiability trap, formally.** Observing D ≈ 0 cannot distinguish
+A(R ∧ 𝒞) small (the contract worked) from π|A(R) concentrated (the prior
+worked); the two are separable only when C(R) ≪ 1. Hence §5's requirement 2 is
+a *precondition*, not a preference: measure Ĉ first, and run the dispersion
+study only where Ĉ sits well below ceiling.
+
+**Law 5's erosion.** Two verifiers with priors π₁, π₂ have errors on the
+silent region of A(R) that correlate with the overlap of π₁|A(R) and π₂|A(R).
+Same model ⟹ π₁ = π₂ ⟹ maximal common mode; Knight–Leveson measured that even
+human priors overlap enough to break the independence assumption (z ≈ 100).
+One model family in both roles is the limiting case of a result forty years
+old.
+
+*Limits of the sketch, stated per law 8:* the factorised μ is an idealisation —
+real generation is sequential and the three factors are not separable in the
+weights; d is named but not constructed, and constructing a computable semantic
+distance for real artefacts is the hard step a study design must solve
+(case02's d was the degenerate "sha256 equality", which is d after quotienting
+by *nothing*); the duality line is a schematic, not an identity — no
+functional form is claimed, only the two limits; and U(R) is generally
+unmeasurable, which is why the operational quantity is always Ĉ, never U.
