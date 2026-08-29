@@ -25,6 +25,29 @@ Change for the next revision:
 - When the skill runs inside a measured/protocolized context, the choice
   must be visible in the run's own output so downstream ledgers catch it.
 
+## Give spec EVOLUTION a beat (2026-08-29, external corroboration)
+
+§5 now names this as a residual: FCDD assumes a static contract. Law 13's
+bidirectional traceability tells you which clauses to re-open when a
+requirement moves, but **tracing is not re-proving** and nothing in the method
+forces the re-proof. The interim habit §5 prescribes — treat a requirement
+change as a NEW contract, re-running Beat 1's completeness gate and Beat 3's
+mutation layer — is a workaround, not a beat.
+
+What a beat would owe:
+- which theorems a clause edit invalidates, with the retraction-cascade shape:
+  drop a derived conclusion only when *every* derivation path for it is gone;
+- which conformance fixtures were pinned to the OLD reading and are now
+  asserting the wrong thing while still passing green;
+- which twin branches became unreachable;
+- a diff-level verdict rather than a full rebuild, or nobody will run it.
+
+Prompted by the EDA industry leading with the same gap — "the spec is likely to
+change... for a verification flow to have change management, there is a lot more
+that needs to happen outside of agents" (Kolpekwa, Siemens EDA, in Bailey,
+*From Spec To Formal Properties*, Semiconductor Engineering, 2026-08-27). They
+call it change management / "contextual intelligence" and have no answer either.
+
 ## DONE — folded in 2026-08-26
 
 - **Attack-reviewer model as an explicit choice** (the item above): superseded in

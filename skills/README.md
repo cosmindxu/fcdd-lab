@@ -42,6 +42,13 @@ depends on; a dedicated skills repository would be the better general fix.
     diff -u skills/formal-contract-dev-current/SKILL.md \
             ~/.claude/skills/formal-contract-dev/SKILL.md
 
+**Refresh `SKILL.md` and `references/` only.** `TODO.md` in this directory is the
+installed file *plus* repo-only annotations (the DONE ledger and the version-
+hygiene note), so a blanket `rsync --delete` from the install silently truncates
+it. A refresh on 2026-08-29 did exactly that; it was caught by reading the diff
+before committing, which is the only reason this warning exists. Diff first,
+then copy the files that actually changed.
+
 An empty diff means the vendored copy is current. A non-empty diff means the
 installed skill has moved and this copy has not been refreshed — which is the
 condition that went undetected before.

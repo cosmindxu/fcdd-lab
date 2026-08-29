@@ -623,6 +623,19 @@ is doing FCDD at a lower claim tier — which is fine, *labeled*.
 - **It caught the hollow monitor; it did not prevent it.** FCDD's value is *late* (adversarial
   review) as much as *early* (proof). Present it that way; a reader who thinks the proof stops all
   bugs will be surprised the way this arc was.
+- **No beat for spec EVOLUTION — the contract is assumed static.** FCDD says how to build a contract
+  and how to add a clause after an incident; it says nothing about what happens when the requirement
+  itself moves under you. Which theorems survive a clause edit, which conformance fixtures were
+  pinned to the OLD reading, which twin branches became dead code, and whether a proof that still
+  compiles still *means* what it meant — all unanswered. Law 13's bidirectional traceability
+  partially covers it (edit a requirement, the trace names the clauses to re-open), but tracing is
+  not re-proving and nothing here forces the re-proof. Named as a residual after external
+  corroboration (2026-08-29): the EDA industry's spec→property practitioners lead with this
+  exact gap — "the spec is likely to change... for a verification flow to have change management,
+  there is a lot more that needs to happen outside of agents" (Kolpekwa, Siemens EDA, in Bailey,
+  *From Spec To Formal Properties*, Semiconductor Engineering, 2026-08-27). Until there is a beat,
+  the safe habit is to treat a requirement change as a NEW contract: re-run Beat 1's completeness
+  gate and Beat 3's mutation layer rather than patching a clause in place.
 - **Evidence base = N=1**, distilled the same day the arc ended, largely author-reviewed. Treat the
   laws as well-motivated hypotheses hardened once, not validated practice. (Applying the skill's own
   badge-matches-detector rule to itself.)
@@ -646,6 +659,32 @@ two-mode operational-constraint generator (elicitation + combinatorial mission a
 three-valued scenario verdict and its static/runtime/kernel enforcement bridge,
 incidents-as-kernel-theorems as a regression habit, the falsifiability-tiering-as-published-badge
 discipline, and the verify-where-it-runs deployment checklist as one bundle.
+
+**Adjacent live thread — LLM-assisted spec→property generation (added 2026-08-29).** FCDD's Beat 1
+is a hand-authored contract with LLM assistance; the EDA world attacks the same natural-language →
+formal-property translation head-on, at industrial scale, and is the closest EXTERNAL evidence base
+FCDD has. Generation pipelines to cite rather than reinvent: **LISA** (chain-of-thought decomposition
+into a verification plan, per-item formal check, RAG refinement loop; ISVLSI 2025), **Hybrid-NL2SVA**
+(retrieval + fine-tuning, arXiv 2506.21569), **SANGAM** (Monte-Carlo tree self-refine, arXiv
+2506.13983). Knowledge-graph grounding — nodes/edges/triples retrieved as facts instead of RAG text
+chunks, so the model is less free to invent a signal name — is the retrieval-side fix, attributed by
+Bailey to Cohen & Chibani, *RAG-SVA in the Landscape of LLM-Based Assertion Generation*
+(**caveat: cited in the trade press; the primary source was NOT locatable on 2026-08-29 — find it
+before citing it**).
+
+**Vacuity checking is the prior art for the hollow monitor**, and this skill should have cited it
+from the start: Beer–Ben-David–Eisner–Rodeh (FMSD 2001, from CHARME'97) and Kupferman–Vardi
+(CHARME'99, extending ω-ACTL to CTL*). A property that passes because its antecedent never fires is
+precisely a monitor whose badge outruns its detector; the "non-vacuous witnesses" requirement in
+Beat 1 and the vacuity/tautology hunt in the Lens set are that literature, renamed. Formal-coverage
+metrics (Hoskote et al., DAC'99; Chockler–Kupferman–Vardi) are the prior art for the completeness
+gate. What FCDD adds on top is small but real, and both additions are things this literature is
+missing rather than things it rejected: **spec-side mutation** as a mechanical completeness proxy
+(the industry consensus hands completeness to a human reviewer who "knows what is missing"), and
+**law 12's declared budget** (the industry names the review-burden explosion — "if every generated
+property needs the same depth of scrutiny as a manually generated one, and the volume has gone up
+tenfold, the review burden can outpace the drafting savings", Darbari/Axiomise — and proposes no
+stop condition for it).
 
 ## 7. Files
 
