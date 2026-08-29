@@ -1,5 +1,5 @@
 ---
-title: "FCDD — the process encoded in the formal-contract-dev skill (Beat 4 bounded, 2026-08-23)"
+title: "FCDD — the process encoded in the formal-contract-dev skill (synced 2026-08-29: Beat 0.5, laws 13–14, bounded Beat 4)"
 ---
 flowchart TB
     classDef beat fill:#1f3a5f,stroke:#4a90d9,stroke-width:2px,color:#ffffff
@@ -8,13 +8,15 @@ flowchart TB
     classDef res fill:#5f1f1f,stroke:#d94a4a,stroke-width:2px,color:#ffffff
     classDef law fill:#2f2f3f,stroke:#8a8ad9,stroke-width:1px,color:#ffffff
 
-    UP["<b>UPSTREAM — outside FCDD</b><br/>hazard analysis (FMEA / STPA)<br/>yields properties P1..Pn"]:::out
+    UP["<b>UPSTREAM — outside FCDD</b><br/>general hazard analysis (FMEA / STPA)<br/>correctness-of-intent stays here"]:::out
+
+    B05["<b>BEAT 0.5 · SCENARIO</b> — the deployment slice FCDD <i>partially owns</i><br/>(a) operator elicitation — the KNOWN-but-UNSPOKEN constraints<br/>(b) combinatorial mission analysis — the products nobody modelled<br/>three-valued verdict · static / runtime / kernel enforcement<br/><b>its output IS the P1..Pn for the deployment dimension</b><br/><i>bought by R2: a correctly-deciding dead-man, false-latched 3×</i>"]:::beat
 
     subgraph PURE["① build the contract — offline, pure, no environment"]
         direction LR
-        B1["<b>BEAT 1 · PROVE</b><br/>kernel-checked <i>spec of record</i><br/>fail direction per property<br/>completeness gate: zero holes"]:::beat
+        B1["<b>BEAT 1 · PROVE</b><br/>kernel-checked <i>spec of record</i><br/>fail direction per property<br/>completeness gate: zero holes<br/><i>entry (law 13):</i> clause provenance · req↔clause traceability<br/><i>close (law 14):</i> input totality · interpretation ledger<br/><i>then mutate the SPEC — a clause set no self-mutation<br/>can break is pinning nothing</i>"]:::beat
         A1["<b>Contract.lean</b><br/>Conforming predicate<br/>witnesses · consequences<br/>incidents as theorems"]:::art
-        B2["<b>BEAT 2 · TWIN</b><br/>pure implementation,<br/>clause for clause<br/>transcription <i>or</i> extraction"]:::beat
+        B2["<b>BEAT 2 · TWIN</b><br/>pure implementation, clause for clause<br/><b>FCDD-T</b> transcription + bridge<br/><i>or</i> <b>FCDD-X</b> verified extraction<br/><i>name which — results do not transfer</i>"]:::beat
         A2["<b>twin.py</b><br/>no I/O · no clocks<br/>numeric domain ⊇ model's"]:::art
         B3["<b>BEAT 3 · BRIDGE</b><br/>conformance suite,<br/>one gate, judged by exit code"]:::beat
         A3["<b>bridge/</b><br/>witnesses · theorem mirrors<br/>mutations · brute force<br/><i>samples, ≠ refinement proof</i>"]:::art
@@ -37,7 +39,7 @@ flowchart TB
         B4 --> SHIP --> OPS
     end
 
-    UP --> B1
+    UP --> B05 --> B1
     A3 --> B35
     B375 --> B4
 
@@ -46,10 +48,10 @@ flowchart TB
     B375 -. "a false finding on a real case is a defect in<br/>spec, twin or shell — never patch the test" .-> B1
     OPS == "REAL INCIDENT ⇒ NEW THEOREM (law 6): the lifecycle closes" ==> B1
 
-    LAWS["<b>CROSS-CUTTING LAWS</b> (apply to every beat)<br/>1 degraded input ⇒ conservative verdict · 2 local proofs die at stateful seams<br/>3 the badge must match the detector · 4 verify claims where they run<br/>5 two independent verifiers · 6 real incidents become theorems<br/>7 spec coherence before code conformance · 8 ship assumptions, rejected<br/>alternatives and residuals · 9 silence never encodes a posture<br/>10 a partial FCDD labelled beats a full FCDD pretended<br/>11 operational constraints are deduced, not given<br/><b>12 no unbounded loop in the method — every iterative beat<br/>declares its budget before it starts</b>"]:::law
+    LAWS["<b>CROSS-CUTTING LAWS</b> (apply to every beat)<br/>1 degraded input ⇒ conservative verdict · 2 local proofs die at stateful seams<br/>3 the badge must match the detector · 4 verify claims where they run<br/>5 two independent verifiers · 6 real incidents become theorems<br/>7 spec coherence before code conformance · 8 ship assumptions, rejected<br/>alternatives and residuals · 9 silence never encodes a posture<br/>10 a partial FCDD labelled beats a full FCDD pretended<br/>11 operational constraints are deduced, not given<br/><b>12 no unbounded loop in the method — every iterative beat<br/>declares its budget before it starts</b><br/>13 clause provenance · bidirectional traceability · spec-side mutation<br/>14 no silent residue — input totality + interpretation ledger"]:::law
 
     WHY["<b>WHY BEAT 4 IS BOUNDED</b> (case02, 56 runs)<br/>under iterate-to-convergence the beat ran <b>1–18 rounds</b> on repeats of the<br/>SAME defect; round count correlated <b>r = 0.72</b> with run cost and explained<br/>~half its variance; runs with ≥6 rounds cost $48.33 vs $28.42 for ≤2 — and<br/><b>all 56 runs produced a byte-identical artefact</b>, so the extra rounds changed<br/>nothing. The bounded control arm varied 3× and correlated −0.21.<br/><i>Diagnosis measured; the fix's benefit is predicted, not yet demonstrated.</i>"]:::law
 
     B4 -.- WHY
 
-    RES["<b>WHAT FCDD DOES NOT ESTABLISH</b><br/>proves COHERENCE, never correctness-of-intent — garbage clauses,<br/>kernel-checked, are still garbage · the bridge cannot catch COMMON-MODE<br/>error: one author writing spec AND twin makes both agree and every layer<br/>pass, yielding maximal false confidence — only an independent reviewer<br/>and reality can · it CAUGHT the hollow monitor, it did not PREVENT it"]:::res
+    RES["<b>WHAT FCDD DOES NOT ESTABLISH</b><br/>proves COHERENCE, never correctness-of-intent — garbage clauses, kernel-checked,<br/>are still garbage · <i>what IS owned (law 13): coverage of STATED intent — provenance,<br/>traceability, a declared completeness scope, and a clause set strong enough to<br/>reject a mutation of itself; a need nobody wrote down stays unreachable</i><br/>the bridge cannot catch COMMON-MODE error: one author writing spec AND twin<br/>makes both agree and every layer pass, yielding maximal false confidence —<br/>only an independent reviewer and reality can · it CAUGHT the hollow monitor,<br/>it did not PREVENT it<br/><b>no beat for spec EVOLUTION</b> — the contract is assumed static; law 13 names the<br/>clauses to re-open when a requirement moves, but tracing is not re-proving.<br/>Interim habit: treat a requirement change as a NEW contract"]:::res

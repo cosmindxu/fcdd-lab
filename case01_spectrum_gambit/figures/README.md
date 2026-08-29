@@ -45,6 +45,13 @@ including the shell/validate/ship/operate stages that case 01's experiment
 did not exercise. No longer used by the manuscript (fig1 above replaced it),
 but retained as documentation of the full lifecycle.
 
+**It tracks the LIVE skill, so it goes stale silently.** Re-render it in the same
+commit as any installed-skill change, the way `skills/README.md` requires for the
+vendored copy. The title line carries the sync date; if it is older than the last
+`skills/formal-contract-dev-current/` commit, the diagram is behind. Last sync
+2026-08-29 added Beat 0.5, laws 13-14, the FCDD-T/FCDD-X variant naming, and the
+spec-evolution residual — all of which had been live in the skill and absent here.
+
 ### Regenerating the Mermaid diagram
 
 The Mermaid CLI needs a browser; the bundled download fails in this VM, so
