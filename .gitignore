@@ -12,8 +12,18 @@ case*/paper/*.aux
 case*/paper/*.log
 case*/paper/*.out
 
-# Manuscript — LOCAL ONLY, never published to the remote (operator, 2026-08-06)
-case*/ARTICLE.md
+# Manuscripts.
+# 2026-08-06 (operator): ARTICLE.md and REPORT.md are LOCAL ONLY, never published
+#   to the remote.
+# 2026-08-29 (operator): REVERSED for ARTICLE.md. Nothing is under submission or
+#   will be for now, so no venue preprint policy is at risk, and the root
+#   ARTICLE.md had already published every headline number these two elaborate.
+#   case01 and case02 ARTICLE.md are now tracked deliberately. This does NOT
+#   auto-publish a future case's article: dropping the rule only means a new
+#   ARTICLE.md appears untracked in `git status` instead of being hidden, and it
+#   still needs an explicit `git add`.
+# Still local, unchanged: REPORT.md (case01, case04) and every LaTeX build below
+#   — the "IEEE build remains local for now" instruction stands.
 case*/REPORT.md
 case*/paper/
 case*/paper_springer/*.aux
